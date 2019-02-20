@@ -38,7 +38,7 @@
 * `:parent_id` references `messages`
 
 ---
-###`chatrooms`
+### `chatrooms`
 
 | column name | data type | details               | foreign key |
 |-------------|-----------|-----------------------|-------------|
