@@ -88,7 +88,7 @@
 
 ---
 
-###`pinned_messages`
+### `pinned_messages`
 
 | column name | data type | details               | foreign key |
 |-------------|-----------|-----------------------|-------------|
