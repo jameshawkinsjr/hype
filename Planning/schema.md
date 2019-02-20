@@ -1,6 +1,6 @@
-#Database Schema
+# Database Schema
 
-###`users`
+### `users`
 
 | column name     | data type | details                   | foreign key |
 |-----------------|-----------|---------------------------|-------------|
@@ -20,7 +20,7 @@
   
 ---
 
-###`messages`
+### `messages`
 
 | column name | data type | details               | foreign key |
 |-------------|-----------|-----------------------|-------------|
@@ -54,7 +54,7 @@
 * `:type` (Model level validation: `inclusion: { in: [channel, direct_message] }`
 
 ---
-###`chatroom_subscriptions`
+### `chatroom_subscriptions`
 
 | column name       | data type | details               | foreign key |
 |-------------------|-----------|-----------------------|-------------|
@@ -72,7 +72,7 @@
 * `:last_read_message` references `messages`
 
 ---
-###`stars`
+### `stars`
 
 | column name    | data type | details               | foreign key |
 |----------------|-----------|-----------------------|-------------|
@@ -104,7 +104,7 @@
 
 ---
 
-###`reactions`
+### `reactions`
 
 | column name | data type | details               | foreign key |
 |-------------|-----------|-----------------------|-------------|
@@ -122,7 +122,7 @@
 
 ---
 
-###`emojis`
+### `emojis`
 
 | column name | data type | details               | foreign key |
 |-------------|-----------|-----------------------|-------------|
