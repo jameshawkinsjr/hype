@@ -1,0 +1,188 @@
+{
+    entities: {
+        users: {
+            1: {
+                id: 1,
+                fullName: "Minch Yoda",
+                alias: "Yoda"
+                profilePhoto: "https://s3.amazonaws.com/mySlack/filename1.png"
+            },
+            2: {
+                id: 2,
+                fullName: "Thomas A. Anderson",
+                alias: "Neo",
+                profilePhoto: "https://s3.amazonaws.com/mySlack/filename2.png"
+            }
+            3: {
+                id: 3,
+                fullName: "Breanna Johnson",
+                alias: null,
+                profilePhoto: "https://s3.amazonaws.com/mySlack/filename2.png"
+            }
+        },
+        messages: {
+            1: {
+                id: 1,
+                body: "You can't generate the firewall without generating the primary SDD protocol!",
+                chatroomId: 4,
+                authorId: 2,
+                parentId: null
+            },
+            2: {
+                id: 2,
+                body: "Difficult to see. Always in motion is the future...",
+                chatroomId: 2,
+                authorId: 1,
+                parentId: 7
+            },
+            3: {
+                id: 3,
+                body: "i'm running late lmk if you want to push the meeting back",
+                chatroomId: 1,
+                authorId: 5,
+                parentId: null
+            },
+            4: {
+                id: 4,
+                body: "sounds good -- I'm not really ready for it yet anyway",
+                chatroomId: 1,
+                authorId: 6,
+                parentId: 3
+            }
+        },
+        chatrooms: {
+            1: {
+                id: 1,
+                title: "general",
+                topic: "A place for general conversation",
+                type: "channel",
+                adminId: 1
+            },
+            2: {
+                id: 2,
+                title: null,
+                topic: "quick chat about indexing the haptic xml pixel",
+                type: "directmessage",
+                adminId: 2
+            },
+            3: {
+                id: 3,
+                title: "Performance Reviews",
+                topic: "Channel to discuss specifics about the upcoming perf cycle",
+                type: "channel",
+                adminId: 7
+            },
+
+        },
+        chatroomSubscriptions: {
+            1: {
+                id: 1,
+                chatroomID: 3,
+                userID: 1,
+                lastReadMessageID: 8
+            },
+            2: {
+                id: 2,
+                chatroomID: 1,
+                userID: 4,
+                lastReadMessageID: 10
+            },
+            3: {
+                id: 3,
+                chatroomID: 1,
+                userID: 6,
+                lastReadMessageID: 3
+            },
+        },
+        stars: {
+            1: {
+                id: 1,
+                starrableId: 8,
+                starrableType: 'chatroom',
+                userID: 1,
+            },
+            2: {
+                id: 2,
+                starrableId: 1,
+                starrableType: 'direct_message',
+                userID: 9,
+            },
+            3: {
+                id: 3,
+                starrableId: 3,
+                starrableType: 'chatroom',
+                userID: 1,
+            },
+            4: {
+                id: 4,
+                starrableId: 8,
+                starrableType: 'direct_message',
+                userID: 1,
+            },
+        },
+        pinnedMesages: {
+            1: {
+                id: 1,
+                chatroomID: 1,
+                messageId: 9,
+            },
+            2: {
+                id: 2,
+                chatroomID: 7,
+                messageId: 43,
+            },
+            3: {
+                id: 3,
+                chatroomID: 11,
+                messageId: 33,
+            },
+        },
+        reactions: {
+            1: {
+                id: 1,
+                emojiId: 11,
+                messageID: 47,
+                userID: 3,
+            },
+            2: {
+                id: 2,
+                emojiId: 4,
+                messageID: 55,
+                userID: 4,
+            },
+            3: {
+                id: 3,
+                emojiId: 9,
+                messageID: 33,
+                userID: 8,
+            },
+        },
+        emojis: {
+            1: {
+                id: 1,
+                title: ":blushing_face",
+                emoji: "😊",
+            },
+            2: {
+                id: 2,
+                title: "mind_blown",
+                emoji: "🤯",
+            },
+            3: {
+                id: 3,
+                title: "thumbs_down",
+                emoji: "👎",
+            },
+        },
+    },
+    ui: {
+        loading: true / false
+    },
+    errors: {
+        login: ["Sorry, you entered an incorrect email address or password."],
+        chatroomForm: ["That name is already taken by another channel."],
+    },
+    session: {
+        currentUserId: 5
+    }
+}

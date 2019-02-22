@@ -41,5 +41,5 @@ emoji1 = Emoji.create!({emoji: "🤯", emoji_title: ":mind_blown:"}
 emoji1 = Emoji.create!({emoji: "😡", emoji_title: ":angry_face:"}
 emoji1 = Emoji.create!({emoji: "🧐", emoji_title: ":hmmmm:"}
 emoji1 = Emoji.create!({emoji: "👍", emoji_title: ":thumbs_up:"}
-emoji1 = Emoji.create!({emoji: "👎", emoji_title: ":thunbs_down:"}
+emoji1 = Emoji.create!({emoji: "👎", emoji_title: ":thumbs_down:"}
 emoji1 = Emoji.create!({emoji: "💪", emoji_title: ":flexing:"}
