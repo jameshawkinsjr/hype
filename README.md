@@ -1,5 +1,5 @@
 # hype
-hype is a real-time chat app built to clone the app [Slack](https://slack.com). hype allows users to chat with other users in real time via direct messages, group chats, and channels.
+hype is a real-time messaging app built to clone the app [Slack](https://slack.com). hype allows users to chat with other users in real time via direct messages, group chats, and channels.
 
 ## technologies
 
