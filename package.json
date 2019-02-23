@@ -28,13 +28,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jameshawkinsjr/Full-Stack.git"
+    "url": "git+https://github.com/jameshawkinsjr/hype.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jameshawkinsjr/Full-Stack/issues"
+    "url": "https://github.com/jameshawkinsjr/hype/issues"
   },
-  "homepage": "https://github.com/jameshawkinsjr/Full-Stack#readme"
+  "homepage": "https://github.com/jameshawkinsjr/hype#readme"
 }
