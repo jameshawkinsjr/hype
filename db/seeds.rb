@@ -35,4 +35,5 @@ user25 = User.create!(full_name: "Oscar Martinez", email: "O.Martinez@dunder-mif
 user26 = User.create!(full_name: "Jo Bennett", email: "J.Bennett@dunder-mifflin.org", alias: 'Jo', password: 'Jo123456')
 user27 = User.create!(full_name: "Roy Anderson", email: "R.Anderson@dunder-mifflin.org", password: 'Roy123456')
 user28 = User.create!(full_name: "Deangelo Vickers", email: "D.Vickers@dunder-mifflin.org", password: 'Deangelo123456')
-user29 = User.create!(full_name: "Clack Green", email: "C.Green@dunder-mifflin.org", password: 'Clack123456')
+user29 = User.create!(full_name: "Clark Green", email: "C.Green@dunder-mifflin.org", password: 'Clack123456')
+user30 = User.create!(full_name: "Robert Vance", email: "R.Vance@vance-refrigeration.org", alias: 'Bob Vance - Vance Refrigeration', password: 'Bob123456')
