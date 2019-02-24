@@ -3,6 +3,19 @@
     height: 100%
 }
 
+.top-nav-home {
+    height: 50px;
+    padding: 15px 0px 0px 15px;
+    background: #3F0E40;
+    color: white;
+    a {
+        color: white;
+    }
+}
+.top-nav-home:hover {
+    background: #311134;
+}
+
 .top-nav {
     border-bottom: 1px solid #DDDDDD;
     width: 100%;
