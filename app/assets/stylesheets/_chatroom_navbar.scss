@@ -1,0 +1,56 @@
+.chatroom-skeleton {
+    background: #3F0E40;
+    color: rgb(197,183,198);
+    position: absolute;
+    float: left;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    z-index: 2;
+    flex-direction: column;
+}
+
+.chatroom-scollable-box {
+    overflow: scroll;
+}
+
+.chatroom-nav > div {
+    padding: 10px 0px 10px 0px;
+}
+.chatroom-header {
+    height: 50px;
+    padding: 15px 0px 0px 15px;
+}
+.chatroom-header:hover, 
+.chatroom-name:hover {
+    background: #311134;
+}
+
+.chatroom-scrollable-box > div {
+    margin: 10px 20px;
+}
+
+.chatroom-name {
+    font-weight: 300;
+    padding: 4px 10px 4px 20px;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.chatroom-name-active {
+    background: #2B649E;
+    color: white;
+}
+.chatroom-name-active:hover {
+    background: #2B649E;
+    color: white;
+}
+
+.chatroom-name-unread {
+    color: white;
+    font-weight: 600;
+}

@@ -1,0 +1,1084 @@
+  [1m[35m (4.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "hype_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "hype_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (471.9ms)[0m  [1m[35mCREATE DATABASE "hype_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (479.6ms)[0m  [1m[35mCREATE DATABASE "hype_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (19.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190223204716)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (50.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "full_name" character varying NOT NULL, "alias" character varying, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190223204716_create_users.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_full_name" ON "users"  ("full_name")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:11
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:12
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_session_token_on_email" ON "session_token"  ("email")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:13
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190223204716)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (29.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "full_name" character varying NOT NULL, "alias" character varying, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190223204716_create_users.rb:3
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_full_name" ON "users"  ("full_name")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:11
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:12
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_session_token_on_email" ON "session_token"  ("email")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:13
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190223204716)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (47.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "full_name" character varying NOT NULL, "alias" character varying, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190223204716_create_users.rb:3
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_full_name" ON "users"  ("full_name")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:11
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:12
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_session_token" ON "users"  ("session_token")[0m
+  ↳ db/migrate/20190223204716_create_users.rb:13
+  [1m[36mActiveRecord::SchemaMigration Create (5.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190223204716"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-02-23 21:21:28.841806"], ["updated_at", "2019-02-23 21:21:28.841806"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6986379698994865785)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "QuwCtGlFWS6cY06y1TwvXA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:11
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "James Halpert"], ["alias", "Jim Halpert"], ["email", "J.Halpert@dunder-mifflin.org"], ["password_digest", "$2a$10$0trDZM5FPsNKPc0DhdeUNO8BHxsfdwNXZWqYvej.b3zUxgdrgOS7S"], ["session_token", "QuwCtGlFWS6cY06y1TwvXA"], ["created_at", "2019-02-23 21:23:49.885961"], ["updated_at", "2019-02-23 21:23:49.885961"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (41.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "G6JnenZDYtQ8nnh78jVDXw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Pam Beesly"], ["email", "P.Beesly@dunder-mifflin.org"], ["password_digest", "$2a$10$kgcNI0mtpQpY.a1aKns10udOU2SkkGAgoWcTcqUTSl8nCUDeVMTPm"], ["session_token", "G6JnenZDYtQ8nnh78jVDXw"], ["created_at", "2019-02-23 21:23:50.009630"], ["updated_at", "2019-02-23 21:23:50.009630"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "q4-9Ir8DzjwRq3X_fS8m5Q"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:13
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "M.Scott@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:13
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Michael Scott"], ["email", "M.Scott@dunder-mifflin.org"], ["password_digest", "$2a$10$eCH/M2sYA15bnVtvaTBrgOc9HSQL76NOGs2y6G5GGGR.hBQJzPE.u"], ["session_token", "q4-9Ir8DzjwRq3X_fS8m5Q"], ["created_at", "2019-02-23 21:23:50.074987"], ["updated_at", "2019-02-23 21:23:50.074987"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "N1YtIXQp4LgPWs8qL8wX4A"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Schrute@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Dwight Schrute"], ["email", "D.Schrute@dunder-mifflin.org"], ["password_digest", "$2a$10$kWs8/X.eLt8if0KFHJ5IPeujorc.nj.i6AcgDXnR5zLXDznNBtfui"], ["session_token", "N1YtIXQp4LgPWs8qL8wX4A"], ["created_at", "2019-02-23 21:23:50.140067"], ["updated_at", "2019-02-23 21:23:50.140067"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:15
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "UsCyByRDfiDRMoxIqOnKMQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:15
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "A.Bernard@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:15
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Andy Bernard"], ["alias", "Nard Dog"], ["email", "A.Bernard@dunder-mifflin.org"], ["password_digest", "$2a$10$JTsqsp5ZZqv4HOgHO7QlT.965oQthBXF7AIXc404MfKdJQZuSW8RG"], ["session_token", "UsCyByRDfiDRMoxIqOnKMQ"], ["created_at", "2019-02-23 21:23:50.206177"], ["updated_at", "2019-02-23 21:23:50.206177"]]
+  ↳ db/seeds.rb:15
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "UMIPLVL_Cx0dCTXa8vhrSw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "T.Flenderson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Toby Flenderson"], ["email", "T.Flenderson@dunder-mifflin.org"], ["password_digest", "$2a$10$ckMC27XZm7xCb3GwGorMD.65GIbyEJEVoHmLkL9ej070Zrh2yEwZO"], ["session_token", "UMIPLVL_Cx0dCTXa8vhrSw"], ["created_at", "2019-02-23 21:23:50.271924"], ["updated_at", "2019-02-23 21:23:50.271924"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "6Gq2uBjNdo5_6mliu7BpMg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "K.Malone@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Kevin Malone"], ["email", "K.Malone@dunder-mifflin.org"], ["password_digest", "$2a$10$sbIfKW4fHTNFvbUrl2CrfusrbPmALbvogb5xnYQcpWtTAxrR7o3zm"], ["session_token", "6Gq2uBjNdo5_6mliu7BpMg"], ["created_at", "2019-02-23 21:23:50.334177"], ["updated_at", "2019-02-23 21:23:50.334177"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "E0E-IzPtVbskTXzYxERFNA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "A.Martin@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Angela Martin"], ["email", "A.Martin@dunder-mifflin.org"], ["password_digest", "$2a$10$vSRs/175CulyUKaYszuU2u27mOs3Awp89amFLomoz1QE.aBdoehQu"], ["session_token", "E0E-IzPtVbskTXzYxERFNA"], ["created_at", "2019-02-23 21:23:50.397471"], ["updated_at", "2019-02-23 21:23:50.397471"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "4iOdUCTinJyvjuHGHK8Xqg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "E.Hannon@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Erin Hannon"], ["email", "E.Hannon@dunder-mifflin.org"], ["password_digest", "$2a$10$shdDTkc5LRk8niD1PNW0oONYBfo02VWcSdXrQDtPCRCei8bh1unmu"], ["session_token", "4iOdUCTinJyvjuHGHK8Xqg"], ["created_at", "2019-02-23 21:23:50.457950"], ["updated_at", "2019-02-23 21:23:50.457950"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "-O8k94r9vUbwpANVII53eA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Levinson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Jan Levinson"], ["email", "J.Levinson@dunder-mifflin.org"], ["password_digest", "$2a$10$ZgThPm5trmH9bEuHnz9O1OAkAVjEfbkwUFj2gx7NGaKnCBcpau7UO"], ["session_token", "-O8k94r9vUbwpANVII53eA"], ["created_at", "2019-02-23 21:23:50.521120"], ["updated_at", "2019-02-23 21:23:50.521120"]]
+  ↳ db/seeds.rb:20
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "HYhFXiDwLsUV05eLclYbQQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "S.Hudson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Stanley Hudson"], ["alias", "Stanley"], ["email", "S.Hudson@dunder-mifflin.org"], ["password_digest", "$2a$10$uC/YteLdyaYEluWiJ/RZl.Uh9OKY00VQiZY.ua5CP44IU50/1sfye"], ["session_token", "HYhFXiDwLsUV05eLclYbQQ"], ["created_at", "2019-02-23 21:23:50.583334"], ["updated_at", "2019-02-23 21:23:50.583334"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "HT-aD84RY_zhorfQjLSJTQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Bratton@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Creed Bratton"], ["alias", "Creed"], ["email", "C.Bratton@dunder-mifflin.org"], ["password_digest", "$2a$10$kKQzkvXOrcC/8uYkidoaOuFr.Hk4tRIWvqr6wGVTwXaFIceTTCKxu"], ["session_token", "HT-aD84RY_zhorfQjLSJTQ"], ["created_at", "2019-02-23 21:23:50.644321"], ["updated_at", "2019-02-23 21:23:50.644321"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "OSTnPsaZQkMbaW2ipqJ9-w"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "H.Flax@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Holly Flax"], ["email", "H.Flax@dunder-mifflin.org"], ["password_digest", "$2a$10$m9CbXXGehhhay1Rxn9XlUu99R2Lyk5Og/gemPL5xvN5UqQ8WIWxfW"], ["session_token", "OSTnPsaZQkMbaW2ipqJ9-w"], ["created_at", "2019-02-23 21:23:50.708591"], ["updated_at", "2019-02-23 21:23:50.708591"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:24
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "ssj-Im29geuilRMX-ap9fA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.Howard@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Ryan Howard"], ["email", "R.Howard@dunder-mifflin.org"], ["password_digest", "$2a$10$2iOAk4lLFNoI/BNVB2LKG.esfC6slnqkF/mzhhSJi.ZozCA.nNhb6"], ["session_token", "ssj-Im29geuilRMX-ap9fA"], ["created_at", "2019-02-23 21:23:50.771177"], ["updated_at", "2019-02-23 21:23:50.771177"]]
+  ↳ db/seeds.rb:24
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:24
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "lnsr_ocYHX6qyHc6Gvhdww"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "K.Kapoor@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Kelly Kapoor"], ["email", "K.Kapoor@dunder-mifflin.org"], ["password_digest", "$2a$10$S7CfwBORhViM9XqshhTN1emUGs1KAXBdAg6HBNZnEIvEuH9ddirXm"], ["session_token", "lnsr_ocYHX6qyHc6Gvhdww"], ["created_at", "2019-02-23 21:23:50.831923"], ["updated_at", "2019-02-23 21:23:50.831923"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "xWl_SQqC2v1E9syEi_OkMg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "G.Lewis@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Gabe Lewis"], ["email", "G.Lewis@dunder-mifflin.org"], ["password_digest", "$2a$10$4.crVkjUY.SYiafE8KYnhOGypv7PApf7pIPGdrtIogaRyb6nB0axi"], ["session_token", "xWl_SQqC2v1E9syEi_OkMg"], ["created_at", "2019-02-23 21:23:50.898306"], ["updated_at", "2019-02-23 21:23:50.898306"]]
+  ↳ db/seeds.rb:26
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "y9f8estxXOwJma4cUOXFYg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "M.Palmer@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Meredith Palmer"], ["alias", "Meredith"], ["email", "M.Palmer@dunder-mifflin.org"], ["password_digest", "$2a$10$9mPVaMYbrY1NgFyChHz0/.pEnPIcJQIx2nSf.atVd5/60VeROknxm"], ["session_token", "y9f8estxXOwJma4cUOXFYg"], ["created_at", "2019-02-23 21:23:50.963271"], ["updated_at", "2019-02-23 21:23:50.963271"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Tb5vATx3L7hJ-XRI0vl6JA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "N.Bertram@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Nellie Bertram"], ["email", "N.Bertram@dunder-mifflin.org"], ["password_digest", "$2a$10$7xdMFr8Y7RtsP2WZZVsbo.6oXd.ooOn99E/E3cVW9Wzx2tsCQXDyq"], ["session_token", "Tb5vATx3L7hJ-XRI0vl6JA"], ["created_at", "2019-02-23 21:23:51.029327"], ["updated_at", "2019-02-23 21:23:51.029327"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:29
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "KY8PY4zn2lSEyz9CMWxe2g"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Philbin@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Darryl Philbin"], ["email", "D.Philbin@dunder-mifflin.org"], ["password_digest", "$2a$10$8jIT2lm7aNTpG7ZBaQyxpuAWnAOFB39DCMQ2ooqgB/A.dQPRAkPJK"], ["session_token", "KY8PY4zn2lSEyz9CMWxe2g"], ["created_at", "2019-02-23 21:23:51.093561"], ["updated_at", "2019-02-23 21:23:51.093561"]]
+  ↳ db/seeds.rb:29
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:29
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:30
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "rh6Su2GNFhyoKOM-_PDQyw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:30
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.California@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:30
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Robert California"], ["email", "R.California@dunder-mifflin.org"], ["password_digest", "$2a$10$Ljoa5UJ54zs2uo..lTyCC.48weTKEL8V16YpFhZbDCKKOG24EuQVG"], ["session_token", "rh6Su2GNFhyoKOM-_PDQyw"], ["created_at", "2019-02-23 21:23:51.158255"], ["updated_at", "2019-02-23 21:23:51.158255"]]
+  ↳ db/seeds.rb:30
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:30
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:31
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "XgrTDqHpFM_gSG2u9VculA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:31
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Miller@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:31
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Pete Miller"], ["email", "P.Miller@dunder-mifflin.org"], ["password_digest", "$2a$10$F55UqFa0Zu7tTdbpzzncWe5Ua35v.iIfaOiaJN5E5FCfD8o0nE/TG"], ["session_token", "XgrTDqHpFM_gSG2u9VculA"], ["created_at", "2019-02-23 21:23:51.223150"], ["updated_at", "2019-02-23 21:23:51.223150"]]
+  ↳ db/seeds.rb:31
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:31
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:32
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "7c2_O2LXLVh0GDw5DxGxOg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:32
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Vance@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:32
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Phyllis Vance"], ["email", "P.Vance@dunder-mifflin.org"], ["password_digest", "$2a$10$VyW02uEgNNZ6i7n10y..AOg9cPNI4XDRb36ScJgtfPrej/f3UH25C"], ["session_token", "7c2_O2LXLVh0GDw5DxGxOg"], ["created_at", "2019-02-23 21:23:51.288759"], ["updated_at", "2019-02-23 21:23:51.288759"]]
+  ↳ db/seeds.rb:32
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:32
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "JahtAVq2rPYdNml5lbWxLQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:33
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Miner@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:33
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Charles Miner"], ["email", "C.Miner@dunder-mifflin.org"], ["password_digest", "$2a$10$bXtfI9AaASXnvYrdIBNEgugY/DxF7fDuefAT38jWFpCZrcdDQZG2C"], ["session_token", "JahtAVq2rPYdNml5lbWxLQ"], ["created_at", "2019-02-23 21:23:51.352773"], ["updated_at", "2019-02-23 21:23:51.352773"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "fEq9v00MdVfICldKJQPdQQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:34
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "O.Martinez@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:34
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Oscar Martinez"], ["email", "O.Martinez@dunder-mifflin.org"], ["password_digest", "$2a$10$IDPSB4y7g8VgoZNGtrMe3Oj9J5W47XhGWs0MJFa1EGOHmwcqm4gOe"], ["session_token", "fEq9v00MdVfICldKJQPdQQ"], ["created_at", "2019-02-23 21:23:51.419779"], ["updated_at", "2019-02-23 21:23:51.419779"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:35
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "KoZHrBYhCu7_MXeDvMcneg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:35
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Bennett@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:35
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Jo Bennett"], ["alias", "Jo"], ["email", "J.Bennett@dunder-mifflin.org"], ["password_digest", "$2a$10$aKYEn/Le7tetsdA/NTkll.LJQtnpQiXSMs5QDIgaVdP3wU7QNS6Wu"], ["session_token", "KoZHrBYhCu7_MXeDvMcneg"], ["created_at", "2019-02-23 21:23:51.484646"], ["updated_at", "2019-02-23 21:23:51.484646"]]
+  ↳ db/seeds.rb:35
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:35
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "ayyOmdkZRF-uMZy8oNNKuw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.Anderson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Roy Anderson"], ["email", "R.Anderson@dunder-mifflin.org"], ["password_digest", "$2a$10$OCOKgDO0JYzq1aBCxhzHv.Udn0Lqcv9LDHGSUhNgZitLW3GXi8Z.2"], ["session_token", "ayyOmdkZRF-uMZy8oNNKuw"], ["created_at", "2019-02-23 21:23:51.549138"], ["updated_at", "2019-02-23 21:23:51.549138"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:37
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "-5hxyz9v8idx7SC4i19kgQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Vickers@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Deangelo Vickers"], ["email", "D.Vickers@dunder-mifflin.org"], ["password_digest", "$2a$10$Fr/9/AISnjyhg5wnp2p8xuHPngDilXcL3sjbFXvU/Y9S3xRUrJqfi"], ["session_token", "-5hxyz9v8idx7SC4i19kgQ"], ["created_at", "2019-02-23 21:23:51.613146"], ["updated_at", "2019-02-23 21:23:51.613146"]]
+  ↳ db/seeds.rb:37
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:37
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:38
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Z31Gis99amvjYc4unh78uw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:38
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Green@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:38
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Clack Green"], ["email", "C.Green@dunder-mifflin.org"], ["password_digest", "$2a$10$Lysbn7X97SmRjDT591GPlOZ0FiEQVWAdC4tfhfnMRdRkfuUV9pd1."], ["session_token", "Z31Gis99amvjYc4unh78uw"], ["created_at", "2019-02-23 21:23:51.684379"], ["updated_at", "2019-02-23 21:23:51.684379"]]
+  ↳ db/seeds.rb:38
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:38
+Started GET "/" for 127.0.0.1 at 2019-02-23 13:33:29 -0800
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb (5.8ms)
+Completed 200 OK in 18ms (Views: 15.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/index" for 127.0.0.1 at 2019-02-23 13:33:36 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/bin/annotate:23
+Started GET "/" for 127.0.0.1 at 2019-02-23 13:44:22 -0800
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb (1.8ms)
+Completed 200 OK in 10ms (Views: 4.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/root" for 127.0.0.1 at 2019-02-23 13:44:25 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/root"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/index" for 127.0.0.1 at 2019-02-23 13:52:09 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-02-23 13:52:11 -0800
+Processing by StaticPagesController#root as HTML
+Completed 406 Not Acceptable in 125ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::UnknownFormat - StaticPagesController#root is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/eba0659032974aeb/variables" for 127.0.0.1 at 2019-02-23 13:52:11 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 13:52:24 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 1674ms (Views: 1670.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:28:35 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 34ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:54:50 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 298ms (Views: 295.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:57:24 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 109ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159302268360'
+
+Started POST "/__better_errors/8ff3d90276caaabe/variables" for 127.0.0.1 at 2019-02-23 14:57:24 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:59:09 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159298532440'
+
+Started POST "/__better_errors/20579eecac22dd53/variables" for 127.0.0.1 at 2019-02-23 14:59:09 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:59:10 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70162781776600'
+
+Started POST "/__better_errors/2246698852dc06c8/variables" for 127.0.0.1 at 2019-02-23 14:59:10 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 14:59:34 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159302004640'
+
+Started POST "/__better_errors/d68e71e07e10be34/variables" for 127.0.0.1 at 2019-02-23 14:59:35 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:00:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 93ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159293334780'
+
+Started POST "/__better_errors/980a088c24ae60d3/variables" for 127.0.0.1 at 2019-02-23 15:00:23 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:06:45 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - File to import not found or unreadable: fonts.
+Load paths:
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/config
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/images
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/javascripts
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/stylesheets
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/jquery-rails-4.3.3/vendor/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actioncable-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activestorage-5.2.2/app/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actionview-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/node_modules:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159293400920'
+
+Started POST "/__better_errors/1d741aa9a55febe0/variables" for 127.0.0.1 at 2019-02-23 15:06:45 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:07:07 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 121ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70161702544300'
+
+Started POST "/__better_errors/185861bc795b4f46/variables" for 127.0.0.1 at 2019-02-23 15:07:07 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:08:39 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - File to import not found or unreadable: styles.
+Load paths:
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/config
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/images
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/javascripts
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/stylesheets
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/jquery-rails-4.3.3/vendor/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actioncable-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activestorage-5.2.2/app/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actionview-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/node_modules:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159301952320'
+
+Started POST "/__better_errors/c5d9791eb5276909/variables" for 127.0.0.1 at 2019-02-23 15:08:39 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:08:48 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - File to import not found or unreadable: top-navbar.
+Load paths:
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/config
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/images
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/javascripts
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/app/assets/stylesheets
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/jquery-rails-4.3.3/vendor/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actioncable-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activestorage-5.2.2/app/assets/javascripts
+  /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/actionview-5.2.2/lib/assets/compiled
+  /Users/jameshawkins/Downloads/AppAcademy/aA-Projects/hype/node_modules:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159301839840'
+
+Started POST "/__better_errors/2c3ce20fba35305d/variables" for 127.0.0.1 at 2019-02-23 15:08:48 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:09:20 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 83ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70161704834380'
+
+Started POST "/__better_errors/4ab64db04425b995/variables" for 127.0.0.1 at 2019-02-23 15:09:20 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:12:34 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 67ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159301776380'
+
+Started POST "/__better_errors/cffe6055596a629e/variables" for 127.0.0.1 at 2019-02-23 15:12:35 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:15:05 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 274ms (Views: 270.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:15:31 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 101ms (Views: 98.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:15:33 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 32ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:15:37 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 500 Internal Server Error in 77ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159294006020'
+
+Started POST "/__better_errors/164bc663f6847364/variables" for 127.0.0.1 at 2019-02-23 15:15:37 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:19:01 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159301887580'
+
+Started POST "/__better_errors/5a5fb34bbdfb2a9b/variables" for 127.0.0.1 at 2019-02-23 15:19:01 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:23:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159286402140'
+
+Started POST "/__better_errors/a1b94d7d053fb133/variables" for 127.0.0.1 at 2019-02-23 15:23:58 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:23:59 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159299741480'
+
+Started POST "/__better_errors/0de79af06e53e095/variables" for 127.0.0.1 at 2019-02-23 15:23:59 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:23:59 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70161704632980'
+
+Started POST "/__better_errors/9de1bcf1b0fcafab/variables" for 127.0.0.1 at 2019-02-23 15:23:59 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:24:08 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 112ms (Views: 109.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:24:10 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:25:50 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 100ms (Views: 96.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:31:07 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 127ms (Views: 123.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:38:11 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 70ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159286121860'
+
+Started POST "/__better_errors/90e289dcbcda1389/variables" for 127.0.0.1 at 2019-02-23 15:38:12 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:39:06 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159299495580'
+
+Started POST "/__better_errors/138af7dd20080adf/variables" for 127.0.0.1 at 2019-02-23 15:39:07 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:39:49 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 139ms (Views: 137.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:40:09 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 200 OK in 184ms (Views: 180.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:41:47 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70160627049640'
+
+Started POST "/__better_errors/caa72af06dd0c9b9/variables" for 127.0.0.1 at 2019-02-23 15:41:47 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:42:11 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159299333300'
+
+Started POST "/__better_errors/adabaf0d452c8ed8/variables" for 127.0.0.1 at 2019-02-23 15:42:11 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:42:26 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 88ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159302001100'
+
+Started POST "/__better_errors/2f48b9d619352c2e/variables" for 127.0.0.1 at 2019-02-23 15:42:26 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:44:42 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 264ms (Views: 260.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:47:46 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 200 OK in 53ms (Views: 50.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:47:48 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 43ms (Views: 40.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:48:13 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 93ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159298747040'
+
+Started POST "/__better_errors/0015a070d423ccb6/variables" for 127.0.0.1 at 2019-02-23 15:48:13 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:50:12 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159299760020'
+
+Started POST "/__better_errors/d0a38c9365b803fc/variables" for 127.0.0.1 at 2019-02-23 15:50:12 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:50:13 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159298993740'
+
+Started POST "/__better_errors/b515a9415776b1d2/variables" for 127.0.0.1 at 2019-02-23 15:50:14 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:01 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70161168180680'
+
+Started POST "/__better_errors/873f83e38be45870/variables" for 127.0.0.1 at 2019-02-23 15:52:01 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:10 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.5ms)
+Completed 200 OK in 115ms (Views: 112.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:16 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:17 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 30ms (Views: 27.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:18 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 32ms (Views: 30.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:19 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 23ms (Views: 20.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:20 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 41ms (Views: 37.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:21 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 200 OK in 36ms (Views: 33.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:21 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 40ms (Views: 37.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 33ms (Views: 30.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:52:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.4ms)
+Completed 200 OK in 33ms (Views: 30.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:56:26 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 44ms (Views: 41.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:57:57 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 73ms (Views: 71.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:58:04 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 500 Internal Server Error in 58ms (ActiveRecord: 0.0ms)
+
+
+
+Sass::SyntaxError - Undefined variable: "$font-logo".:
+  app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__692485698863811106_70159299135580'
+
+Started POST "/__better_errors/fc5dd501e1db4175/variables" for 127.0.0.1 at 2019-02-23 15:58:05 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:59:46 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.6ms)
+Completed 200 OK in 105ms (Views: 102.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 15:59:52 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 79ms (Views: 76.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:00:08 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 96ms (Views: 92.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:00:09 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.2ms)
+Completed 200 OK in 36ms (Views: 32.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:01:38 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 302ms (Views: 298.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:02:10 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 28.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:02:14 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 322ms (Views: 318.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-23 16:02:47 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html within layouts/application
+  Rendered static_pages/root.html within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 28.6ms | ActiveRecord: 0.0ms)
+
+

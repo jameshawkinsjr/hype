@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+/node_modules/
 bundle.js
 bundle.js/map
 
@@ -9,3 +9,4 @@ bundle.js/map
 .env.development.local
 .env.test.local
 .env.production.local
+tmp/
