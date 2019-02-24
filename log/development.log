@@ -1122,3 +1122,92 @@ Processing by StaticPagesController#root as HTML
 Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.0ms)
 
 
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:32:42 -0800
+
+SyntaxError - syntax error, unexpected end-of-input, expecting keyword_end:
+  app/controllers/api/sessions_controller.rb:29:in `'
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:33:24 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:34:11 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:35:07 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:36:13 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:36:51 -0800
+
+NoMethodError - undefined method `skip_before_filter' for ApplicationController:Class
+Did you mean?  skip_before_action:
+  app/controllers/application_controller.rb:3:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<main>'
+  app/controllers/api/sessions_controller.rb:1:in `<main>'
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:37:01 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:27
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 38.9ms)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/models/user.rb:36:in `is_password?'
+  app/models/user.rb:28:in `find_by_credentials'
+  app/controllers/api/sessions_controller.rb:4:in `create'
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:37:54 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:27
+Completed 500 Internal Server Error in 163ms (ActiveRecord: 6.7ms)
+
+
+
+NoMethodError - undefined method `login!' for #<Api::SessionsController:0x00007f9e77b34b70>:
+  app/controllers/api/sessions_controller.rb:6:in `create'
+
+Started POST "/api/session?[user][email]=J.Halpert@dunder-mifflin.org&[user][password]=[FILTERED]" for 127.0.0.1 at 2019-02-23 16:42:11 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:27
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (6.1ms)
+Completed 200 OK in 112ms (Views: 13.8ms | ActiveRecord: 10.9ms)
+
+

@@ -10,6 +10,7 @@ class Api::SessionsController < ApplicationController
                 message: "Invalid Credentials. Please try again."
             }, 
             status: 401
+        end
     end
 
     def destroy
@@ -21,7 +22,9 @@ class Api::SessionsController < ApplicationController
         else
             render json: {
                 message: "No user found."
-            }
+            },
+            status: 404
+        end
     end
-    
+
 end
