@@ -6344,3 +6344,37 @@ Processing by Api::SessionsController#destroy as JSON
 Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.4ms)
 
 
+Started GET "/" for ::1 at 2019-02-25 21:15:47 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (12.6ms)
+Completed 500 Internal Server Error in 190ms (ActiveRecord: 6.3ms)
+
+
+
+Sprockets::Rails::Helper::AssetNotFound - The asset "default.js" is not present in the asset pipeline.:
+  app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___3262225580436888656_70268612675500'
+
+Started POST "/__better_errors/1f7deb7b3c1d82b7/variables" for ::1 at 2019-02-25 21:15:48 -0800
+Started GET "/" for ::1 at 2019-02-25 21:16:01 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 43ms (Views: 38.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-25 21:17:02 -0800
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 2119ms (Views: 2114.5ms | ActiveRecord: 2.5ms)
+
+
