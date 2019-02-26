@@ -15,7 +15,15 @@
     a:hover {
         color: #DDDDDD;
     }
-    flex-direction: column;
+    button {
+        background: #2B649E; 
+        cursor: pointer;
+        color: white;
+    }
+    button:hover {
+        background: rgb(13, 74, 136); 
+    }
+    // flex-direction: column;
 }
 .top-nav-home:hover {
     background: #311134;
