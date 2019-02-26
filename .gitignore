@@ -1,7 +1,5 @@
 # dependencies
 /node_modules/
-bundle.js
-bundle.js/map
 
 # misc
 .DS_Store
@@ -10,4 +8,3 @@ bundle.js/map
 .env.test.local
 .env.production.local
 tmp/.env
-node_modules
