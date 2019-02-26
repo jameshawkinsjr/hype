@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.signup(this.state)
+        this.props.login(this.state)
         .then( () => this.props.history.push('/chatrooms'));
     }
 
@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
                             placeholder="you@example.com"
                             onChange={this.handleInput('email')}
                         />
-                    <input  type="text"
+                    <input  type="password"
                             value={this.state.password}
                             placeholder="password"
                             value={this.state.password}

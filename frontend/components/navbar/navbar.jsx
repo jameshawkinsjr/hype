@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default ( { currentUser, logout } ) => {
+    let name;
     if (currentUser) {
-        const name = currentUser.alias ? alias : full_name
+        if (currentUser.alias) {
+            console.log("alias");
+            name = currentUser.alias;
+        } else {
+            name = currentUser.full_name;
+            console.log("full_name");
+        }
     };
     const navBar = currentUser ? (
         

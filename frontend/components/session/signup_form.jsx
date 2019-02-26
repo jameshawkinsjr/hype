@@ -43,7 +43,7 @@ class SignupForm extends React.Component {
                                 placeholder="Display Name"
                                 onChange={this.handleInput('alias')}
                         />
-                        <p classname="login-form-subtext">By default, hype will use your full name - but you can choose something shorter if you'd like.</p>
+                        <p className="login-form-subtext">By default, hype will use your full name - but you can choose something shorter if you'd like.</p>
                     </label>
                     <label>Email   
                         <input  type="text"
@@ -53,12 +53,12 @@ class SignupForm extends React.Component {
                         />
                     </label>
                     <label>Password (required)   
-                        <input  type="text"
+                        <input  type="password"
                                 value={this.state.password}
                                 placeholder="Password"
                                 onChange={this.handleInput('password')}
                         />
-                        <p classname="login-form-subtext">Passwords must be at least 6 characters long, and can't be things like “password”, “123456” or “abcdef”.</p>
+                        <p className="login-form-subtext">Passwords must be at least 6 characters long, and can't be things like “password”, “123456” or “abcdef”.</p>
                     </label>
                     <button onClick={this.handleSubmit}>Sign up for hype</button>
                 </form>
