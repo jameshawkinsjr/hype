@@ -26,8 +26,15 @@ class SignupForm extends React.Component {
 
 
     render () {
+
+        // debugger;
+        let errors = this.props.errors.map( error => 
+            <li key={error}> {error} </li> 
+            )
+
+
         return (
-            <div className="signup-form">
+            <div className="signup-form flex">
                 <h2>Join the hype</h2>
                 <form>
                     <label>Full Name   
@@ -35,6 +42,7 @@ class SignupForm extends React.Component {
                                 value={this.state.full_name}
                                 placeholder="Full Name"
                                 onChange={this.handleInput('full_name')}
+                                autoComplete = "off"
                         />
                     </label>
                     <label>Display Name (optional)   
@@ -42,6 +50,7 @@ class SignupForm extends React.Component {
                                 value={this.state.alias}
                                 placeholder="Display Name"
                                 onChange={this.handleInput('alias')}
+                                autoComplete = "off"
                         />
                         <p className="login-form-subtext">By default, hype will use your full name - but you can choose something shorter if you'd like.</p>
                     </label>
@@ -50,6 +59,7 @@ class SignupForm extends React.Component {
                                 value={this.state.email}
                                 placeholder="Email"
                                 onChange={this.handleInput('email')}
+                                autoComplete = "off"
                         />
                     </label>
                     <label>Password (required)   
@@ -57,11 +67,15 @@ class SignupForm extends React.Component {
                                 value={this.state.password}
                                 placeholder="Password"
                                 onChange={this.handleInput('password')}
+                                autoComplete = "off"
                         />
                         <p className="login-form-subtext">Passwords must be at least 6 characters long, and can't be things like “password”, “123456” or “abcdef”.</p>
                     </label>
                     <button onClick={this.handleSubmit}>Sign up for hype</button>
                 </form>
+                <ul className="errors">
+                    { errors } 
+                </ul>
             </div>
         )
     }

@@ -24,8 +24,14 @@ class LoginForm extends React.Component {
 
 
     render () {
+
+        // debugger
+        let errors = this.props.errors.map( error => 
+            <li key={error}> {error} </li> 
+            )
+
         return (
-            <div className="login-form">
+            <div className="login-form flex">
                 <h2>Sign in to hype</h2>
                 <h3>Enter your <strong> email address</strong> and <strong>password</strong>.</h3>
                 <form>
@@ -33,15 +39,20 @@ class LoginForm extends React.Component {
                             value={this.state.email}
                             placeholder="you@example.com"
                             onChange={this.handleInput('email')}
+                            autoComplete = "off"
                         />
                     <input  type="password"
                             value={this.state.password}
                             placeholder="password"
                             value={this.state.password}
                             onChange={this.handleInput('password')}
+                            autoComplete = "off"
                         />
                     <button onClick={this.handleSubmit}>Sign In</button>
                 </form>
+                <ul className="errors">
+                    { errors } 
+                </ul>
             </div>
         )
     }

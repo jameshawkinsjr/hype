@@ -5,12 +5,17 @@
 
 .top-nav-home {
     height: 50px;
-    padding: 15px 0px 0px 15px;
+    padding: 25px;
     background: #3F0E40;
     color: white;
     a {
         color: white;
+        padding: 5px;
     }
+    a:hover {
+        color: #DDDDDD;
+    }
+    flex-direction: column;
 }
 .top-nav-home:hover {
     background: #311134;

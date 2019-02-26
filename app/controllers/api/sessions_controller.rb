@@ -6,9 +6,7 @@ class Api::SessionsController < ApplicationController
             login!(@user)
             render 'api/users/show';
         else
-            render json: {
-                message: "Sorry, you entered an incorrect email address or password."
-            }, 
+            render json: ["Sorry, you entered an incorrect email address or password."],
             status: 401
         end
     end
@@ -16,13 +14,9 @@ class Api::SessionsController < ApplicationController
     def destroy
         if current_user
             logout!
-            render json: {
-                message: "Logout successful."
-            }
+            render json: ["Logout successful."]
         else
-            render json: {
-                message: "No user found."
-            },
+            render json: ["No user found."],
             status: 404
         end
     end

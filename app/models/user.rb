@@ -14,11 +14,11 @@
 
 class User < ApplicationRecord
     validates :session_token, presence: true, uniqueness: true
-    validates :password_digest, presence: { message: "Password can't be blank" }
-    validates :full_name, presence: { message: "Name can't be blank" }
-    validates :email, presence: { message: "Email can't be blank" }
-    validates :email, uniqueness: { message: "Email is already in use" }
-    validates :password, length: { minimum: 6, allow_nil: true, too_short: "Password must be at least 6 characters" }
+    validates :password_digest, presence: { message: "can't be blank" }
+    validates :full_name, presence: { message: "can't be blank" }
+    validates :email, presence: { message: "can't be blank" }
+    validates :email, uniqueness: { message: "is already in use" }
+    validates :password, length: { minimum: 6, allow_nil: true, too_short: "must be at least 6 characters" }
 
     after_initialize :ensure_session_token
     attr_reader :password
