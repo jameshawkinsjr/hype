@@ -10,3 +10,4 @@ bundle.js/map
 .env.test.local
 .env.production.local
 tmp/.env
+node_modules
