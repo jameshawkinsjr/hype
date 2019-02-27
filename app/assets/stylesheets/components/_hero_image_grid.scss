@@ -59,16 +59,16 @@
     grid-column-end: span 2;
     grid-row-start: 4;
     button {
-    background: $bright-purple;
-    color: $white;
-    padding: 15px 30px;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1.1px;
-    font-family: $font-sans-serif;
-    display: block;
-    width: 40%;
+        background: $bright-purple;
+        color: $white;
+        padding: 15px 30px;
+        border-radius: 3px;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 1.1px;
+        font-family: $font-sans-serif;
+        display: block;
+        width: 40%;
         &:hover {
             background: $dark-purple;
             cursor: pointer;

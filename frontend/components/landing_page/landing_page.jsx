@@ -11,15 +11,16 @@ class LandingPage extends React.Component {
         let header = (
             <header className="landing-page-nav flex">
                 <div className="landing-page-nav-left flex">
-                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small}/></Link>
+                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small_color}/></Link>
                     <div className="landing-page-nav-links">Why Slack?</div>
                     <div className="landing-page-nav-links">Solutions</div>
                     <div className="landing-page-nav-links">Resources</div>
                     <div className="landing-page-nav-links">Pricing</div>
                 </div>
                 <div className="landing-page-nav-right flex">
-                    {/* <div className="landing-page-nav-login">Sign-in</div> */}
-                    <div className="landing-page-nav-button">Sign In</div>
+                    <div className="landing-page-nav-login">Sign-in</div>
+                    {/* <Link to="/login"><div className="landing-page-nav-button">Sign In</div></Link> */}
+                    <Link to="/signup"><div className="landing-page-nav-button purple-button">GET STARTED</div></Link>
                 </div>
             </header>
         );

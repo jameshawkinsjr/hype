@@ -195,6 +195,9 @@ var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/login",
     component: _session_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
+    path: "/signup",
+    component: _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/nav",
@@ -204,10 +207,7 @@ var App = function App() {
     component: _landing_page_landing_page__WEBPACK_IMPORTED_MODULE_5__["default"]
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "flex"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
-    path: "/signup",
-    component: _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["ProtectedRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["ProtectedRoute"], {
     path: "/chatrooms",
     component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"]
   })));
@@ -272,7 +272,7 @@ function (_React$Component) {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "landing-page-logo",
-        src: window.images.hype_small
+        src: window.images.hype_small_color
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
       }, "Why Slack?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -284,8 +284,12 @@ function (_React$Component) {
       }, "Pricing")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-right flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "landing-page-nav-button"
-      }, "Sign In")));
+        className: "landing-page-nav-login"
+      }, "Sign-in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/signup"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "landing-page-nav-button purple-button"
+      }, "GET STARTED"))));
       var main = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "landing-page-hero flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -516,6 +520,38 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/session/header.jsx":
+/*!************************************************!*\
+  !*** ./frontend/components/session/header.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+var Header = function Header() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "session-form-header flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "session-form-header-inner flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "landing-page-logo",
+    src: window.images.hype_small_color
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
 /***/ "./frontend/components/session/login_form.jsx":
 /*!****************************************************!*\
   !*** ./frontend/components/session/login_form.jsx ***!
@@ -527,6 +563,8 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header */ "./frontend/components/session/header.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -546,6 +584,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -591,6 +631,12 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearErrors();
+    } // DEMO LOGINS
+
+  }, {
     key: "loginMichael",
     value: function loginMichael(e) {
       var _this4 = this;
@@ -599,8 +645,7 @@ function (_React$Component) {
       var user = {
         email: "M.Scott@dunder-mifflin.org",
         password: "Michael123456"
-      }; // debugger
-
+      };
       this.props.login(user).then(function () {
         return _this4.props.history.push('/chatrooms');
       });
@@ -614,8 +659,7 @@ function (_React$Component) {
       var user = {
         email: "J.Halpert@dunder-mifflin.org",
         password: "Jim123456"
-      }; // debugger
-
+      };
       this.props.login(user).then(function () {
         return _this5.props.history.push('/chatrooms');
       });
@@ -629,31 +673,28 @@ function (_React$Component) {
       var user = {
         email: "P.Beesly@dunder-mifflin.org",
         password: "Pam123456"
-      }; // debugger
-
+      };
       this.props.login(user).then(function () {
         return _this6.props.history.push('/chatrooms');
       });
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.props.clearErrors();
     }
   }, {
     key: "render",
     value: function render() {
       var _React$createElement;
 
-      // debugger
       var errors = this.props.errors.map(function (error) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: error
         }, " ", error, " ");
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-form-body flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-form flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign in to hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Enter your ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " email address"), " and ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "password"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign in to hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Enter your ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " email address"), " and ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "password"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         placeholder: "you@example.com",
@@ -664,16 +705,20 @@ function (_React$Component) {
         value: this.state.password,
         placeholder: "password"
       }, _defineProperty(_React$createElement, "value", this.state.password), _defineProperty(_React$createElement, "onChange", this.handleInput('password')), _defineProperty(_React$createElement, "autoComplete", "off"), _React$createElement)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "purple-button",
         onClick: this.handleSubmit
       }, "Sign In")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "blue-button",
         onClick: this.loginMichael
       }, "Login as Michael Scott"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "blue-button",
         onClick: this.loginPam
       }, "Login as Pam Beasley"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "blue-button",
         onClick: this.loginJim
       }, "Login as Jim Halpert"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "errors"
-      }, errors));
+      }, errors))));
     }
   }]);
 
@@ -734,6 +779,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header */ "./frontend/components/session/header.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -753,6 +800,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -810,15 +859,19 @@ function (_React$Component) {
           key: error
         }, " ", error, " ");
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-form-body flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-form flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Join the hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Full Name", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Join the hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Full Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.full_name,
         placeholder: "Full Name",
         onChange: this.handleInput('full_name'),
         autoComplete: "off"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Display Name (optional)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Display Name (optional)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.alias,
         placeholder: "Display Name",
@@ -826,13 +879,13 @@ function (_React$Component) {
         autoComplete: "off"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "login-form-subtext"
-      }, "By default, hype will use your full name - but you can choose something shorter if you'd like.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "By default, hype will use your full name - but you can choose something shorter if you'd like.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         placeholder: "Email",
         onChange: this.handleInput('email'),
         autoComplete: "off"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password (required)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Password (required)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
         placeholder: "Password",
@@ -841,10 +894,11 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "login-form-subtext"
       }, "Passwords must be at least 6 characters long, and can't be things like \u201Cpassword\u201D, \u201C123456\u201D or \u201Cabcdef\u201D.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "purple-button",
         onClick: this.handleSubmit
-      }, "Sign up for hype")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "errors"
-      }, errors));
+      }, errors))));
     }
   }]);
 

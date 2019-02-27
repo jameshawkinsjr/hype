@@ -1,10 +1,97 @@
 .login-form, .signup-form {
     padding: 20px;
     border-radius: 15px;
-    border: 1px solid $black;
+    border: 1px solid $medium-grey;
     flex-direction: column;
     background: $medium-grey;
     width: 500px;
     align-self: center;
     align-items: center;
+    background: white;
+    box-shadow: 5px 5px 5px $medium-grey;
+    h2 {
+        font-weight: 700;
+    }
+
+    form {
+        flex-direction: column;
+        label {
+            padding: 10px;
+            h3 {
+                margin: 7px 2px 7px 0;
+                font-size: 13px;
+                font-weight: 700;
+            }
+        }
+    }
+    input {
+        padding: 10px;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid $light-grey;
+        font-size: 18px;
+    }
+    p {
+        padding: 12px 0 0 0;
+        line-height: 1.44;
+        color: $light-grey;
+    }
+
 }
+
+.purple-button {
+    align-self: center;
+    color: $white;
+    padding: 12px;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    font-family: $font-sans-serif;
+    width: fit-content;
+    background: $bright-purple;
+}
+.purple-button:hover{
+    background: $dark-purple;
+    cursor: pointer;
+}
+.blue-button {
+    align-self: center;
+    background: $blue;
+    color: $white;
+    padding: 12px;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    font-family: $font-sans-serif;
+    width: fit-content;
+}
+.blue-button:hover{
+    background: $dark-blue;
+    cursor: pointer;
+}
+.session-form-header {
+    background: white;
+    height: 65px;
+    border-bottom: 3px solid $medium-grey;
+    justify-content: center;
+    padding: 10px 0 0 0;
+}
+
+.session-form-body{
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 100px 0;
+    background: #f0f0f0;
+    position: fixed;
+    top: 79px;
+    bottom: 0;
+    width: 100%;
+    
+}
+.session-form-header-inner {
+    justify-content: start;
+    align-self: start;
+}
+
