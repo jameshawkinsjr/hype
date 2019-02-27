@@ -646,7 +646,9 @@ function (_React$Component) {
         className: "top-nav-home"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "bold"
-      }, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/"
+      }, " Home "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.props.logout
       }, " Sign Out ")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-nav-home flex"

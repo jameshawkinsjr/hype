@@ -21,6 +21,7 @@ class NavBar extends React.Component {
             <div className="top-nav-home">
                 <h3 className="bold">Welcome</h3>
                 <p> { name }</p>
+                <Link to="/"> Home </Link>
                 <button onClick= { this.props.logout }> Sign Out </button>
             </div>
         ) : (
