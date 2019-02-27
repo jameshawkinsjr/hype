@@ -1,0 +1,10 @@
+.login-form, .signup-form {
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid $black;
+    flex-direction: column;
+    background: $medium-grey;
+    width: 500px;
+    align-self: center;
+    align-items: center;
+}

@@ -1,0 +1,45 @@
+.landing-page {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+}
+
+.landing-page-nav {
+    justify-content: space-between;
+    width: 1200px;
+    height: 50px;
+    font-family: $font-sans-serif;
+}
+
+.landing-page-nav-left,
+.landing-page-nav-right
+ {
+    align-items: center;
+    height: 80%;
+    padding: 15px 25px 15px 25px;
+}
+
+.landing-page-nav-links {
+    color: #5e5e5e;
+    margin: 0 15px;
+    font-size: 14px;
+    cursor: pointer;
+
+}
+
+.landing-page-nav-left {
+
+}
+.landing-page-nav-right {
+
+}
+
+.landing-page-nav-button {
+    background: $bright-purple;
+    color: $white;
+    padding: 10px;
+    border-radius: 3px;
+    &:hover {
+        background: $dark-purple;
+    }
+};

@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
-
+gem "aws-sdk-s3", require: false
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
