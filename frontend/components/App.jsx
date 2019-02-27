@@ -10,12 +10,12 @@ const App = () => (
     <>
     <header>
         <Switch>
-            <Route path="/" component={LandingPage} />
+            <AuthRoute path="/login" component={LoginFormContainer} />
             <Route exact path="/nav" component={NavBarContainer} />
+            <Route path="/" component={LandingPage} />
         </Switch>
     </header>
     <section className="flex">
-        <AuthRoute path="/login" component={LoginFormContainer} />
         <AuthRoute path="/signup" component={SignupFormContainer} />
         <ProtectedRoute path="/chatrooms" component={NavBarContainer} />
     </section>

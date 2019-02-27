@@ -5,51 +5,13 @@ import { Link, withRouter } from 'react-router-dom';
 class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            timeout: true,
-            counter: 0
-        };
-        this.changeHeroClasses = this.changeHeroClasses.bind(this);
-    }
-
-    componentDidMount() {
-        if(this.state.timeout) {
-          this.interval = setInterval(() => {
-            this.changeHeroClasses();
-          }, 3000);
-        }
-      }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-        this.setState({ timeout: false});
-    }
-      
-    changeHeroClasses() {
-        if (this.state.timeout) {
-            const hero_image_1c = document.getElementById('hero-image-1c');
-            const hero_image_2c = document.getElementById('hero-image-2c');
-            const hero_image_3c = document.getElementById('hero-image-3c');
-            const hero_image_1b = document.getElementById('hero-image-1b');
-            const hero_image_2b = document.getElementById('hero-image-2b');
-            const hero_image_3b = document.getElementById('hero-image-3b');
-            // hero_image_1c.classList.toggle("hero_image_hide");
-            // hero_image_2c.classList.toggle("hero_image_hide");
-            // hero_image_3c.classList.toggle("hero_image_hide");
-            // hero_image_1b.classList.toggle("hero_image_hide");
-            // hero_image_1b.classList.toggle("hero-top-left");
-            // hero_image_2b.classList.toggle("hero_image_hide");
-            // hero_image_2b.classList.toggle("hero-top-left");
-            // hero_image_3b.classList.toggle("hero-top-left");
-            // hero_image_3b.classList.toggle("hero-bottom-right");
-        }
     }
         
     render () {
         let header = (
             <header className="landing-page-nav flex">
                 <div className="landing-page-nav-left flex">
-                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small } /></Link>
+                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small}/></Link>
                     <div className="landing-page-nav-links">Why Slack?</div>
                     <div className="landing-page-nav-links">Solutions</div>
                     <div className="landing-page-nav-links">Resources</div>
@@ -72,19 +34,31 @@ class LandingPage extends React.Component {
                         <h3>Slack is a collaboration hub for work, no matter what work you do. It’s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.</h3>
                     </div>
                     <div className="hero-get-started">
-                        <form className="hero-get-started-input">
+                        <form className="hero-get-started-input flex">
                         <input type="text" placeholder="Email Address"/>
                         <button>GET STARTED</button>
                         </form>
-                        <h3>Already Using Slack?</h3><Link to="/login"> Sign in. </Link>
+                        <div className="hero-get-started-link flex">
+                        <h3>Already Using Slack? </h3><pre>   </pre><Link to="/login"> <h3>Sign in.</h3> </Link>
+                        </div>
                     </div>
-                    <img id="hero-image-1c" className="hero-image hero_1_color hero_image_hide" src={ window.images.hero_1_color } />
-                    <img id="hero-image-2c" className="hero-image hero_2_color hero-middle-color" src={ window.images.hero_2_color } />
-                    <img id="hero-image-3c" className="hero-image hero_3_color hero_image_hide" src={ window.images.hero_3_color } /> 
-                    
-                    <img id="hero-image-1b" className="hero-image hero_1_bw hero-top-left" src={ window.images.hero_1_bw } />
-                    <img id="hero-image-2b" className="hero-image hero_2_bw hero_image_hide" src={ window.images.hero_2_bw } />
-                    <img id="hero-image-3b" className="hero-image hero_3_bw hero-bottom-right" src={ window.images.hero_3_bw } />
+                    {/* Middle Hero Image Color */}
+                    <img className="hero-image hero-1-color hero-middle-color" src={ window.images.hero_1_color } />
+                    <caption className="hero-1-caption hero-image-caption">Autodesk fosters open communication with Slack</caption>
+                    <img className="hero-image hero-2-color hero-middle-color" src={ window.images.hero_2_color } />
+                    <caption className="hero-2-caption hero-image-caption">Away transforms creativity and customer support with Slack</caption>
+                    <img className="hero-image hero-3-color hero-middle-color" src={ window.images.hero_3_color } /> 
+                    <caption  className="hero-3-caption hero-image-caption">Molly Moon creates a recipe for success with Slack</caption>
+                    {/* Top Left Hero Image Black and White */}
+                    <div className="top-left">
+                        <img className="hero-image hero-1-bw-tl hero-top-left" src={ window.images.hero_1_bw } />
+                        <img className="hero-image hero-2-bw-tl hero-top-left" src={ window.images.hero_2_bw } />
+                        <img className="hero-image hero-3-bw-tl hero-top-left" src={ window.images.hero_3_bw } />
+                    </div>
+                    {/* Bottom Right Her Image Black and White */}
+                    <img className="hero-image hero-1-bw-br hero-bottom-right" src={ window.images.hero_1_bw } />
+                    <img className="hero-image hero-2-bw-br hero-bottom-right" src={ window.images.hero_2_bw } />
+                    <img className="hero-image hero-3-bw-br hero-bottom-right" src={ window.images.hero_3_bw } />
             </section>
             </main>
         );

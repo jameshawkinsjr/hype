@@ -192,19 +192,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/",
-    component: _landing_page_landing_page__WEBPACK_IMPORTED_MODULE_5__["default"]
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
+    path: "/login",
+    component: _session_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/nav",
     component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/",
+    component: _landing_page_landing_page__WEBPACK_IMPORTED_MODULE_5__["default"]
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
-    path: "/login",
-    component: _session_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/signup",
     component: _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__["ProtectedRoute"], {
@@ -239,9 +239,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -256,59 +256,12 @@ function (_React$Component) {
   _inherits(LandingPage, _React$Component);
 
   function LandingPage(props) {
-    var _this;
-
     _classCallCheck(this, LandingPage);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LandingPage).call(this, props));
-    _this.state = {
-      timeout: true,
-      counter: 0
-    };
-    _this.changeHeroClasses = _this.changeHeroClasses.bind(_assertThisInitialized(_this));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(LandingPage).call(this, props));
   }
 
   _createClass(LandingPage, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (this.state.timeout) {
-        this.interval = setInterval(function () {
-          _this2.changeHeroClasses();
-        }, 3000);
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      clearInterval(this.interval);
-      this.setState({
-        timeout: false
-      });
-    }
-  }, {
-    key: "changeHeroClasses",
-    value: function changeHeroClasses() {
-      if (this.state.timeout) {
-        var hero_image_1c = document.getElementById('hero-image-1c');
-        var hero_image_2c = document.getElementById('hero-image-2c');
-        var hero_image_3c = document.getElementById('hero-image-3c');
-        var hero_image_1b = document.getElementById('hero-image-1b');
-        var hero_image_2b = document.getElementById('hero-image-2b');
-        var hero_image_3b = document.getElementById('hero-image-3b'); // hero_image_1c.classList.toggle("hero_image_hide");
-        // hero_image_2c.classList.toggle("hero_image_hide");
-        // hero_image_3c.classList.toggle("hero_image_hide");
-        // hero_image_1b.classList.toggle("hero_image_hide");
-        // hero_image_1b.classList.toggle("hero-top-left");
-        // hero_image_2b.classList.toggle("hero_image_hide");
-        // hero_image_2b.classList.toggle("hero-top-left");
-        // hero_image_3b.classList.toggle("hero-top-left");
-        // hero_image_3b.classList.toggle("hero-bottom-right");
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var header = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
@@ -344,35 +297,48 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Slack is a collaboration hub for work, no matter what work you do. It\u2019s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-get-started"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "hero-get-started-input"
+        className: "hero-get-started-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Email Address"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "GET STARTED")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already Using Slack?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "GET STARTED")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hero-get-started-link flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already Using Slack? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "   "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login"
-      }, " Sign in. ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-1c",
-        className: "hero-image hero_1_color hero_image_hide",
+      }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in."), " "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-1-color hero-middle-color",
         src: window.images.hero_1_color
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-2c",
-        className: "hero-image hero_2_color hero-middle-color",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("caption", {
+        className: "hero-1-caption hero-image-caption"
+      }, "Autodesk fosters open communication with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-2-color hero-middle-color",
         src: window.images.hero_2_color
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-3c",
-        className: "hero-image hero_3_color hero_image_hide",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("caption", {
+        className: "hero-2-caption hero-image-caption"
+      }, "Away transforms creativity and customer support with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-3-color hero-middle-color",
         src: window.images.hero_3_color
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-1b",
-        className: "hero-image hero_1_bw hero-top-left",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("caption", {
+        className: "hero-3-caption hero-image-caption"
+      }, "Molly Moon creates a recipe for success with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "top-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-1-bw-tl hero-top-left",
         src: window.images.hero_1_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-2b",
-        className: "hero-image hero_2_bw hero_image_hide",
+        className: "hero-image hero-2-bw-tl hero-top-left",
         src: window.images.hero_2_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "hero-image-3b",
-        className: "hero-image hero_3_bw hero-bottom-right",
+        className: "hero-image hero-3-bw-tl hero-top-left",
+        src: window.images.hero_3_bw
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-1-bw-br hero-bottom-right",
+        src: window.images.hero_1_bw
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-2-bw-br hero-bottom-right",
+        src: window.images.hero_2_bw
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "hero-image hero-3-bw-br hero-bottom-right",
         src: window.images.hero_3_bw
       })));
       var footer = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
