@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_212722) do
+ActiveRecord::Schema.define(version: 2019_02_27_225113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chatroom_subscriptions", force: :cascade do |t|
+    t.integer "chatroom_id", null: false
+    t.integer "user_id", null: false
+    t.integer "last_read_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id", "user_id"], name: "index_chatroom_subscriptions_on_chatroom_id_and_user_id", unique: true
+    t.index ["last_read_message"], name: "index_chatroom_subscriptions_on_last_read_message"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "title"
+    t.string "topic"
+    t.string "chatroom_type", null: false
+    t.integer "admin_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text "body", null: false

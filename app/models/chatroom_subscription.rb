@@ -1,0 +1,2 @@
+class ChatroomSubscription < ApplicationRecord
+end
