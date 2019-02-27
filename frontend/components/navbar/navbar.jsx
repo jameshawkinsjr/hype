@@ -6,8 +6,6 @@ class NavBar extends React.Component {
         super(props);
     }
 
-
-
     render() {
         let name;
         if (this.props.currentUser) {
@@ -16,7 +14,8 @@ class NavBar extends React.Component {
             } else {
                 name = this.props.currentUser.full_name;
             }
-        };
+        }
+
         const navBar = this.props.currentUser ? (
             
             <div className="top-nav-home">
@@ -28,6 +27,7 @@ class NavBar extends React.Component {
             <div className="top-nav-home flex">
                 <Link to="/signup"> Sign Up </Link>
                 <Link to="/login"> Log In </Link>
+                <p>Not working</p>
             </div>
         );
 
