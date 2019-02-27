@@ -27085,3 +27085,1510 @@ Processing by StaticPagesController#root as HTML
 Completed 200 OK in 1834ms (Views: 1825.4ms | ActiveRecord: 5.6ms)
 
 
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/bin/annotate:23
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:12:22 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (64.5ms)
+Completed 200 OK in 131ms (Views: 122.4ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:23:36 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (36.9ms)
+Completed 200 OK in 446ms (Views: 432.4ms | ActiveRecord: 10.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:23:45 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (13.4ms)
+Completed 200 OK in 52ms (Views: 47.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:25:06 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 398ms (Views: 394.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:25:20 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.8ms)
+Completed 200 OK in 434ms (Views: 430.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/hero_1_color.jpg" for 127.0.0.1 at 2019-02-27 15:25:21 -0800
+Started GET "/hero_2_color.jpg" for 127.0.0.1 at 2019-02-27 15:25:21 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/hero_1_color.jpg"):
+  
+Started GET "/hero_2_bw.jpg" for 127.0.0.1 at 2019-02-27 15:25:21 -0800
+Started GET "/hero_1_bw.jpg" for 127.0.0.1 at 2019-02-27 15:25:21 -0800
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/hero_2_bw.jpg"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/hero_3_color.jpg" for 127.0.0.1 at 2019-02-27 15:25:21 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/hero_1_bw.jpg"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  
+ActionController::RoutingError (No route matches [GET] "/hero_2_color.jpg"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/hero_3_bw.jpg" for 127.0.0.1 at 2019-02-27 15:25:22 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/hero_3_color.jpg"):
+  
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+ActionController::RoutingError (No route matches [GET] "/hero_3_bw.jpg"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:25:37 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (1585.8ms)
+Completed 200 OK in 1864ms (Views: 1853.3ms | ActiveRecord: 7.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:28:31 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (22.0ms)
+Completed 200 OK in 532ms (Views: 528.3ms | ActiveRecord: 0.7ms)
+
+
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE DATABASE "hype_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE DATABASE "hype_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (8.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "chatroom_subscriptions" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "chatroom_subscriptions" ("id" bigserial primary key, "chatroom_id" integer NOT NULL, "user_id" integer NOT NULL, "last_read_message" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_chatroom_subscriptions_on_chatroom_id_and_user_id" ON "chatroom_subscriptions"  ("chatroom_id", "user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_chatroom_subscriptions_on_last_read_message" ON "chatroom_subscriptions"  ("last_read_message")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "chatrooms" CASCADE[0m
+  ↳ db/schema.rb:28
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "chatrooms" ("id" bigserial primary key, "title" character varying, "topic" character varying, "chatroom_type" character varying NOT NULL, "admin_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:28
+  [1m[35m (3.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages" CASCADE[0m
+  ↳ db/schema.rb:37
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "messages" ("id" bigserial primary key, "body" text NOT NULL, "chatroom_id" integer NOT NULL, "author_id" integer NOT NULL, "parent_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:37
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_author_id" ON "messages"  ("author_id")[0m
+  ↳ db/schema.rb:37
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_chatroom_id" ON "messages"  ("chatroom_id")[0m
+  ↳ db/schema.rb:37
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:48
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "full_name" character varying NOT NULL, "alias" character varying, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_full_name" ON "users"  ("full_name")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_session_token" ON "users"  ("session_token")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (6.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "chatroom_subscriptions" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "chatroom_subscriptions" ("id" bigserial primary key, "chatroom_id" integer NOT NULL, "user_id" integer NOT NULL, "last_read_message" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_chatroom_subscriptions_on_chatroom_id_and_user_id" ON "chatroom_subscriptions"  ("chatroom_id", "user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_chatroom_subscriptions_on_last_read_message" ON "chatroom_subscriptions"  ("last_read_message")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "chatrooms" CASCADE[0m
+  ↳ db/schema.rb:28
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "chatrooms" ("id" bigserial primary key, "title" character varying, "topic" character varying, "chatroom_type" character varying NOT NULL, "admin_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:28
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages" CASCADE[0m
+  ↳ db/schema.rb:37
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "messages" ("id" bigserial primary key, "body" text NOT NULL, "chatroom_id" integer NOT NULL, "author_id" integer NOT NULL, "parent_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:37
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_author_id" ON "messages"  ("author_id")[0m
+  ↳ db/schema.rb:37
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_chatroom_id" ON "messages"  ("chatroom_id")[0m
+  ↳ db/schema.rb:37
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:48
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "full_name" character varying NOT NULL, "alias" character varying, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_full_name" ON "users"  ("full_name")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_session_token" ON "users"  ("session_token")[0m
+  ↳ db/schema.rb:48
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2019-02-27 23:31:15.699513"], ["key", "environment"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2019-02-27 23:31:15.704352"], ["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:9
+  [1m[36mChatroom Load (0.8ms)[0m  [1m[34mSELECT "chatrooms".* FROM "chatrooms"[0m
+  ↳ db/seeds.rb:10
+  [1m[36mMessage Load (0.9ms)[0m  [1m[34mSELECT "messages".* FROM "messages"[0m
+  ↳ db/seeds.rb:11
+  [1m[36mChatroomSubscription Load (0.8ms)[0m  [1m[34mSELECT "chatroom_subscriptions".* FROM "chatroom_subscriptions"[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Zq8JJWonwlljzDh4JRJ6dg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "James Halpert"], ["alias", "Jim Halpert"], ["email", "J.Halpert@dunder-mifflin.org"], ["password_digest", "$2a$10$kQLOxSxke397KKTD.CzM6e7EUUwihySGk0jpHto16/wgqXbyhqmiq"], ["session_token", "Zq8JJWonwlljzDh4JRJ6dg"], ["created_at", "2019-02-27 23:31:15.844102"], ["updated_at", "2019-02-27 23:31:15.844102"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:15
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwMdc--vxtp3fre0usTpPg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:15
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:15
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Pam Beesly"], ["email", "P.Beesly@dunder-mifflin.org"], ["password_digest", "$2a$10$s74vx8u34gSgBTIvY1g93.a0JqCOM.uB8TqPe3SMeG5pXse/SKBo2"], ["session_token", "MwMdc--vxtp3fre0usTpPg"], ["created_at", "2019-02-27 23:31:15.919103"], ["updated_at", "2019-02-27 23:31:15.919103"]]
+  ↳ db/seeds.rb:15
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "i8Pnzcz5iwOYT2YXbHgU8w"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "M.Scott@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Michael Scott"], ["email", "M.Scott@dunder-mifflin.org"], ["password_digest", "$2a$10$t/S.EZP3h9PpX1xZKoRnBenBncD35mttzNUcUN2ywzhksKJapYPMW"], ["session_token", "i8Pnzcz5iwOYT2YXbHgU8w"], ["created_at", "2019-02-27 23:31:15.996869"], ["updated_at", "2019-02-27 23:31:15.996869"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "149Oo6xQoxEgqIXpqZuDSg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Schrute@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Dwight Schrute"], ["email", "D.Schrute@dunder-mifflin.org"], ["password_digest", "$2a$10$tDLqsdf8JTMYfg3lzQQEXura/99DfBBWgLm70Oev7sc5eqwSIgm62"], ["session_token", "149Oo6xQoxEgqIXpqZuDSg"], ["created_at", "2019-02-27 23:31:16.075102"], ["updated_at", "2019-02-27 23:31:16.075102"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "o_vIwFQv0RFLQR5lBX06lQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "A.Bernard@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Andy Bernard"], ["alias", "Nard Dog"], ["email", "A.Bernard@dunder-mifflin.org"], ["password_digest", "$2a$10$oZ7k8k3BQKr74MP4lAvXTuhqTzgKuGLVqUC/Dfz2Ehj4Cei/Gi.32"], ["session_token", "o_vIwFQv0RFLQR5lBX06lQ"], ["created_at", "2019-02-27 23:31:16.150506"], ["updated_at", "2019-02-27 23:31:16.150506"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "0r54KVkbZHL4TZlRVo2lng"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "T.Flenderson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Toby Flenderson"], ["email", "T.Flenderson@dunder-mifflin.org"], ["password_digest", "$2a$10$WjDp73yrNoVFycdagI55V.vWJAHRLGJn74YmJbD8CfRyzPKX2Jg4q"], ["session_token", "0r54KVkbZHL4TZlRVo2lng"], ["created_at", "2019-02-27 23:31:16.228640"], ["updated_at", "2019-02-27 23:31:16.228640"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "peN0MB5-iHhtuB9NopQ29Q"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "K.Malone@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Kevin Malone"], ["email", "K.Malone@dunder-mifflin.org"], ["password_digest", "$2a$10$LTaMTtb1SR3Xiz2u0f/c6uf.ZKLZgMH1OnzpnMes1KgrfNhodWZru"], ["session_token", "peN0MB5-iHhtuB9NopQ29Q"], ["created_at", "2019-02-27 23:31:16.307551"], ["updated_at", "2019-02-27 23:31:16.307551"]]
+  ↳ db/seeds.rb:20
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "EVkBt91hy5YHtn23jcmP3A"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "A.Martin@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Angela Martin"], ["email", "A.Martin@dunder-mifflin.org"], ["password_digest", "$2a$10$UJuXA7nBhLhqBpuMyjqTrOiO06zwxPL3EW5hHoQtk1L/0SYLGCt1u"], ["session_token", "EVkBt91hy5YHtn23jcmP3A"], ["created_at", "2019-02-27 23:31:16.385328"], ["updated_at", "2019-02-27 23:31:16.385328"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "DXws1m1KQXJ9W1A_8wb2cw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "O.Martinez@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Oscar Martinez"], ["email", "O.Martinez@dunder-mifflin.org"], ["password_digest", "$2a$10$pUbPa7n723QydY75G5Yd0.o.JxJNLhiLziFDwuQq/tUPtCXvMLw4K"], ["session_token", "DXws1m1KQXJ9W1A_8wb2cw"], ["created_at", "2019-02-27 23:31:16.461633"], ["updated_at", "2019-02-27 23:31:16.461633"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Uplx8YtFmKgKbuW0EcyXQQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "E.Hannon@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Erin Hannon"], ["email", "E.Hannon@dunder-mifflin.org"], ["password_digest", "$2a$10$1L5dIqeMHk23InN4mUT4KOFZWoVON/Ez66BxGnvovKXnWxLhYq/P6"], ["session_token", "Uplx8YtFmKgKbuW0EcyXQQ"], ["created_at", "2019-02-27 23:31:16.538741"], ["updated_at", "2019-02-27 23:31:16.538741"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:24
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "4tQVp0gWDf6w8tRgX2ch8A"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Levinson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Jan Levinson"], ["email", "J.Levinson@dunder-mifflin.org"], ["password_digest", "$2a$10$ehAY1bcvzLAP0ElK2GvYIOQuG/1E176khIQnjuMH8COhpXdRd.HjC"], ["session_token", "4tQVp0gWDf6w8tRgX2ch8A"], ["created_at", "2019-02-27 23:31:16.616862"], ["updated_at", "2019-02-27 23:31:16.616862"]]
+  ↳ db/seeds.rb:24
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:24
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "emgFN6IGkBTDUIwAyG6Anw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "S.Hudson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Stanley Hudson"], ["alias", "Stanley"], ["email", "S.Hudson@dunder-mifflin.org"], ["password_digest", "$2a$10$frme0fqfhjpQa789sax1Cuq9wwVe2BdPEwIBJ6sQ3h/xHx3B5ng2m"], ["session_token", "emgFN6IGkBTDUIwAyG6Anw"], ["created_at", "2019-02-27 23:31:16.693485"], ["updated_at", "2019-02-27 23:31:16.693485"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "aAfk5qkF3B4ElMuZeX8azw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Bratton@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Creed Bratton"], ["alias", "Creed"], ["email", "C.Bratton@dunder-mifflin.org"], ["password_digest", "$2a$10$dc3S2.RgKWExKmObfaqge.jItQfVPxEQK9/l7eC0K5buIo2pLKnLK"], ["session_token", "aAfk5qkF3B4ElMuZeX8azw"], ["created_at", "2019-02-27 23:31:16.770097"], ["updated_at", "2019-02-27 23:31:16.770097"]]
+  ↳ db/seeds.rb:26
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "QorVIxgpUmJ4r6wQlJ0ahg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "H.Flax@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Holly Flax"], ["email", "H.Flax@dunder-mifflin.org"], ["password_digest", "$2a$10$eItgAfpNlerP7AWLAid4NeuRgk2pditUpYVd16HCYhtBQMSv2Iycy"], ["session_token", "QorVIxgpUmJ4r6wQlJ0ahg"], ["created_at", "2019-02-27 23:31:16.846742"], ["updated_at", "2019-02-27 23:31:16.846742"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "QofsH0Ef3IHTv_IQjG1D6Q"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.Howard@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Ryan Howard"], ["email", "R.Howard@dunder-mifflin.org"], ["password_digest", "$2a$10$TWP6AuY0ixbCltarFF4iLeQDZEOj/3xF4pM8VawA3ZyFBfmEuk8nS"], ["session_token", "QofsH0Ef3IHTv_IQjG1D6Q"], ["created_at", "2019-02-27 23:31:16.924623"], ["updated_at", "2019-02-27 23:31:16.924623"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:29
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "_NwJpOfZDsm1A__nI2xw5w"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "K.Kapoor@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Kelly Kapoor"], ["email", "K.Kapoor@dunder-mifflin.org"], ["password_digest", "$2a$10$J5K/VzeXwFhGwiW1MGj/neeCt8GRawqhcQyZ1AFsRBf9CIiKYmbja"], ["session_token", "_NwJpOfZDsm1A__nI2xw5w"], ["created_at", "2019-02-27 23:31:16.997482"], ["updated_at", "2019-02-27 23:31:16.997482"]]
+  ↳ db/seeds.rb:29
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:29
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:30
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "9fmj1WBd8EogvV5FxmQzLA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:30
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "K.Filippelli@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:30
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Karen Filippelli"], ["email", "K.Filippelli@dunder-mifflin.org"], ["password_digest", "$2a$10$Ewl5MtG1mfQfayvU/sbMBOZL.Ja0SLlh7ljihFeVN94jMPAwU8X6m"], ["session_token", "9fmj1WBd8EogvV5FxmQzLA"], ["created_at", "2019-02-27 23:31:17.072999"], ["updated_at", "2019-02-27 23:31:17.072999"]]
+  ↳ db/seeds.rb:30
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:30
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:31
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "TtlqidE3h_p6zoQl7FAgZQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:31
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "G.Lewis@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:31
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Gabe Lewis"], ["email", "G.Lewis@dunder-mifflin.org"], ["password_digest", "$2a$10$gbAn7dUVbdDC1EFKXcdPO.N51KG/sNlT3o2SzQJ..rj51nlJwBDJ6"], ["session_token", "TtlqidE3h_p6zoQl7FAgZQ"], ["created_at", "2019-02-27 23:31:17.150600"], ["updated_at", "2019-02-27 23:31:17.150600"]]
+  ↳ db/seeds.rb:31
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:31
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:32
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "yqD64n4ut455HdkcljEmCQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:32
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "M.Palmer@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:32
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Meredith Palmer"], ["alias", "Meredith"], ["email", "M.Palmer@dunder-mifflin.org"], ["password_digest", "$2a$10$tY1zjV3MKFFPa/L.MtgsPu071Bnm4ucXbbhVu6U/YQgrZ7eLafQAa"], ["session_token", "yqD64n4ut455HdkcljEmCQ"], ["created_at", "2019-02-27 23:31:17.227848"], ["updated_at", "2019-02-27 23:31:17.227848"]]
+  ↳ db/seeds.rb:32
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:32
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "QjvsR_3_NNVVMK3AM8QHXw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:33
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "N.Bertram@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:33
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Nellie Bertram"], ["email", "N.Bertram@dunder-mifflin.org"], ["password_digest", "$2a$10$y7XLxAUTMUZHfZfyXBn/xulJAHs2ILMuhmBLfG8dyCkceLgppTCP2"], ["session_token", "QjvsR_3_NNVVMK3AM8QHXw"], ["created_at", "2019-02-27 23:31:17.288915"], ["updated_at", "2019-02-27 23:31:17.288915"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "GvyblLZxNMKWU7ZKvoOr4g"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:34
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Philbin@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:34
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Darryl Philbin"], ["email", "D.Philbin@dunder-mifflin.org"], ["password_digest", "$2a$10$zJYISDxOws.UH8eGjqg7fuaTE.C4/k6kZRBgsVlp5LPX.je6VHKTG"], ["session_token", "GvyblLZxNMKWU7ZKvoOr4g"], ["created_at", "2019-02-27 23:31:17.357554"], ["updated_at", "2019-02-27 23:31:17.357554"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:35
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "IC7izSwOtSkFeFPwlBxiNA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:35
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.California@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:35
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Robert California"], ["email", "R.California@dunder-mifflin.org"], ["password_digest", "$2a$10$EeNikkCZt9EISVf5t4XMI.oySn.0KiSEIdhGYPWHdT/HTrNomlUra"], ["session_token", "IC7izSwOtSkFeFPwlBxiNA"], ["created_at", "2019-02-27 23:31:17.432524"], ["updated_at", "2019-02-27 23:31:17.432524"]]
+  ↳ db/seeds.rb:35
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:35
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "G1Sodu0mumR7aD6qRpyW2Q"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Miller@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Pete Miller"], ["email", "P.Miller@dunder-mifflin.org"], ["password_digest", "$2a$10$c2RnU239zig9LjKOd2rfoOmPSLaH9vfyQkaJZy3khhOt3CsCX0Mb6"], ["session_token", "G1Sodu0mumR7aD6qRpyW2Q"], ["created_at", "2019-02-27 23:31:17.507522"], ["updated_at", "2019-02-27 23:31:17.507522"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:37
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "s7PX2SWYlQnVh-UjrfLeQA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Vance@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Phyllis Vance"], ["email", "P.Vance@dunder-mifflin.org"], ["password_digest", "$2a$10$AsaTflY36nUQbue38oX6.eaMQzp9qH9PndXLLWfCKHxFpuc2vOR2K"], ["session_token", "s7PX2SWYlQnVh-UjrfLeQA"], ["created_at", "2019-02-27 23:31:17.586444"], ["updated_at", "2019-02-27 23:31:17.586444"]]
+  ↳ db/seeds.rb:37
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:37
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:38
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "X6NiNi31owEVuo2x6obooQ"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:38
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Miner@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:38
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Charles Miner"], ["email", "C.Miner@dunder-mifflin.org"], ["password_digest", "$2a$10$fTEcrLJxBdCMuVMSFn7TV.ZN7/ZV6iNwTY28ojOZHhjfNX9g35FBu"], ["session_token", "X6NiNi31owEVuo2x6obooQ"], ["created_at", "2019-02-27 23:31:17.664051"], ["updated_at", "2019-02-27 23:31:17.664051"]]
+  ↳ db/seeds.rb:38
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:38
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:39
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "gpUY6aYwyto86MwhgBasIA"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:39
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Bennett@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:39
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Jo Bennett"], ["alias", "Jo"], ["email", "J.Bennett@dunder-mifflin.org"], ["password_digest", "$2a$10$6IX/WNawRfJVIdd50kYImex97cEDAqiUhFYKbbZDr/LMufQSeDT9K"], ["session_token", "gpUY6aYwyto86MwhgBasIA"], ["created_at", "2019-02-27 23:31:17.738586"], ["updated_at", "2019-02-27 23:31:17.738586"]]
+  ↳ db/seeds.rb:39
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "JXmZ6flL5x0vcp3P8sTXTg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:40
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.Anderson@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:40
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Roy Anderson"], ["email", "R.Anderson@dunder-mifflin.org"], ["password_digest", "$2a$10$2ErtsWMQcwILVfJx28WDXuVevzKyCXE66A/qRjQ.UnFekFUd5YzZW"], ["session_token", "JXmZ6flL5x0vcp3P8sTXTg"], ["created_at", "2019-02-27 23:31:17.813838"], ["updated_at", "2019-02-27 23:31:17.813838"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "veEH8YdjUZv0BHsDISxyYg"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "D.Vickers@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Deangelo Vickers"], ["email", "D.Vickers@dunder-mifflin.org"], ["password_digest", "$2a$10$Aoi2o7VbFpyjheWVi./cKetoJaqn7EkT8dCRovy2vKfS9NUxOhbl2"], ["session_token", "veEH8YdjUZv0BHsDISxyYg"], ["created_at", "2019-02-27 23:31:17.890019"], ["updated_at", "2019-02-27 23:31:17.890019"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:42
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "lQJhFDnMMIbJjGkHmKE1vw"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:42
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "C.Green@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:42
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["full_name", "Clark Green"], ["email", "C.Green@dunder-mifflin.org"], ["password_digest", "$2a$10$LZoGeHFKGFmJjIKmzBGdt.vxP6rGFFH4GIX4cmsKbn8BXIMhHNKqW"], ["session_token", "lQJhFDnMMIbJjGkHmKE1vw"], ["created_at", "2019-02-27 23:31:17.965066"], ["updated_at", "2019-02-27 23:31:17.965066"]]
+  ↳ db/seeds.rb:42
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:42
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:43
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "O33R_9nCwhTCq7zVCMFsow"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:43
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "R.Vance@vance-refrigeration.org"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:43
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("full_name", "alias", "email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["full_name", "Robert Vance"], ["alias", "Bob Vance - Vance Refrigeration"], ["email", "R.Vance@vance-refrigeration.org"], ["password_digest", "$2a$10$zYL9XELNgk6ur.HXMLCf7u73jN1r6ybd8NKPaMURnPDxpTHySCHjS"], ["session_token", "O33R_9nCwhTCq7zVCMFsow"], ["created_at", "2019-02-27 23:31:18.041279"], ["updated_at", "2019-02-27 23:31:18.041279"]]
+  ↳ db/seeds.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:43
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:45
+  [1m[36mChatroom Create (0.9ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Dunder Mifflin"], ["topic", "A place to chat"], ["chatroom_type", "channel"], ["admin_id", 3], ["created_at", "2019-02-27 23:31:18.052005"], ["updated_at", "2019-02-27 23:31:18.052005"]]
+  ↳ db/seeds.rb:45
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:45
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:46
+  [1m[36mChatroom Create (0.4ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Accounting"], ["topic", "The back corner $$"], ["chatroom_type", "channel"], ["admin_id", 9], ["created_at", "2019-02-27 23:31:18.055252"], ["updated_at", "2019-02-27 23:31:18.055252"]]
+  ↳ db/seeds.rb:46
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:46
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:47
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Scranton Office"], ["topic", "The #1 office at Dunder Mifflin"], ["chatroom_type", "channel"], ["admin_id", 4], ["created_at", "2019-02-27 23:31:18.057596"], ["updated_at", "2019-02-27 23:31:18.057596"]]
+  ↳ db/seeds.rb:47
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:47
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:48
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Michael's Office"], ["topic", "The Manager's Den"], ["chatroom_type", "channel"], ["admin_id", 3], ["created_at", "2019-02-27 23:31:18.059670"], ["updated_at", "2019-02-27 23:31:18.059670"]]
+  ↳ db/seeds.rb:48
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:48
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Party Planning Committee"], ["topic", "Only for serious planners"], ["chatroom_type", "channel"], ["admin_id", 8], ["created_at", "2019-02-27 23:31:18.061544"], ["updated_at", "2019-02-27 23:31:18.061544"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:50
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Dwight's Farm"], ["topic", "Beats, Bears, Battlestar Gallactica"], ["chatroom_type", "channel"], ["admin_id", 4], ["created_at", "2019-02-27 23:31:18.063424"], ["updated_at", "2019-02-27 23:31:18.063424"]]
+  ↳ db/seeds.rb:50
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:50
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:51
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Corporate"], ["topic", "The Higher Ups"], ["chatroom_type", "channel"], ["admin_id", 22], ["created_at", "2019-02-27 23:31:18.065395"], ["updated_at", "2019-02-27 23:31:18.065395"]]
+  ↳ db/seeds.rb:51
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:51
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 1], ["created_at", "2019-02-27 23:31:18.067249"], ["updated_at", "2019-02-27 23:31:18.067249"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:53
+  [1m[36mChatroom Create (0.5ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 1], ["created_at", "2019-02-27 23:31:18.069707"], ["updated_at", "2019-02-27 23:31:18.069707"]]
+  ↳ db/seeds.rb:53
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:53
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:54
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 1], ["created_at", "2019-02-27 23:31:18.072464"], ["updated_at", "2019-02-27 23:31:18.072464"]]
+  ↳ db/seeds.rb:54
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:54
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:55
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 2], ["created_at", "2019-02-27 23:31:18.074804"], ["updated_at", "2019-02-27 23:31:18.074804"]]
+  ↳ db/seeds.rb:55
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:56
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 8], ["created_at", "2019-02-27 23:31:18.076693"], ["updated_at", "2019-02-27 23:31:18.076693"]]
+  ↳ db/seeds.rb:56
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:56
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:57
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 15], ["created_at", "2019-02-27 23:31:18.078564"], ["updated_at", "2019-02-27 23:31:18.078564"]]
+  ↳ db/seeds.rb:57
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:57
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:58
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 1], ["created_at", "2019-02-27 23:31:18.080336"], ["updated_at", "2019-02-27 23:31:18.080336"]]
+  ↳ db/seeds.rb:58
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:58
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:59
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 3], ["created_at", "2019-02-27 23:31:18.082186"], ["updated_at", "2019-02-27 23:31:18.082186"]]
+  ↳ db/seeds.rb:59
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:59
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:60
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 10], ["created_at", "2019-02-27 23:31:18.084199"], ["updated_at", "2019-02-27 23:31:18.084199"]]
+  ↳ db/seeds.rb:60
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:60
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:61
+  [1m[36mChatroom Create (0.4ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 14], ["created_at", "2019-02-27 23:31:18.086549"], ["updated_at", "2019-02-27 23:31:18.086549"]]
+  ↳ db/seeds.rb:61
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:61
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:62
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 11], ["created_at", "2019-02-27 23:31:18.088900"], ["updated_at", "2019-02-27 23:31:18.088900"]]
+  ↳ db/seeds.rb:62
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:62
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:63
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 6], ["created_at", "2019-02-27 23:31:18.090980"], ["updated_at", "2019-02-27 23:31:18.090980"]]
+  ↳ db/seeds.rb:63
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:63
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:64
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 24], ["created_at", "2019-02-27 23:31:18.093134"], ["updated_at", "2019-02-27 23:31:18.093134"]]
+  ↳ db/seeds.rb:64
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:64
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:65
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 13], ["created_at", "2019-02-27 23:31:18.095121"], ["updated_at", "2019-02-27 23:31:18.095121"]]
+  ↳ db/seeds.rb:65
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:65
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:66
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 7], ["created_at", "2019-02-27 23:31:18.097004"], ["updated_at", "2019-02-27 23:31:18.097004"]]
+  ↳ db/seeds.rb:66
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:66
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:67
+  [1m[36mChatroom Create (0.3ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 9], ["created_at", "2019-02-27 23:31:18.098814"], ["updated_at", "2019-02-27 23:31:18.098814"]]
+  ↳ db/seeds.rb:67
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:67
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:68
+  [1m[36mChatroom Create (0.4ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 5], ["created_at", "2019-02-27 23:31:18.100865"], ["updated_at", "2019-02-27 23:31:18.100865"]]
+  ↳ db/seeds.rb:68
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:68
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:69
+  [1m[36mChatroom Create (0.4ms)[0m  [1m[32mINSERT INTO "chatrooms" ("title", "topic", "chatroom_type", "admin_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", ""], ["topic", ""], ["chatroom_type", "direct_message"], ["admin_id", 1], ["created_at", "2019-02-27 23:31:18.103559"], ["updated_at", "2019-02-27 23:31:18.103559"]]
+  ↳ db/seeds.rb:69
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:69
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:71
+  [1m[36mChatroomSubscription Create (0.7ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.113755"], ["updated_at", "2019-02-27 23:31:18.113755"]]
+  ↳ db/seeds.rb:71
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:71
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:72
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.116275"], ["updated_at", "2019-02-27 23:31:18.116275"]]
+  ↳ db/seeds.rb:72
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:72
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:73
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.118473"], ["updated_at", "2019-02-27 23:31:18.118473"]]
+  ↳ db/seeds.rb:73
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:74
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.120863"], ["updated_at", "2019-02-27 23:31:18.120863"]]
+  ↳ db/seeds.rb:74
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:74
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:75
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.123379"], ["updated_at", "2019-02-27 23:31:18.123379"]]
+  ↳ db/seeds.rb:75
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:75
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:76
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 6], ["created_at", "2019-02-27 23:31:18.125582"], ["updated_at", "2019-02-27 23:31:18.125582"]]
+  ↳ db/seeds.rb:76
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:77
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 7], ["created_at", "2019-02-27 23:31:18.127544"], ["updated_at", "2019-02-27 23:31:18.127544"]]
+  ↳ db/seeds.rb:77
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:77
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:78
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 8], ["created_at", "2019-02-27 23:31:18.129388"], ["updated_at", "2019-02-27 23:31:18.129388"]]
+  ↳ db/seeds.rb:78
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:78
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:79
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 10], ["created_at", "2019-02-27 23:31:18.131267"], ["updated_at", "2019-02-27 23:31:18.131267"]]
+  ↳ db/seeds.rb:79
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:79
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:80
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 11], ["created_at", "2019-02-27 23:31:18.133113"], ["updated_at", "2019-02-27 23:31:18.133113"]]
+  ↳ db/seeds.rb:80
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:80
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:81
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 12], ["created_at", "2019-02-27 23:31:18.135129"], ["updated_at", "2019-02-27 23:31:18.135129"]]
+  ↳ db/seeds.rb:81
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:81
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:82
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 13], ["created_at", "2019-02-27 23:31:18.137743"], ["updated_at", "2019-02-27 23:31:18.137743"]]
+  ↳ db/seeds.rb:82
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:82
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:83
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 14], ["created_at", "2019-02-27 23:31:18.140186"], ["updated_at", "2019-02-27 23:31:18.140186"]]
+  ↳ db/seeds.rb:83
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:83
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:84
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 15], ["created_at", "2019-02-27 23:31:18.142304"], ["updated_at", "2019-02-27 23:31:18.142304"]]
+  ↳ db/seeds.rb:84
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:84
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:85
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 16], ["created_at", "2019-02-27 23:31:18.144020"], ["updated_at", "2019-02-27 23:31:18.144020"]]
+  ↳ db/seeds.rb:85
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:85
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:86
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 17], ["created_at", "2019-02-27 23:31:18.145902"], ["updated_at", "2019-02-27 23:31:18.145902"]]
+  ↳ db/seeds.rb:86
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:86
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:87
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 18], ["created_at", "2019-02-27 23:31:18.147809"], ["updated_at", "2019-02-27 23:31:18.147809"]]
+  ↳ db/seeds.rb:87
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:87
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:88
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 19], ["created_at", "2019-02-27 23:31:18.149695"], ["updated_at", "2019-02-27 23:31:18.149695"]]
+  ↳ db/seeds.rb:88
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:88
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:89
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 20], ["created_at", "2019-02-27 23:31:18.151477"], ["updated_at", "2019-02-27 23:31:18.151477"]]
+  ↳ db/seeds.rb:89
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:89
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:90
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 21], ["created_at", "2019-02-27 23:31:18.154064"], ["updated_at", "2019-02-27 23:31:18.154064"]]
+  ↳ db/seeds.rb:90
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:90
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:91
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 22], ["created_at", "2019-02-27 23:31:18.156344"], ["updated_at", "2019-02-27 23:31:18.156344"]]
+  ↳ db/seeds.rb:91
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:91
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:92
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 23], ["created_at", "2019-02-27 23:31:18.158345"], ["updated_at", "2019-02-27 23:31:18.158345"]]
+  ↳ db/seeds.rb:92
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:92
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:93
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 24], ["created_at", "2019-02-27 23:31:18.160120"], ["updated_at", "2019-02-27 23:31:18.160120"]]
+  ↳ db/seeds.rb:93
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:93
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:94
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 25], ["created_at", "2019-02-27 23:31:18.161961"], ["updated_at", "2019-02-27 23:31:18.161961"]]
+  ↳ db/seeds.rb:94
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:94
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:95
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.163722"], ["updated_at", "2019-02-27 23:31:18.163722"]]
+  ↳ db/seeds.rb:95
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:95
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:96
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 26], ["created_at", "2019-02-27 23:31:18.165550"], ["updated_at", "2019-02-27 23:31:18.165550"]]
+  ↳ db/seeds.rb:96
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:96
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:97
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 27], ["created_at", "2019-02-27 23:31:18.167535"], ["updated_at", "2019-02-27 23:31:18.167535"]]
+  ↳ db/seeds.rb:97
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:97
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:98
+  [1m[36mChatroomSubscription Create (0.5ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 28], ["created_at", "2019-02-27 23:31:18.169874"], ["updated_at", "2019-02-27 23:31:18.169874"]]
+  ↳ db/seeds.rb:98
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:98
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:99
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 29], ["created_at", "2019-02-27 23:31:18.172351"], ["updated_at", "2019-02-27 23:31:18.172351"]]
+  ↳ db/seeds.rb:99
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:99
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:100
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 1], ["user_id", 30], ["created_at", "2019-02-27 23:31:18.174660"], ["updated_at", "2019-02-27 23:31:18.174660"]]
+  ↳ db/seeds.rb:100
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:100
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:101
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 2], ["user_id", 7], ["created_at", "2019-02-27 23:31:18.176598"], ["updated_at", "2019-02-27 23:31:18.176598"]]
+  ↳ db/seeds.rb:101
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:101
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:102
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 2], ["user_id", 8], ["created_at", "2019-02-27 23:31:18.178397"], ["updated_at", "2019-02-27 23:31:18.178397"]]
+  ↳ db/seeds.rb:102
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:102
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:103
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 2], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.180187"], ["updated_at", "2019-02-27 23:31:18.180187"]]
+  ↳ db/seeds.rb:103
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:103
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:104
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.182067"], ["updated_at", "2019-02-27 23:31:18.182067"]]
+  ↳ db/seeds.rb:104
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:104
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:105
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.183763"], ["updated_at", "2019-02-27 23:31:18.183763"]]
+  ↳ db/seeds.rb:105
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:105
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:106
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.186062"], ["updated_at", "2019-02-27 23:31:18.186062"]]
+  ↳ db/seeds.rb:106
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:106
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:107
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.188609"], ["updated_at", "2019-02-27 23:31:18.188609"]]
+  ↳ db/seeds.rb:107
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:107
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:108
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.190889"], ["updated_at", "2019-02-27 23:31:18.190889"]]
+  ↳ db/seeds.rb:108
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:108
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:109
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 6], ["created_at", "2019-02-27 23:31:18.192850"], ["updated_at", "2019-02-27 23:31:18.192850"]]
+  ↳ db/seeds.rb:109
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:109
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:110
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 7], ["created_at", "2019-02-27 23:31:18.194955"], ["updated_at", "2019-02-27 23:31:18.194955"]]
+  ↳ db/seeds.rb:110
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:110
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:111
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 8], ["created_at", "2019-02-27 23:31:18.196701"], ["updated_at", "2019-02-27 23:31:18.196701"]]
+  ↳ db/seeds.rb:111
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:111
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:112
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.198578"], ["updated_at", "2019-02-27 23:31:18.198578"]]
+  ↳ db/seeds.rb:112
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:112
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:113
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 10], ["created_at", "2019-02-27 23:31:18.200640"], ["updated_at", "2019-02-27 23:31:18.200640"]]
+  ↳ db/seeds.rb:113
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:113
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:114
+  [1m[36mChatroomSubscription Create (0.5ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 11], ["created_at", "2019-02-27 23:31:18.203033"], ["updated_at", "2019-02-27 23:31:18.203033"]]
+  ↳ db/seeds.rb:114
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:114
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:115
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 12], ["created_at", "2019-02-27 23:31:18.205832"], ["updated_at", "2019-02-27 23:31:18.205832"]]
+  ↳ db/seeds.rb:115
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:115
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:116
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 13], ["created_at", "2019-02-27 23:31:18.207933"], ["updated_at", "2019-02-27 23:31:18.207933"]]
+  ↳ db/seeds.rb:116
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:116
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:117
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 14], ["created_at", "2019-02-27 23:31:18.209768"], ["updated_at", "2019-02-27 23:31:18.209768"]]
+  ↳ db/seeds.rb:117
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:117
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:118
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 15], ["created_at", "2019-02-27 23:31:18.211644"], ["updated_at", "2019-02-27 23:31:18.211644"]]
+  ↳ db/seeds.rb:118
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:118
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:119
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 16], ["created_at", "2019-02-27 23:31:18.213467"], ["updated_at", "2019-02-27 23:31:18.213467"]]
+  ↳ db/seeds.rb:119
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:119
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:120
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 17], ["created_at", "2019-02-27 23:31:18.215216"], ["updated_at", "2019-02-27 23:31:18.215216"]]
+  ↳ db/seeds.rb:120
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:120
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:121
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 18], ["created_at", "2019-02-27 23:31:18.217033"], ["updated_at", "2019-02-27 23:31:18.217033"]]
+  ↳ db/seeds.rb:121
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:121
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:122
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 3], ["user_id", 19], ["created_at", "2019-02-27 23:31:18.219181"], ["updated_at", "2019-02-27 23:31:18.219181"]]
+  ↳ db/seeds.rb:122
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:122
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:123
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 4], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.221644"], ["updated_at", "2019-02-27 23:31:18.221644"]]
+  ↳ db/seeds.rb:123
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:123
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:124
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 4], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.223989"], ["updated_at", "2019-02-27 23:31:18.223989"]]
+  ↳ db/seeds.rb:124
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:124
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:125
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 4], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.226006"], ["updated_at", "2019-02-27 23:31:18.226006"]]
+  ↳ db/seeds.rb:125
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:125
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:126
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 8], ["created_at", "2019-02-27 23:31:18.227658"], ["updated_at", "2019-02-27 23:31:18.227658"]]
+  ↳ db/seeds.rb:126
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:126
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:127
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 24], ["created_at", "2019-02-27 23:31:18.229586"], ["updated_at", "2019-02-27 23:31:18.229586"]]
+  ↳ db/seeds.rb:127
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:127
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:128
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.231418"], ["updated_at", "2019-02-27 23:31:18.231418"]]
+  ↳ db/seeds.rb:128
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:128
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:129
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 19], ["created_at", "2019-02-27 23:31:18.233295"], ["updated_at", "2019-02-27 23:31:18.233295"]]
+  ↳ db/seeds.rb:129
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:129
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:130
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 16], ["created_at", "2019-02-27 23:31:18.235148"], ["updated_at", "2019-02-27 23:31:18.235148"]]
+  ↳ db/seeds.rb:130
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:130
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:131
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 17], ["created_at", "2019-02-27 23:31:18.238102"], ["updated_at", "2019-02-27 23:31:18.238102"]]
+  ↳ db/seeds.rb:131
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:131
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:132
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 15], ["created_at", "2019-02-27 23:31:18.240391"], ["updated_at", "2019-02-27 23:31:18.240391"]]
+  ↳ db/seeds.rb:132
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:132
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:133
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 14], ["created_at", "2019-02-27 23:31:18.242640"], ["updated_at", "2019-02-27 23:31:18.242640"]]
+  ↳ db/seeds.rb:133
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:133
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:134
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 5], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.244503"], ["updated_at", "2019-02-27 23:31:18.244503"]]
+  ↳ db/seeds.rb:134
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:134
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:135
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 6], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.246325"], ["updated_at", "2019-02-27 23:31:18.246325"]]
+  ↳ db/seeds.rb:135
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:135
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:136
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 6], ["user_id", 17], ["created_at", "2019-02-27 23:31:18.248153"], ["updated_at", "2019-02-27 23:31:18.248153"]]
+  ↳ db/seeds.rb:136
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:136
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:137
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 22], ["created_at", "2019-02-27 23:31:18.249980"], ["updated_at", "2019-02-27 23:31:18.249980"]]
+  ↳ db/seeds.rb:137
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:137
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:138
+  [1m[36mChatroomSubscription Create (0.6ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 23], ["created_at", "2019-02-27 23:31:18.251863"], ["updated_at", "2019-02-27 23:31:18.251863"]]
+  ↳ db/seeds.rb:138
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:138
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:139
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 25], ["created_at", "2019-02-27 23:31:18.254578"], ["updated_at", "2019-02-27 23:31:18.254578"]]
+  ↳ db/seeds.rb:139
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:139
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:140
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 26], ["created_at", "2019-02-27 23:31:18.256827"], ["updated_at", "2019-02-27 23:31:18.256827"]]
+  ↳ db/seeds.rb:140
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:140
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:141
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 28], ["created_at", "2019-02-27 23:31:18.258818"], ["updated_at", "2019-02-27 23:31:18.258818"]]
+  ↳ db/seeds.rb:141
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:141
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:142
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 7], ["user_id", 29], ["created_at", "2019-02-27 23:31:18.260515"], ["updated_at", "2019-02-27 23:31:18.260515"]]
+  ↳ db/seeds.rb:142
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:142
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:143
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 8], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.262367"], ["updated_at", "2019-02-27 23:31:18.262367"]]
+  ↳ db/seeds.rb:143
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:143
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:144
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 8], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.264250"], ["updated_at", "2019-02-27 23:31:18.264250"]]
+  ↳ db/seeds.rb:144
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:144
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:145
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 9], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.266067"], ["updated_at", "2019-02-27 23:31:18.266067"]]
+  ↳ db/seeds.rb:145
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:145
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:146
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 9], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.268023"], ["updated_at", "2019-02-27 23:31:18.268023"]]
+  ↳ db/seeds.rb:146
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:146
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:147
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 10], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.270861"], ["updated_at", "2019-02-27 23:31:18.270861"]]
+  ↳ db/seeds.rb:147
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:147
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:148
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 10], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.273052"], ["updated_at", "2019-02-27 23:31:18.273052"]]
+  ↳ db/seeds.rb:148
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:148
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:149
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 10], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.274990"], ["updated_at", "2019-02-27 23:31:18.274990"]]
+  ↳ db/seeds.rb:149
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:149
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:150
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 10], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.277065"], ["updated_at", "2019-02-27 23:31:18.277065"]]
+  ↳ db/seeds.rb:150
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:150
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:151
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 11], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.278864"], ["updated_at", "2019-02-27 23:31:18.278864"]]
+  ↳ db/seeds.rb:151
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:151
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:152
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 11], ["user_id", 10], ["created_at", "2019-02-27 23:31:18.280652"], ["updated_at", "2019-02-27 23:31:18.280652"]]
+  ↳ db/seeds.rb:152
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:152
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:153
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 12], ["user_id", 8], ["created_at", "2019-02-27 23:31:18.282420"], ["updated_at", "2019-02-27 23:31:18.282420"]]
+  ↳ db/seeds.rb:153
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:153
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:154
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 12], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.284323"], ["updated_at", "2019-02-27 23:31:18.284323"]]
+  ↳ db/seeds.rb:154
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:154
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:155
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 13], ["user_id", 15], ["created_at", "2019-02-27 23:31:18.286846"], ["updated_at", "2019-02-27 23:31:18.286846"]]
+  ↳ db/seeds.rb:155
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:155
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:156
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 13], ["user_id", 16], ["created_at", "2019-02-27 23:31:18.289021"], ["updated_at", "2019-02-27 23:31:18.289021"]]
+  ↳ db/seeds.rb:156
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:156
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:157
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 14], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.291177"], ["updated_at", "2019-02-27 23:31:18.291177"]]
+  ↳ db/seeds.rb:157
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:157
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:158
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 14], ["user_id", 7], ["created_at", "2019-02-27 23:31:18.292966"], ["updated_at", "2019-02-27 23:31:18.292966"]]
+  ↳ db/seeds.rb:158
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:158
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:159
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 15], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.294842"], ["updated_at", "2019-02-27 23:31:18.294842"]]
+  ↳ db/seeds.rb:159
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:159
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:160
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 15], ["user_id", 4], ["created_at", "2019-02-27 23:31:18.296649"], ["updated_at", "2019-02-27 23:31:18.296649"]]
+  ↳ db/seeds.rb:160
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:160
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:161
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 16], ["user_id", 10], ["created_at", "2019-02-27 23:31:18.298489"], ["updated_at", "2019-02-27 23:31:18.298489"]]
+  ↳ db/seeds.rb:161
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:161
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:162
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 16], ["user_id", 2], ["created_at", "2019-02-27 23:31:18.300359"], ["updated_at", "2019-02-27 23:31:18.300359"]]
+  ↳ db/seeds.rb:162
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:162
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:163
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 17], ["user_id", 14], ["created_at", "2019-02-27 23:31:18.302633"], ["updated_at", "2019-02-27 23:31:18.302633"]]
+  ↳ db/seeds.rb:163
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:163
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:164
+  [1m[36mChatroomSubscription Create (0.5ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 17], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.305455"], ["updated_at", "2019-02-27 23:31:18.305455"]]
+  ↳ db/seeds.rb:164
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:164
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:165
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 18], ["user_id", 11], ["created_at", "2019-02-27 23:31:18.307811"], ["updated_at", "2019-02-27 23:31:18.307811"]]
+  ↳ db/seeds.rb:165
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:165
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:166
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 19], ["user_id", 6], ["created_at", "2019-02-27 23:31:18.310042"], ["updated_at", "2019-02-27 23:31:18.310042"]]
+  ↳ db/seeds.rb:166
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:166
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:167
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 19], ["user_id", 3], ["created_at", "2019-02-27 23:31:18.311868"], ["updated_at", "2019-02-27 23:31:18.311868"]]
+  ↳ db/seeds.rb:167
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:167
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:168
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 20], ["user_id", 24], ["created_at", "2019-02-27 23:31:18.313659"], ["updated_at", "2019-02-27 23:31:18.313659"]]
+  ↳ db/seeds.rb:168
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:168
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:169
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 20], ["user_id", 12], ["created_at", "2019-02-27 23:31:18.315443"], ["updated_at", "2019-02-27 23:31:18.315443"]]
+  ↳ db/seeds.rb:169
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:169
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:170
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 21], ["user_id", 13], ["created_at", "2019-02-27 23:31:18.317397"], ["updated_at", "2019-02-27 23:31:18.317397"]]
+  ↳ db/seeds.rb:170
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:170
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:171
+  [1m[36mChatroomSubscription Create (0.4ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 22], ["user_id", 7], ["created_at", "2019-02-27 23:31:18.319512"], ["updated_at", "2019-02-27 23:31:18.319512"]]
+  ↳ db/seeds.rb:171
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:171
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:172
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 22], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.322199"], ["updated_at", "2019-02-27 23:31:18.322199"]]
+  ↳ db/seeds.rb:172
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:172
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:173
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 23], ["user_id", 9], ["created_at", "2019-02-27 23:31:18.324429"], ["updated_at", "2019-02-27 23:31:18.324429"]]
+  ↳ db/seeds.rb:173
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:173
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:174
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 23], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.326479"], ["updated_at", "2019-02-27 23:31:18.326479"]]
+  ↳ db/seeds.rb:174
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:174
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:175
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 24], ["user_id", 5], ["created_at", "2019-02-27 23:31:18.328410"], ["updated_at", "2019-02-27 23:31:18.328410"]]
+  ↳ db/seeds.rb:175
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:175
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:176
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 24], ["user_id", 10], ["created_at", "2019-02-27 23:31:18.330336"], ["updated_at", "2019-02-27 23:31:18.330336"]]
+  ↳ db/seeds.rb:176
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:176
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:177
+  [1m[36mChatroomSubscription Create (0.3ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 25], ["user_id", 1], ["created_at", "2019-02-27 23:31:18.332222"], ["updated_at", "2019-02-27 23:31:18.332222"]]
+  ↳ db/seeds.rb:177
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:177
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:178
+  [1m[36mChatroomSubscription Create (0.6ms)[0m  [1m[32mINSERT INTO "chatroom_subscriptions" ("chatroom_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["chatroom_id", 25], ["user_id", 12], ["created_at", "2019-02-27 23:31:18.334270"], ["updated_at", "2019-02-27 23:31:18.334270"]]
+  ↳ db/seeds.rb:178
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:178
+Started GET "/" for 127.0.0.1 at 2019-02-27 15:42:38 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwaUVV5zP2sC_RNeoTew_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (30.9ms)
+Completed 200 OK in 92ms (Views: 80.8ms | ActiveRecord: 7.1ms)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2019-02-27 15:42:50 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"P.Beesly@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (7.1ms)
+Completed 200 OK in 119ms (Views: 16.5ms | ActiveRecord: 12.6ms)
+
+
+Started DELETE "/api/session" for 127.0.0.1 at 2019-02-27 15:42:56 -0800
+Processing by Api::SessionsController#destroy as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "MwMdc--vxtp3fre0usTpPg"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "ky5fJMsfiKUTkJtJY7A9Gw"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Update (0.8ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "ky5fJMsfiKUTkJtJY7A9Gw"], ["updated_at", "2019-02-27 23:42:56.184823"], ["id", 2]]
+  ↳ app/models/user.rb:52
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:52
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 3.0ms)
+
+

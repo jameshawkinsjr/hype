@@ -23,8 +23,11 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
     attr_reader :password
 
-    has_many :messages
-    has_many :chatrooms, through: :messages
+    has_many :messages,
+        foreign_key: :author_id,
+        class_name: :Message
+    has_many :chatroom_subscriptions
+    has_many :chatrooms, through: :chatroom_subscriptions
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

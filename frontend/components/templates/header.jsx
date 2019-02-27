@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <div className="session-form-header flex">
             <div className="session-form-header-inner flex">
-                <Link to="/"><img className="session-form-header-logo" src={ window.images.hype_small_color}/></Link>
+                <Link to="/"><img className="session-form-header-logo" src="assets/hype_small_color.png"/></Link>
             </div>
         </div>   
     )

@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className="footer flex">
                 <div className="footer-left">
-                    <Link to="/"><img className="footer-logo" src={ window.images.hype_small_color}/></Link>
+                    <Link to="/"><img className="footer-logo" src="assets/hype_small_color.png"/></Link>
                 </div>
                 <div className="footer-right flex">
                         <ul className="footer-green">
