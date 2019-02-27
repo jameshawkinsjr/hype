@@ -6,7 +6,8 @@ class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            timeout: true
+            timeout: true,
+            counter: 0
         };
         this.changeHeroClasses = this.changeHeroClasses.bind(this);
     }
@@ -15,7 +16,7 @@ class LandingPage extends React.Component {
         if(this.state.timeout) {
           this.interval = setInterval(() => {
             this.changeHeroClasses();
-          }, 1000);
+          }, 3000);
         }
       }
 
@@ -26,7 +27,21 @@ class LandingPage extends React.Component {
       
     changeHeroClasses() {
         if (this.state.timeout) {
-            console.log("working");
+            const hero_image_1c = document.getElementById('hero-image-1c');
+            const hero_image_2c = document.getElementById('hero-image-2c');
+            const hero_image_3c = document.getElementById('hero-image-3c');
+            const hero_image_1b = document.getElementById('hero-image-1b');
+            const hero_image_2b = document.getElementById('hero-image-2b');
+            const hero_image_3b = document.getElementById('hero-image-3b');
+            // hero_image_1c.classList.toggle("hero_image_hide");
+            // hero_image_2c.classList.toggle("hero_image_hide");
+            // hero_image_3c.classList.toggle("hero_image_hide");
+            // hero_image_1b.classList.toggle("hero_image_hide");
+            // hero_image_1b.classList.toggle("hero-top-left");
+            // hero_image_2b.classList.toggle("hero_image_hide");
+            // hero_image_2b.classList.toggle("hero-top-left");
+            // hero_image_3b.classList.toggle("hero-top-left");
+            // hero_image_3b.classList.toggle("hero-bottom-right");
         }
     }
         
@@ -34,7 +49,7 @@ class LandingPage extends React.Component {
         let header = (
             <header className="landing-page-nav flex">
                 <div className="landing-page-nav-left flex">
-                    <img src={ window.images.hype_small } />
+                <Link to="/"><img src={ window.images.hype_small } /></Link>
                     <div className="landing-page-nav-links">Why Slack?</div>
                     <div className="landing-page-nav-links">Solutions</div>
                     <div className="landing-page-nav-links">Resources</div>
@@ -61,13 +76,13 @@ class LandingPage extends React.Component {
                         <button>Get Started</button>
                         <button>Already Using Slack?</button>
                     </div>
-                    <img className="hero-image hero_2_color" src={ window.images.hero_2_color } />
-                    <img className="hero-image hero_1_color hero_image_hide" src={ window.images.hero_1_color } />
-                    <img className="hero-image hero_3_color hero_image_hide" src={ window.images.hero_3_color } /> 
+                    <img id="hero-image-1c" className="hero-image hero_1_color hero_image_hide" src={ window.images.hero_1_color } />
+                    <img id="hero-image-2c" className="hero-image hero_2_color hero-middle-color" src={ window.images.hero_2_color } />
+                    <img id="hero-image-3c" className="hero-image hero_3_color hero_image_hide" src={ window.images.hero_3_color } /> 
                     
-                    <img className="hero-image hero_1_bw" src={ window.images.hero_1_bw } />
-                    <img className="hero-image hero_3_bw" src={ window.images.hero_3_bw } />
-                    <img className="hero-image hero_2_bw hero_image_hide" src={ window.images.hero_2_bw } />
+                    <img id="hero-image-1b" className="hero-image hero_1_bw hero-top-left" src={ window.images.hero_1_bw } />
+                    <img id="hero-image-2b" className="hero-image hero_2_bw hero_image_hide" src={ window.images.hero_2_bw } />
+                    <img id="hero-image-3b" className="hero-image hero_3_bw hero-bottom-right" src={ window.images.hero_3_bw } />
             </section>
             </main>
         );

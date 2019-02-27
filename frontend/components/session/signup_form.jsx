@@ -24,6 +24,10 @@ class SignupForm extends React.Component {
         .then( () => this.props.history.push('/chatrooms'));
     }
 
+    componentWillUnmount(){
+        this.props.clearErrors();
+    }
+
 
     render () {
 
@@ -31,7 +35,6 @@ class SignupForm extends React.Component {
         let errors = this.props.errors.map( error => 
             <li key={error}> {error} </li> 
             )
-
 
         return (
             <div className="signup-form flex">

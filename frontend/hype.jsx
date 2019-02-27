@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     //Testing
-    // window.ApiUtil = ApiUtil;
-    // window.getState = store.getState;
-    // window.dispatch = store.dispatch;
+    window.ApiUtil = ApiUtil;
+    window.getState = store.getState;
+    window.dispatch = store.dispatch;
     
     
     const root = document.getElementById('root');
