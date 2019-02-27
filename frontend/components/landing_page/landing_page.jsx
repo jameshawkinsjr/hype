@@ -49,15 +49,15 @@ class LandingPage extends React.Component {
         let header = (
             <header className="landing-page-nav flex">
                 <div className="landing-page-nav-left flex">
-                <Link to="/"><img src={ window.images.hype_small } /></Link>
+                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small } /></Link>
                     <div className="landing-page-nav-links">Why Slack?</div>
                     <div className="landing-page-nav-links">Solutions</div>
                     <div className="landing-page-nav-links">Resources</div>
                     <div className="landing-page-nav-links">Pricing</div>
                 </div>
                 <div className="landing-page-nav-right flex">
-                    <div className="landing-page-nav-login">Sign-in</div>
-                    <div className="landing-page-nav-button">Get Started</div>
+                    {/* <div className="landing-page-nav-login">Sign-in</div> */}
+                    <div className="landing-page-nav-button">Sign In</div>
                 </div>
             </header>
         );
@@ -66,15 +66,17 @@ class LandingPage extends React.Component {
             <main className="landing-page-hero flex">
             <section className="hero-image-grid-container">
                     <div className="hero-quote">
-                        <h1>Image what you'll accomplish together</h1>
+                        <h1>Imagine what you'll accomplish together</h1>
                     </div>
                     <div className="hero-description">
                         <h3>Slack is a collaboration hub for work, no matter what work you do. It’s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.</h3>
                     </div>
                     <div className="hero-get-started">
-                        <h1>Email Address</h1>
-                        <button>Get Started</button>
-                        <button>Already Using Slack?</button>
+                        <form className="hero-get-started-input">
+                        <input type="text" placeholder="Email Address"/>
+                        <button>GET STARTED</button>
+                        </form>
+                        <h3>Already Using Slack?</h3><Link to="/login"> Sign in. </Link>
                     </div>
                     <img id="hero-image-1c" className="hero-image hero_1_color hero_image_hide" src={ window.images.hero_1_color } />
                     <img id="hero-image-2c" className="hero-image hero_2_color hero-middle-color" src={ window.images.hero_2_color } />

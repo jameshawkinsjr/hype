@@ -189,14 +189,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import logo from '../../app/assets/images/hype_medium.png';
+
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/landing",
+    path: "/",
     component: _landing_page_landing_page__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/",
+    exact: true,
+    path: "/nav",
     component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"]
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "flex"
@@ -317,6 +318,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "landing-page-logo",
         src: window.images.hype_small
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
@@ -329,21 +331,26 @@ function (_React$Component) {
       }, "Pricing")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-right flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "landing-page-nav-login"
-      }, "Sign-in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-button"
-      }, "Get Started")));
+      }, "Sign In")));
       var main = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "landing-page-hero flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "hero-image-grid-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-quote"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Image what you'll accomplish together")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Imagine what you'll accomplish together")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-description"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Slack is a collaboration hub for work, no matter what work you do. It\u2019s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-get-started"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Email Address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Get Started"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Already Using Slack?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "hero-get-started-input"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "Email Address"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "GET STARTED")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already Using Slack?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/login"
+      }, " Sign in. ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "hero-image-1c",
         className: "hero-image hero_1_color hero_image_hide",
         src: window.images.hero_1_color

@@ -1,9 +1,10 @@
 .hero-image-grid-container {
-    margin: 40px 0;
+    margin: 80px 0;
     display: grid;
     grid-template-columns: 12% 13% 33% 22px 30% 12%;
     grid-template-rows: 100px 69px minmax(auto,125px) auto 286px 30px;
-    width: 880px;
+    width: 1100px;
+    height: 760px;
     // border: 1px solid black;
     div {
         // border: 1px solid black;
@@ -18,7 +19,7 @@
 };
 
 .landing-page-hero {
-    width: 880px;
+    width: 1100px;
 };
 
 .landing-page-images {
@@ -47,20 +48,50 @@
     object-fit: cover;
     width: 100%;
 }
-.hero_1_bw {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row-start: 2;
-}
 
 .hero-get-started {
     grid-column-start: 5;
+    grid-column-end: span 2;
     grid-row-start: 4;
+    button {
+    background: $bright-purple;
+    color: $white;
+    padding: 12px 30px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    font-family: $font-sans-serif;
+    height: 50px;
+        &:hover {
+            background: $dark-purple;
+            cursor: pointer;
+        }
+    }
+    input {
+        height: 40px;
+        border-radius: 3px;
+        border: 1px solid $light-grey;
+        font-size: 15px;
+        padding: 5px;
+        margin-right: 10px;
+    }
 }
 .hero-description {
     grid-column-start: 5;
-    grid-column-end: 6;
+    grid-column-end: span 2;
     grid-row-start: 3;
+    line-height: 1.44;
+    color: $light-grey;
+    h3 {
+        font-size: 15.5px;
+    }
+}
+
+.hero-top-left {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 2;
 }
 
 .hero-middle-color {
@@ -75,6 +106,14 @@
     grid-column-end: span 1;
     grid-row-start: 5;
     z-index: 0;
+    transition: 2s;
+}
+.hero-bottom-right:hover {
+    grid-column-start: 5;
+    grid-column-end: span 1;
+    grid-row-start: 1;
+    z-index: 0;
+    transition: 2s;
 }
 
 .hero_image_hide {
