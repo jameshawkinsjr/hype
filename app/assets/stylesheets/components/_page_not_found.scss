@@ -1,0 +1,35 @@
+.not-found-modal {
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid $medium-grey;
+    flex-direction: column;
+    width: 450px;
+    align-self: center;
+    align-items: center;
+    background: white;
+    opacity: .9;
+    h2 {
+        font-weight: 700;
+        padding-top: 20px;
+    }
+    p {
+        padding: 20px;
+        line-height: 1.44;
+        color: $black;
+        font-size: 15px;
+        font-weight: 400;
+    }
+}
+
+.not-found-body{
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 100px 0;
+    background: url(https://a.slack-edge.com/4030/img/404/marrakesh-meadow-80.jpg);
+    background-size: cover;
+    position: fixed;
+    top: 79px;
+    bottom: 0;
+    width: 100%;
+    
+}

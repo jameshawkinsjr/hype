@@ -1,0 +1,44 @@
+.footer {
+    border-top: 1px solid $medium-grey;
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    justify-content: space-between;
+
+    ul a,
+    ul > li{
+       color: $med-grey; 
+       font-size: 13px;
+       line-height: 1.75;
+       cursor: pointer;
+    }
+
+    ul a:hover,
+    ul > li:hover {
+        color: $dark-grey;
+    }
+   
+    ul > p {
+        font-size: 12px;
+        font-weight: 400;
+        margin-bottom: 5px;
+    }
+}
+
+.footer-left {
+    margin: auto;
+}
+.footer-right {
+    width: 80%;
+    justify-content: space-evenly;
+}
+
+.footer-blue{
+    color: $blue;
+}
+.footer-red{
+    color: $red;
+}
+.footer-green{
+    color: $green;
+}

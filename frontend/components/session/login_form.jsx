@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Header from './header';
+import Header from '../templates/header';
 
 
 class LoginForm extends React.Component {
@@ -70,29 +70,39 @@ class LoginForm extends React.Component {
             <>
             <Header />
             <div className="session-form-body flex">
-                <div className="login-form flex">
+                <div className="signup-modal flex">
                     <h2>Sign in to hype</h2>
                     <h3>Enter your <strong> email address</strong> and <strong>password</strong>.</h3>
                     <form className="flex">
-                        <input  type="text"
-                                value={this.state.email}
-                                placeholder="you@example.com"
-                                onChange={this.handleInput('email')}
-                                autoComplete = "off"
-                            />
-                        <input  type="password"
-                                value={this.state.password}
-                                placeholder="password"
-                                value={this.state.password}
-                                onChange={this.handleInput('password')}
-                                autoComplete = "off"
-                            />
+                        <label>
+                            <h3>Email</h3>
+                            <input  type="text"
+                                    value={this.state.email}
+                                    placeholder="you@example.com"
+                                    onChange={this.handleInput('email')}
+                                    autoComplete = "off"
+                                />
+                        </label>
+                        <label>
+                            <h3>Password</h3>
+                            <input  type="password"
+                                    placeholder="password"
+                                    value={this.state.password}
+                                    onChange={this.handleInput('password')}
+                                    autoComplete = "off"
+                                />
+                        </label>
                         <button className="purple-button" onClick={this.handleSubmit}>Sign In</button>
                     </form>
-                        <button className="blue-button" onClick={this.loginMichael}>Login as Michael Scott</button>
-                        <button className="blue-button" onClick={this.loginPam}>Login as Pam Beasley</button>
-                        <button className="blue-button" onClick={this.loginJim}>Login as Jim Halpert</button>
-                    <ul className="errors">
+                    <div className="demo-users flex">
+                        <h3>Demo Users</h3>
+                        <div className="demo-buttons flex">
+                            <button className="blue-button" onClick={this.loginMichael}>Login as Michael Scott</button>
+                            <button className="blue-button" onClick={this.loginPam}>Login as Pam Beesley</button>
+                            <button className="blue-button" onClick={this.loginJim}>Login as Jim Halpert</button>
+                        </div>
+                    </div>
+                        <ul className="errors">
                         { errors } 
                     </ul>
                 </div>

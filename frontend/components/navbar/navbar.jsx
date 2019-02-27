@@ -12,11 +12,9 @@ class NavBar extends React.Component {
         let name;
         if (this.props.currentUser) {
             if (this.props.currentUser.alias) {
-                console.log("alias");
                 name = this.props.currentUser.alias;
             } else {
                 name = this.props.currentUser.full_name;
-                console.log("full_name");
             }
         };
         const navBar = this.props.currentUser ? (

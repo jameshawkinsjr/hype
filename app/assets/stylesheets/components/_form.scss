@@ -1,9 +1,8 @@
-.login-form, .signup-form {
+.login-modal, .signup-modal {
     padding: 20px;
     border-radius: 15px;
     border: 1px solid $medium-grey;
     flex-direction: column;
-    background: $medium-grey;
     width: 500px;
     align-self: center;
     align-items: center;
@@ -12,9 +11,13 @@
     h2 {
         font-weight: 700;
     }
+    h3 {
+        margin: 15px;
+    }
 
     form {
         flex-direction: column;
+        width: 90%;
         label {
             padding: 10px;
             h3 {
@@ -36,7 +39,33 @@
         line-height: 1.44;
         color: $light-grey;
     }
+    .last-label {
+        margin-bottom: 5px;
+    }
 
+    .errors {
+        color: $bright-purple;
+        text-align: center;
+        margin: 15px 0 10px 0;
+        line-height: 1.44;
+    }
+
+}
+
+.demo-users {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid $medium-grey;
+    button {
+        font-size: 14px;
+        margin: 15px 10px 0px 10px;
+    }
+    h3 {
+        font-size: 20px;
+        color: $light-grey;
+    }
 }
 
 .purple-button {
@@ -82,16 +111,21 @@
 .session-form-body{
     flex-direction: column;
     justify-content: flex-start;
-    padding: 100px 0;
+    padding: 100px 0 200px 0;
     background: #f0f0f0;
-    position: fixed;
-    top: 79px;
-    bottom: 0;
+    // position: fixed;
+    // top: 79px;
+    // bottom: 0;
     width: 100%;
+    max-height: 100%;
     
 }
 .session-form-header-inner {
     justify-content: start;
     align-self: start;
+}
+
+.session-form-header-logo {
+    top: 10;
 }
 

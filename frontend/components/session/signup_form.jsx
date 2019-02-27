@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Header from './header';
+import Header from '../templates/header';
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            email: this.props.email || "",
             alias: "",
             full_name: "",
             password: ""
@@ -32,7 +32,6 @@ class SignupForm extends React.Component {
 
     render () {
 
-        // debugger;
         let errors = this.props.errors.map( error => 
             <li key={error}> {error} </li> 
             )
@@ -41,7 +40,7 @@ class SignupForm extends React.Component {
             <>
             <Header />
             <div className="session-form-body flex">
-                <div className="signup-form flex">
+                <div className="signup-modal flex">
                     <h2>Join the hype</h2>
                     <form className="flex">
                         <label >
@@ -72,7 +71,7 @@ class SignupForm extends React.Component {
                                     autoComplete = "off"
                             />
                         </label>
-                        <label>
+                        <label className="last-label">
                             <h3>Password (required)</h3>
                             <input  type="password"
                                     value={this.state.password}
@@ -80,7 +79,7 @@ class SignupForm extends React.Component {
                                     onChange={this.handleInput('password')}
                                     autoComplete = "off"
                             />
-                            <p className="login-form-subtext">Passwords must be at least 6 characters long, and can't be things like “password”, “123456” or “abcdef”.</p>
+                            <p className="login-form-subtext">Passwords must be at least 6 characters long.</p>
                         </label>
                         <button className="purple-button" onClick={this.handleSubmit}>Sign up</button>
                     </form>

@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => ({
     errors: state.errors.session,
+    email: state.session.landingPageEmail
 });
 
 const mapDispatchToProps = dispatch => ({
