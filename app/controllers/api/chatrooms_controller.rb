@@ -1,11 +1,12 @@
 class Api::ChatroomsController < ApplicationController
 
     def index
-        @chatrooms = Todo.all
+        @chatrooms = Chatroom.all
     end
 
     def create
         @chatroom = Chatroom.new(chatroom_params)
+        @chatroom.admin = current_user.id
         if @chatroom.save
             render :show
         else

@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create]
     resources :chatrooms, only: [:index, :create, :show, :update, :destroy]
-    resources :chatrooms, only: [:create, :show, :update, :destroy]
+    resources :messages, only: [:create, :show, :update, :destroy]
     resource :session, only: [:create, :destroy]
   end
+
+  mount ActionCable.server => '/cable'
+
+  # resources :chatrooms, param: :slug
+  # resources :messages
   
 end

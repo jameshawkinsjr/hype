@@ -832,71 +832,51 @@ function (_React$Component) {
   }, {
     key: "loginMichael",
     value: function loginMichael(e) {
-      var _this4 = this;
-
-      var user = {
+      var michael = {
         email: "M.Scott@dunder-mifflin.org",
         password: "Michael123456"
-      }; // this.setState(user);
-      // setTimeout( () => this.handleSubmit(), 800);
-
-      this.loginTyper(user.email, 0, this.handleSubmit);
-      setTimeout(function () {
-        return _this4.setState({
-          password: user.password
-        });
-      }, 1800);
+      };
+      this.loginTyper(michael.email, michael.password, 0, this.handleSubmit);
     }
   }, {
     key: "loginJim",
     value: function loginJim(e) {
-      var _this5 = this;
-
       e.preventDefault();
-      var user = {
+      var jim = {
         email: "J.Halpert@dunder-mifflin.org",
         password: "Jim123456"
-      }; // this.setState(user);
-      // setTimeout( () => this.handleSubmit(), 800);
-
-      this.loginTyper(user.email, 0, this.handleSubmit);
-      setTimeout(function () {
-        return _this5.setState({
-          password: user.password
-        });
-      }, 1800);
+      };
+      this.loginTyper(jim.email, jim.password, 0, this.handleSubmit);
     }
   }, {
     key: "loginPam",
     value: function loginPam(e) {
-      var _this6 = this;
-
       e.preventDefault();
-      var user = {
+      var pam = {
         email: "P.Beesly@dunder-mifflin.org",
         password: "Pam123456"
       };
-      this.loginTyper(user.email, 0, this.handleSubmit);
-      setTimeout(function () {
-        return _this6.setState({
-          password: user.password
-        });
-      }, 1800);
+      this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
     } // DEMO LOGIN loginTyper
 
   }, {
     key: "loginTyper",
-    value: function loginTyper(email, i, submitCallback) {
-      var _this7 = this;
+    value: function loginTyper(email, password, i, submitCallback) {
+      var _this4 = this;
 
       if (i < email.length) {
         this.setState({
           email: email.substring(0, i + 1)
         });
         setTimeout(function () {
-          return _this7.loginTyper(email, i + 1, submitCallback);
+          return _this4.loginTyper(email, password, i + 1, submitCallback);
         }, 45);
       } else {
+        setTimeout(function () {
+          return _this4.setState({
+            password: password
+          });
+        }, 300);
         setTimeout(submitCallback, 700);
       }
     }

@@ -2,7 +2,13 @@ class Api::MessagesController < ApplicationController
     
     def create
         @message = Message.new(message_params)
+        @message.chatroom_id = params[:chatroom_id]
+        @message.author_id = current_user.id
         if @message.save
+            ActionCable.server.broadcast 'messages',
+                message: message.body,
+                user: message.author_id,
+                chatroom: message.chatroom_id,
             render :show
         else
             render json: @messages.errors.full_messages, status: 401
@@ -14,8 +20,8 @@ class Api::MessagesController < ApplicationController
     end
     
     def update
-        @message = Message.find_by(id: params[:id])
-        if @message.update(message)
+        @message = current_user.messages.find_by(id: params[:id])
+        if @message && @message.update(message_params)
             render :show
         else
             render json: @message.errors.full_messages, status: 401
@@ -35,7 +41,7 @@ class Api::MessagesController < ApplicationController
 
     private
     def message_params
-        params.require(:message).permit(:body, :chatroom_id, :author_id, :parent_id)
+        params.require(:message).permit(:body, :parent_id)
     end
 end
 

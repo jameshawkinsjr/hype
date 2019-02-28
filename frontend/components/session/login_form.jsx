@@ -35,43 +35,36 @@ class LoginForm extends React.Component {
 
     // DEMO LOGINS
     loginMichael(e){
-        const user = {
+        const michael = {
             email: "M.Scott@dunder-mifflin.org",
             password: "Michael123456"
         };
-        // this.setState(user);
-        // setTimeout( () => this.handleSubmit(), 800);
-        this.loginTyper(user.email, 0, this.handleSubmit)
-        setTimeout( () => this.setState({ password: user.password }), 1800);
+        this.loginTyper(michael.email, michael.password, 0, this.handleSubmit)
     }
     loginJim(e){
         e.preventDefault();
-        const user = {
+        const jim = {
             email: "J.Halpert@dunder-mifflin.org",
             password: "Jim123456"
         };
-        // this.setState(user);
-        // setTimeout( () => this.handleSubmit(), 800);
-        this.loginTyper(user.email, 0, this.handleSubmit)
-        setTimeout( () => this.setState({ password: user.password }), 1800);
+        this.loginTyper(jim.email, jim.password, 0, this.handleSubmit)
     }
     loginPam(e){
         e.preventDefault();
-        const user = {
+        const pam = {
             email: "P.Beesly@dunder-mifflin.org",
             password: "Pam123456"
         };
-
-        this.loginTyper(user.email, 0, this.handleSubmit)
-        setTimeout( () => this.setState({ password: user.password }), 1800);
+        this.loginTyper(pam.email, pam.password, 0, this.handleSubmit)
     }
     // DEMO LOGIN loginTyper
-    loginTyper(email, i, submitCallback) {
+    loginTyper(email, password, i, submitCallback) {
         if (i < (email.length)) {
             this.setState( { email: email.substring(0, i+1) });
-        setTimeout( () => this.loginTyper(email, i + 1, submitCallback), 45);
+            setTimeout( () => this.loginTyper(email, password, i + 1, submitCallback), 45);
         } else {
-        setTimeout(submitCallback, 700);
+            setTimeout( () => this.setState({ password: password }), 300);
+            setTimeout(submitCallback, 700);
         }
     }
 
