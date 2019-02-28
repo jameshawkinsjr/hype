@@ -1,6 +1,7 @@
 class Api::ChatroomsController < ApplicationController
 
     def index
+        @chatrooms = Todo.all
     end
 
     def create
@@ -15,33 +16,27 @@ class Api::ChatroomsController < ApplicationController
     def show
         @chatroom = Chatroom.find_by(id: params[:id])
     end
-    
-    def index
-        @chatrooms = Chatroom.all
-        render :index
-    end
 
-    def new
-    end
-    
-    def edit
-    end
     
     def update
-    end
-    
-    def show
+        @chatroom = Chatroom.find_by(id: params[:id])
+        if @chatroom.update(chatroom_params)
+            render :show
+        else
+            render json: @chatroom.errors.full_messages, status: 401
+        end
     end
 
     def destroy
-    #     if current_user
-    #         logout!
-    #         render json: ["Logout successful."]
-    #     else
-    #         render json: ["No user found."],
-    #         status: 404
-    #     end
-    # end
+        @chatroom = Chatroom.find_by(id: params[:id])
+        if @chatroom
+            @chatroom.delete
+            render json: ["Chatroom successfully deleted."]
+        else
+            render json: ["Chatroom not found."],
+            status: 404
+        end
+    end
 
     private
     def chatroom_params
