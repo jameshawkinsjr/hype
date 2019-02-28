@@ -27,7 +27,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "webpack --watch --mode=development",
+    "start": "webpack --watch",
     "postinstall": "cd client && npm install"
   },
   "repository": {

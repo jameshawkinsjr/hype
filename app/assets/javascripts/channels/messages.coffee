@@ -1,4 +1,10 @@
 # App.messages = App.cable.subscriptions.create "MessagesChannel",
+
+# Commented out line above
+
+
+
+
   connected: ->
     # Called when the subscription is ready for use on the server
 
