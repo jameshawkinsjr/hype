@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "postinstall": "cd client && npm install"
+    "postinstall": "cd client && npm install && webpack -p"
   },
   "repository": {
     "type": "git",
