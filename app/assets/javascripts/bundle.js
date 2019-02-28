@@ -794,6 +794,7 @@ function (_React$Component) {
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.loginTyper = _this.loginTyper.bind(_assertThisInitialized(_this));
     _this.loginMichael = _this.loginMichael.bind(_assertThisInitialized(_this));
     _this.loginJim = _this.loginJim.bind(_assertThisInitialized(_this));
     _this.loginPam = _this.loginPam.bind(_assertThisInitialized(_this));
@@ -814,7 +815,10 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       var _this3 = this;
 
-      e.preventDefault();
+      if (e) {
+        e.preventDefault();
+      }
+
       this.props.login(this.state).then(function () {
         return _this3.props.history.push('/chatrooms');
       });
@@ -830,14 +834,18 @@ function (_React$Component) {
     value: function loginMichael(e) {
       var _this4 = this;
 
-      e.preventDefault();
       var user = {
         email: "M.Scott@dunder-mifflin.org",
         password: "Michael123456"
-      };
-      this.props.login(user).then(function () {
-        return _this4.props.history.push('/chatrooms');
-      });
+      }; // this.setState(user);
+      // setTimeout( () => this.handleSubmit(), 800);
+
+      this.loginTyper(user.email, 0, this.handleSubmit);
+      setTimeout(function () {
+        return _this4.setState({
+          password: user.password
+        });
+      }, 1800);
     }
   }, {
     key: "loginJim",
@@ -848,10 +856,15 @@ function (_React$Component) {
       var user = {
         email: "J.Halpert@dunder-mifflin.org",
         password: "Jim123456"
-      };
-      this.props.login(user).then(function () {
-        return _this5.props.history.push('/chatrooms');
-      });
+      }; // this.setState(user);
+      // setTimeout( () => this.handleSubmit(), 800);
+
+      this.loginTyper(user.email, 0, this.handleSubmit);
+      setTimeout(function () {
+        return _this5.setState({
+          password: user.password
+        });
+      }, 1800);
     }
   }, {
     key: "loginPam",
@@ -863,9 +876,29 @@ function (_React$Component) {
         email: "P.Beesly@dunder-mifflin.org",
         password: "Pam123456"
       };
-      this.props.login(user).then(function () {
-        return _this6.props.history.push('/chatrooms');
-      });
+      this.loginTyper(user.email, 0, this.handleSubmit);
+      setTimeout(function () {
+        return _this6.setState({
+          password: user.password
+        });
+      }, 1800);
+    } // DEMO LOGIN loginTyper
+
+  }, {
+    key: "loginTyper",
+    value: function loginTyper(email, i, submitCallback) {
+      var _this7 = this;
+
+      if (i < email.length) {
+        this.setState({
+          email: email.substring(0, i + 1)
+        });
+        setTimeout(function () {
+          return _this7.loginTyper(email, i + 1, submitCallback);
+        }, 45);
+      } else {
+        setTimeout(submitCallback, 700);
+      }
     }
   }, {
     key: "render",

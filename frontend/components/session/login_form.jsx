@@ -11,6 +11,7 @@ class LoginForm extends React.Component {
             password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.loginTyper = this.loginTyper.bind(this);
         this.loginMichael = this.loginMichael.bind(this);
         this.loginJim = this.loginJim.bind(this);
         this.loginPam = this.loginPam.bind(this);
@@ -23,7 +24,7 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+        if (e) { e.preventDefault() }
         this.props.login(this.state)
         .then( () => this.props.history.push('/chatrooms'));
     }
@@ -34,13 +35,14 @@ class LoginForm extends React.Component {
 
     // DEMO LOGINS
     loginMichael(e){
-        e.preventDefault();
         const user = {
             email: "M.Scott@dunder-mifflin.org",
             password: "Michael123456"
         };
-        this.props.login(user)
-        .then( () => this.props.history.push('/chatrooms'));
+        // this.setState(user);
+        // setTimeout( () => this.handleSubmit(), 800);
+        this.loginTyper(user.email, 0, this.handleSubmit)
+        setTimeout( () => this.setState({ password: user.password }), 1800);
     }
     loginJim(e){
         e.preventDefault();
@@ -48,8 +50,10 @@ class LoginForm extends React.Component {
             email: "J.Halpert@dunder-mifflin.org",
             password: "Jim123456"
         };
-        this.props.login(user)
-        .then( () => this.props.history.push('/chatrooms'));
+        // this.setState(user);
+        // setTimeout( () => this.handleSubmit(), 800);
+        this.loginTyper(user.email, 0, this.handleSubmit)
+        setTimeout( () => this.setState({ password: user.password }), 1800);
     }
     loginPam(e){
         e.preventDefault();
@@ -57,8 +61,18 @@ class LoginForm extends React.Component {
             email: "P.Beesly@dunder-mifflin.org",
             password: "Pam123456"
         };
-        this.props.login(user)
-        .then( () => this.props.history.push('/chatrooms'));
+
+        this.loginTyper(user.email, 0, this.handleSubmit)
+        setTimeout( () => this.setState({ password: user.password }), 1800);
+    }
+    // DEMO LOGIN loginTyper
+    loginTyper(email, i, submitCallback) {
+        if (i < (email.length)) {
+            this.setState( { email: email.substring(0, i+1) });
+        setTimeout( () => this.loginTyper(email, i + 1, submitCallback), 45);
+        } else {
+        setTimeout(submitCallback, 700);
+        }
     }
 
     render () {
