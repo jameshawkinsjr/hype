@@ -25,6 +25,10 @@
     "lib": "lib",
     "test": "test"
   },
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.8.0"
+  },
   "scripts": {
     "start": "webpack --watch",
     "postinstall": "webpack"
@@ -39,5 +43,5 @@
   "bugs": {
     "url": "https://github.com/jameshawkinsjr/hype/issues"
   },
-  "homepage": "https://github.com/jameshawkinsjr/hype#readme",
+  "homepage": "https://github.com/jameshawkinsjr/hype#readme"
 }
