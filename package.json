@@ -6,7 +6,6 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
-    "file-loader": "^3.0.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
@@ -28,7 +27,7 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "postinstall": "cd client && npm install && webpack -p"
+    "postinstall": "webpack"
   },
   "repository": {
     "type": "git",
@@ -41,7 +40,4 @@
     "url": "https://github.com/jameshawkinsjr/hype/issues"
   },
   "homepage": "https://github.com/jameshawkinsjr/hype#readme",
-  "devDependencies": {
-    "mini-css-extract-plugin": "^0.5.0"
-  }
 }
