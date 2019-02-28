@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
+import MessageWindowContainer from '../messages/message_window_container';
 
 
 
@@ -19,6 +20,7 @@ class ChatroomList extends React.Component {
                     <h3 className="bold">Hawkins</h3>
                     <p>James Hawkins</p>
                 </div>
+                <MessageWindowContainer />
                 <div className="chatroom-skeleton flex">
                         <div className="chatroom-all-threads">  
                             <div className="chatroom-jump-to"><h3> Jump To Box </h3></div>

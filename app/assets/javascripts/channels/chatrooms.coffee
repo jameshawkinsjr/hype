@@ -1,4 +1,10 @@
-App.chatrooms = App.cable.subscriptions.create "ChatroomsChannel",
+# App.chatrooms = App.cable.subscriptions.create "ChatroomsChannel",
+
+
+
+# Commented out line above
+
+
   connected: ->
     # Called when the subscription is ready for use on the server
 

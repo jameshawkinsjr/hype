@@ -67,6 +67,8 @@ Rails.application.configure do
   Rails.application.configure do 
     config.action_cable.url = "ws://localhost:3000/cable"
   end 
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:a439f9c5e6f3056dcc1b07f17e15a841@dory.redistogo.com:10786'
+
 
 
 end
