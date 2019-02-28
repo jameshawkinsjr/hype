@@ -26,7 +26,7 @@ class Chatroom < ApplicationRecord
         class_name: :ChatroomSubscription
 
     has_many :users, through: :user_subsriptions
-    has_many :messages
+    has_many :messages, dependent: :destroy
 
 
 end

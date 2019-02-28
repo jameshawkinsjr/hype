@@ -40,7 +40,7 @@ class LandingPage extends React.Component {
         let header = (
             <header className="landing-page-nav flex">
                 <div className="landing-page-nav-left flex">
-                <Link to="/"><img className="landing-page-logo" src="assets/hype_small_color.png"/></Link>
+                <Link to="/"><img className="landing-page-logo" src={ window.images.hype_small_color}/></Link>
                     <div className="landing-page-nav-links">Why Slack?</div>
                     <div className="landing-page-nav-links">Solutions</div>
                     <div className="landing-page-nav-links">Resources</div>
@@ -76,22 +76,22 @@ class LandingPage extends React.Component {
                         </div>
                     </div>
                     {/* Middle Hero Image Color */}
-                    <img className="hero-image hero-1-color hero-middle-color" src="assets/hero_1_color.jpg" />
+                    <img className="hero-image hero-1-color hero-middle-color" src={ window.images.hero_1_color} />
                     <div className="hero-1-caption hero-image-caption">Autodesk fosters open communication with Slack</div>
-                    <img className="hero-image hero-2-color hero-middle-color" src="assets/hero_2_color.jpg" />
+                    <img className="hero-image hero-2-color hero-middle-color" src={ window.images.hero_2_color} />
                     <div className="hero-2-caption hero-image-caption">Away transforms creativity and customer support with Slack</div>
-                    <img className="hero-image hero-3-color hero-middle-color" src="assets/hero_3_color.jpg" /> 
+                    <img className="hero-image hero-3-color hero-middle-color" src={ window.images.hero_3_color} /> 
                     <div  className="hero-3-caption hero-image-caption">Molly Moon creates a recipe for success with Slack</div>
                     {/* Top Left Hero Image Black and White */}
                     <div className="top-left">
-                        <img className="hero-image hero-1-bw-tl hero-top-left" src="assets/hero_1_bw.jpg" />
-                        <img className="hero-image hero-2-bw-tl hero-top-left" src="assets/hero_2_bw.jpg" />
-                        <img className="hero-image hero-3-bw-tl hero-top-left" src="assets/hero_3_bw.jpg" />
+                        <img className="hero-image hero-1-bw-tl hero-top-left" src={ window.images.hero_1_bw} />
+                        <img className="hero-image hero-2-bw-tl hero-top-left" src={ window.images.hero_2_bw} />
+                        <img className="hero-image hero-3-bw-tl hero-top-left" src={ window.images.hero_3_bw} />
                     </div>
                     {/* Bottom Right Her Image Black and White */}
-                    <img className="hero-image hero-1-bw-br hero-bottom-right" src="assets/hero_1_bw.jpg" />
-                    <img className="hero-image hero-2-bw-br hero-bottom-right" src="assets/hero_2_bw.jpg" />
-                    <img className="hero-image hero-3-bw-br hero-bottom-right" src="assets/hero_3_bw.jpg" />
+                    <img className="hero-image hero-1-bw-br hero-bottom-right" src={ window.images.hero_1_bw} />
+                    <img className="hero-image hero-2-bw-br hero-bottom-right" src={ window.images.hero_2_bw} />
+                    <img className="hero-image hero-3-bw-br hero-bottom-right" src={ window.images.hero_3_bw} />
             </section>
             </main>
         );

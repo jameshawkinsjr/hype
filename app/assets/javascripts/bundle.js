@@ -463,7 +463,7 @@ function (_React$Component) {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "landing-page-logo",
-        src: "assets/hype_small_color.png"
+        src: window.images.hype_small_color
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
       }, "Why Slack?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -500,39 +500,39 @@ function (_React$Component) {
         to: "/login"
       }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in."), " "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-color hero-middle-color",
-        src: "assets/hero_1_color.jpg"
+        src: window.images.hero_1_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-1-caption hero-image-caption"
       }, "Autodesk fosters open communication with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-2-color hero-middle-color",
-        src: "assets/hero_2_color.jpg"
+        src: window.images.hero_2_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-2-caption hero-image-caption"
       }, "Away transforms creativity and customer support with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-3-color hero-middle-color",
-        src: "assets/hero_3_color.jpg"
+        src: window.images.hero_3_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-3-caption hero-image-caption"
       }, "Molly Moon creates a recipe for success with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-bw-tl hero-top-left",
-        src: "assets/hero_1_bw.jpg"
+        src: window.images.hero_1_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-2-bw-tl hero-top-left",
-        src: "assets/hero_2_bw.jpg"
+        src: window.images.hero_2_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-3-bw-tl hero-top-left",
-        src: "assets/hero_3_bw.jpg"
+        src: window.images.hero_3_bw
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-bw-br hero-bottom-right",
-        src: "assets/hero_1_bw.jpg"
+        src: window.images.hero_1_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-2-bw-br hero-bottom-right",
-        src: "assets/hero_2_bw.jpg"
+        src: window.images.hero_2_bw
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-3-bw-br hero-bottom-right",
-        src: "assets/hero_3_bw.jpg"
+        src: window.images.hero_3_bw
       })));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page flex"
@@ -1200,7 +1200,7 @@ var Footer = function Footer() {
     to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "footer-logo",
-    src: "assets/hype_small_color.png"
+    src: window.images.hype_small_color
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "footer-right flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -1258,7 +1258,7 @@ var Header = function Header() {
     to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "session-form-header-logo",
-    src: "assets/hype_small_color.png"
+    src: window.images.hype_small_color
   }))));
 };
 
