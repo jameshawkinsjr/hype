@@ -10,14 +10,14 @@ const Footer = () => {
                 </div>
                 <div className="footer-right flex">
                         <ul className="footer-green">
-                            <p>SLACK ♥</p>
-                            <li><Link to="/">Why Slack?</Link></li>
+                            <p>HYPE ♥</p>
+                            <li><Link to="/">Why Hype?</Link></li>
                             <li><Link to="/">About Us</Link></li>
                             <li><Link to="/">News</Link></li>
                             <li><Link to="/">Careers</Link></li>
                         </ul> 
                         <ul className="footer-red">
-                            <p>USING SLACK</p>
+                            <p>USING HYPE</p>
                             <li><Link to="/login">Log In</Link></li>
                             <li><Link to="/signup">Sign Up</Link></li>
                         </ul> 

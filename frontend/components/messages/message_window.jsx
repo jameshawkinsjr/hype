@@ -12,6 +12,7 @@ class MessageWindow extends React.Component {
             displayedMessages: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEnterKey = this.handleEnterKey.bind(this);
     }
 
     componentWillMount() {
@@ -29,6 +30,12 @@ class MessageWindow extends React.Component {
         this.chats.create( this.state );
         this.setState({ body: "" });
     }
+    
+    handleEnterKey(e) {
+        if (e.key === 'Enter') {
+            this.handleSubmit(e);
+        }
+    }
 
     createSocket() {
         // need to change this URL for production
@@ -37,9 +44,10 @@ class MessageWindow extends React.Component {
             {   channel: 'MessagesChannel'  },  
             {
                 connected: () => {},
-                received: (newMessage) => {
+                received: (data) => {
+                    console.log("working");
                     let displayedMessages = this.state.displayedMessages;
-                    displayedMessages.push(newMessage.body);
+                    displayedMessages.push(data.body);
                     this.setState({ displayedMessages: displayedMessages });
             },  create: function(message) 
                 {   this.perform('create', { 
@@ -77,6 +85,7 @@ class MessageWindow extends React.Component {
                     value={ this.state.body }
                     onChange={ this.handleInput() }
                     className='message-input'
+                    onKeyPress={ (e) => this.handleEnterKey(e) }
             />
             { this.state.body }
             { this.state.author_id }

@@ -6,41 +6,49 @@ input:focus {
 }
 
 .login-modal, .signup-modal {
+    box-sizing: border-box;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 5px;
     border: 1px solid $medium-grey;
     flex-direction: column;
-    width: 500px;
+    width: 550px;
     align-self: center;
     align-items: center;
     background: white;
-    box-shadow: 5px 5px 5px $medium-grey;
+    box-shadow: 1px 1px 1px $medium-grey;
     h2 {
         font-weight: 700;
+        padding: 20px;
     }
     h3 {
-        margin: 15px;
+        text-align: left;
+        font-size: 14px;
     }
-
+    
+    span {
+        font-weight: bold;
+    }
     form {
         flex-direction: column;
-        width: 90%;
-        label {
-            padding: 10px;
-            h3 {
-                margin: 7px 2px 7px 0;
-                font-size: 13px;
-                font-weight: 700;
-            }
+        margin-top: 20px;
+        width: 400px;
+        button {
+            margin-top: 20px;
+            width: 100%;
+            font-weight: 700;
         }
     }
     input {
+        box-sizing: border-box;
         padding: 10px;
-        width: 90%;
+        width: 100%;
         border-radius: 5px;
         border: 1px solid $light-grey;
         font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
     }
+
     p {
         padding: 12px 0 0 0;
         line-height: 1.44;
@@ -50,15 +58,38 @@ input:focus {
         margin-bottom: 5px;
     }
 
-    .errors {
-        color: $bright-purple;
-        text-align: center;
-        margin: 15px 0 10px 0;
-        line-height: 1.44;
-    }
-
+    
 }
 
+.errors-box{
+    align-self: center;
+    width: 550px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid $medium-grey;
+    box-shadow: 1px 1px 1px $medium-grey;
+    background: white;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.error-red{
+    background: $error-red;
+    width: 7px;
+    height: 50px;
+    float: left;
+}
+
+.errors {
+    flex-direction: column;
+    margin: auto 20px;
+    align-items: center;
+    // color: $bright-purple;
+    color: black;
+    text-align: center;
+    line-height: 1.44;
+    font-size: 14px;
+}
 .demo-users {
     flex-direction: column;
     align-items: center;
@@ -91,9 +122,9 @@ input:focus {
     background: $dark-purple;
     cursor: pointer;
 }
-.blue-button {
+
+.green-button {
     align-self: center;
-    background: $blue;
     color: $white;
     padding: 12px;
     border-radius: 3px;
@@ -101,7 +132,25 @@ input:focus {
     font-size: 15px;
     letter-spacing: 1.1px;
     font-family: $font-sans-serif;
-    width: fit-content;
+    background: $green;
+}
+.green-button:active{
+    background: $dark-green;
+    cursor: pointer;
+}
+
+.blue-button {
+    align-self: center;
+    background: $blue;
+    color: $white;
+    padding: 12px 15px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    line-height: 1.2;
+    font-family: $font-sans-serif;
+    width: 100px;
 }
 .blue-button:hover{
     background: $dark-blue;
@@ -126,6 +175,14 @@ input:focus {
     width: 100%;
     max-height: 100%;
     
+}
+
+.demo-users {
+    width: 400px;
+}
+.demo-buttons {
+    justify-content: space-between;
+    width: 400px;
 }
 .session-form-header-inner {
     justify-content: start;

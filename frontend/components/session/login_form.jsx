@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.clearErrors();
+        this.props.clearSessionErrors();
     }
 
     // DEMO LOGINS
@@ -74,16 +74,25 @@ class LoginForm extends React.Component {
             <li key={error}> {error} </li> 
             )
 
+        let renderErrors = (
+            <div className="errors-box flex">
+                <div className="error-red"><pre> </pre></div>
+                <ul className="errors">
+                        { errors } 
+                </ul>
+            </div>
+        )
+
+
         return (
             <div className="flex-column">
             <Header />
             <div className="session-form-body flex">
+                { errors.length > 0 ? renderErrors : ""}
                 <div className="signup-modal flex">
                     <h2>Sign in to hype</h2>
-                    <h3>Enter your <strong> email address</strong> and <strong>password</strong>.</h3>
                     <form className="flex">
-                        <label>
-                            <h3>Email</h3>
+                        <h3>Enter your <span> email address</span> and <span>password</span>.</h3>
                             <input  type="text"
                                     value={this.state.email}
                                     placeholder="you@example.com"
@@ -91,29 +100,22 @@ class LoginForm extends React.Component {
                                     autoComplete = "off"
                                     autoFocus
                                 />
-                        </label>
-                        <label>
-                            <h3>Password</h3>
                             <input  type="password"
                                     placeholder="password"
                                     value={this.state.password}
                                     onChange={this.handleInput('password')}
                                     autoComplete = "off"
                                 />
-                        </label>
-                        <button className="purple-button" onClick={this.handleSubmit}>Sign In</button>
+                        <button className="green-button" onClick={this.handleSubmit}>Sign in</button>
                     </form>
                     <div className="demo-users flex">
                         <h3>Demo Users</h3>
                         <div className="demo-buttons flex">
-                            <button className="blue-button" onClick={this.loginMichael}>Login as Michael Scott</button>
-                            <button className="blue-button" onClick={this.loginPam}>Login as Pam Beesley</button>
-                            <button className="blue-button" onClick={this.loginJim}>Login as Jim Halpert</button>
+                            <button className="blue-button" onClick={this.loginMichael}> Michael Scott</button>
+                            <button className="blue-button" onClick={this.loginPam}> Pam Beesley</button>
+                            <button className="blue-button" onClick={this.loginJim}> Jim Halpert</button>
                         </div>
                     </div>
-                        <ul className="errors">
-                        { errors } 
-                    </ul>
                 </div>
             </div>
             <Footer />

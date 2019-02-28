@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_ERRORS, LANDING_PAGE_SIGNUP, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearErrors, landingPageSignup, login, signup, logout */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS, LANDING_PAGE_SIGNUP, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearSessionErrors, landingPageSignup, login, signup, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,12 +98,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_CURRENT_USER", function() { return LOGOUT_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SESSION_ERRORS", function() { return RECEIVE_SESSION_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERRORS", function() { return CLEAR_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_SESSION_ERRORS", function() { return CLEAR_SESSION_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LANDING_PAGE_SIGNUP", function() { return LANDING_PAGE_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentUser", function() { return receiveCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutCurrentUser", function() { return logoutCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSessionErrors", function() { return clearSessionErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "landingPageSignup", function() { return landingPageSignup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
-var CLEAR_ERRORS = 'CLEAR_ERRORS';
+var CLEAR_SESSION_ERRORS = 'CLEAR_SESSION_ERRORS';
 var LANDING_PAGE_SIGNUP = 'LANDING_PAGE_SIGNUP';
 var receiveCurrentUser = function receiveCurrentUser(currentUser) {
   return {
@@ -133,9 +133,9 @@ var receiveErrors = function receiveErrors(errors) {
     errors: errors
   };
 };
-var clearErrors = function clearErrors() {
+var clearSessionErrors = function clearSessionErrors() {
   return {
-    type: CLEAR_ERRORS
+    type: CLEAR_SESSION_ERRORS
   };
 };
 var landingPageSignup = function landingPageSignup(email) {
@@ -470,7 +470,7 @@ function (_React$Component) {
         src: window.images.hype_small_color
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
-      }, "Why Slack?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Why Hype?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
       }, "Solutions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page-nav-links"
@@ -487,7 +487,7 @@ function (_React$Component) {
         className: "hero-quote"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Imagine what you'll accomplish together")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-description"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Slack is a collaboration hub for work, no matter what work you do. It\u2019s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hype is a collaboration hub for work, no matter what work you do. It\u2019s a place where conversations happen, decisions are made, and information is always at your fingertips. With Hype, your team is better connected.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-get-started"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "hero-get-started-input flex"
@@ -500,24 +500,24 @@ function (_React$Component) {
         onClick: this.handleSubmit
       }, "GET STARTED")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-get-started-link flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already Using Slack? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "   "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already Using Hype? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "   "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login"
       }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in."), " "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-color hero-middle-color",
         src: window.images.hero_1_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-1-caption hero-image-caption"
-      }, "Autodesk fosters open communication with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, "Autodesk fosters open communication with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-2-color hero-middle-color",
         src: window.images.hero_2_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-2-caption hero-image-caption"
-      }, "Away transforms creativity and customer support with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, "Away transforms creativity and customer support with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-3-color hero-middle-color",
         src: window.images.hero_3_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-3-caption hero-image-caption"
-      }, "Molly Moon creates a recipe for success with Slack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Molly Moon creates a recipe for success with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-bw-tl hero-top-left",
@@ -642,6 +642,7 @@ function (_React$Component) {
       displayedMessages: []
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -671,6 +672,13 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleEnterKey",
+    value: function handleEnterKey(e) {
+      if (e.key === 'Enter') {
+        this.handleSubmit(e);
+      }
+    }
+  }, {
     key: "createSocket",
     value: function createSocket() {
       var _this3 = this;
@@ -681,9 +689,10 @@ function (_React$Component) {
         channel: 'MessagesChannel'
       }, {
         connected: function connected() {},
-        received: function received(newMessage) {
+        received: function received(data) {
+          console.log("working");
           var displayedMessages = _this3.state.displayedMessages;
-          displayedMessages.push(newMessage.body);
+          displayedMessages.push(data.body);
 
           _this3.setState({
             displayedMessages: displayedMessages
@@ -717,6 +726,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-nav flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -726,7 +737,10 @@ function (_React$Component) {
         placeholder: "Enter your message here",
         value: this.state.body,
         onChange: this.handleInput(),
-        className: "message-input"
+        className: "message-input",
+        onKeyPress: function onKeyPress(e) {
+          return _this4.handleEnterKey(e);
+        }
       }), this.state.body, this.state.author_id, this.state.chatroom_id, this.state.parent_id, this.state.displayedMessages, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "message-send",
         onClick: this.handleSubmit
@@ -753,15 +767,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _message_window__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_window */ "./frontend/components/messages/message_window.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/messages_api_util */ "./frontend/util/messages_api_util.js");
 
 
 
 
-var mapStateToProps = function mapStateToProps(_ref) {
-  var entities = _ref.entities,
-      session = _ref.session;
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    currentUser: entities.users[session.currentUserId]
+    currentUser: state.entities.users[state.session.currentUserId],
+    messages: Object(_util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(ownProps.match.params.chatroomId),
+    errors: state.errors.session
   };
 };
 
@@ -1016,7 +1032,7 @@ function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.props.clearErrors();
+      this.props.clearSessionErrors();
     } // DEMO LOGINS
 
   }, {
@@ -1078,46 +1094,51 @@ function (_React$Component) {
           key: error
         }, " ", error, " ");
       });
+      var renderErrors = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "error-red"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors"
+      }, errors));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form-body flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, errors.length > 0 ? renderErrors : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-modal flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign in to hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Enter your ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " email address"), " and ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "password"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign in to hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Enter your ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " email address"), " and ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "password"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         placeholder: "you@example.com",
         onChange: this.handleInput('email'),
         autoComplete: "off",
         autoFocus: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         placeholder: "password",
         value: this.state.password,
         onChange: this.handleInput('password'),
         autoComplete: "off"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "purple-button",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button",
         onClick: this.handleSubmit
-      }, "Sign In")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Sign in")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-users flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Demo Users"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-buttons flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "blue-button",
         onClick: this.loginMichael
-      }, "Login as Michael Scott"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " Michael Scott"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "blue-button",
         onClick: this.loginPam
-      }, "Login as Pam Beesley"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " Pam Beesley"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "blue-button",
         onClick: this.loginJim
-      }, "Login as Jim Halpert"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "errors"
-      }, errors))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, " Jim Halpert"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -1157,8 +1178,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     login: function login(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["login"])(user));
     },
-    clearErrors: function clearErrors() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearErrors"])());
+    clearSessionErrors: function clearSessionErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
     }
   };
 };
@@ -1249,7 +1270,7 @@ function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.props.clearErrors();
+      this.props.clearSessionErrors();
     }
   }, {
     key: "render",
@@ -1344,8 +1365,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     signup: function signup(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["signup"])(user));
     },
-    clearErrors: function clearErrors() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearErrors"])());
+    clearSessionErrors: function clearSessionErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
     }
   };
 };
@@ -1383,9 +1404,9 @@ var Footer = function Footer() {
     className: "footer-right flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "footer-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "SLACK \u2665"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "HYPE \u2665"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, "Why Slack?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Why Hype?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
   }, "About Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
@@ -1393,7 +1414,7 @@ var Footer = function Footer() {
     to: "/"
   }, "Careers"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "footer-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "USING SLACK"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "USING HYPE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/login"
   }, "Log In")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/signup"
@@ -1630,7 +1651,7 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return [];
 
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ERRORS"]:
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_SESSION_ERRORS"]:
       return [];
       ;
 
@@ -1739,6 +1760,59 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/messages_api_util.js":
+/*!********************************************!*\
+  !*** ./frontend/util/messages_api_util.js ***!
+  \********************************************/
+/*! exports provided: fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editMessage", function() { return editMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyMessage", function() { return destroyMessage; });
+var fetchMessages = function fetchMessages(chatroomId) {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/chatrooms/".concat(chatroomId, "/messages")
+  });
+};
+var fetchMessage = function fetchMessage(messageId) {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/messages/".concat(messageId)
+  });
+};
+var createMessage = function createMessage(message) {
+  return $.ajax({
+    method: 'POST',
+    url: "/api/messages/".concat(message.id),
+    data: {
+      message: message
+    }
+  });
+};
+var editMessage = function editMessage(message) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "/api/messages/".concat(message.id),
+    data: {
+      message: message
+    }
+  });
+};
+var destroyMessage = function destroyMessage(messageId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "/api/messages/".concat(messageId)
+  });
+};
 
 /***/ }),
 

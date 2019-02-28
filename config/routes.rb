@@ -5,14 +5,16 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create]
-    resources :chatrooms, only: [:index, :create, :show, :update, :destroy]
-    resources :messages, only: [:create, :show, :update, :destroy]
+    resources :chatrooms, only: [:index, :create, :show, :update, :destroy] do
+      resources :messages, only: [:index, :create]
+    end
+    resources :messages, only: [:show, :update, :destroy]
     resource :session, only: [:create, :destroy]
   end
 
   mount ActionCable.server => '/cable'
 
 
-  get '*path', to: redirect('/'), via: :all
+  # get '*path', to: redirect('/'), via: :all
   
 end
