@@ -51,6 +51,7 @@ class SignupForm extends React.Component {
                                     placeholder="Full Name"
                                     onChange={this.handleInput('full_name')}
                                     autoComplete = "off"
+                                    autoFocus
                             />
                         </label>
                         <label>

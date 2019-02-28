@@ -1,3 +1,10 @@
+input:focus {
+    outline: none !important;
+    -webkit-box-shadow:inset 0px 0px 0px 1px $bright-purple;
+    -moz-box-shadow:inset 0px 0px 0px 1px $bright-purple;
+    box-shadow:inset 0px 0px 0px 1px $bright-purple;
+}
+
 .login-modal, .signup-modal {
     padding: 20px;
     border-radius: 15px;

@@ -12,11 +12,11 @@ const App = () => (
     <>
     <header>
         <Switch>
-            <ProtectedRoute path="/chatrooms" component={ChatroomList} />
-            <AuthRoute path="/login" component={LoginFormContainer} />
-            <AuthRoute path="/signup" component={SignupFormContainer} />
-            <Route path="/" exact component={LandingPageContainer} />
-            <Route path="/nav" exact component={NavBarContainer} />
+            <Route path="/chatrooms" component={ChatroomList} />
+            <AuthRoute exact path="/login" component={LoginFormContainer} />
+            <AuthRoute exact path="/signup" component={SignupFormContainer} />
+            <Route exact path="/" component={LandingPageContainer} />
+            <Route exact path="/nav" component={NavBarContainer} />
             <Route component={PageNotFound} />
         </Switch>
     </header>

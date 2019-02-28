@@ -3,8 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
 import MessageWindowContainer from '../messages/message_window_container';
 
-
-
 class ChatroomList extends React.Component {
     constructor(props) {
         super(props);

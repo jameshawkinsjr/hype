@@ -89,6 +89,7 @@ class LoginForm extends React.Component {
                                     placeholder="you@example.com"
                                     onChange={this.handleInput('email')}
                                     autoComplete = "off"
+                                    autoFocus
                                 />
                         </label>
                         <label>

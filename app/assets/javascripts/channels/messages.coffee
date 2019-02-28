@@ -1,4 +1,4 @@
-# App.messages = App.cable.subscriptions.create "MessagesChannel",
+App.messages = App.cable.subscriptions.create "MessagesChannel",
 
 # Commented out line above
 

@@ -8,6 +8,7 @@ import configureStore from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
+    // debugger;
     if (window.currentUser) {
         const preloadedState = {
             entities: {
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore(preloadedState);
         delete window.currentUser;
     } else {
+        console.log("No current user");
         store = configureStore();
     }
     
