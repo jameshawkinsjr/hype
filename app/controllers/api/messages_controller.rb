@@ -8,8 +8,8 @@ class Api::MessagesController < ApplicationController
             ActionCable.server.broadcast 'messages',
                 message: message.body,
                 user: message.author_id,
-                chatroom: message.chatroom_id,
-            render :show
+                chatroom: message.chatroom_id
+            # render :show
         else
             render json: @messages.errors.full_messages, status: 401
         end

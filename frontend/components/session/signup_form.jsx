@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Header from '../templates/header';
+import Footer from '../templates/footer';
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +38,7 @@ class SignupForm extends React.Component {
             )
 
         return (
-            <>
+            <div className="flex-column">
             <Header />
             <div className="session-form-body flex">
                 <div className="signup-modal flex">
@@ -88,7 +89,8 @@ class SignupForm extends React.Component {
                     </ul>
                 </div>
             </div>
-            </>
+            <Footer />
+            </div>
         )
     }
 }
