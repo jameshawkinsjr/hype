@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+
   get '*path', to: redirect('/'), via: :all
   
 end
