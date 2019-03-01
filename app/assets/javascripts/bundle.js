@@ -90,7 +90,7 @@
 /*!**********************************************!*\
   !*** ./frontend/actions/messages_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, RECEIVE_MESSAGE_ERRORS, CLEAR_MESSAGE_ERRORS, receiveMessages, receiveMessage, removeMessage, receiveErrors, clearMessageErrors, fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
+/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, RECEIVE_MESSAGE_ERRORS, CLEAR_MESSAGE_ERRORS, REMOVE_MESSAGE, receiveMessages, receiveMessage, removeMessage, receiveMessageErrors, clearMessageErrors, fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,23 +99,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MESSAGE", function() { return RECEIVE_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MESSAGE_ERRORS", function() { return RECEIVE_MESSAGE_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MESSAGE_ERRORS", function() { return CLEAR_MESSAGE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_MESSAGE", function() { return REMOVE_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessages", function() { return receiveMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessage", function() { return receiveMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeMessage", function() { return removeMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessageErrors", function() { return receiveMessageErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearMessageErrors", function() { return clearMessageErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editMessage", function() { return editMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyMessage", function() { return destroyMessage; });
-/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
+/* harmony import */ var _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/messages_api_util */ "./frontend/util/messages_api_util.js");
  // Action creators
 
 var RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
 var RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 var RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
 var CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
+var REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 var receiveMessages = function receiveMessages(messages) {
   return {
     type: RECEIVE_ALL_MESSAGES,
@@ -130,10 +132,11 @@ var receiveMessage = function receiveMessage(message) {
 };
 var removeMessage = function removeMessage(messageId) {
   return {
-    type: REMOVE_MESSAGE
+    type: REMOVE_MESSAGE,
+    messageId: messageId
   };
 };
-var receiveErrors = function receiveErrors(errors) {
+var receiveMessageErrors = function receiveMessageErrors(errors) {
   return {
     type: RECEIVE_MESSAGE_ERRORS,
     errors: errors
@@ -147,46 +150,46 @@ var clearMessageErrors = function clearMessageErrors() {
 
 var fetchMessages = function fetchMessages(chatroomId) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](chatroomId).then(function (chatroomId) {
-      return dispatch(receiveMessages(chatroomId));
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](chatroomId).then(function (messages) {
+      return dispatch(receiveMessages(messages));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveMessageErrors(err.responseJSON));
     });
   };
 };
 var fetchMessage = function fetchMessage(messageId) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessage"](messageId).then(function (messageId) {
-      return dispatch(receiveMessage(messageId));
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessage"](messageId).then(function (message) {
+      return dispatch(receiveMessage(message));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveMessageErrors(err.responseJSON));
     });
   };
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message).then(function (message) {
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message).then(function (message) {
       return dispatch(receiveMessage(message));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveMessageErrors(err.responseJSON));
     });
   };
 };
 var editMessage = function editMessage(message) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["editMessage"](message).then(function (message) {
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["editMessage"](message).then(function (message) {
       return dispatch(receiveMessage(message));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveMessageErrors(err.responseJSON));
     });
   };
 };
 var destroyMessage = function destroyMessage(messageId) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyMessage"](messageId).then(function (messageId) {
-      return dispatch(destroyMessage(messageId));
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyMessage"](messageId).then(function (messageId) {
+      return dispatch(removeMessage(messageId));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveMessageErrors(err.responseJSON));
     });
   };
 };
@@ -197,7 +200,7 @@ var destroyMessage = function destroyMessage(messageId) {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS, LANDING_PAGE_SIGNUP, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearSessionErrors, landingPageSignup, login, signup, logout */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS, LANDING_PAGE_SIGNUP, receiveCurrentUser, logoutCurrentUser, receiveSessionErrors, clearSessionErrors, landingPageSignup, login, signup, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -209,7 +212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LANDING_PAGE_SIGNUP", function() { return LANDING_PAGE_SIGNUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentUser", function() { return receiveCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutCurrentUser", function() { return logoutCurrentUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSessionErrors", function() { return receiveSessionErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSessionErrors", function() { return clearSessionErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "landingPageSignup", function() { return landingPageSignup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
@@ -234,7 +237,7 @@ var logoutCurrentUser = function logoutCurrentUser() {
     type: LOGOUT_CURRENT_USER
   };
 };
-var receiveErrors = function receiveErrors(errors) {
+var receiveSessionErrors = function receiveSessionErrors(errors) {
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors: errors
@@ -257,7 +260,7 @@ var login = function login(user) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveSessionErrors(err.responseJSON));
     });
   };
 };
@@ -266,7 +269,7 @@ var signup = function signup(user) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveSessionErrors(err.responseJSON));
     });
   };
 };
@@ -275,7 +278,7 @@ var logout = function logout() {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function () {
       return dispatch(logoutCurrentUser());
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveSessionErrors(err.responseJSON));
     });
   };
 };
@@ -313,7 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["ProtectedRoute"], {
-    path: "/chatrooms",
+    path: "/chatrooms/:chatroomId",
     component: _chatroom_list_chatroom_list__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
     exact: true,
@@ -535,7 +538,7 @@ function (_React$Component) {
       e.preventDefault();
 
       if (this.props.currentUser) {
-        this.props.history.push('/chatrooms');
+        this.props.history.push('/chatrooms/1');
       } else {
         this.props.landingPageSignup(this.state.email);
         this.props.history.push('/signup');
@@ -754,9 +757,17 @@ function (_React$Component) {
   }
 
   _createClass(MessageWindow, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.createSocket(); // this.fetchMessages(this.props.match.params.chatroomId);
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.createSocket(); // debugger
+
+      var messages = this.props.fetchMessages(this.props.match.params.chatroomId);
+      var messageArray = Object.values(messages).map(function (message) {
+        return message.body;
+      });
+      this.setState({
+        displayedMessages: messages
+      });
     }
   }, {
     key: "handleInput",
@@ -874,7 +885,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _message_window__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_window */ "./frontend/components/messages/message_window.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/messages_api_util */ "./frontend/util/messages_api_util.js");
+/* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
 
 
@@ -890,10 +901,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchMessages: function fetchMessages(chatoomId) {
-      return dispatch(Object(_util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatoomId));
+    fetchMessages: function fetchMessages(chatroomId) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatroomId));
     }
   };
 };
@@ -1139,7 +1150,7 @@ function (_React$Component) {
       }
 
       this.props.login(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms');
+        return _this3.props.history.push('/chatrooms/1');
       });
     }
   }, {
@@ -1377,7 +1388,7 @@ function (_React$Component) {
 
       e.preventDefault();
       this.props.signup(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms');
+        return _this3.props.history.push('/chatrooms/1');
       });
     }
   }, {
@@ -1713,16 +1724,16 @@ var messagesReducer = function messagesReducer() {
 
   switch (action.type) {
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:
-      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, action.messages);
+      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.messages);
       return newState;
 
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGE"]:
-      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state);
+      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
       newState[action.message.id] = action.message;
       return newState;
 
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_MESSAGE"]:
-      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state);
+      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
       delete newState[action.messageId];
       return newState;
 

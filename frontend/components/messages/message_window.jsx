@@ -15,9 +15,12 @@ class MessageWindow extends React.Component {
         this.handleEnterKey = this.handleEnterKey.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.createSocket();
-        // this.fetchMessages(this.props.match.params.chatroomId);
+        // debugger
+        let messages = this.props.fetchMessages(this.props.match.params.chatroomId);
+        let messageArray = Object.values(messages).map( message => ( message.body ));
+        this.setState({ displayedMessages: messages });
       }
 
     handleInput() {

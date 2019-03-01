@@ -16,7 +16,7 @@ export const logoutCurrentUser = () => ({
         type: LOGOUT_CURRENT_USER,
 });
 
-export const receiveErrors = errors => ({
+export const receiveSessionErrors = errors => ({
         type: RECEIVE_SESSION_ERRORS,
         errors,
 });
@@ -34,20 +34,20 @@ export const landingPageSignup = email => ({
 export const login = (user) => dispatch => (
     ApiUtil.login(user)
         .then(user => dispatch(receiveCurrentUser(user)),
-            err => (dispatch(receiveErrors(err.responseJSON)))
+            err => (dispatch(receiveSessionErrors(err.responseJSON)))
         )   
 );
 
 export const signup = (user) => dispatch => (
     ApiUtil.signup(user)
         .then(user => dispatch(receiveCurrentUser(user)),
-            err => (dispatch(receiveErrors(err.responseJSON)))
+            err => (dispatch(receiveSessionErrors(err.responseJSON)))
         )   
 );
 
 export const logout = () => dispatch => (
     ApiUtil.logout()
         .then( () => dispatch(logoutCurrentUser()),
-            err => (dispatch(receiveErrors(err.responseJSON)))
+            err => (dispatch(receiveSessionErrors(err.responseJSON)))
         )   
 );

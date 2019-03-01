@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MessageWindow from './message_window';
 import { withRouter } from 'react-router-dom';
-import { fetchMessages } from '../../util/messages_api_util';
+import { fetchMessages } from '../../actions/messages_actions';
 import { selectAllMessages } from '../../reducers/selectors';
 
 
@@ -11,8 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
     errors: state.errors.session,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetchMessages: (chatoomId) => dispatch(fetchMessages(chatoomId))
+const mapDispatchToProps = (dispatch) => ({
+    fetchMessages: chatroomId => dispatch(fetchMessages(chatroomId))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MessageWindow));

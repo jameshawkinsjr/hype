@@ -1,10 +1,11 @@
-import * as ApiUtil from '../util/session_api_util';
+import * as ApiUtil from '../util/messages_api_util';
 
 // Action creators
 export const RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 export const RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
 export const CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
+export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 
 export const receiveMessages = messages => ({
         type: RECEIVE_ALL_MESSAGES,
@@ -18,9 +19,10 @@ export const receiveMessage = message => ({
 
 export const removeMessage = messageId => ({
         type: REMOVE_MESSAGE,
+        messageId
 });
 
-export const receiveErrors = errors => ({
+export const receiveMessageErrors = errors => ({
         type: RECEIVE_MESSAGE_ERRORS,
         errors,
 });
@@ -32,35 +34,35 @@ export const clearMessageErrors = () => ({
 // Thunk action creators
 export const fetchMessages = (chatroomId) => dispatch => (
         ApiUtil.fetchMessages(chatroomId)
-                .then(chatroomId => dispatch(receiveMessages(chatroomId)),
-                err => (dispatch(receiveErrors(err.responseJSON)))       
+                .then(messages => dispatch(receiveMessages(messages)),
+                err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );
     
 export const fetchMessage = (messageId) => dispatch => (
         ApiUtil.fetchMessage(messageId)
-                .then(messageId => dispatch(receiveMessage(messageId)),
-                err => (dispatch(receiveErrors(err.responseJSON)))       
+                .then(message => dispatch(receiveMessage(message)),
+                err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );
 
 export const createMessage = (message) => dispatch => (
         ApiUtil.createMessage(message)
                 .then(message => dispatch(receiveMessage(message)),
-                err => (dispatch(receiveErrors(err.responseJSON)))       
+                err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );
 
 export const editMessage = (message) => dispatch => (
         ApiUtil.editMessage(message)
                 .then(message => dispatch(receiveMessage(message)),
-                err => (dispatch(receiveErrors(err.responseJSON)))       
+                err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );
 
 export const destroyMessage = (messageId) => dispatch => (
         ApiUtil.destroyMessage(messageId)
-                .then(messageId => dispatch(destroyMessage(messageId)),
-                err => (dispatch(receiveErrors(err.responseJSON)))       
+                .then(messageId => dispatch(removeMessage(messageId)),
+                err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );
