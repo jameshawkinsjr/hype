@@ -86,6 +86,113 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/messages_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/messages_actions.js ***!
+  \**********************************************/
+/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, RECEIVE_MESSAGE_ERRORS, CLEAR_MESSAGE_ERRORS, receiveMessages, receiveMessage, removeMessage, receiveErrors, clearMessageErrors, fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_MESSAGES", function() { return RECEIVE_ALL_MESSAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MESSAGE", function() { return RECEIVE_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MESSAGE_ERRORS", function() { return RECEIVE_MESSAGE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MESSAGE_ERRORS", function() { return CLEAR_MESSAGE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessages", function() { return receiveMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessage", function() { return receiveMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeMessage", function() { return removeMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearMessageErrors", function() { return clearMessageErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editMessage", function() { return editMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyMessage", function() { return destroyMessage; });
+/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
+ // Action creators
+
+var RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
+var RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+var RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
+var CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
+var receiveMessages = function receiveMessages(messages) {
+  return {
+    type: RECEIVE_ALL_MESSAGES,
+    messages: messages
+  };
+};
+var receiveMessage = function receiveMessage(message) {
+  return {
+    type: RECEIVE_MESSAGE,
+    message: message
+  };
+};
+var removeMessage = function removeMessage(messageId) {
+  return {
+    type: REMOVE_MESSAGE
+  };
+};
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_MESSAGE_ERRORS,
+    errors: errors
+  };
+};
+var clearMessageErrors = function clearMessageErrors() {
+  return {
+    type: CLEAR_MESSAGE_ERRORS
+  };
+}; // Thunk action creators
+
+var fetchMessages = function fetchMessages(chatroomId) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](chatroomId).then(function (chatroomId) {
+      return dispatch(receiveMessages(chatroomId));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var fetchMessage = function fetchMessage(messageId) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessage"](messageId).then(function (messageId) {
+      return dispatch(receiveMessage(messageId));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var createMessage = function createMessage(message) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message).then(function (message) {
+      return dispatch(receiveMessage(message));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var editMessage = function editMessage(message) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["editMessage"](message).then(function (message) {
+      return dispatch(receiveMessage(message));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var destroyMessage = function destroyMessage(messageId) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyMessage"](messageId).then(function (messageId) {
+      return dispatch(destroyMessage(messageId));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -649,7 +756,7 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentWillMount",
     value: function componentWillMount() {
-      this.createSocket();
+      this.createSocket(); // this.fetchMessages(this.props.match.params.chatroomId);
     }
   }, {
     key: "handleInput",
@@ -768,6 +875,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _message_window__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_window */ "./frontend/components/messages/message_window.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/messages_api_util */ "./frontend/util/messages_api_util.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
@@ -776,13 +885,17 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
-    messages: Object(_util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(ownProps.match.params.chatroomId),
+    messages: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["selectAllMessages"])(state),
     errors: state.errors.session
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchMessages: function fetchMessages(chatoomId) {
+      return dispatch(Object(_util_messages_api_util__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatoomId));
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_message_window__WEBPACK_IMPORTED_MODULE_1__["default"])));
@@ -1565,12 +1678,60 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/entities/users_reducer.js");
+/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/entities/messages_reducer.js");
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/messages_reducer.js":
+/*!********************************************************!*\
+  !*** ./frontend/reducers/entities/messages_reducer.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var messagesReducer = function messagesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState;
+
+  switch (action.type) {
+    case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:
+      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, action.messages);
+      return newState;
+
+    case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGE"]:
+      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state);
+      newState[action.message.id] = action.message;
+      return newState;
+
+    case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_MESSAGE"]:
+      newState = Object(lodash_merge__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state);
+      delete newState[action.messageId];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (messagesReducer);
 
 /***/ }),
 
@@ -1657,7 +1818,6 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_SESSION_ERRORS"]:
       return [];
-      ;
 
     default:
       return state;
@@ -1691,6 +1851,22 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/selectors.js":
+/*!****************************************!*\
+  !*** ./frontend/reducers/selectors.js ***!
+  \****************************************/
+/*! exports provided: selectAllMessages */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllMessages", function() { return selectAllMessages; });
+var selectAllMessages = function selectAllMessages(state) {
+  return Object.values(state.entities.messages);
+};
 
 /***/ }),
 
@@ -1853,7 +2029,7 @@ var Auth = function Auth(_ref) {
     path: path,
     render: function render(props) {
       return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/"
+        to: "/chatrooms"
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props);
     }
   });
@@ -1867,7 +2043,7 @@ var Protected = function Protected(_ref2) {
     path: path,
     render: function render(props) {
       return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/chatrooms"
+        to: "/"
       });
     }
   });

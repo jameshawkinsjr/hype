@@ -11,18 +11,22 @@ export const receiveMessages = messages => ({
         messages,
 });
 
-export const receiveMessage = () => ({
+export const receiveMessage = message => ({
         type: RECEIVE_MESSAGE,
-        message
+        message,
+});
+
+export const removeMessage = messageId => ({
+        type: REMOVE_MESSAGE,
 });
 
 export const receiveErrors = errors => ({
-    type: RECEIVE_MESSAGE_ERRORS,
-    errors,
+        type: RECEIVE_MESSAGE_ERRORS,
+        errors,
 });
 
 export const clearMessageErrors = () => ({
-    type: CLEAR_MESSAGE_ERRORS,
+        type: CLEAR_MESSAGE_ERRORS,
 });
 
 // Thunk action creators

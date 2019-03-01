@@ -42541,3 +42541,680 @@ MessagesChannel is transmitting the subscription confirmation
 MessagesChannel is streaming from MessagesChannel
 MessagesChannel is transmitting the subscription confirmation
 MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:48:14 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (1.1ms)
+  Rendered static_pages/root.html.erb within layouts/application (29.2ms)
+Completed 200 OK in 434ms (Views: 425.6ms | ActiveRecord: 5.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:15 -0800
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:15 -0800
+MessagesChannel stopped streaming from MessagesChannel
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:48:15 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:15 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:48:26 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 422ms (Views: 418.1ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:26 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:48:27 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:27 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:48:27 -0800
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:48:27 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (2.1ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:27 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  Rendered api/messages/index.json.jbuilder (12.0ms)
+Completed 200 OK in 29ms (Views: 15.6ms | ActiveRecord: 9.6ms)
+
+
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.4ms)
+  Rendered static_pages/root.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 59ms (Views: 56.7ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:48:29 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (0.9ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (4.4ms)
+Completed 200 OK in 17ms (Views: 10.9ms | ActiveRecord: 3.1ms)
+
+
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel#create({"body"=>"fdsfdsafs", "author_id"=>"1", "chatroom_id"=>"1", "parent_id"=>nil})
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mChatroom Load (0.5ms)[0m  [1m[34mSELECT  "chatrooms".* FROM "chatrooms" WHERE "chatrooms"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mMessage Create (1.3ms)[0m  [1m[32mINSERT INTO "messages" ("body", "chatroom_id", "author_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["body", "fdsfdsafs"], ["chatroom_id", 1], ["author_id", 1], ["created_at", "2019-03-01 00:48:31.542373"], ["updated_at", "2019-03-01 00:48:31.542373"]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/channels/messages_channel.rb:11
+[ActiveJob] Enqueued ChatMessageCreationEventBroadcastJob (Job ID: a5dd15e1-87c8-49ea-802e-50adf229009d) to Async(default) with arguments: #<GlobalID:0x00007fdb1c887620 @uri=#<URI::GID gid://hype/Message/33>>
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [a5dd15e1-87c8-49ea-802e-50adf229009d] Performing ChatMessageCreationEventBroadcastJob (Job ID: a5dd15e1-87c8-49ea-802e-50adf229009d) from Async(default) with arguments: #<GlobalID:0x00007fdb1b3cb538 @uri=#<URI::GID gid://hype/Message/33>>
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [a5dd15e1-87c8-49ea-802e-50adf229009d] [ActionCable] Broadcasting to messages: {:id=>33, :created_at=>"00:48", :author_id=>1, :chatroom_id=>1, :body=>"fdsfdsafs"}
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [a5dd15e1-87c8-49ea-802e-50adf229009d] Performed ChatMessageCreationEventBroadcastJob (Job ID: a5dd15e1-87c8-49ea-802e-50adf229009d) from Async(default) in 1.59ms
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:55:12 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (1.4ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (8.6ms)
+Completed 200 OK in 27ms (Views: 15.9ms | ActiveRecord: 6.4ms)
+
+
+MessagesChannel#create({"body"=>"fdsafsdfs", "author_id"=>"1", "chatroom_id"=>"1", "parent_id"=>nil})
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mChatroom Load (0.9ms)[0m  [1m[34mSELECT  "chatrooms".* FROM "chatrooms" WHERE "chatrooms"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mMessage Create (6.8ms)[0m  [1m[32mINSERT INTO "messages" ("body", "chatroom_id", "author_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["body", "fdsafsdfs"], ["chatroom_id", 1], ["author_id", 1], ["created_at", "2019-03-01 00:55:18.851201"], ["updated_at", "2019-03-01 00:55:18.851201"]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/channels/messages_channel.rb:11
+[ActiveJob] Enqueued ChatMessageCreationEventBroadcastJob (Job ID: 3cb7f429-4b7e-4f16-a5bb-faf6565c1cde) to Async(default) with arguments: #<GlobalID:0x00007fdb1db02548 @uri=#<URI::GID gid://hype/Message/34>>
+  [1m[36mMessage Load (0.6ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [3cb7f429-4b7e-4f16-a5bb-faf6565c1cde] Performing ChatMessageCreationEventBroadcastJob (Job ID: 3cb7f429-4b7e-4f16-a5bb-faf6565c1cde) from Async(default) with arguments: #<GlobalID:0x00007fdb1dae80f8 @uri=#<URI::GID gid://hype/Message/34>>
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [3cb7f429-4b7e-4f16-a5bb-faf6565c1cde] [ActionCable] Broadcasting to messages: {:id=>34, :created_at=>"00:55", :author_id=>1, :chatroom_id=>1, :body=>"fdsafsdfs"}
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [3cb7f429-4b7e-4f16-a5bb-faf6565c1cde] Performed ChatMessageCreationEventBroadcastJob (Job ID: 3cb7f429-4b7e-4f16-a5bb-faf6565c1cde) from Async(default) in 1.36ms
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:00:52 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:00:52 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:00:52 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:00:58 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:00:58 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:00:58 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:01 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:01 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:01 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:07 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:07 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:07 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:14 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:14 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:14 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:22 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:22 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:22 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:31 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:31 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:31 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:40 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:40 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:40 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:01:51 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:51 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:01:51 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:02 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:02 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:02 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:21 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:21 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:21 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:27 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:27 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:27 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:30 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:30 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:30 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:36 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:36 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:43 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:43 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:43 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:02:51 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:51 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:02:51 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:00 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:00 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:00 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:09 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:09 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:09 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:21 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:21 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:21 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:33 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:33 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:33 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:34 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:34 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:34 -0800
+Started DELETE "/api/session" for 127.0.0.1 at 2019-02-28 17:03:37 -0800
+Processing by Api::SessionsController#destroy as JSON
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Update (0.8ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["updated_at", "2019-03-01 01:03:37.297032"], ["id", 2]]
+  ↳ app/models/user.rb:52
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:52
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 9.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:03:38 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (23.5ms)
+Completed 200 OK in 477ms (Views: 473.8ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:38 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:38 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:38 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:38 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 17:03:42 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 8ms (Views: 5.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:45 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:45 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:45 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:03:57 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:57 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:03:57 -0800
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 17:04:00 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:04:10 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:10 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:10 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:04:23 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:23 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:23 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:04:37 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:37 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:37 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:04:51 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:51 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:04:51 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:05 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:05 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:05 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:06 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:06 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:06 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:12 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:12 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:12 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:16 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:16 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:16 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:19 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:19 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:19 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:21 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:21 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:21 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:28 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:28 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:28 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:34 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:34 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:34 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:36 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:36 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:45 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:45 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:45 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:49 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:49 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:49 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:05:55 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:55 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:05:55 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:05 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:16 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:16 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:16 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:21 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:21 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:21 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:28 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:28 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:28 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:37 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:37 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:37 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:40 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:40 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:40 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:52 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:52 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:52 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:06:53 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:53 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:06:53 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:07:03 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 423ms (Views: 420.0ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:03 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:07:03 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:03 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 17:07:08 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"P.Beesly@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.4ms)
+Completed 200 OK in 86ms (Views: 14.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:07:09 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:09 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:09 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:07:25 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:25 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:25 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:07:42 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:42 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:42 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:07:59 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:59 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:07:59 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:08:16 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:16 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:16 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:08:33 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:33 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:33 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:08:50 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:50 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:08:50 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:08 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:08 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:08 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:09:17 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (40.0ms)
+Completed 200 OK in 443ms (Views: 432.5ms | ActiveRecord: 6.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:17 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:18 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:26 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:26 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:26 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:09:44 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:44 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:09:44 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:10:02 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:02 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:02 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:10:20 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:20 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:20 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:10:38 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:38 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:38 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:10:57 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:57 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:10:57 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:11:16 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:16 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:16 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (34.8ms)
+Completed 200 OK in 502ms (Views: 497.8ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:22 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:11:35 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:35 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:35 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:11:54 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:54 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:11:54 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:13 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:13 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:13 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:12:31 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (47.5ms)
+Completed 200 OK in 545ms (Views: 538.6ms | ActiveRecord: 3.3ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:31 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:31 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:31 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:32 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:32 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:32 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:32 -0800
+Request origin not allowed: http://www.hype-chat.com
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:32 -0800
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 45ms (Views: 42.7ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:33 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:36 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started DELETE "/api/session" for 127.0.0.1 at 2019-02-28 17:12:37 -0800
+Processing by Api::SessionsController#destroy as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "BfNfSfqy6LUIvAsXJeco8A"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "dhu2OsxysYS6qN3zctxwGQ"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "dhu2OsxysYS6qN3zctxwGQ"], ["updated_at", "2019-03-01 01:12:37.676783"], ["id", 2]]
+  ↳ app/models/user.rb:52
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:52
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 4.4ms)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 17:12:42 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"J.Halpert@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "J.Halpert@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.4ms)
+Completed 200 OK in 84ms (Views: 10.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:42 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:42 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 17:12:45 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 17:12:45 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel

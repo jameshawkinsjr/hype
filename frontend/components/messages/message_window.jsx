@@ -17,6 +17,7 @@ class MessageWindow extends React.Component {
 
     componentWillMount() {
         this.createSocket();
+        // this.fetchMessages(this.props.match.params.chatroomId);
       }
 
     handleInput() {
