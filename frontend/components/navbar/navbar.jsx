@@ -18,24 +18,21 @@ class NavBar extends React.Component {
 
         const navBar = this.props.currentUser ? (
             
-            <div className="top-nav-home">
+            <div className="top-nav flex">
                 <h3 className="bold">Welcome</h3>
                 <p> { name }</p>
-                <Link to="/"> Home </Link>
-                <button onClick= { this.props.logout }> Sign Out </button>
             </div>
         ) : (
-            <div className="top-nav-home flex">
+            <div className="top-nav flex">
                 <Link to="/signup"> Sign Up </Link>
                 <Link to="/login"> Log In </Link>
-                <p>Not working</p>
             </div>
         );
 
         return (
-            <div className="top-nav flex">
+            <>
                 { navBar }
-            </div>
+            </>
         )
     }
 }

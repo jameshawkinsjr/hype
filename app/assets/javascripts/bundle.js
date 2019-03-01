@@ -300,7 +300,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
 /* harmony import */ var _session_login_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_form_container */ "./frontend/components/session/login_form_container.jsx");
 /* harmony import */ var _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/signup_form_container */ "./frontend/components/session/signup_form_container.jsx");
-/* harmony import */ var _chatroom_list_chatroom_list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chatroom_list/chatroom_list */ "./frontend/components/chatroom_list/chatroom_list.jsx");
+/* harmony import */ var _chatroom_list_chatroom_list_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chatroom_list/chatroom_list_container */ "./frontend/components/chatroom_list/chatroom_list_container.jsx");
 /* harmony import */ var _landing_page_landing_page_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./landing_page/landing_page_container */ "./frontend/components/landing_page/landing_page_container.jsx");
 /* harmony import */ var _templates_page_not_found__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./templates/page_not_found */ "./frontend/components/templates/page_not_found.jsx");
 /* harmony import */ var _util_route_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../util/route_utils */ "./frontend/util/route_utils.js");
@@ -317,7 +317,15 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["ProtectedRoute"], {
     path: "/chatrooms/:chatroomId",
-    component: _chatroom_list_chatroom_list__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _chatroom_list_chatroom_list_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/chatrooms",
+    render: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        to: "/chatrooms/1"
+      });
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
     exact: true,
     path: "/login",
@@ -397,51 +405,51 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-list flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header-clear"
-      }, "\" \""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chatroom-grid-container flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], this.props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "bold"
-      }, "Hawkins"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "James Hawkins")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/"
+      }, " Home "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.props.logout
+      }, " Sign Out ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-skeleton flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-all-threads"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-jump-to"
+        className: "chatroom-category chatroom-jump-to"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Jump To Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-all-threads"
+        className: "chatroom-category chatroom-all-threads"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-starred"
+        className: "chatroom-category chatroom-starred"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Starred ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Kevin Jeffries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name active"
       }, "\u25E6 James Hawkins"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name bold"
+        className: "chatroom-name unread"
       }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "# friends"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Billy Lee"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name bold"
+        className: "chatroom-name unread"
       }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "# testing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Billy Jeffries")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-channels"
+        className: "chatroom-category chatroom-channels"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Channels ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "# general "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "# random"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name bold"
+        className: "chatroom-name unread"
       }, "# breakroom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "# meeting prep")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-direct-messages"
+        className: "chatroom-category chatroom-direct-messages"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Tim Phillips, Billy Johnson, Billy Johnson, Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -451,7 +459,7 @@ function (_React$Component) {
       }, "\u25E6 Kevin Jeffries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name bold"
+        className: "chatroom-name unread"
       }, "\u25E6 Alex Clatterbuck"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
       }, "\u25E6 Billy Lee"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -466,7 +474,7 @@ function (_React$Component) {
         className: "chatroom-name"
       }, "\u25E6 Jane Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
-      }, "\u25E6 Billy Johnson, Will Smith, Billy Johnson, Billy Johnson")))));
+      }, "\u25E6 Billy Johnson, Will Smith, Billy Johnson, Billy Johnson")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -474,6 +482,44 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(ChatroomList));
+
+/***/ }),
+
+/***/ "./frontend/components/chatroom_list/chatroom_list_container.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/components/chatroom_list/chatroom_list_container.jsx ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _chatroom_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatroom_list */ "./frontend/components/chatroom_list/chatroom_list.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities,
+      session = _ref.session;
+  return {
+    currentUser: entities.users[session.currentUserId]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_chatroom_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -699,6 +745,34 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/messages/message_item.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/messages/message_item.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+var MessageItem = function MessageItem(_ref) {
+  var message = _ref.message;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    key: "message-".concat(message.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "message-body"
+  }, "Message: ", message.body));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MessageItem);
+
+/***/ }),
+
 /***/ "./frontend/components/messages/message_window.jsx":
 /*!*********************************************************!*\
   !*** ./frontend/components/messages/message_window.jsx ***!
@@ -712,6 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _message_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_item */ "./frontend/components/messages/message_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -729,6 +804,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -759,15 +835,10 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.createSocket(); // debugger
-
-      var messages = this.props.fetchMessages(this.props.match.params.chatroomId);
-      var messageArray = Object.values(messages).map(function (message) {
-        return message.body;
-      });
-      this.setState({
-        displayedMessages: messages
-      });
+      this.createSocket();
+      this.props.fetchMessages(this.props.match.params.chatroomId); // debugger
+      // let allMessages = Object.values(messages);
+      // this.setState({ displayedMessages: allMessages });
     }
   }, {
     key: "handleInput",
@@ -807,14 +878,10 @@ function (_React$Component) {
         channel: 'MessagesChannel'
       }, {
         connected: function connected() {},
-        received: function received(data) {
-          console.log("working");
-          var displayedMessages = _this3.state.displayedMessages;
-          displayedMessages.push(data.body);
+        received: function received(message) {
+          console.log("Message");
 
-          _this3.setState({
-            displayedMessages: displayedMessages
-          });
+          _this3.props.receiveMessage(message);
         },
         create: function create(message) {
           this.perform('create', {
@@ -825,44 +892,52 @@ function (_React$Component) {
           });
         }
       });
-    }
-  }, {
-    key: "renderMessages",
-    value: function renderMessages() {
-      return this.state.displayedMessages.map(function (message) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: "message-".concat(message.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "message-body"
-        }, el.content), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "message-timestamp"
-        }, el.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "message-author"
-        }, el.author_id));
-      });
-    }
+    } // renderMessages() {
+    //     return this.state.displayedMessages.map( message => {
+    //         return (
+    //             <li key={`${Date.now()}`}>
+    //                 <p className='message-body'>Message: { message.body }</p>
+    //                 {/* <p className='message-timestamp'>{ message.created_at }</p>
+    //                 <p className='message-author'>{ message.author_id }</p> */}
+    //             </li>
+    //         )
+    //     })
+    //     // return this.state.displayedMessages.map( message => {
+    //     //     return (
+    //     //         <li key={`message-${message.id}`}>
+    //     //             <p className='message-body'>{ el.content }</p>
+    //     //             <p className='message-timestamp'>{ el.created_at }</p>
+    //     //             <p className='message-author'>{ el.author_id }</p>
+    //     //         </li>
+    //     //     )
+    //     // })
+    // }
+
   }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "top-nav flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "message-window"
-      }, this.renderMessages()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "full-message-window flex"
+      }, "Displayed Messages: ", this.state.displayedMessages, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Body: ", this.state.body, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Author Id: ", this.state.author_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Chatroom: ", this.state.chatroom_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Parent Id: ", this.state.parent_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "message-list flex"
+      }, this.props.messages.map(function (message) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: message.id,
+          message: message
+        });
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Enter your message here",
         value: this.state.body,
         onChange: this.handleInput(),
-        className: "message-input",
+        className: "message-form",
+        autoFocus: true,
         onKeyPress: function onKeyPress(e) {
           return _this4.handleEnterKey(e);
         }
-      }), this.state.body, this.state.author_id, this.state.chatroom_id, this.state.parent_id, this.state.displayedMessages, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "message-send",
-        onClick: this.handleSubmit
-      }, "Send"));
+      }));
     }
   }]);
 
@@ -905,6 +980,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchMessages: function fetchMessages(chatroomId) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatroomId));
+    },
+    receiveMessage: function receiveMessage(message) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
     }
   };
 };
@@ -971,23 +1049,17 @@ function (_React$Component) {
       }
 
       var navBar = this.props.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "top-nav-home"
+        className: "top-nav flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "bold"
-      }, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/"
-      }, " Home "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.props.logout
-      }, " Sign Out ")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "top-nav-home flex"
+      }, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "top-nav flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"
       }, " Sign Up "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login"
-      }, " Log In "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Not working"));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "top-nav flex"
-      }, navBar);
+      }, " Log In "));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, navBar);
     }
   }]);
 
@@ -1756,10 +1828,7 @@ var messagesReducer = function messagesReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 

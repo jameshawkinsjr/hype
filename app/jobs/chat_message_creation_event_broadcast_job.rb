@@ -5,7 +5,7 @@ class ChatMessageCreationEventBroadcastJob < ApplicationJob
       ActionCable
         .server
         .broadcast(
-                  'messages',
+                  'MessagesChannel',
                    id: message.id,
                    created_at: message.created_at.strftime('%H:%M'),
                    author_id: message.author_id,

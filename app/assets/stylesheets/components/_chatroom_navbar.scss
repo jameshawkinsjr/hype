@@ -1,33 +1,32 @@
+.chatroom-grid-container {
+    display: grid;
+    border-style: solid;
+    border-color: red;
+    grid-template-columns: 220px auto;
+    grid-template-rows: 50px auto 100px;
+    width: 100vw;
+    height: 100vh;
+  }
+
 .chatroom-skeleton {
-    background: #3F0E40;
+    background: $light-purple;
     color: rgb(197,183,198);
-    position: absolute;
-    float: left;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 220px;
-    z-index: 2;
-    flex-direction: column;
+    grid-column-start: 1;
+    grid-column-end: span 1;
+    grid-row-start: 2;
+    grid-row-end: span 2;
 }
 
-.header-clear {
-    width: 600px;
-    height: 500px;
-}
-
-.chatroom-list {
-}
-.chatroom-scollable-box {
+.chatroom-all-threads {
     overflow: scroll;
+
 }
 
-.chatroom-nav > div {
+.chatroom-category {
+    margin: 10px 20px;
     padding: 10px 0px 10px 0px;
 }
-
-.chatroom-scrollable-box > div {
-    margin: 10px 20px;
+.chatroom-nav > div {
 }
 
 .chatroom-name {
@@ -38,23 +37,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
+    &:hover{
+        background: #311134;
+    }
+    &.active {
+        background: #2B649E;
+        color: $white;
+        font-weight: 400;
+    }
+    &.unread {
+        color: $white;
+        font-weight: 600;
+    }
 }
 
-.chatroom-name:hover {
-    background: #311134;
-}
-
-.chatroom-name-active {
-    background: #2B649E;
-    color: $white;
-}
-.chatroom-name-active:hover {
-    background: #2B649E;
-    color: $white;
-}
-
-.chatroom-name-unread,
-.bold {
-    color: $white;
-    font-weight: 600;
+.chatroom-header {
+    border-bottom: 1px solid $lighter-grey;
 }
