@@ -20,8 +20,6 @@ class Message < ApplicationRecord
         foreign_key: :author_id,
         class_name: :User
 
-    after_create_commit do
-        ChatMessageCreationEventBroadcastJob.perform_later(self)
-    end
+    after_create_commit { ChatMessageCreationEventBroadcastJob.perform_now self }
 
 end
