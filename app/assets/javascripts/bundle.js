@@ -423,58 +423,26 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-category chatroom-starred"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Starred ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Kevin Jeffries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "chatroom-name unread"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/chatrooms/1"
+      }, " Chatroom 1 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "chatroom-name unread"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/chatrooms/2"
+      }, " Chatroom 2 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name active"
       }, "\u25E6 James Hawkins"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name unread"
-      }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "# friends"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Lee"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "# testing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Jeffries")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u25E6 Billy Johnson")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-category chatroom-channels"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Channels ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
-      }, "# general "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "# random"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, "# breakroom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "# meeting prep")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "# general ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-category chatroom-direct-messages"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name"
-      }, "\u25E6 Tim Phillips, Billy Johnson, Billy Johnson, Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Jana Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Kevin Jeffries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, "\u25E6 Alex Clatterbuck"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Lee"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Timmy Jeffries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Kevin Johnson, Brian Smith, Billy Johnson, Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Lee"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Jane Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Billy Johnson, Will Smith, Billy Johnson, Billy Johnson")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, "\u25E6 Tim Phillips, Billy Johnson, Billy Johnson, Billy Johnson")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -822,10 +790,9 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MessageWindow).call(this, props));
     _this.state = {
       body: "",
-      author_id: "1",
-      chatroom_id: "1",
-      parent_id: null,
-      displayedMessages: []
+      author_id: _this.props.currentUser.id,
+      chatroom_id: _this.props.match.params.chatroomId,
+      parent_id: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
@@ -836,9 +803,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.createSocket();
-      this.props.fetchMessages(this.props.match.params.chatroomId); // debugger
-      // let allMessages = Object.values(messages);
-      // this.setState({ displayedMessages: allMessages });
+      this.props.fetchMessages(this.props.match.params.chatroomId);
     }
   }, {
     key: "handleInput",
@@ -879,8 +844,6 @@ function (_React$Component) {
       }, {
         connected: function connected() {},
         received: function received(message) {
-          console.log("Message");
-
           _this3.props.receiveMessage(message);
         },
         create: function create(message) {
@@ -892,27 +855,7 @@ function (_React$Component) {
           });
         }
       });
-    } // renderMessages() {
-    //     return this.state.displayedMessages.map( message => {
-    //         return (
-    //             <li key={`${Date.now()}`}>
-    //                 <p className='message-body'>Message: { message.body }</p>
-    //                 {/* <p className='message-timestamp'>{ message.created_at }</p>
-    //                 <p className='message-author'>{ message.author_id }</p> */}
-    //             </li>
-    //         )
-    //     })
-    //     // return this.state.displayedMessages.map( message => {
-    //     //     return (
-    //     //         <li key={`message-${message.id}`}>
-    //     //             <p className='message-body'>{ el.content }</p>
-    //     //             <p className='message-timestamp'>{ el.created_at }</p>
-    //     //             <p className='message-author'>{ el.author_id }</p>
-    //     //         </li>
-    //     //     )
-    //     // })
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {

@@ -1,6 +1,7 @@
 //= require cable
 //= require_self
 //= require_tree .
+  
 
 App.messages = App.cable.subscriptions.create('MessagesChannel', {
     received: function(data){

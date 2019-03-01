@@ -7,10 +7,9 @@ class MessageWindow extends React.Component {
         super(props);
         this.state = {
             body: "",
-            author_id: "1",
-            chatroom_id: "1",
-            parent_id: null,
-            displayedMessages: []
+            author_id: this.props.currentUser.id,
+            chatroom_id: this.props.match.params.chatroomId,
+            parent_id: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);
@@ -19,9 +18,6 @@ class MessageWindow extends React.Component {
     componentDidMount() {
         this.createSocket();
         this.props.fetchMessages(this.props.match.params.chatroomId);
-        // debugger
-        // let allMessages = Object.values(messages);
-        // this.setState({ displayedMessages: allMessages });
       }
 
     handleInput() {
@@ -52,7 +48,6 @@ class MessageWindow extends React.Component {
             {   connected: 
                     () => {},
                     received: message => {
-                        console.log("Message");
                         this.props.receiveMessage(message);
                     },  
                     create: function(message) {
@@ -68,29 +63,6 @@ class MessageWindow extends React.Component {
             }
         );
     }
-
-
-    // renderMessages() {
-
-    //     return this.state.displayedMessages.map( message => {
-    //         return (
-    //             <li key={`${Date.now()}`}>
-    //                 <p className='message-body'>Message: { message.body }</p>
-    //                 {/* <p className='message-timestamp'>{ message.created_at }</p>
-    //                 <p className='message-author'>{ message.author_id }</p> */}
-    //             </li>
-    //         )
-    //     })
-    //     // return this.state.displayedMessages.map( message => {
-    //     //     return (
-    //     //         <li key={`message-${message.id}`}>
-    //     //             <p className='message-body'>{ el.content }</p>
-    //     //             <p className='message-timestamp'>{ el.created_at }</p>
-    //     //             <p className='message-author'>{ el.author_id }</p>
-    //     //         </li>
-    //     //     )
-    //     // })
-    // }
 
     render() {
    
