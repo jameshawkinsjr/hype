@@ -37,10 +37,20 @@ class SignupForm extends React.Component {
             <li key={error}> {error} </li> 
             )
 
+        let renderErrors = (
+            <div className="errors-box flex">
+                <div className="error-red"><pre> </pre></div>
+                <ul className="errors">
+                        { errors } 
+                </ul>
+            </div>
+        )
+
         return (
             <div className="flex-column">
             <Header />
             <div className="session-form-body flex">
+            { errors.length > 0 ? renderErrors : ""}
                 <div className="signup-modal flex">
                     <h2>Join the hype</h2>
                     <form className="flex">
@@ -85,9 +95,6 @@ class SignupForm extends React.Component {
                         </label>
                         <button className="purple-button" onClick={this.handleSubmit}>Sign up</button>
                     </form>
-                    <ul className="errors">
-                        { errors } 
-                    </ul>
                 </div>
             </div>
             <Footer />

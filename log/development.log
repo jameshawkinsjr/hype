@@ -41333,3 +41333,1211 @@ Processing by Api::MessagesController#index as JSON
 Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:48:29 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.7ms)
+Completed 500 Internal Server Error in 85ms (ActiveRecord: 0.4ms)
+
+
+
+Sass::SyntaxError - Invalid CSS after "}": expected "}", was "":
+  app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___1664174891441371933_70293533988640'
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:29 -0800
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:29 -0800
+MessagesChannel stopped streaming from MessagesChannel
+MessagesChannel stopped streaming from MessagesChannel
+Started POST "/__better_errors/860d50fca93a3c25/variables" for 127.0.0.1 at 2019-02-28 15:48:29 -0800
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:48:35 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 230ms (Views: 226.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:48:35 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:35 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:48:37 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 57ms (Views: 53.9ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:37 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:48:37 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:37 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:48:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 223ms (Views: 217.8ms | ActiveRecord: 1.2ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:58 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:48:59 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:48:59 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:49:27 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 64ms (Views: 60.8ms | ActiveRecord: 0.8ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:49:27 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:49:27 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:49:27 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:52:35 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 69ms (Views: 65.7ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:52:35 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:52:35 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:52:35 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:52:45 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:53:22 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.5ms)
+Completed 200 OK in 197ms (Views: 192.3ms | ActiveRecord: 0.7ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:53:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:53:22 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:53:22 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:54:36 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 76ms (Views: 71.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:54:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:54:36 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:58:54 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 267ms (Views: 263.6ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:58:55 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:58:55 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:58:55 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:59:04 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 296ms (Views: 291.3ms | ActiveRecord: 1.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:59:04 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:59:04 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:59:04 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 15:59:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 358ms (Views: 353.3ms | ActiveRecord: 0.7ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:59:58 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 15:59:59 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 15:59:59 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:01:56 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.8ms)
+Completed 200 OK in 291ms (Views: 286.3ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:01:57 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:01:57 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:01:57 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:02:55 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 343ms (Views: 339.5ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:02:55 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:02:55 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:02:55 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:03:13 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (17.4ms)
+Completed 200 OK in 283ms (Views: 278.7ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:14 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:03:14 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:14 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:03:29 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (24.4ms)
+Completed 200 OK in 363ms (Views: 357.2ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:29 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:03:30 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:30 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:03:45 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 320ms (Views: 316.4ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:46 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:03:46 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:03:46 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:05:29 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 287ms (Views: 283.8ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:05:30 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:05:30 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:05:30 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:06:40 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 277ms (Views: 272.4ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:06:41 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:06:41 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:06:41 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:07:51 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 333ms (Views: 329.5ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:07:51 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:07:51 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:07:51 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel is transmitting the subscription confirmation
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:07:56 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.8ms)
+Completed 200 OK in 52ms (Views: 48.7ms | ActiveRecord: 0.7ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:07:56 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:07:57 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:07:57 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:10:38 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (15.3ms)
+Completed 200 OK in 205ms (Views: 201.5ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:38 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:10:38 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:38 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:10:40 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 54ms (Views: 51.3ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:40 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:10:40 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:40 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:10:49 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.8ms)
+Completed 200 OK in 211ms (Views: 206.4ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:49 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:10:49 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:49 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:10:54 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 228ms (Views: 223.0ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:54 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:10:55 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:10:55 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:11:04 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 226ms (Views: 220.2ms | ActiveRecord: 1.9ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:04 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:11:04 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:04 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:11:14 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (23.7ms)
+Completed 200 OK in 221ms (Views: 216.2ms | ActiveRecord: 0.7ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:15 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:11:15 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:15 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:11:18 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 52ms (Views: 48.8ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:18 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:11:18 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:11:18 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:12:48 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (30.9ms)
+Completed 200 OK in 240ms (Views: 236.8ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:12:48 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:12:48 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:12:48 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:13:45 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 211ms (Views: 208.3ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:13:46 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:13:46 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:13:46 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:13:55 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 187ms (Views: 182.6ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:13:55 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:13:56 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:13:56 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:14:15 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 238ms (Views: 234.4ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:14:15 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:14:16 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:14:16 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:15:02 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 196ms (Views: 192.8ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:03 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:15:03 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:03 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:06 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:15:17 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:17 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:15:18 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "FOJXe3aweoxa4yk9ERFl9Q"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 97ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:15:51 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (16.2ms)
+Completed 200 OK in 426ms (Views: 422.6ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:52 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:15:52 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:15:52 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:15:53 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RSkFvsykyhHZ00jr4aFH7w"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 78ms (Views: 0.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:16:51 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (24.4ms)
+Completed 200 OK in 253ms (Views: 248.7ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:16:52 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:16:52 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:16:52 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:16:53 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "I9Yf3E4udTMe_57SapTfwA"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 70ms (Views: 0.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:17:13 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 275ms (Views: 269.3ms | ActiveRecord: 0.7ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:13 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:17:14 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:14 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:17:14 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "vDfZ7LHwFJPG_pYPxqX-CQ"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 76ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:17:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 723ms (Views: 719.3ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:24 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:17:24 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:24 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:17:25 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "1RZvrP-YFdKfmeEbw58YbA"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 77ms (Views: 0.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:17:43 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.9ms)
+Completed 200 OK in 188ms (Views: 182.9ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:43 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:17:43 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:17:43 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:17:44 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "lIbvoqDQfSxQCTyrlDsVbw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 86ms (Views: 0.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:06 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 42ms (Views: 39.1ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:06 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:06 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:06 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:07 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:19 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 246ms (Views: 241.0ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:19 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:19 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:19 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:18:20 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "NxXGcEM_qb2LA0Fw9QoYKg"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 81ms (Views: 0.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:22 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:22 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:23 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:23 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 51ms (Views: 47.5ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:23 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:23 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:23 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:24 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:43 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (30.7ms)
+Completed 200 OK in 269ms (Views: 264.9ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:43 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:43 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:43 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:18:44 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "XFcDi7SaQg-X69SWOfQ9lQ"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 76ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:46 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (10.6ms)
+Completed 200 OK in 42ms (Views: 39.3ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:46 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:46 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:46 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:18:48 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:18:58 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 206ms (Views: 201.5ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:59 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:18:59 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:18:59 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:19:00 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:19:11 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 212ms (Views: 208.7ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:11 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:19:11 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:11 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:19:12 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:19:15 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.8ms)
+Completed 200 OK in 53ms (Views: 49.6ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:15 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:19:15 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:15 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:19:16 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "xdjWtKPLP7Ryy_YzH28qLA"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 62ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:19:36 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 254ms (Views: 249.7ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:36 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:19:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:36 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/users" for 127.0.0.1 at 2019-02-28 16:19:37 -0800
+Processing by Api::UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "alias"=>"", "full_name"=>"", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Y5kal1RhCgDyu_gYVkDSSw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:5
+Completed 401 Unauthorized in 78ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:19:53 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:22:46 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 230ms (Views: 227.4ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:22:46 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:22:46 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:22:46 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:23:07 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (34.5ms)
+Completed 200 OK in 246ms (Views: 241.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:23:08 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.6ms)
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:08 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:08 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Completed 200 OK in 67ms (Views: 63.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:08 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:08 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:23:11 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 51ms (Views: 47.8ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:11 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:11 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:11 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:23:12 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 58ms (Views: 55.5ms | ActiveRecord: 0.5ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:12 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:12 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:12 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:13 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:13 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:23:14 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (17.8ms)
+Completed 200 OK in 61ms (Views: 56.6ms | ActiveRecord: 0.6ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:14 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:15 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:15 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:23:20 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"P.Beesly@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.6ms)
+Completed 200 OK in 87ms (Views: 12.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:23:20 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:21 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:21 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (0.7ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (2.4ms)
+Completed 200 OK in 25ms (Views: 16.8ms | ActiveRecord: 0.7ms)
+
+
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:23:49 -0800
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:23:49 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (1.1ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (3.5ms)
+Completed 200 OK in 21ms (Views: 13.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:23:49 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started DELETE "/api/session" for 127.0.0.1 at 2019-02-28 16:23:50 -0800
+Processing by Api::SessionsController#destroy as JSON
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "mCKm3rodazsdlXZDIh_y_g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:52
+  [1m[36mUser Update (2.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["updated_at", "2019-03-01 00:23:50.805662"], ["id", 2]]
+  ↳ app/models/user.rb:52
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:52
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 10.9ms)
+
+
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:23:50 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (1.4ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (6.3ms)
+Completed 200 OK in 20ms (Views: 13.3ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:32:21 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered static_pages/root.html.erb within layouts/application (23.8ms)
+Completed 200 OK in 453ms (Views: 445.2ms | ActiveRecord: 5.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:22 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:32:22 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:22 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+Started POST "/api/session" for 127.0.0.1 at 2019-02-28 16:32:26 -0800
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"P.Beesly@dunder-mifflin.org", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "P.Beesly@dunder-mifflin.org"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:33
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.4ms)
+Completed 200 OK in 67ms (Views: 7.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:32:26 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:32:26 -0800
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (1.8ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (6.5ms)
+Completed 200 OK in 26ms (Views: 16.7ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:26 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel#create({"body"=>"fdsfsdfsafsd", "author_id"=>"1", "chatroom_id"=>"1", "parent_id"=>nil})
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mChatroom Load (0.5ms)[0m  [1m[34mSELECT  "chatrooms".* FROM "chatrooms" WHERE "chatrooms"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[36mMessage Create (2.3ms)[0m  [1m[32mINSERT INTO "messages" ("body", "chatroom_id", "author_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["body", "fdsfsdfsafsd"], ["chatroom_id", 1], ["author_id", 1], ["created_at", "2019-03-01 00:32:29.106784"], ["updated_at", "2019-03-01 00:32:29.106784"]]
+  ↳ app/channels/messages_channel.rb:11
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/channels/messages_channel.rb:11
+[ActiveJob] Enqueued ChatMessageCreationEventBroadcastJob (Job ID: 596203af-f407-451f-8bf8-545193c3368a) to Async(default) with arguments: #<GlobalID:0x00007fdb1c84ba58 @uri=#<URI::GID gid://hype/Message/32>>
+  [1m[36mMessage Load (0.9ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  ↳ /Users/jameshawkins/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [596203af-f407-451f-8bf8-545193c3368a] Performing ChatMessageCreationEventBroadcastJob (Job ID: 596203af-f407-451f-8bf8-545193c3368a) from Async(default) with arguments: #<GlobalID:0x00007fdb1c80aa30 @uri=#<URI::GID gid://hype/Message/32>>
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [596203af-f407-451f-8bf8-545193c3368a] [ActionCable] Broadcasting to messages: {:id=>32, :created_at=>"00:32", :author_id=>1, :chatroom_id=>1, :body=>"fdsfsdfsafsd"}
+[ActiveJob] [ChatMessageCreationEventBroadcastJob] [596203af-f407-451f-8bf8-545193c3368a] Performed ChatMessageCreationEventBroadcastJob (Job ID: 596203af-f407-451f-8bf8-545193c3368a) from Async(default) in 1.13ms
+Started GET "/" for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "pa0rpyqz3tXsBrvlwmMUSA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (20.1ms)
+Completed 200 OK in 62ms (Views: 58.3ms | ActiveRecord: 0.4ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+MessagesChannel stopped streaming from MessagesChannel
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/api/chatrooms/undefined/messages" for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Processing by Api::MessagesController#index as JSON
+  Parameters: {"chatroom_id"=>"undefined"}
+Started GET "/cable" for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2019-02-28 16:32:36 -0800
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  Rendering api/messages/index.json.jbuilder
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."chatroom_id" = $1[0m  [["chatroom_id", 0]]
+  ↳ app/views/api/messages/index.json.jbuilder:1
+  Rendered api/messages/index.json.jbuilder (1.4ms)
+Completed 200 OK in 12ms (Views: 9.2ms | ActiveRecord: 0.4ms)
+
+
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel
+MessagesChannel is transmitting the subscription confirmation
+MessagesChannel is streaming from MessagesChannel

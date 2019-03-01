@@ -8,6 +8,7 @@ input:focus {
 .login-modal, .signup-modal {
     box-sizing: border-box;
     padding: 20px;
+    padding-bottom: 30px;
     border-radius: 5px;
     border: 1px solid $medium-grey;
     flex-direction: column;
@@ -37,6 +38,14 @@ input:focus {
             width: 100%;
             font-weight: 700;
         }
+        label {
+            // padding: 10px;
+            h3 {
+                margin: 7px 2px 0;
+                font-size: 13px;
+                font-weight: 700;
+            }
+        }
     }
     input {
         box-sizing: border-box;
@@ -50,7 +59,7 @@ input:focus {
     }
 
     p {
-        padding: 12px 0 0 0;
+        padding: 12px 0 7px 0;
         line-height: 1.44;
         color: $light-grey;
     }
@@ -64,7 +73,7 @@ input:focus {
 .errors-box{
     align-self: center;
     width: 550px;
-    height: 50px;
+    min-height: 50px;
     border-radius: 5px;
     border: 1px solid $medium-grey;
     box-shadow: 1px 1px 1px $medium-grey;
@@ -76,19 +85,18 @@ input:focus {
 .error-red{
     background: $error-red;
     width: 7px;
-    height: 50px;
+    display: block;
     float: left;
 }
 
 .errors {
     flex-direction: column;
+    justify-content: flex-start;
     margin: auto 20px;
-    align-items: center;
-    // color: $bright-purple;
     color: black;
-    text-align: center;
-    line-height: 1.44;
+    line-height: 1.5;
     font-size: 14px;
+    padding: 5px 0;
 }
 .demo-users {
     flex-direction: column;
@@ -110,12 +118,12 @@ input:focus {
     align-self: center;
     color: $white;
     padding: 12px;
+    border-bottom: 20px;
     border-radius: 3px;
     font-weight: 400;
     font-size: 15px;
     letter-spacing: 1.1px;
     font-family: $font-sans-serif;
-    width: fit-content;
     background: $bright-purple;
 }
 .purple-button:hover{
@@ -167,11 +175,8 @@ input:focus {
 .session-form-body{
     flex-direction: column;
     justify-content: flex-start;
-    padding: 100px 0 200px 0;
+    padding: 75px 0 100px 0;
     background: #f0f0f0;
-    // position: fixed;
-    // top: 79px;
-    // bottom: 0;
     width: 100%;
     max-height: 100%;
     

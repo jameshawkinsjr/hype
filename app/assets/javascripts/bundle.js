@@ -205,7 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["ProtectedRoute"], {
     path: "/chatrooms",
     component: _chatroom_list_chatroom_list__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
@@ -1280,11 +1280,18 @@ function (_React$Component) {
           key: error
         }, " ", error, " ");
       });
+      var renderErrors = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "error-red"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors"
+      }, errors));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form-body flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, errors.length > 0 ? renderErrors : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-modal flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Join the hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "flex"
@@ -1322,9 +1329,7 @@ function (_React$Component) {
       }, "Passwords must be at least 6 characters long.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "purple-button",
         onClick: this.handleSubmit
-      }, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "errors"
-      }, errors))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, "Sign up")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -1534,7 +1539,6 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_4__["default"])(preloadedState);
     delete window.currentUser;
   } else {
-    console.log("No current user");
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_4__["default"])();
   } //Testing
 
@@ -1863,7 +1867,7 @@ var Protected = function Protected(_ref2) {
     path: path,
     render: function render(props) {
       return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/"
+        to: "/chatrooms"
       });
     }
   });
