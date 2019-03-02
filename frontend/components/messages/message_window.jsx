@@ -45,8 +45,7 @@ class MessageWindow extends React.Component {
         if (process.env.NODE_ENV !== 'production') {
             cable = Cable.createConsumer('http://localhost:3000/cable');
           } else {
-            cable = Cable.createConsumer('wss://hype-chat.com/cable');
-            // cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
           }
         this.chats = cable.subscriptions.create(
             {   channel: 
