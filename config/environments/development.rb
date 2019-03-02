@@ -65,7 +65,7 @@ Rails.application.configure do
   # We'll specify the development and production socket URIs in the appropriate
   # environment files, and pass it through to the consumer via the action_cable_meta_tag 
   config.action_cable.url = "ws://localhost:3000/cable"
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:a439f9c5e6f3056dcc1b07f17e15a841@dory.redistogo.com:10786'
+  # ENV["REDISTOGO_URL"] = 'redis://redistogo:a439f9c5e6f3056dcc1b07f17e15a841@dory.redistogo.com:10786'
 
 
 

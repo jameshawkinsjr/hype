@@ -41,6 +41,8 @@ class MessageWindow extends React.Component {
 
     createSocket() {
         // let cable = Cable.createConsumer('http://localhost:3000/cable');
+        // let cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+        console.log(process.env.NODE_ENV);
         let cable;
         if (process.env.NODE_ENV !== 'production') {
             cable = Cable.createConsumer('http://localhost:3000/cable');
