@@ -38,7 +38,7 @@ class ChatroomList extends React.Component {
                         </ul>
                     </div>
                 </div>
-                <MessageWindowContainer />
+                <MessageWindowContainer/>
         </div>
         )
     }

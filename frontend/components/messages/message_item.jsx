@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const MessageItem = ({message}) => {
   return (
-    <li key={`message-${message.id}`}>
+    <li key={`message-${message.id} message-item flex`}>
           <p className='message-body'>User {message.author_id}: { message.body }</p>
     </li>
   )

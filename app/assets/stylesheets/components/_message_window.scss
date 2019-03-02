@@ -4,6 +4,7 @@
     grid-row-start: 2;
     grid-row-end: span 1;
     flex-direction: column;
+    overflow: scroll;
     justify-content: flex-end;
 }
 
@@ -44,4 +45,8 @@
 
 .message-list {
     flex-direction: column;
+}
+
+.message-item {
+    justify-content: space-between;
 }

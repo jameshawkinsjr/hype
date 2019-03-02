@@ -4,7 +4,6 @@
     border-color: red;
     grid-template-columns: 220px auto;
     grid-template-rows: 50px auto 100px;
-    width: 100vw;
     height: 100vh;
   }
 
@@ -15,6 +14,7 @@
     grid-column-end: span 1;
     grid-row-start: 2;
     grid-row-end: span 2;
+    overflow-x: scroll;
 }
 
 .chatroom-all-threads {

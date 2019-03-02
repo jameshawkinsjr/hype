@@ -23,8 +23,8 @@ class MessageWindow extends React.Component {
     }
     
     componentDidMount() {
-        this.createSocket();
         this.props.fetchMessages(this.props.match.params.chatroomId);
+        this.createSocket();
     }
 
     handleSubmit(e) {
@@ -40,38 +40,35 @@ class MessageWindow extends React.Component {
     }
 
     createSocket() {
-        // let that = this;
-        let cable = Cable.createConsumer('ws://localhost:3001/cable');
+        let cable = Cable.createConsumer('ws://localhost:3000/cable');
         this.chats = cable.subscriptions.create(
             {   channel: 
                     'MessagesChannel'
             },  
-            {   connected: 
-                    () => {},
-                    received: message => {
-                        console.log("Received Message");
-                        this.props.receiveMessage(message);
-                    },  
-                    create: function(message) {
-                        console.log("Sent Message");
-                        this.perform(
-                            'create', { 
-                                body: message.body,
-                                author_id: message.author_id,
-                                chatroom_id: message.chatroom_id,
-                                parent_id: message.parent_id,
-                            }
-                        );
+            {   connected: () => {},
+                received: message => {
+                    console.log("Received Message");
+                    this.props.receiveMessage(message);
+                    },
+                create: function(message) {
+                    console.log("Sent Message");
+                    this.perform(
+                        'create', { 
+                        body: message.body,
+                        author_id: message.author_id,
+                        chatroom_id: message.chatroom_id,
+                        parent_id: message.parent_id,
+                        }
+                    );
                     }
             }
         );
     }
 
     render() {
-   
         return (
             <>
-            <div className="full-message-window flex">
+            <div id="message-window" className="full-message-window flex">
                 <ul className="message-list flex">
                     { this.props.messages.map( message => (
                         <MessageItem key={message.id} message={message} />
