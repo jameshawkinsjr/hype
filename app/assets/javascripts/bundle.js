@@ -168,11 +168,11 @@ var fetchMessage = function fetchMessage(messageId) {
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message).then(function (message) {
-      return dispatch(receiveMessage(message));
-    }, function (err) {
-      return dispatch(receiveMessageErrors(err.responseJSON));
-    });
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message) // .then(message => dispatch(receiveMessage(message)),
+    // .then( () => dispatch(),
+    // err => (dispatch(receiveMessageErrors(err.responseJSON)))       
+    // )
+    ;
   };
 };
 var editMessage = function editMessage(message) {
@@ -819,8 +819,10 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      this.chats.create(this.state);
+      e.preventDefault(); // debugger
+      // this.chats.create( this.state );
+
+      this.props.createMessage(this.state);
       this.setState({
         body: ""
       });
@@ -839,7 +841,7 @@ function (_React$Component) {
 
       // let cable = Cable.createConsumer('http://localhost:3000/cable');
       // let cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-      console.log("development");
+      // console.log(process.env.NODE_ENV);
       var cable;
 
       if (true) {
@@ -945,6 +947,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     destroyMessage: function destroyMessage(messageId) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["destroyMessage"])(messageId));
+    },
+    createMessage: function createMessage(message) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["createMessage"])(message));
     }
   };
 };
@@ -1754,7 +1759,7 @@ var messagesReducer = function messagesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var newState;
+  var newState; // debugger
 
   switch (action.type) {
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:
@@ -1762,6 +1767,7 @@ var messagesReducer = function messagesReducer() {
       return newState;
 
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGE"]:
+      // debugger 
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
       newState[action.message.id] = action.message;
       return newState;
@@ -2014,7 +2020,7 @@ var fetchMessage = function fetchMessage(messageId) {
 var createMessage = function createMessage(message) {
   return $.ajax({
     method: 'POST',
-    url: "/api/messages/".concat(message.id),
+    url: "/api/messages/",
     data: {
       message: message
     }

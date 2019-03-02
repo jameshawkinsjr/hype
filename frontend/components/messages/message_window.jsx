@@ -29,7 +29,9 @@ class MessageWindow extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.chats.create( this.state );
+        // debugger
+        // this.chats.create( this.state );
+        this.props.createMessage( this.state );
         this.setState({ body: "" });
     }
     
@@ -42,13 +44,13 @@ class MessageWindow extends React.Component {
     createSocket() {
         // let cable = Cable.createConsumer('http://localhost:3000/cable');
         // let cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-        console.log(process.env.NODE_ENV);
+        // console.log(process.env.NODE_ENV);
         let cable;
         if (process.env.NODE_ENV !== 'production') {
             cable = Cable.createConsumer('http://localhost:3000/cable');
-          } else {
+        } else {
             cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-          }
+        }
         this.chats = cable.subscriptions.create(
             {   channel: 
                     'MessagesChannel'

@@ -15,7 +15,7 @@ export const fetchMessage = (messageId) => (
 export const createMessage = (message) => (
     $.ajax({
         method: 'POST',
-        url: `/api/messages/${message.id}`,
+        url: `/api/messages/`,
         data: { message }
     })
 );
