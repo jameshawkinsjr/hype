@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "postinstall": "webpack"
+    "postinstall": "webpack --mode=production",
   },
   "repository": {
     "type": "git",
