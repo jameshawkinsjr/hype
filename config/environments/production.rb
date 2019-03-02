@@ -94,8 +94,11 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Set the cable server's URI for production
-  config.web_socket_server_url = "wss://get-hype-chat.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = ['https://get-hype-chat.herokuapp.com', 'http://get-hype-chat.herokuapp.com']
+  # config.web_socket_server_url = "wss://get-hype-chat.herokuapp.com/cable" 
+  # config.action_cable.allowed_request_origins = ['https://get-hype-chat.herokuapp.com', 'http://get-hype-chat.herokuapp.com']
 
+  config.web_socket_server_url = "wss://hype-chat.com/cable" 
+  config.action_cable.allowed_request_origins = ['https://hype-chat.com', 'http://hype-chat.com', 'https://get-hype-chat.herokuapp.com', 'http://get-hype-chat.herokuapp.com']
+  
 
 end
