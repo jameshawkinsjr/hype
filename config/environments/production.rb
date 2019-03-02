@@ -98,6 +98,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = ['https://get-hype-chat.herokuapp.com', 'http://get-hype-chat.herokuapp.com']
 
   config.web_socket_server_url = "wss://get-hype-chat.com/cable" 
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
   
 
 end
