@@ -40,17 +40,19 @@ class MessageWindow extends React.Component {
     }
 
     createSocket() {
-        let cable;
-        if (process.env.NODE_ENV !== 'production') {
-            cable = Cable.createConsumer('http://localhost:3000/cable');
-          } else {
-            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-          }
+        let cable = Cable.createConsumer('http://localhost:3000/cable');
+        // let cable;
+        // if (process.env.NODE_ENV !== 'production') {
+        //     cable = Cable.createConsumer('http://localhost:3000/cable');
+        //   } else {
+        //     cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+        //   }
         this.chats = cable.subscriptions.create(
             {   channel: 
                     'MessagesChannel'
             },  
-            {   connected: () => {},
+            {   connected: () => { console.log("Connected"); },
+                disconnected: () => { console.log("Disconnected"); },
                 received: message => {
                     console.log("Received Message");
                     this.props.receiveMessage(message);
