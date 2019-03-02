@@ -15,15 +15,16 @@ class MessageWindow extends React.Component {
         this.handleEnterKey = this.handleEnterKey.bind(this);
     }
 
-    componentDidMount() {
-        this.createSocket();
-        this.props.fetchMessages(this.props.match.params.chatroomId);
-      }
-
+    
     handleInput() {
         return (e) => {
             this.setState({ body: e.target.value });
         };
+    }
+    
+    componentDidMount() {
+        this.createSocket();
+        this.props.fetchMessages(this.props.match.params.chatroomId);
     }
 
     handleSubmit(e) {
@@ -39,8 +40,8 @@ class MessageWindow extends React.Component {
     }
 
     createSocket() {
-        // need to change this URL for production
-        let cable = Cable.createConsumer('ws://localhost:3000/cable');
+        // let that = this;
+        let cable = Cable.createConsumer('ws://localhost:3001/cable');
         this.chats = cable.subscriptions.create(
             {   channel: 
                     'MessagesChannel'
@@ -48,9 +49,11 @@ class MessageWindow extends React.Component {
             {   connected: 
                     () => {},
                     received: message => {
+                        console.log("Received Message");
                         this.props.receiveMessage(message);
                     },  
                     create: function(message) {
+                        console.log("Sent Message");
                         this.perform(
                             'create', { 
                                 body: message.body,
@@ -69,11 +72,6 @@ class MessageWindow extends React.Component {
         return (
             <>
             <div className="full-message-window flex">
-                Displayed Messages: {this.state.displayedMessages} <br/>
-                Body: {this.state.body} <br/>
-                Author Id: {this.state.author_id} <br/>
-                Chatroom: {this.state.chatroom_id} <br/>
-                Parent Id: {this.state.parent_id} <br/>
                 <ul className="message-list flex">
                     { this.props.messages.map( message => (
                         <MessageItem key={message.id} message={message} />
@@ -89,11 +87,6 @@ class MessageWindow extends React.Component {
                     autoFocus
                     onKeyPress={ (e) => this.handleEnterKey(e) }
                 />
-            {/* <button className='message-send'
-                    onClick= { this.handleSubmit }
-            >
-                Send
-            </button> */}
         </>
         )
     }

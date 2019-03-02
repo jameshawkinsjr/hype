@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const MessageItem = ({message}) => {
   return (
     <li key={`message-${message.id}`}>
-          <p className='message-body'>Message: { message.body }</p>
+          <p className='message-body'>User {message.author_id}: { message.body }</p>
     </li>
   )
 }

@@ -734,7 +734,7 @@ var MessageItem = function MessageItem(_ref) {
     key: "message-".concat(message.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "message-body"
-  }, "Message: ", message.body));
+  }, "User ", message.author_id, ": ", message.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
@@ -800,12 +800,6 @@ function (_React$Component) {
   }
 
   _createClass(MessageWindow, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.createSocket();
-      this.props.fetchMessages(this.props.match.params.chatroomId);
-    }
-  }, {
     key: "handleInput",
     value: function handleInput() {
       var _this2 = this;
@@ -815,6 +809,12 @@ function (_React$Component) {
           body: e.target.value
         });
       };
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.createSocket();
+      this.props.fetchMessages(this.props.match.params.chatroomId);
     }
   }, {
     key: "handleSubmit",
@@ -837,16 +837,19 @@ function (_React$Component) {
     value: function createSocket() {
       var _this3 = this;
 
-      // need to change this URL for production
-      var cable = actioncable__WEBPACK_IMPORTED_MODULE_1___default.a.createConsumer('ws://localhost:3000/cable');
+      // let that = this;
+      var cable = actioncable__WEBPACK_IMPORTED_MODULE_1___default.a.createConsumer('ws://localhost:3001/cable');
       this.chats = cable.subscriptions.create({
         channel: 'MessagesChannel'
       }, {
         connected: function connected() {},
         received: function received(message) {
+          console.log("Received Message");
+
           _this3.props.receiveMessage(message);
         },
         create: function create(message) {
+          console.log("Sent Message");
           this.perform('create', {
             body: message.body,
             author_id: message.author_id,
@@ -863,7 +866,7 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "full-message-window flex"
-      }, "Displayed Messages: ", this.state.displayedMessages, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Body: ", this.state.body, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Author Id: ", this.state.author_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Chatroom: ", this.state.chatroom_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Parent Id: ", this.state.parent_id, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "message-list flex"
       }, this.props.messages.map(function (message) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -926,7 +929,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     receiveMessage: function receiveMessage(message) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
-    }
+    },
+    createMessage: function (_createMessage) {
+      function createMessage(_x) {
+        return _createMessage.apply(this, arguments);
+      }
+
+      createMessage.toString = function () {
+        return _createMessage.toString();
+      };
+
+      return createMessage;
+    }(function (message) {
+      return dispatch(createMessage(message));
+    })
   };
 };
 

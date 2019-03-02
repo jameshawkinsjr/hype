@@ -7,7 +7,7 @@ class ChatMessageCreationEventBroadcastJob < ApplicationJob
         .broadcast(
                   'MessagesChannel',
                    id: message.id,
-                   created_at: message.created_at.strftime('%H:%M'),
+                   created_at: message.created_at,
                    author_id: message.author_id,
                    chatroom_id: message.chatroom_id,
                    body: message.body

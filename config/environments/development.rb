@@ -8,7 +8,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -65,7 +65,7 @@ Rails.application.configure do
   # We'll specify the development and production socket URIs in the appropriate
   # environment files, and pass it through to the consumer via the action_cable_meta_tag 
   Rails.application.configure do 
-    config.action_cable.url = "ws://localhost:3000/cable"
+    config.action_cable.url = "ws://localhost:3001/cable"
   end 
   ENV["REDISTOGO_URL"] = 'redis://redistogo:a439f9c5e6f3056dcc1b07f17e15a841@dory.redistogo.com:10786'
 
