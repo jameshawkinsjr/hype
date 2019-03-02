@@ -791,7 +791,8 @@ function (_React$Component) {
     _this.state = {
       body: "",
       author_id: _this.props.currentUser.id,
-      chatroom_id: _this.props.match.params.chatroomId,
+      // chatroom_id: this.props.match.params.chatroomId,
+      chatroom_id: 29,
       parent_id: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));

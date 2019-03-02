@@ -8,7 +8,8 @@ class MessageWindow extends React.Component {
         this.state = {
             body: "",
             author_id: this.props.currentUser.id,
-            chatroom_id: this.props.match.params.chatroomId,
+            // chatroom_id: this.props.match.params.chatroomId,
+            chatroom_id: 29,
             parent_id: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
