@@ -84,14 +84,23 @@ class MessageWindow extends React.Component {
                     }
                 </ul>
             </div>
-            <input  type='text'
-                    placeholder='Enter your message here'
-                    value={ this.state.body }
-                    onChange={ this.handleInput() }
-                    className='message-form'
-                    autoFocus
-                    onKeyPress={ (e) => this.handleEnterKey(e) }
-                />
+            <div className="message-form-input flex">
+            <div className="message-form-left-box flex">
+            <p>+</p>
+            </div>
+                <input  type='text'
+                        placeholder='Enter your message here'
+                        value={ this.state.body }
+                        onChange={ this.handleInput() }
+                        className='message-form'
+                        autoFocus
+                        onKeyPress={ (e) => this.handleEnterKey(e) }
+                    />
+            <div className="message-form-right-box flex">
+                <p>@</p>
+                <i className="far fa-smile"></i>
+            </div>
+            </div>
         </>
         )
     }

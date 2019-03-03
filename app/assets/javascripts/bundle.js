@@ -896,7 +896,11 @@ function (_React$Component) {
           key: message.id,
           message: message
         });
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-form-input flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-form-left-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Enter your message here",
         value: this.state.body,
@@ -906,7 +910,11 @@ function (_React$Component) {
         onKeyPress: function onKeyPress(e) {
           return _this4.handleEnterKey(e);
         }
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-form-right-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "@"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-smile"
+      }))));
     }
   }]);
 

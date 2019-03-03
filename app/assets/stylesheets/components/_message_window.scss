@@ -8,26 +8,62 @@
     justify-content: flex-end;
 }
 
-.message-form {
+.message-form-input {
     grid-column-start: 2;
     grid-column-end: span 1;
     grid-row-start: 3;
     grid-row-end: span 1;
-    height: 40px;
+}
+
+.message-form {
+    padding: 3px 10px;
+    margin: 0 0 10px 0;
+    width: 100%;
+    border-top: 1px solid $med-grey;
+    border-bottom: 1px solid $med-grey;
+    border-left: none;
+    border-right: none;
+}
+
+
+.message-form-left-box {
+    justify-content: center;
+    align-content: center;
+    border-radius: 5px 0 0 5px;
+    margin: 0 0 10px 20px;
+    border: 1px solid $med-grey;
+    color: $med-grey;
+    p {
+        font-size: 25px;
+        font-weight: 500;
+        align-self: center;
+        text-align: center;
+        padding: 12px;
+    }
+    &:hover {
+        background: $green2;
+        color: white;
+        border: 1px solid $dark-green;
+    }
+}
+
+.message-form-right-box {
+    margin: 0 0 10px 20px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid $med-grey;
+}
+
+
+.message-form, .message-form-left-box, .message-form-right-box  {
+    box-sizing: border-box;
+    height: 45px;
     align-self: center;
-    width: 90%;
-    border: 2px solid $med-grey;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    padding: 5px 10px;
+    font-size: 14px;
     &::placeholder {
         color: $lighter-grey;
     }
     &:focus {
-        -webkit-box-shadow:inset 0px 0px 0px 1px $med-grey;
-        -moz-box-shadow:inset 0px 0px 0px 1px $med-grey;
-        box-shadow:inset 0px 0px 0px 1px $med-grey;
+        border: none;
     }  
 }
 
