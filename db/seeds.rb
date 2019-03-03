@@ -12,6 +12,7 @@ Message.destroy_all
 ChatroomSubscription.destroy_all
 
 
+hypebot = User.create!(full_name: "Hypebot", email: "Hypebot@hype-chat.com", alias: 'Hypebot', password: 'Hypebot123456')
 jim = User.create!(full_name: "James Halpert", email: "J.Halpert@dunder-mifflin.org", alias: 'Jim Halpert', password: 'Jim123456')
 pam = User.create!(full_name: "Pam Beesly", email: "P.Beesly@dunder-mifflin.org", password: 'Pam123456')
 michael = User.create!(full_name: "Michael Scott", email: "M.Scott@dunder-mifflin.org", password: 'Michael123456')

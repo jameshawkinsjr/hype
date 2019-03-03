@@ -1,7 +1,7 @@
 import { RECEIVE_MESSAGE_ERRORS, RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, CLEAR_MESSAGE_ERRORS } from '../../actions/messages_actions';
 
 
-const sessionMessagesReducer = (state = [], action) => {
+const messagesErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_MESSAGE_ERRORS: 
@@ -17,4 +17,4 @@ const sessionMessagesReducer = (state = [], action) => {
     }
 };
 
-export default sessionMessagesReducer;
+export default messagesErrorsReducer;

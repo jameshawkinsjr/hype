@@ -8,7 +8,6 @@ import { selectAllMessages } from '../../reducers/selectors';
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.currentUserId],
     messages: selectAllMessages(state),
-    errors: state.errors.session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

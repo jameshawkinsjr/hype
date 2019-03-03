@@ -10,13 +10,17 @@ class MessageWindow extends React.Component {
         this.state = {
             body: "",
             author_id: this.props.currentUser.id,
-            // author_id: 10,
             chatroom_id: this.props.match.params.chatroomId,
-            // chatroom_id: 1,
             parent_id: null,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.fetchMessages(this.props.match.params.chatroomId);
+        this.createSocket();
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 200);
     }
 
     
@@ -24,15 +28,6 @@ class MessageWindow extends React.Component {
         return (e) => {
             this.setState({ body: e.target.value });
         };
-    }
-
-
-    
-    
-    componentDidMount() {
-        this.props.fetchMessages(this.props.match.params.chatroomId);
-        this.createSocket();
-        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 200);
     }
 
     handleSubmit(e) {
