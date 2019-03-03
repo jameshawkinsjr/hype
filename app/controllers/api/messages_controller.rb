@@ -15,7 +15,9 @@ class Api::MessagesController < ApplicationController
                     body: @message.body,
                     author_name: @message.user.full_name,
                     author_alias: @message.user.alias,
-                    chatroom_id: @message.chatroom_id
+                    chatroom_id: @message.chatroom_id,
+                    created_at: @message.created_at.localtime.strftime("%l:%M %p"),
+                    full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p")
                 )
         else
             render json: @messages.errors.full_messages, status: 401

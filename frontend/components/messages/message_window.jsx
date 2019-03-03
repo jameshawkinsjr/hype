@@ -11,7 +11,7 @@ class MessageWindow extends React.Component {
             author_id: 10,
             // chatroom_id: this.props.match.params.chatroomId,
             chatroom_id: 1,
-            parent_id: null
+            parent_id: null,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);

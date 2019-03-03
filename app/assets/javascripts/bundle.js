@@ -736,10 +736,17 @@ var MessageItem = function MessageItem(_ref) {
 
   ;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    key: "message-".concat(message.id, " message-item flex")
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "message-body"
-  }, " ", name, ": ", message.body));
+    key: "message-".concat(message.id),
+    className: "message-item-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-item flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-body-author"
+  }, " ", name, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "message-body-timestamp"
+  }, message.timestamp)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-body-body"
+  }, message.body)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
