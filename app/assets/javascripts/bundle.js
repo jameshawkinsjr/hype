@@ -741,7 +741,7 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-item-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
-    src: window.images.robot
+    src: "https://robohash.org/".concat(name, ".png")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1317,6 +1317,10 @@ function (_React$Component) {
         className: "green-button",
         onClick: this.handleSubmit
       }, "Sign in")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-form-link flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Don't have an account? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "   "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/signup"
+      }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign up"), " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-users flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Demo Users"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-buttons flex"
@@ -1524,7 +1528,11 @@ function (_React$Component) {
       }, "Passwords must be at least 6 characters long.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "purple-button",
         onClick: this.handleSubmit
-      }, "Sign up")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-form-link flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Already have an account? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "   "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/login"
+      }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Log in"), " ")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 

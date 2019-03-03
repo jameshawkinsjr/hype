@@ -110,6 +110,7 @@ class LoginForm extends React.Component {
                                 />
                         <button className="green-button" onClick={this.handleSubmit}>Sign in</button>
                     </form>
+                    <div className="session-form-link flex"><h3>Don't have an account? </h3><pre>   </pre><Link to="/signup"> <h3>Sign up</h3> </Link></div>
                     <div className="demo-users flex">
                         <h3>Demo Users</h3>
                         <div className="demo-buttons flex">

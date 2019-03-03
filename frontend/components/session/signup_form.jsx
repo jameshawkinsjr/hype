@@ -99,6 +99,7 @@ class SignupForm extends React.Component {
                         </label>
                         <button className="purple-button" onClick={this.handleSubmit}>Sign up</button>
                     </form>
+                    <div className="session-form-link flex"><h3>Already have an account? </h3><pre>   </pre><Link to="/login"> <h3>Log in</h3> </Link></div>
                 </div>
             </div>
             <Footer />
