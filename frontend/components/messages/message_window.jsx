@@ -36,7 +36,7 @@ class MessageWindow extends React.Component {
         // this.chats.create( this.state );
         this.props.createMessage( this.state );
         this.setState({ body: "" });
-        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 100);
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 300);
     }
     
     handleEnterKey(e) {
@@ -95,7 +95,7 @@ class MessageWindow extends React.Component {
                         value={ this.state.body }
                         onChange={ this.handleInput() }
                         className='message-form'
-                        // autoFocus
+                        autoFocus
                         onKeyPress={ (e) => this.handleEnterKey(e) }
                     />
             <div className="message-form-right-box flex">

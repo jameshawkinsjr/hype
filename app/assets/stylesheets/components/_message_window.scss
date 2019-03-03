@@ -111,15 +111,26 @@
 
 .message-item {
     flex-direction: column;
-    margin: 0 30px 0 40px;
+    align-self: center;
+    margin: 5px 30px auto 40px;
     div {
-        margin: 3px;
+        margin-top: 4px;
     }
 }
 
-.message-item-container:hover {
-    background: $very-light-grey;
+.profile-image {
+    float: left;
+    margin-left: 20px;
+    width: 50px;
+}
 
+
+
+.message-item-container{
+    padding: 3px;
+    &:hover {
+        background: $very-light-grey;
+    }
 }
 
 .message-body-author {
@@ -131,11 +142,11 @@
     font-size: 12px;
     color: $light-grey;
     font-weight: 300;
-    word-wrap: break-word;
 
 }
 .message-body-body {
     font-size: 14px;
     font-weight: 300;
     line-height: 1.5;
+    word-wrap: break-word;
 }

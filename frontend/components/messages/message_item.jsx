@@ -11,7 +11,8 @@ const MessageItem = ({message}) => {
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-        <div className="message-item flex">
+          <img className="profile-image" src={ window.images.robot} />
+          <div className="message-item flex">
             <div className='message-body-author'> { name } <span className="message-body-timestamp">{ message.timestamp }</span></div>
             <div className='message-body-body'>{ message.body }</div>
           </div>

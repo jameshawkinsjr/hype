@@ -613,6 +613,7 @@ function (_React$Component) {
         className: "hero-get-started-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        className: "input-outline",
         placeholder: "Email Address",
         value: this.state.email,
         onChange: this.handleInput('email')
@@ -738,7 +739,10 @@ var MessageItem = function MessageItem(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: "message-".concat(message.id),
     className: "message-item-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "profile-image",
+    src: window.images.robot
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-body-author"
@@ -845,7 +849,7 @@ function (_React$Component) {
       });
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
-      }, 100);
+      }, 300);
     }
   }, {
     key: "handleEnterKey",
@@ -911,8 +915,8 @@ function (_React$Component) {
         placeholder: "Enter your message here",
         value: this.state.body,
         onChange: this.handleInput(),
-        className: "message-form" // autoFocus
-        ,
+        className: "message-form",
+        autoFocus: true,
         onKeyPress: function onKeyPress(e) {
           return _this4.handleEnterKey(e);
         }

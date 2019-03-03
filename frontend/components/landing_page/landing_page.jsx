@@ -65,6 +65,7 @@ class LandingPage extends React.Component {
                         <form className="hero-get-started-input flex">
                         <input 
                             type="text" 
+                            className = "input-outline"
                             placeholder="Email Address"
                             value={this.state.email}
                             onChange={this.handleInput('email')}
