@@ -48,10 +48,6 @@ export const fetchMessage = (messageId) => dispatch => (
 
 export const createMessage = (message) => dispatch => (
         ApiUtil.createMessage(message)
-                // .then(message => dispatch(receiveMessage(message)),
-                // .then( () => dispatch(),
-                // err => (dispatch(receiveMessageErrors(err.responseJSON)))       
-        // )
 );
 
 export const editMessage = (message) => dispatch => (

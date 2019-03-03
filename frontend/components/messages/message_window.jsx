@@ -7,9 +7,10 @@ class MessageWindow extends React.Component {
         super(props);
         this.state = {
             body: "",
-            author_id: this.props.currentUser.id,
+            // author_id: this.props.currentUser.id,
+            author_id: 10,
             // chatroom_id: this.props.match.params.chatroomId,
-            chatroom_id: 29,
+            chatroom_id: 1,
             parent_id: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,9 +44,6 @@ class MessageWindow extends React.Component {
     }
 
     createSocket() {
-        // let cable = Cable.createConsumer('http://localhost:3000/cable');
-        // let cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-        // console.log(process.env.NODE_ENV);
         let cable;
         if (process.env.NODE_ENV !== 'production') {
             cable = Cable.createConsumer('http://localhost:3000/cable');
@@ -59,11 +57,9 @@ class MessageWindow extends React.Component {
             {   connected: () => { console.log("Connected"); },
                 disconnected: () => { console.log("Disconnected"); },
                 received: message => {
-                    console.log("Received Message");
                     this.props.receiveMessage(message);
                     },
                 create: function(message) {
-                    console.log("Sent Message");
                     this.perform(
                         'create', { 
                         body: message.body,

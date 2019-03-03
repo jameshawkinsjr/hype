@@ -168,11 +168,7 @@ var fetchMessage = function fetchMessage(messageId) {
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message) // .then(message => dispatch(receiveMessage(message)),
-    // .then( () => dispatch(),
-    // err => (dispatch(receiveMessageErrors(err.responseJSON)))       
-    // )
-    ;
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message);
   };
 };
 var editMessage = function editMessage(message) {
@@ -730,11 +726,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var MessageItem = function MessageItem(_ref) {
   var message = _ref.message;
+  var name;
+
+  if (message.author_alias) {
+    name = message.author_alias;
+  } else {
+    name = message.author_name;
+  }
+
+  ;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: "message-".concat(message.id, " message-item flex")
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "message-body"
-  }, "User ", message.author_id, ": ", message.body));
+  }, " ", name, ": ", message.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
@@ -790,9 +795,10 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MessageWindow).call(this, props));
     _this.state = {
       body: "",
-      author_id: _this.props.currentUser.id,
+      // author_id: this.props.currentUser.id,
+      author_id: 10,
       // chatroom_id: this.props.match.params.chatroomId,
-      chatroom_id: 29,
+      chatroom_id: 1,
       parent_id: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -840,9 +846,6 @@ function (_React$Component) {
     value: function createSocket() {
       var _this3 = this;
 
-      // let cable = Cable.createConsumer('http://localhost:3000/cable');
-      // let cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-      // console.log(process.env.NODE_ENV);
       var cable;
 
       if (true) {
@@ -859,12 +862,9 @@ function (_React$Component) {
           console.log("Disconnected");
         },
         received: function received(message) {
-          console.log("Received Message");
-
           _this3.props.receiveMessage(message);
         },
         create: function create(message) {
-          console.log("Sent Message");
           this.perform('create', {
             body: message.body,
             author_id: message.author_id,

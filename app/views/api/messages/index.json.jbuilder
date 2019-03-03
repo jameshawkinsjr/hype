@@ -1,6 +1,8 @@
 @messages.each do |message|
     json.set! message.id do
         json.extract! message, :id, :body, :chatroom_id, :author_id, :parent_id, :created_at
+        json.author_name message.user.full_name
+        json.author_alias message.user.alias
     end
 end
 
