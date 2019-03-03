@@ -319,7 +319,7 @@ var App = function App() {
     path: "/chatrooms",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-        to: "/chatrooms/1"
+        to: "/chatrooms/5"
       });
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
@@ -804,8 +804,8 @@ function (_React$Component) {
       body: "",
       // author_id: this.props.currentUser.id,
       author_id: 10,
-      // chatroom_id: this.props.match.params.chatroomId,
-      chatroom_id: 1,
+      chatroom_id: _this.props.match.params.chatroomId,
+      // chatroom_id: 1,
       parent_id: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -829,6 +829,9 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchMessages(this.props.match.params.chatroomId);
       this.createSocket();
+      setTimeout(function () {
+        return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
+      }, 200);
     }
   }, {
     key: "handleSubmit",
@@ -840,6 +843,9 @@ function (_React$Component) {
       this.setState({
         body: ""
       });
+      setTimeout(function () {
+        return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
+      }, 100);
     }
   }, {
     key: "handleEnterKey",
@@ -905,8 +911,8 @@ function (_React$Component) {
         placeholder: "Enter your message here",
         value: this.state.body,
         onChange: this.handleInput(),
-        className: "message-form",
-        autoFocus: true,
+        className: "message-form" // autoFocus
+        ,
         onKeyPress: function onKeyPress(e) {
           return _this4.handleEnterKey(e);
         }
@@ -1290,13 +1296,15 @@ function (_React$Component) {
         className: "flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Enter your ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " email address"), " and ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "password"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.email,
+        className: "input-outline",
         placeholder: "you@example.com",
+        value: this.state.email,
         onChange: this.handleInput('email'),
         autoComplete: "off",
         autoFocus: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
+        className: "input-outline",
         placeholder: "password",
         value: this.state.password,
         onChange: this.handleInput('password'),
@@ -1476,6 +1484,7 @@ function (_React$Component) {
         className: "flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Full Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        className: "input-outline",
         value: this.state.full_name,
         placeholder: "Full Name",
         onChange: this.handleInput('full_name'),
@@ -1483,6 +1492,7 @@ function (_React$Component) {
         autoFocus: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Display Name (optional)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        className: "input-outline",
         value: this.state.alias,
         placeholder: "Display Name",
         onChange: this.handleInput('alias'),
@@ -1491,6 +1501,7 @@ function (_React$Component) {
         className: "login-form-subtext"
       }, "By default, hype will use your full name - but you can choose something shorter if you'd like.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        className: "input-outline",
         value: this.state.email,
         placeholder: "Email",
         onChange: this.handleInput('email'),
@@ -1499,6 +1510,7 @@ function (_React$Component) {
         className: "last-label"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Password (required)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
+        className: "input-outline",
         value: this.state.password,
         placeholder: "Password",
         onChange: this.handleInput('password'),

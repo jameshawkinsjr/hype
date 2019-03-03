@@ -13,7 +13,7 @@ const App = () => (
     <header>
         <Switch>
             <ProtectedRoute path="/chatrooms/:chatroomId" component={ChatroomListContainer} />
-            <Route exact path="/chatrooms" render={() => (<Redirect to="/chatrooms/1"/>)}/>
+            <Route exact path="/chatrooms" render={() => (<Redirect to="/chatrooms/5"/>)}/>
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
             <Route exact path="/" component={LandingPageContainer} />

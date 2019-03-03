@@ -9,8 +9,8 @@ class MessageWindow extends React.Component {
             body: "",
             // author_id: this.props.currentUser.id,
             author_id: 10,
-            // chatroom_id: this.props.match.params.chatroomId,
-            chatroom_id: 1,
+            chatroom_id: this.props.match.params.chatroomId,
+            // chatroom_id: 1,
             parent_id: null,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +27,7 @@ class MessageWindow extends React.Component {
     componentDidMount() {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.createSocket();
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 200);
     }
 
     handleSubmit(e) {
@@ -35,6 +36,7 @@ class MessageWindow extends React.Component {
         // this.chats.create( this.state );
         this.props.createMessage( this.state );
         this.setState({ body: "" });
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 100);
     }
     
     handleEnterKey(e) {
@@ -86,14 +88,14 @@ class MessageWindow extends React.Component {
             </div>
             <div className="message-form-input flex">
             <div className="message-form-left-box flex">
-            <p>+</p>
+                <p>+</p>
             </div>
                 <input  type='text'
                         placeholder='Enter your message here'
                         value={ this.state.body }
                         onChange={ this.handleInput() }
                         className='message-form'
-                        autoFocus
+                        // autoFocus
                         onKeyPress={ (e) => this.handleEnterKey(e) }
                     />
             <div className="message-form-right-box flex">

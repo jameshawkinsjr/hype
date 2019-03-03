@@ -94,13 +94,15 @@ class LoginForm extends React.Component {
                     <form className="flex">
                         <h3>Enter your <span> email address</span> and <span>password</span>.</h3>
                             <input  type="text"
-                                    value={this.state.email}
+                                    className="input-outline"
                                     placeholder="you@example.com"
+                                    value={this.state.email}
                                     onChange={this.handleInput('email')}
                                     autoComplete = "off"
                                     autoFocus
                                 />
                             <input  type="password"
+                                    className="input-outline"
                                     placeholder="password"
                                     value={this.state.password}
                                     onChange={this.handleInput('password')}

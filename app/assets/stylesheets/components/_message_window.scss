@@ -48,11 +48,43 @@
 }
 
 .message-form-right-box {
-    margin: 0 0 10px 20px;
+    padding-right: 10px;
+    margin: 0 20px 10px 0;
     border-radius: 0 5px 5px 0;
-    border: 1px solid $med-grey;
+    border-top: 1px solid $med-grey;
+    border-right: 1px solid $med-grey;
+    border-bottom: 1px solid $med-grey;
+    justify-content: center;
+    align-content: center;
+    color: $med-grey;
+    p {
+        font-size: 22px;
+        font-weight: 500;
+        align-self: center;
+        text-align: center;
+        padding-right: 10px;
+        margin-bottom: 5px;
+        &:hover {
+            transform: scale(1.2);
+            color: $blue;
+        }
+    }
+    i {
+        font-size: 20px;
+        margin: auto;
+        &:hover {
+            transform: scale(1.2);
+            color: goldenrod;
+
+        }
+    }
 }
 
+.message-form:focus {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
 
 .message-form, .message-form-left-box, .message-form-right-box  {
     box-sizing: border-box;
@@ -62,9 +94,6 @@
     &::placeholder {
         color: $lighter-grey;
     }
-    &:focus {
-        border: none;
-    }  
 }
 
 .message-body {
@@ -82,7 +111,7 @@
 
 .message-item {
     flex-direction: column;
-    margin: 0 20px 0 40px;
+    margin: 0 30px 0 40px;
     div {
         margin: 3px;
     }

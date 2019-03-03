@@ -57,6 +57,7 @@ class SignupForm extends React.Component {
                         <label >
                             <h3>Full Name</h3>
                             <input  type="text"
+                                    className="input-outline"
                                     value={this.state.full_name}
                                     placeholder="Full Name"
                                     onChange={this.handleInput('full_name')}
@@ -67,6 +68,7 @@ class SignupForm extends React.Component {
                         <label>
                             <h3>Display Name (optional)</h3>
                             <input  type="text"
+                                    className="input-outline"
                                     value={this.state.alias}
                                     placeholder="Display Name"
                                     onChange={this.handleInput('alias')}
@@ -77,6 +79,7 @@ class SignupForm extends React.Component {
                         <label>
                             <h3>Email</h3>
                             <input  type="text"
+                                    className="input-outline"
                                     value={this.state.email}
                                     placeholder="Email"
                                     onChange={this.handleInput('email')}
@@ -86,6 +89,7 @@ class SignupForm extends React.Component {
                         <label className="last-label">
                             <h3>Password (required)</h3>
                             <input  type="password"
+                                    className="input-outline"
                                     value={this.state.password}
                                     placeholder="Password"
                                     onChange={this.handleInput('password')}
