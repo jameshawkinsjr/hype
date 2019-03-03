@@ -31,6 +31,7 @@
 
 
 .message-form-left-box {
+    cursor: pointer;
     justify-content: center;
     align-content: center;
     border-radius: 5px 0 0 5px;
@@ -71,6 +72,7 @@
         &:hover {
             transform: scale(1.2);
             color: $blue;
+            cursor: pointer;
         }
     }
     i {
@@ -79,6 +81,7 @@
         &:hover {
             transform: scale(1.2);
             color: goldenrod;
+            cursor: pointer;
 
         }
     }
@@ -112,15 +115,6 @@
     flex-direction: column;
     // overflow-y: scroll;
     word-wrap: break-word;
-}
-
-.message-item {
-    flex-direction: column;
-    align-self: center;
-    margin: 5px 30px auto 40px;
-    div {
-        margin-top: 4px;
-    }
 }
 
 .profile-image {
@@ -157,15 +151,27 @@
     }
 }
 
+.message-item {
+    flex-direction: column;
+    margin-left: 5px;
+    .message-body-author-container {
+        margin-top: 4px;
+    }
+}
+
 .message-body-author {
     font-size: 15px;
     font-weight: 600;
-
+    white-space: nowrap;
 }
+
 .message-body-timestamp {
     font-size: 12px;
     color: $light-grey;
     font-weight: 300;
+    margin: 0 0 1px 6px;
+    align-self: flex-end;
+    position:relative;
 
 }
 .message-body-body {
@@ -173,4 +179,31 @@
     font-weight: 300;
     line-height: 1.5;
     word-wrap: break-word;
+    margin-top: 3px;
+}
+
+.message-body-timestamp .message-body-full-timestamp {
+    position: absolute;
+    bottom: 25px;
+    left: -75px;
+    width: 175px;
+    visibility: hidden;
+    background: $black;
+    padding: 10px 5px;
+    color: $white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.message-body-timestamp:hover .message-body-full-timestamp {
+    visibility: visible;
+    animation-name: appear;
+    animation-duration: 1s;
+}
+
+@keyframes appear {
+    0%   {opacity: 0;}
+    25%   {opacity: 0;}
+    100%   {opacity: 1;}
 }

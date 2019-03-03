@@ -1,6 +1,8 @@
 import React from 'react';
 import Cable from 'actioncable';
 import MessageItem from './message_item';
+// import EmojiPicker from 'emoji-picker-react';
+
 
 class MessageWindow extends React.Component {
     constructor(props) {
@@ -23,6 +25,9 @@ class MessageWindow extends React.Component {
             this.setState({ body: e.target.value });
         };
     }
+
+
+    
     
     componentDidMount() {
         this.props.fetchMessages(this.props.match.params.chatroomId);
@@ -92,14 +97,14 @@ class MessageWindow extends React.Component {
             <div className="message-form-left-box flex">
                 <p>+</p>
             </div>
-                <textarea  type='text'
-                        placeholder='Enter your message here'
-                        value={ this.state.body }
-                        onChange={ this.handleInput() }
-                        className='message-form'
-                        autoFocus
-                        onKeyPress={ (e) => this.handleEnterKey(e) }
-                    ></textarea>
+            <input type='text'
+                    placeholder='Enter your message here'
+                    value={ this.state.body }
+                    onChange={ this.handleInput() }
+                    className='message-form'
+                    autoFocus
+                    onKeyPress={ (e) => this.handleEnterKey(e) }
+            />
             <div className="message-form-right-box flex">
                 <p>@</p>
                 <i className="far fa-smile"></i>
