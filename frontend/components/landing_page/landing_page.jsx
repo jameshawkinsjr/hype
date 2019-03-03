@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.props.currentUser) {
-            this.props.history.push('/chatrooms/1');
+            this.props.history.push('/chatrooms/5');
         } else {
             this.props.landingPageSignup(this.state.email);
             this.props.history.push('/signup');

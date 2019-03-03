@@ -10,13 +10,13 @@ class Api::MessagesController < ApplicationController
             ActionCable
                 .server
                 .broadcast(
-                    'MessagesChannel',
+                    "room-#{@message.chatroom_id}:messages",
                     id: @message.id,
                     body: @message.body,
                     author_name: @message.user.full_name,
                     author_alias: @message.user.alias,
                     chatroom_id: @message.chatroom_id,
-                    created_at: @message.created_at.localtime.strftime("%l:%M %p"),
+                    timestamp: @message.created_at.localtime.strftime("%l:%M %p"),
                     full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p")
                 )
         else

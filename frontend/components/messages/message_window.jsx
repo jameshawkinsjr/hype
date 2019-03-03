@@ -54,7 +54,9 @@ class MessageWindow extends React.Component {
         }
         this.chats = cable.subscriptions.create(
             {   channel: 
-                    'MessagesChannel'
+                    'MessagesChannel',
+                room: 
+                    this.props.match.params.chatroomId
             },  
             {   connected: () => { console.log("Connected"); },
                 disconnected: () => { console.log("Disconnected"); },
@@ -90,14 +92,14 @@ class MessageWindow extends React.Component {
             <div className="message-form-left-box flex">
                 <p>+</p>
             </div>
-                <input  type='text'
+                <textarea  type='text'
                         placeholder='Enter your message here'
                         value={ this.state.body }
                         onChange={ this.handleInput() }
                         className='message-form'
                         autoFocus
                         onKeyPress={ (e) => this.handleEnterKey(e) }
-                    />
+                    ></textarea>
             <div className="message-form-right-box flex">
                 <p>@</p>
                 <i className="far fa-smile"></i>

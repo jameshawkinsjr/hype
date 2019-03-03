@@ -23,6 +23,10 @@
     border-bottom: 1px solid $med-grey;
     border-left: none;
     border-right: none;
+    word-wrap: break-word;
+    word-break: break-all;
+    resize: none;
+    height: 200px;
 }
 
 
@@ -84,6 +88,7 @@
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+    outline: none !important;
 }
 
 .message-form, .message-form-left-box, .message-form-right-box  {

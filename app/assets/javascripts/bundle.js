@@ -421,11 +421,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Starred ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name unread"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/chatrooms/1"
+        to: "/chatrooms/5"
       }, " Chatroom 1 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name unread"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/chatrooms/2"
+        to: "/chatrooms/29"
       }, " Chatroom 2 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "chatroom-name active"
       }, "\u25E6 James Hawkins"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -548,7 +548,7 @@ function (_React$Component) {
       e.preventDefault();
 
       if (this.props.currentUser) {
-        this.props.history.push('/chatrooms/1');
+        this.props.history.push('/chatrooms/5');
       } else {
         this.props.landingPageSignup(this.state.email);
         this.props.history.push('/signup');
@@ -870,7 +870,8 @@ function (_React$Component) {
       } else {}
 
       this.chats = cable.subscriptions.create({
-        channel: 'MessagesChannel'
+        channel: 'MessagesChannel',
+        room: this.props.match.params.chatroomId
       }, {
         connected: function connected() {
           console.log("Connected");
@@ -910,7 +911,7 @@ function (_React$Component) {
         className: "message-form-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-left-box flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         type: "text",
         placeholder: "Enter your message here",
         value: this.state.body,
@@ -1215,7 +1216,7 @@ function (_React$Component) {
       }
 
       this.props.login(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms/1');
+        return _this3.props.history.push('/chatrooms/5');
       });
     }
   }, {
@@ -1459,7 +1460,7 @@ function (_React$Component) {
 
       e.preventDefault();
       this.props.signup(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms/1');
+        return _this3.props.history.push('/chatrooms/5');
       });
     }
   }, {

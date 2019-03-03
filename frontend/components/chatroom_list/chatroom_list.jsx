@@ -22,8 +22,8 @@ class ChatroomList extends React.Component {
                     <div className="chatroom-category chatroom-all-threads"><h3> All Threads Box </h3></div>
                     <div className="chatroom-category chatroom-starred"><h3> Starred </h3></div>
                         <ul>
-                            <li className="chatroom-name unread"><Link to="/chatrooms/1"> Chatroom 1 </Link></li>
-                            <li className="chatroom-name unread"><Link to="/chatrooms/2"> Chatroom 2 </Link></li>
+                            <li className="chatroom-name unread"><Link to="/chatrooms/5"> Chatroom 1 </Link></li>
+                            <li className="chatroom-name unread"><Link to="/chatrooms/29"> Chatroom 2 </Link></li>
                             <li className="chatroom-name active">◦ James Hawkins</li>
                             <li className="chatroom-name unread">◦ Billy Johnson</li>
                         </ul>
