@@ -802,8 +802,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MessageWindow).call(this, props));
     _this.state = {
       body: "",
-      // author_id: this.props.currentUser.id,
-      author_id: 10,
+      author_id: _this.props.currentUser.id,
+      // author_id: 10,
       chatroom_id: _this.props.match.params.chatroomId,
       // chatroom_id: 1,
       parent_id: null
