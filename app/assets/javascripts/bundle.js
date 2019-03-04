@@ -621,6 +621,33 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var channels = this.props.chatrooms.filter(function (chatroom) {
+        return chatroom.chatroom_type === 'channel';
+      });
+      var directMessages = this.props.chatrooms.filter(function (chatroom) {
+        return chatroom.chatroom_type === 'direct_message';
+      });
+      var channelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chatroom-category chatroom-channels"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Channels ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, channels.map(function (chatroom) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          to: "/chatrooms/".concat(chatroom.id),
+          className: "active-chatroom"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "chatroom-name"
+        }, "#  ", chatroom.title));
+      })));
+      var directMessageList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chatroom-category chatroom-direct-messages"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, directMessages.map(function (chatroom) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+          key: chatroom.id,
+          to: "/chatrooms/".concat(chatroom.id),
+          className: "active-chatroom"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "chatroom-name"
+        }, "\u25E6 ", chatroom.users.join(", ")));
+      })));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-skeleton flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -628,30 +655,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-category chatroom-jump-to"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Jump To Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-all-threads"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-starred"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Starred ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-channels"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Channels ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/chatrooms/5"
-      }, " Chatroom 1 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/chatrooms/29"
-      }, " Chatroom 2 ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name active"
-      }, "\u25E6 James Hawkins"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name unread"
-      }, "\u25E6 Billy Johnson"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "# general ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-direct-messages"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "chatroom-name"
-      }, "\u25E6 Tim Phillips, Billy Johnson, Billy Johnson, Billy Johnson"))));
+        className: "chatroom-category chatroom-all-threads-text flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-comment-alt"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads ")), channelList, directMessageList));
     }
   }]);
 
