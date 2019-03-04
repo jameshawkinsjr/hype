@@ -19,6 +19,7 @@ class Api::MessagesController < ApplicationController
                     timestamp: @message.created_at.localtime.strftime("%l:%M %p"),
                     full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p")
                 )
+                render :show
         else
             render json: @messages.errors.full_messages, status: 401
         end

@@ -1296,6 +1296,8 @@ function (_React$Component) {
           console.log("Disconnected");
         },
         received: function received(message) {
+          console.log("Received a Message");
+
           _this3.props.receiveMessage(message);
         },
         create: function create(message) {

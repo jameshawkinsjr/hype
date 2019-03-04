@@ -59,6 +59,7 @@ class MessageWindow extends React.Component {
             {   connected: () => { console.log("Connected"); },
                 disconnected: () => { console.log("Disconnected"); },
                 received: message => {
+                    console.log("Received a Message");
                     this.props.receiveMessage(message);
                     },
                 create: function(message) {
