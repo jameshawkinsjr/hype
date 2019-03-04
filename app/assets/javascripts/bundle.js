@@ -1697,8 +1697,7 @@ function (_React$Component) {
     }
   }, {
     key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.props.clearSessionErrors();
+    value: function componentWillUnmount() {// this.props.clearSessionErrors();
     }
   }, {
     key: "render",
