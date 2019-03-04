@@ -14,11 +14,11 @@ const chatroomsReducer = (state = {}, action) => {
         case RECEIVE_CHATROOM:
             // debugger 
             newState = merge({}, state);
-            newState[action.chatrooms.id] = action.chatrooms;
+            newState[action.chatroom.id] = action.chatroom;
             return newState;
         case REMOVE_CHATROOM:
             newState = merge({}, state);
-            delete newState[action.chatroomsId];
+            delete newState[action.chatroomId];
             return newState;
         default:
             return state;

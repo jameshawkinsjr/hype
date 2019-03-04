@@ -19,8 +19,11 @@ class NavBar extends React.Component {
         const navBar = this.props.currentUser ? (
             
             <div className="top-nav flex">
-                <h3 className="bold">Welcome</h3>
-                <p> { name }</p>
+                <div className="flex-column">
+                    <h3 className="bold">Welcome</h3>
+                    <p> { name }</p>
+                    </div>
+                <button onClick= { this.props.logout }> Sign Out </button>
             </div>
         ) : (
             <div className="top-nav flex">

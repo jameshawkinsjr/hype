@@ -11,7 +11,6 @@ const messagesReducer = (state = {}, action) => {
             newState = merge({}, state, action.messages);
             return newState;
         case RECEIVE_MESSAGE:
-            // debugger 
             newState = merge({}, state);
             newState[action.message.id] = action.message;
             return newState;

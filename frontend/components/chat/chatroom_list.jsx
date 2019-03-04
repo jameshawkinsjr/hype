@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import Cable from 'actioncable';
 
 class ChatroomList extends React.Component {
     constructor(props) {
@@ -11,29 +12,76 @@ class ChatroomList extends React.Component {
     }
 
 
+    createSocket(chatroomId) {
+        let cable;
+        if (process.env.NODE_ENV !== 'production') {
+            cable = Cable.createConsumer('http://localhost:3000/cable');
+        } else {
+            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+        }
+        this.chats = cable.subscriptions.create(
+            {   channel: 
+                    'MessagesChannel',
+                room: 
+                    chatroomId
+            },  
+            {   connected: () => { console.log("Connected"); },
+                disconnected: () => { console.log("Disconnected"); },
+                received: message => {
+                    this.props.receiveMessage(message);
+                    },
+                create: function(message) {
+                    this.perform(
+                        'create', { 
+                        body: message.body,
+                        author_id: message.author_id,
+                        chatroom_id: message.chatroom_id,
+                        parent_id: message.parent_id,
+                        }
+                    );
+                    }
+            }
+        );
+    }
+
+
         
     render () {
 
-        let channels = this.props.chatrooms.filter( chatroom => chatroom.chatroom_type === 'channel');
-        let directMessages = this.props.chatrooms.filter( chatroom => chatroom.chatroom_type === 'direct_message');
+        let channels = [];
+        let directMessages = [];
+        
+        this.props.chatrooms.forEach( chatroom => {
+            this.createSocket(chatroom.id);
+            if (chatroom.chatroom_type === 'channel'){
+                channels.push(chatroom);
+            } else if (chatroom.chatroom_type === 'direct_message'){
+                directMessages.push(chatroom);
+            };
+        });
+        
+        let channelList;
+        let directMessageList;
 
-        let channelList = (
+        if (channels){
+            channelList = (
             <>
                 <div className="chatroom-category chatroom-channels"><h3> Channels </h3></div>
                 <ul>
                     { channels.map( chatroom => (
-                        <NavLink to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
-                            <li className="chatroom-name">
-                             #  { chatroom.title }
+                        <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
+                            <li className="chatroom-name chatroom-channel-names">
+                            #  { chatroom.title.replace(/\s+/g, '-').toLowerCase() }
                             </li>
                         </NavLink>
                     ))
                     }
                 </ul>
             </>
-        );
-
-        let directMessageList = (
+            );
+        }
+        if (directMessages){
+            directMessageList = (
             <>
                 <div className="chatroom-category chatroom-direct-messages"><h3> Direct Messages </h3></div>
                 <ul>
@@ -48,7 +96,8 @@ class ChatroomList extends React.Component {
                     }
                 </ul>
             </>
-        );
+            );
+        }
 
         return (
                 <div className="chatroom-skeleton flex">

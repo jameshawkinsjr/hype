@@ -5,25 +5,26 @@
     grid-row-start: 1;
     grid-row-end: span 1;
     font-weight: bold;
+    align-items: center;
     color: white;
-    flex-direction: column;
-    padding: 12px;
+    justify-content: space-evenly;
 
+    div {
+        // padding: 10px 0px 0px 20px;
+    }
     &:hover{
         background: #311134;
     }
-    a {
-        color: white;
-        padding: 5px;
-    }
-    a:hover {
-        color: $medium-grey;
-    }
     button {
-        background: #2B649E; 
+        background: #2B649E;
+        border-radius: 5px;
         cursor: pointer;
         color: white;
-        margin-left: 10px;
+        margin-left: 5px;
+        height: 30px;
+        padding: 0 10px;
+        font-size: 12px;
+        font-family: $font-sans-serif;
     }
     button:hover {
         background: rgb(13, 74, 136); 

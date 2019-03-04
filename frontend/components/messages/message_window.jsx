@@ -1,5 +1,4 @@
 import React from 'react';
-import Cable from 'actioncable';
 import MessageItem from './message_item';
 // import EmojiPicker from 'emoji-picker-react';
 
@@ -19,8 +18,7 @@ class MessageWindow extends React.Component {
 
     componentDidMount() {
         this.props.fetchMessages(this.props.match.params.chatroomId);
-        this.createSocket();
-        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 200);
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
     }
 
     
@@ -32,8 +30,6 @@ class MessageWindow extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // debugger
-        // this.chats.create( this.state );
         this.props.createMessage( this.state );
         this.setState({ body: "" });
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 300);
@@ -45,47 +41,37 @@ class MessageWindow extends React.Component {
         }
     }
 
-    createSocket() {
-        let cable;
-        if (process.env.NODE_ENV !== 'production') {
-            cable = Cable.createConsumer('http://localhost:3000/cable');
-        } else {
-            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-        }
-        this.chats = cable.subscriptions.create(
-            {   channel: 
-                    'MessagesChannel',
-                room: 
-                    this.props.match.params.chatroomId
-            },  
-            {   connected: () => { console.log("Connected"); },
-                disconnected: () => { console.log("Disconnected"); },
-                received: message => {
-                    this.props.receiveMessage(message);
-                    },
-                create: function(message) {
-                    this.perform(
-                        'create', { 
-                        body: message.body,
-                        author_id: message.author_id,
-                        chatroom_id: message.chatroom_id,
-                        parent_id: message.parent_id,
-                        }
-                    );
-                    }
-            }
-        );
-    }
+
 
     render() {
+        let chatroomTitle = "";
+        let welcomeMessage = "";
+        let userList = "Enter your message here";
+        if ( this.props.currentChatroom ) {
+            userList = this.props.currentChatroom.users.join(", ");
+            if (this.props.currentChatroom.chatroom_type == 'channel') {
+                chatroomTitle = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()}`;
+                welcomeMessage = `${this.props.currentChatroom.created_by} created this channel on ${this.props.currentChatroom.date_created}. This is the very beinning of the #${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} channel.`;
+            } else {
+                chatroomTitle = userList;
+                welcomeMessage = `This is the very beginning of your direct message history with ${this.props.currentChatroom.users.join(", ")}. Only the ${this.props.currentChatroom.users.length + 1} of you are in this conversation and no one else can join it.`;
+        }}
         return (
             <>
             <div id="message-window" className="full-message-window flex">
+            <div className="message-window-first-message">
+                <h2> { chatroomTitle }</h2>
+                <p>{ welcomeMessage } </p>
+            </div>
                 <ul className="message-list flex">
-                    { this.props.messages.map( message => (
-                        <MessageItem key={message.id} message={message} />
-                    ))
-                    }
+                    { 
+                        this.props.messages.map( message => {
+                        // debugger
+                        // if (message.chatroom_id === that.state.chatroom_id) {
+                            return <MessageItem key={message.id} message={message} />
+                            }   
+                            // }
+                        )}
                 </ul>
             </div>
             <div className="message-form-input flex">
@@ -93,7 +79,7 @@ class MessageWindow extends React.Component {
                 <p>+</p>
             </div>
             <input type='text'
-                    placeholder='Enter your message here'
+                    placeholder={`Message ${userList}` }
                     value={ this.state.body }
                     onChange={ this.handleInput() }
                     className='message-form'

@@ -207,3 +207,18 @@
     25%   {opacity: 0;}
     100%   {opacity: 1;}
 }
+
+
+.message-window-first-message {
+    padding: 20px;
+    border-bottom: 1px solid $lighter-grey;
+    h2 {
+        font-weight: 900;
+        padding-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+}
