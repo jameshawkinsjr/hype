@@ -1,5 +1,6 @@
 import React from 'react';
 import MessageItem from './message_item';
+import Cable from 'actioncable';
 // import EmojiPicker from 'emoji-picker-react';
 
 
@@ -17,11 +18,12 @@ class MessageWindow extends React.Component {
     }
 
     componentDidMount() {
+        this.createSocket();
+        // debugger
         this.props.fetchMessages(this.props.match.params.chatroomId);
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
     }
 
-    
     handleInput() {
         return (e) => {
             this.setState({ body: e.target.value });
@@ -39,6 +41,38 @@ class MessageWindow extends React.Component {
         if (e.key === 'Enter') {
             this.handleSubmit(e);
         }
+    }
+
+    createSocket() {
+        let cable;
+        if (process.env.NODE_ENV !== 'production') {
+            cable = Cable.createConsumer('http://localhost:3000/cable');
+        } else {
+            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+        }
+        this.chats = cable.subscriptions.create(
+            {   channel: 
+                    'MessagesChannel',
+                room: 
+                    this.props.match.params.chatroomId
+            },  
+            {   connected: () => { console.log("Connected"); },
+                disconnected: () => { console.log("Disconnected"); },
+                received: message => {
+                    this.props.receiveMessage(message);
+                    },
+                create: function(message) {
+                    this.perform(
+                        'create', { 
+                        body: message.body,
+                        author_id: message.author_id,
+                        chatroom_id: message.chatroom_id,
+                        parent_id: message.parent_id,
+                        }
+                    );
+                    }
+            }
+        );
     }
 
 

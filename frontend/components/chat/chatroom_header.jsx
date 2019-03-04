@@ -35,7 +35,7 @@ class ChatroomHeader extends React.Component {
                     <i className="far fa-user"></i>
                     <p>{numUsers}</p>
                     <pre>  |  </pre>
-                    <p>{this.state.topic}</p>
+                    <p>{topic}</p>
                 </div>
             </div>
             <div className="chatroom-header-right flex">

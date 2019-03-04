@@ -643,7 +643,7 @@ function (_React$Component) {
         className: "far fa-star"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "  |  "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-user"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, numUsers), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "  |  "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.topic))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, numUsers), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "  |  "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, topic))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-header-right flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
@@ -713,8 +713,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -734,8 +732,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
+ // import Cable from 'actioncable';
 
 var ChatroomList =
 /*#__PURE__*/
@@ -752,51 +749,45 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchChatrooms(this.props.currentUser.id);
-    }
-  }, {
-    key: "createSocket",
-    value: function createSocket(chatroomId) {
-      var _this = this;
+    } // createSocket(chatroomId) {
+    //     let cable;
+    //     if (process.env.NODE_ENV !== 'production') {
+    //         cable = Cable.createConsumer('http://localhost:3000/cable');
+    //     } else {
+    //         cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+    //     }
+    //     this.chats = cable.subscriptions.create(
+    //         {   channel: 
+    //                 'MessagesChannel',
+    //             room: 
+    //                 chatroomId
+    //         },  
+    //         {   connected: () => { console.log("Connected"); },
+    //             disconnected: () => { console.log("Disconnected"); },
+    //             received: message => {
+    //                 this.props.receiveMessage(message);
+    //                 },
+    //             create: function(message) {
+    //                 this.perform(
+    //                     'create', { 
+    //                     body: message.body,
+    //                     author_id: message.author_id,
+    //                     chatroom_id: message.chatroom_id,
+    //                     parent_id: message.parent_id,
+    //                     }
+    //                 );
+    //                 }
+    //         }
+    //     );
+    // }
 
-      var cable;
-
-      if (true) {
-        cable = actioncable__WEBPACK_IMPORTED_MODULE_2___default.a.createConsumer('http://localhost:3000/cable');
-      } else {}
-
-      this.chats = cable.subscriptions.create({
-        channel: 'MessagesChannel',
-        room: chatroomId
-      }, {
-        connected: function connected() {
-          console.log("Connected");
-        },
-        disconnected: function disconnected() {
-          console.log("Disconnected");
-        },
-        received: function received(message) {
-          _this.props.receiveMessage(message);
-        },
-        create: function create(message) {
-          this.perform('create', {
-            body: message.body,
-            author_id: message.author_id,
-            chatroom_id: message.chatroom_id,
-            parent_id: message.parent_id
-          });
-        }
-      });
-    }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var channels = [];
       var directMessages = [];
       this.props.chatrooms.forEach(function (chatroom) {
-        _this2.createSocket(chatroom.id);
-
+        // this.createSocket(chatroom.id);
         if (chatroom.chatroom_type === 'channel') {
           channels.push(chatroom);
         } else if (chatroom.chatroom_type === 'direct_message') {
@@ -1197,6 +1188,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _message_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item */ "./frontend/components/messages/message_item.jsx");
+/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
+/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1214,6 +1207,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
  // import EmojiPicker from 'emoji-picker-react';
@@ -1243,6 +1237,8 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.createSocket(); // debugger
+
       this.props.fetchMessages(this.props.match.params.chatroomId);
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
@@ -1279,9 +1275,43 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "createSocket",
+    value: function createSocket() {
+      var _this3 = this;
+
+      var cable;
+
+      if (true) {
+        cable = actioncable__WEBPACK_IMPORTED_MODULE_2___default.a.createConsumer('http://localhost:3000/cable');
+      } else {}
+
+      this.chats = cable.subscriptions.create({
+        channel: 'MessagesChannel',
+        room: this.props.match.params.chatroomId
+      }, {
+        connected: function connected() {
+          console.log("Connected");
+        },
+        disconnected: function disconnected() {
+          console.log("Disconnected");
+        },
+        received: function received(message) {
+          _this3.props.receiveMessage(message);
+        },
+        create: function create(message) {
+          this.perform('create', {
+            body: message.body,
+            author_id: message.author_id,
+            chatroom_id: message.chatroom_id,
+            parent_id: message.parent_id
+          });
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var chatroomTitle = "";
       var welcomeMessage = "";
@@ -1326,7 +1356,7 @@ function (_React$Component) {
         className: "message-form",
         autoFocus: true,
         onKeyPress: function onKeyPress(e) {
-          return _this3.handleEnterKey(e);
+          return _this4.handleEnterKey(e);
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-right-box flex"
