@@ -1141,7 +1141,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var MessageItem = function MessageItem(_ref) {
   var message = _ref.message,
-      currentUser = _ref.currentUser;
+      destroyMessage = _ref.destroyMessage,
+      fetchMessages = _ref.fetchMessages;
+  // debugger
   var name;
 
   if (message.author_alias) {
@@ -1151,6 +1153,11 @@ var MessageItem = function MessageItem(_ref) {
   }
 
   ;
+
+  function deleteMessage() {
+    destroyMessage(message.id);
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: "message-".concat(message.id),
     className: "message-item-container"
@@ -1176,6 +1183,7 @@ var MessageItem = function MessageItem(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item-buttons"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    onClick: deleteMessage,
     className: "fas fa-ellipsis-h"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-item-buttons-popup"
@@ -1183,6 +1191,46 @@ var MessageItem = function MessageItem(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
+
+/***/ }),
+
+/***/ "./frontend/components/messages/message_item_container.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/messages/message_item_container.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _message_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item */ "./frontend/components/messages/message_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    currentUser: state.entities.users[state.session.currentUserId],
+    message: ownProps.message
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    destroyMessage: function destroyMessage(messageId) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["destroyMessage"])(messageId));
+    },
+    fetchMessages: function fetchMessages(chatroomId) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatroomId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_message_item__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -1197,7 +1245,7 @@ var MessageItem = function MessageItem(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _message_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item */ "./frontend/components/messages/message_item.jsx");
+/* harmony import */ var _message_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item_container */ "./frontend/components/messages/message_item_container.jsx");
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1360,7 +1408,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", chatroomTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, welcomeMessage, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "message-list flex"
       }, this.props.messages.map(function (message) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message
         });

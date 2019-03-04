@@ -164,6 +164,7 @@
 }
 
 .message-item-right {
+    position: relative;
     align-self: center;
     border: 1px solid $lighter-grey;
     color: $lighter-grey;
@@ -175,9 +176,10 @@
 
 .message-item-right .message-item-buttons-popup {
     position: absolute;
-    bottom: 25px;
+    font-size: 11px;
+    bottom: 30px;
     left: -75px;
-    width: 175px;
+    // width: 175px;
     visibility: hidden;
     background: $black;
     padding: 10px 5px;

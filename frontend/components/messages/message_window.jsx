@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageItem from './message_item';
+import MessageItemContainer from './message_item_container';
 import Cable from 'actioncable';
 // import EmojiPicker from 'emoji-picker-react';
 
@@ -106,11 +106,11 @@ class MessageWindow extends React.Component {
                 <p>{ welcomeMessage } </p>
             </div>
                 <ul className="message-list flex">
-                    { 
-                        this.props.messages.map( message => {
-                            return <MessageItem key={message.id} message={message} />
-                            }   
-                        )}
+                    {   
+                        this.props.messages.map( message => (
+                            <MessageItemContainer key={message.id} message={message} />
+                        ))
+                    }
                 </ul>
             </div>
             <div className="message-form-input flex">

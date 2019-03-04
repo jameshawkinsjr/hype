@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MessageItem = ({message, currentUser}) => {
+const MessageItem = ({ message, destroyMessage, fetchMessages }) => {
+  // debugger
   let name;
   if (message.author_alias) {
       name = message.author_alias;
   } else {
       name = message.author_name;
   };
+
+  function deleteMessage() {
+    destroyMessage(message.id);
+  }
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
@@ -26,7 +31,8 @@ const MessageItem = ({message, currentUser}) => {
             </div>
             <div className="message-item-right">
               <div className="message-item-buttons">
-                <i className="fas fa-ellipsis-h"></i>
+                <i onClick={ deleteMessage }className="fas fa-ellipsis-h"></i>
+                {/* <button onClick={ deleteMessage }>Delete</button> */}
                 <span className="message-item-buttons-popup"> Delete Comment </span>
               </div>
             </div>
