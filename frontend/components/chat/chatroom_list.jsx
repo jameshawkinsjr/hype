@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-// import Cable from 'actioncable';
+import Cable from 'actioncable';
 
 class ChatroomList extends React.Component {
     constructor(props) {
@@ -8,41 +8,63 @@ class ChatroomList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchChatrooms(this.props.currentUser.id);
+        this.props.fetchChatrooms(this.props.currentUser.id)
+        .then(chatrooms => this.subscribeToAllChats());
+    }
+
+    componentDidUpdate(previousProps) {
+
     }
 
 
-    // createSocket(chatroomId) {
-    //     let cable;
-    //     if (process.env.NODE_ENV !== 'production') {
-    //         cable = Cable.createConsumer('http://localhost:3000/cable');
-    //     } else {
-    //         cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
-    //     }
-    //     this.chats = cable.subscriptions.create(
-    //         {   channel: 
-    //                 'MessagesChannel',
-    //             room: 
-    //                 chatroomId
-    //         },  
-    //         {   connected: () => { console.log("Connected"); },
-    //             disconnected: () => { console.log("Disconnected"); },
-    //             received: message => {
-    //                 this.props.receiveMessage(message);
-    //                 },
-    //             create: function(message) {
-    //                 this.perform(
-    //                     'create', { 
-    //                     body: message.body,
-    //                     author_id: message.author_id,
-    //                     chatroom_id: message.chatroom_id,
-    //                     parent_id: message.parent_id,
-    //                     }
-    //                 );
-    //                 }
-    //         }
-    //     );
-    // }
+    subscribeToAllChats() {
+        this.props.chatrooms.forEach( chatroom => {
+            this.createSocket(chatroom.id);
+        });
+    }
+    createSocket(chatroomId) {
+        let cable;
+        if (process.env.NODE_ENV !== 'production') {
+            cable = Cable.createConsumer('http://localhost:3000/cable');
+        } else {
+            cable = Cable.createConsumer('wss://get-hype-chat.herokuapp.com/cable');
+        }
+        this.chats = cable.subscriptions.create(
+            {   channel: 
+                    'MessagesChannel',
+                room: 
+                    chatroomId
+            },  
+            {   connected: () => { console.log(`Connected to channel ${chatroomId}`); },
+                disconnected: () => { console.log(`Disconnected to channel ${chatroomId}`); },
+                received: message => {
+                    this.props.receiveMessage(message);
+                    if (!("Notification" in window)) {
+                        console.log("No Notifications");
+                    } else if (Notification.permission === "granted") {
+                        debugger
+                        let notification = new Notification(`${message.author_name}: ${message.body}`);
+                    } else if (Notification.permission !== "denied") {
+                        Notification.requestPermission().then(function (permission) {
+                            if (permission === "granted") {
+                                let notification = new Notification(`${message.body}`);
+                          }
+                        });
+                      }
+                    },
+                create: function(message) {
+                    this.perform(
+                        'create', { 
+                        body: message.body,
+                        author_id: message.author_id,
+                        chatroom_id: message.chatroom_id,
+                        parent_id: message.parent_id,
+                        }
+                    );
+                    }
+            }
+        );
+    }
 
 
         

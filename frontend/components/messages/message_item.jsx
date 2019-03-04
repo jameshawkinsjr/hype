@@ -32,7 +32,6 @@ const MessageItem = ({ message, destroyMessage, fetchMessages }) => {
             <div className="message-item-right">
               <div className="message-item-buttons">
                 <i onClick={ deleteMessage }className="fas fa-ellipsis-h"></i>
-                {/* <button onClick={ deleteMessage }>Delete</button> */}
                 <span className="message-item-buttons-popup"> Delete Comment </span>
               </div>
             </div>
