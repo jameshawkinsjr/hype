@@ -19,8 +19,15 @@ class MessageWindow extends React.Component {
 
     componentDidMount() {
         this.createSocket();
-        // debugger
         this.props.fetchMessages(this.props.match.params.chatroomId);
+        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+    }
+
+    componentDidUpdate(previousProps) {
+        // debugger
+        if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+            this.props.fetchMessages(this.props.match.params.chatroomId);
+        }
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
     }
 
@@ -86,7 +93,7 @@ class MessageWindow extends React.Component {
             userList = this.props.currentChatroom.users.join(", ");
             if (this.props.currentChatroom.chatroom_type == 'channel') {
                 chatroomTitle = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()}`;
-                welcomeMessage = `${this.props.currentChatroom.created_by} created this channel on ${this.props.currentChatroom.date_created}. This is the very beinning of the #${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} channel.`;
+                welcomeMessage = `${this.props.currentChatroom.created_by} created this channel on ${this.props.currentChatroom.date_created}. This is the very beginning of the #${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} channel.`;
             } else {
                 chatroomTitle = userList;
                 welcomeMessage = `This is the very beginning of your direct message history with ${this.props.currentChatroom.users.join(", ")}. Only the ${this.props.currentChatroom.users.length + 1} of you are in this conversation and no one else can join it.`;
@@ -101,11 +108,8 @@ class MessageWindow extends React.Component {
                 <ul className="message-list flex">
                     { 
                         this.props.messages.map( message => {
-                        // debugger
-                        // if (message.chatroom_id === that.state.chatroom_id) {
                             return <MessageItem key={message.id} message={message} />
                             }   
-                            // }
                         )}
                 </ul>
             </div>

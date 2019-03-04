@@ -152,11 +152,45 @@
 }
 
 .message-item {
-    flex-direction: column;
+    justify-content: space-between;
     margin-left: 5px;
     .message-body-author-container {
         margin-top: 4px;
     }
+}
+
+.message-item-left {
+    flex-direction: column;
+}
+
+.message-item-right {
+    align-self: center;
+    border: 1px solid $lighter-grey;
+    color: $lighter-grey;
+    margin-right: 25px;
+    border-radius: 5px;
+    height: 20px;
+    padding: 3px 10px;
+}
+
+.message-item-right .message-item-buttons-popup {
+    position: absolute;
+    bottom: 25px;
+    left: -75px;
+    width: 175px;
+    visibility: hidden;
+    background: $black;
+    padding: 10px 5px;
+    color: $white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.message-item-right:hover .message-item-buttons-popup {
+    visibility: visible;
+    animation-name: appear;
+    animation-duration: 1s;
 }
 
 .message-body-author {
@@ -212,6 +246,7 @@
 .message-window-first-message {
     padding: 20px;
     border-bottom: 1px solid $lighter-grey;
+    margin-bottom: 20px;
     h2 {
         font-weight: 900;
         padding-bottom: 20px;

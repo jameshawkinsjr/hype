@@ -1160,6 +1160,8 @@ var MessageItem = function MessageItem(_ref) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-item-left flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-body-author-container flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-author"
@@ -1169,7 +1171,15 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-body-full-timestamp"
   }, message.full_timestamp))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-body-body"
-  }, message.body)));
+  }, message.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-item-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "message-item-buttons"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-ellipsis-h"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "message-item-buttons-popup"
+  }, " Delete Comment ")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
@@ -1237,9 +1247,20 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.createSocket(); // debugger
-
+      this.createSocket();
       this.props.fetchMessages(this.props.match.params.chatroomId);
+      setTimeout(function () {
+        return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
+      }, 500);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(previousProps) {
+      // debugger
+      if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+        this.props.fetchMessages(this.props.match.params.chatroomId);
+      }
+
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
       }, 500);
@@ -1324,7 +1345,7 @@ function (_React$Component) {
 
         if (this.props.currentChatroom.chatroom_type == 'channel') {
           chatroomTitle = "#".concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase());
-          welcomeMessage = "".concat(this.props.currentChatroom.created_by, " created this channel on ").concat(this.props.currentChatroom.date_created, ". This is the very beinning of the #").concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase(), " channel.");
+          welcomeMessage = "".concat(this.props.currentChatroom.created_by, " created this channel on ").concat(this.props.currentChatroom.date_created, ". This is the very beginning of the #").concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase(), " channel.");
         } else {
           chatroomTitle = userList;
           welcomeMessage = "This is the very beginning of your direct message history with ".concat(this.props.currentChatroom.users.join(", "), ". Only the ").concat(this.props.currentChatroom.users.length + 1, " of you are in this conversation and no one else can join it.");
@@ -1339,14 +1360,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", chatroomTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, welcomeMessage, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "message-list flex"
       }, this.props.messages.map(function (message) {
-        // debugger
-        // if (message.chatroom_id === that.state.chatroom_id) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message
         });
-      } // }
-      ))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-left-box flex"
@@ -1401,7 +1419,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
-    messages: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllMessages"])(state),
+    // messages: selectAllMessages(state), // for this chatroom
+    messages: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllMessagesForChatroom"])(state, ownProps.match.params.chatroomId),
     chatrooms: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllChatrooms"])(state),
     errors: state.errors.messages
   };
@@ -2529,15 +2548,24 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectAllMessages, selectAllChatrooms */
+/*! exports provided: selectAllMessages, selectAllMessagesForChatroom, selectAllChatrooms */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllMessages", function() { return selectAllMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllMessagesForChatroom", function() { return selectAllMessagesForChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllChatrooms", function() { return selectAllChatrooms; });
 var selectAllMessages = function selectAllMessages(state) {
   return Object.values(state.entities.messages);
+};
+var selectAllMessagesForChatroom = function selectAllMessagesForChatroom(state, chatroomId) {
+  var messages = Object.values(state.entities.messages);
+  var filteredMessages = messages.filter(function (message) {
+    return message.chatroom_id == chatroomId;
+  }); // debugger
+
+  return filteredMessages;
 };
 var selectAllChatrooms = function selectAllChatrooms(state) {
   return Object.values(state.entities.chatrooms);

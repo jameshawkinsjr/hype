@@ -3,13 +3,14 @@ import MessageWindow from './message_window';
 import { withRouter } from 'react-router-dom';
 import { fetchMessages, receiveMessage, destroyMessage, createMessage } from '../../actions/messages_actions';
 import { fetchChatroom } from '../../actions/chatrooms_actions';
-import { selectAllMessages, selectAllChatrooms } from '../../reducers/selectors';
+import { selectAllMessages, selectAllChatrooms, selectAllMessagesForChatroom } from '../../reducers/selectors';
 
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.currentUserId],
     currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
-    messages: selectAllMessages(state),
+    // messages: selectAllMessages(state), // for this chatroom
+    messages: selectAllMessagesForChatroom(state, ownProps.match.params.chatroomId),
     chatrooms: selectAllChatrooms(state),
     errors: state.errors.messages,
 });
