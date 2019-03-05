@@ -66,3 +66,17 @@ export const destroyChatroom = (chatroomId) => dispatch => (
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )
 );
+
+export const subscribeToChatroom = (chatroom) => dispatch => (
+        ApiUtil.createChatroomSubscription(chatroom)
+                .then(chatroomId => dispatch(receiveChatroom(chatroomId)),
+                err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
+        )
+);
+
+export const unsubscribeFromChatroom = (chatroom) => dispatch => (
+        ApiUtil.destroyChatroomSubscription(chatroom)
+                .then(chatroomId => dispatch(removeChatroom(chatroomId)),
+                err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
+        )
+);

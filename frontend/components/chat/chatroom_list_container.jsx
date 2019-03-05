@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChatroomList from './chatroom_list';
-import { fetchChatrooms, receiveChatroom, destroyChatroom, createChatroom } from '../../actions/chatrooms_actions';
+import { fetchChatrooms, receiveChatroom, destroyChatroom, createChatroom, unsubscribeFromChatroom} from '../../actions/chatrooms_actions';
 import { receiveMessage, removeMessage } from '../../actions/messages_actions';
 import { withRouter } from 'react-router-dom';
 import { selectAllChatrooms } from '../../reducers/selectors';
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
     receiveChatroom: chatroom => dispatch(receiveChatroom(chatroom)),
     destroyChatroom: chatroomId => dispatch(destroyChatroom(chatroomId)),
     createChatroom: chatroom => dispatch(createChatroom(chatroom)),
+    unsubscribeFromChatroom: chatroom => dispatch(unsubscribeFromChatroom(chatroom)),
 
 });
 

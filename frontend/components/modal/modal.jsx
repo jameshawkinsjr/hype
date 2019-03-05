@@ -12,6 +12,12 @@ function Modal({modal, closeModal}) {
     case 'editMessage':
       component = <MessageItemEditContainer message={modal.message} />;
       break;
+    case 'addChannel':
+      component = <MessageItemEditContainer  chatroomType={modal.type}/>;
+      break;
+    case 'addDirectMessage':
+      component = <MessageItemEditContainer chatroomType={modal.type} />;
+      break;
     default:
       return null;
   }

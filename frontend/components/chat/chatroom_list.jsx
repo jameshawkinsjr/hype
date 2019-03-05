@@ -13,7 +13,6 @@ class ChatroomList extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-
     }
 
 
@@ -22,6 +21,13 @@ class ChatroomList extends React.Component {
             this.createSocket(chatroom.id);
         });
     }
+
+    unsubscribe(chatroom){
+        // debugger
+        this.props.unsubscribeFromChatroom(chatroom);
+    }
+
+
     createSocket(chatroomId) {
         let cable;
         if (process.env.NODE_ENV !== 'production') {
@@ -94,8 +100,13 @@ class ChatroomList extends React.Component {
                 <ul>
                     { channels.map( chatroom => (
                         <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
-                            <li className="chatroom-name chatroom-channel-names">
-                            #  { chatroom.title.replace(/\s+/g, '-').toLowerCase() }
+                            <li className="chatroom-name chatroom-channel-names flex">
+                            <div>
+                                #  { chatroom.title.replace(/\s+/g, '-').toLowerCase() }
+                            </div>
+                            <div>
+                                    <i className="message-icons far fa-times-circle"></i>
+                                </div>
                             </li>
                         </NavLink>
                     ))
@@ -107,17 +118,20 @@ class ChatroomList extends React.Component {
         if (directMessages){
             directMessageList = (
             <>
-                <div className="chatroom-category chatroom-direct-messages"><h3> Direct Messages </h3></div>
+                <div className="chatroom-category chatroom-direct-messages flex">
+                    <h3> Direct Messages </h3>
+                            <i className="fas fa-plus"></i>
+                    </div>
                 <ul>
                 { directMessages.map( chatroom => (
                     <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
                             <li className="chatroom-name">
-                                ◦ { chatroom.users.join(", ") }
+                                    ◦ { chatroom.users.join(", ") }
+                                    <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
                             </li>
                     </NavLink>
-                        
                     ))
-                    }
+                }
                 </ul>
             </>
             );
@@ -126,9 +140,14 @@ class ChatroomList extends React.Component {
         return (
                 <div className="chatroom-skeleton flex">
                 <div className="chatroom-all-threads">  
-                    <div className="chatroom-category chatroom-jump-to"><h3> Jump To Box </h3></div>
+                    <div className="chatroom-category chatroom-jump-to flex">
+                        <i className=" fas fa-search"></i><h3> Jump To... </h3>
+                    </div>
                     <div className="chatroom-category chatroom-all-threads-text flex"><i className="far fa-comment-alt"></i><h3> All Threads </h3></div>
                     { channelList }
+                    <div className="add-channel-button">
+                        <div className="chatroom-category add-channel-button flex"><h3>+ Add a channel </h3></div>
+                    </div>
                     { directMessageList }
                 </div> 
             </div>

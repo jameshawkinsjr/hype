@@ -90,7 +90,7 @@
 /*!***********************************************!*\
   !*** ./frontend/actions/chatrooms_actions.js ***!
   \***********************************************/
-/*! exports provided: RECEIVE_ALL_CHATROOMS, RECEIVE_CHATROOM, RECEIVE_CHATROOM_ERRORS, CLEAR_CHATROOM_ERRORS, REMOVE_CHATROOM, receiveChatrooms, receiveChatroom, removeChatroom, receiveChatroomErrors, clearChatroomErrors, fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom */
+/*! exports provided: RECEIVE_ALL_CHATROOMS, RECEIVE_CHATROOM, RECEIVE_CHATROOM_ERRORS, CLEAR_CHATROOM_ERRORS, REMOVE_CHATROOM, receiveChatrooms, receiveChatroom, removeChatroom, receiveChatroomErrors, clearChatroomErrors, fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom, subscribeToChatroom, unsubscribeFromChatroom */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,6 +110,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChatroom", function() { return createChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editChatroom", function() { return editChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyChatroom", function() { return destroyChatroom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subscribeToChatroom", function() { return subscribeToChatroom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unsubscribeFromChatroom", function() { return unsubscribeFromChatroom; });
 /* harmony import */ var _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/chatrooms_api_util */ "./frontend/util/chatrooms_api_util.js");
  // Action creators
 
@@ -187,6 +189,24 @@ var editChatroom = function editChatroom(chatroom) {
 var destroyChatroom = function destroyChatroom(chatroomId) {
   return function (dispatch) {
     return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyChatroom"](chatroomId).then(function (chatroomId) {
+      return dispatch(removeChatroom(chatroomId));
+    }, function (err) {
+      return dispatch(receiveChatroomErrors(err.responseJSON));
+    });
+  };
+};
+var subscribeToChatroom = function subscribeToChatroom(chatroom) {
+  return function (dispatch) {
+    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroomSubscription"](chatroom).then(function (chatroomId) {
+      return dispatch(receiveChatroom(chatroomId));
+    }, function (err) {
+      return dispatch(receiveChatroomErrors(err.responseJSON));
+    });
+  };
+};
+var unsubscribeFromChatroom = function unsubscribeFromChatroom(chatroom) {
+  return function (dispatch) {
+    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyChatroomSubscription"](chatroom).then(function (chatroomId) {
       return dispatch(removeChatroom(chatroomId));
     }, function (err) {
       return dispatch(receiveChatroomErrors(err.responseJSON));
@@ -802,6 +822,12 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "unsubscribe",
+    value: function unsubscribe(chatroom) {
+      // debugger
+      this.props.unsubscribeFromChatroom(chatroom);
+    }
+  }, {
     key: "createSocket",
     value: function createSocket(chatroomId) {
       var _this3 = this;
@@ -853,6 +879,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var channels = [];
       var directMessages = [];
       this.props.chatrooms.forEach(function (chatroom) {
@@ -877,22 +905,31 @@ function (_React$Component) {
             to: "/chatrooms/".concat(chatroom.id),
             className: "active-chatroom"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "chatroom-name chatroom-channel-names"
-          }, "#  ", chatroom.title.replace(/\s+/g, '-').toLowerCase()));
+            className: "chatroom-name chatroom-channel-names flex"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "#  ", chatroom.title.replace(/\s+/g, '-').toLowerCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "message-icons far fa-times-circle"
+          }))));
         })));
       }
 
       if (directMessages) {
         directMessageList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "chatroom-category chatroom-direct-messages"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, directMessages.map(function (chatroom) {
+          className: "chatroom-category chatroom-direct-messages flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-plus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, directMessages.map(function (chatroom) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
             key: chatroom.id,
             to: "/chatrooms/".concat(chatroom.id),
             className: "active-chatroom"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             className: "chatroom-name"
-          }, "\u25E6 ", chatroom.users.join(", ")));
+          }, "\u25E6 ", chatroom.users.join(", "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "message-icons far fa-times-circle",
+            onClick: function onClick() {
+              return _this4.unsubscribe(chatroom);
+            }
+          })));
         })));
       }
 
@@ -901,12 +938,18 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-all-threads"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-jump-to"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Jump To Box ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chatroom-category chatroom-jump-to flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: " fas fa-search"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Jump To... ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-category chatroom-all-threads-text flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-comment-alt"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads ")), channelList, directMessageList));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads ")), channelList, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-channel-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chatroom-category add-channel-button flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "+ Add a channel "))), directMessageList));
     }
   }]);
 
@@ -965,6 +1008,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createChatroom: function createChatroom(chatroom) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["createChatroom"])(chatroom));
+    },
+    unsubscribeFromChatroom: function unsubscribeFromChatroom(chatroom) {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["unsubscribeFromChatroom"])(chatroom));
     }
   };
 };
@@ -1792,6 +1838,18 @@ function Modal(_ref) {
     case 'editMessage':
       component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         message: modal.message
+      });
+      break;
+
+    case 'addChannel':
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        chatroomType: modal.type
+      });
+      break;
+
+    case 'addDirectMessage':
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        chatroomType: modal.type
       });
       break;
 
@@ -2775,6 +2833,7 @@ var chatroomsErrorsReducer = function chatroomsErrorsReducer() {
 
   switch (action.type) {
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHATROOM_ERRORS"]:
+      debugger;
       return action.errors;
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_CHATROOMS"]:
@@ -3084,7 +3143,7 @@ var configureStore = function configureStore() {
 /*!*********************************************!*\
   !*** ./frontend/util/chatrooms_api_util.js ***!
   \*********************************************/
-/*! exports provided: fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom */
+/*! exports provided: fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom, createChatroomSubscription, destroyChatroomSubscription */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3094,6 +3153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChatroom", function() { return createChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editChatroom", function() { return editChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyChatroom", function() { return destroyChatroom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChatroomSubscription", function() { return createChatroomSubscription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyChatroomSubscription", function() { return destroyChatroomSubscription; });
 var fetchChatrooms = function fetchChatrooms(userId) {
   return $.ajax({
     method: 'GET',
@@ -3128,6 +3189,24 @@ var destroyChatroom = function destroyChatroom(chatroomId) {
   return $.ajax({
     method: 'DELETE',
     url: "/api/chatrooms/".concat(chatroomId)
+  });
+};
+var createChatroomSubscription = function createChatroomSubscription(chatroom) {
+  return $.ajax({
+    method: 'POST',
+    url: "/api/chatroom_subscriptions/",
+    data: {
+      chatroom: chatroom
+    }
+  });
+};
+var destroyChatroomSubscription = function destroyChatroomSubscription(chatroom) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "/api/chatroom_subscriptions/".concat(chatroom.id),
+    data: {
+      chatroom: chatroom
+    }
   });
 };
 

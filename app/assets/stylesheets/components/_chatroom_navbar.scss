@@ -29,10 +29,30 @@
 }
 
 .chatroom-jump-to {
-    background: #1e0920;
+    align-items: center;
+    background: #1e0920b2;
     padding: 5px;
     margin: 0;
+    width: 175px;
+    height: 25px;
+    border-radius: 5px;
     
+    i {
+        font-size: 12px;
+        margin: 5px;
+    }
+}
+
+.chatroom-direct-messages {
+    justify-content: space-between;
+    i {
+        font-size: 12px;
+        padding: 3px 18px 0 0; 
+        cursor: pointer;
+        &:hover{
+            color: $white;
+        }
+    }
 }
 
 .fa-comment-alt {
@@ -45,20 +65,27 @@
         font-size: 15px;
     }
 
+
 }
-.chatroom-nav > div {
+.add-channel-button{
+    align-items: center;
+    height: 30px;
+    &:hover {
+        background: #311134;
+        cursor: pointer;
+    }
 }
 
 .chatroom-name {
+    justify-content: space-between;
     font-weight: 300;
     font-size: 15px;
-    padding: 6px 10px 6px 20px;
+    padding: 6px 0 6px 20px;
     width: 220px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
-    position: relative;
     color: $white;
     a {
         color: $white;
@@ -70,14 +97,41 @@
         color: $white;
         font-weight: 600;
     }
+    .message-icons {
+        margin-right: 5px;
+        visibility: hidden;
+        position: absolute;
+        left: 190px;
+        color: $med-grey;
+        &:hover{
+            color: $white;
+        }
+    }
+}
+
+.active-chatroom:hover .message-icons {
+    visibility: visible;
+}
+.active-chatroom:hover .chatroom-name {
+    width: 180px;
 }
 
 .active-chatroom {
     display: flex;
+    position: relative;
     justify-items: flex-end;
     &.active > li{
         background: #2B649E;
     }
+    &:hover{
+        background: #311134;
+    }
+    &.active:hover{
+        background: #2B649E;
+    }
+    // &.active:hover .message-icons{
+    //     color: $white;
+    // }
 }
 
 .chatroom-channel-names {

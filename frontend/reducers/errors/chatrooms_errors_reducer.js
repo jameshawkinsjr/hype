@@ -5,6 +5,7 @@ const chatroomsErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_CHATROOM_ERRORS: 
+            debugger
             return action.errors;
         case RECEIVE_ALL_CHATROOMS:
             return [];

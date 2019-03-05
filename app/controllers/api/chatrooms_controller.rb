@@ -9,6 +9,7 @@ class Api::ChatroomsController < ApplicationController
         @chatroom = Chatroom.new(chatroom_params)
         @chatroom.admin = current_user.id
         if @chatroom.save
+            ChatroomSubscription.create!(user_id: current_user.id, chatroom_id: @chatroom.id)
             render :show
         else
             render json: @chatroom.errors.full_messages, status: 401

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :chatrooms, only: [:create, :show, :update, :destroy] do
       resources :messages, only: [:index]
     end
+    resources :chatroom_subscriptions, only: [:show, :create, :destroy]
     resources :messages, only: [:create, :show, :update, :destroy]
     resource :session, only: [:create, :destroy]
   end
