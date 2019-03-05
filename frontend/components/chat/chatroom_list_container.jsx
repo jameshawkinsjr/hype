@@ -4,6 +4,7 @@ import { fetchChatrooms, receiveChatroom, destroyChatroom, createChatroom, unsub
 import { receiveMessage, removeMessage } from '../../actions/messages_actions';
 import { withRouter } from 'react-router-dom';
 import { selectAllChatrooms } from '../../reducers/selectors';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mapStateToProps = ( state, ownProps ) => ({
     currentUser: state.entities.users[state.session.currentUserId],
@@ -11,7 +12,7 @@ const mapStateToProps = ( state, ownProps ) => ({
 
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     fetchChatrooms: userId => dispatch(fetchChatrooms(userId)),
     receiveMessage: message => dispatch(receiveMessage(message)),
     removeMessage: message => dispatch(removeMessage(message)),
@@ -19,6 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
     destroyChatroom: chatroomId => dispatch(destroyChatroom(chatroomId)),
     createChatroom: chatroom => dispatch(createChatroom(chatroom)),
     unsubscribeFromChatroom: chatroom => dispatch(unsubscribeFromChatroom(chatroom)),
+    openChannelModal: () => dispatch(openModal({ type: 'addChannel'})),
+    openDirectMessageModal: () => dispatch(openModal({ type: 'addDirectMessage'})),
 
 });
 

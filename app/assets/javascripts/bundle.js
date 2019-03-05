@@ -617,6 +617,214 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/chat/chatroom_add.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/chat/chatroom_add.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ChatroomAdd =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ChatroomAdd, _React$Component);
+
+  function ChatroomAdd(props) {
+    var _this;
+
+    _classCallCheck(this, ChatroomAdd);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ChatroomAdd).call(this, props));
+    _this.state = {
+      id: "this.props.message.id,",
+      body: "this.props.message.body,"
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ChatroomAdd, [{
+    key: "handleInput",
+    value: function handleInput() {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState({
+          body: e.target.value
+        });
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      this.props.createChatroom(this.state).then(function () {
+        return _this3.props.closeModal();
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearChatroomErrors();
+    }
+  }, {
+    key: "handleEnterKey",
+    value: function handleEnterKey(e) {
+      if (e.key === 'Enter') {
+        this.handleSubmit(e);
+      } else if (e.key === "Escape") {
+        this.props.closeModal();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var errors = this.props.errors.map(function (error) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: error
+        }, " ", error, " ");
+      });
+      var renderErrors = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "error-red"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors"
+      }, errors));
+      var header;
+      var inputBox;
+
+      if (this.props.chatroomType === 'addDirectMessage') {
+        header = "Direct Messages";
+        inputBox = "Find or start a conversation"; // List of all users. Add each one to the state. Then create subscriptions
+      } else if (this.props.chatroomType === 'addChannel') {
+        header = "Browse Channels";
+        inputBox = "Search Channels"; // List of all available channels. Add each one to the state. Then create subscriptions
+      } else {
+        header = "Create a Channel";
+        subtext = "Channels are where your members communicate. They're best when organized around a topic -- #leads for example.";
+        inputBox = "Search Channels"; // List of all available channels. Add each one to the state. Then create subscriptions
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-full-screen flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex"
+      }, errors.length > 0 ? renderErrors : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-modal flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Input Box "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Show all Channels sort by channel name "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        type: "text",
+        className: "input-outline",
+        rows: "20",
+        placeholder: "Edit your message",
+        onChange: this.handleInput(),
+        onKeyDown: function onKeyDown(e) {
+          return _this4.handleEnterKey(e);
+        },
+        autoComplete: "off",
+        autoFocus: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button",
+        onClick: this.handleSubmit
+      }, "Edit Message")))));
+    }
+  }]);
+
+  return ChatroomAdd;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ChatroomAdd);
+
+/***/ }),
+
+/***/ "./frontend/components/chat/chatroom_add_container.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/chat/chatroom_add_container.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _chatroom_add__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatroom_add */ "./frontend/components/chat/chatroom_add.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
+  return {
+    message: ownProps.message,
+    errors: state.errors.messages
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createChatroom: function (_createChatroom) {
+      function createChatroom(_x) {
+        return _createChatroom.apply(this, arguments);
+      }
+
+      createChatroom.toString = function () {
+        return _createChatroom.toString();
+      };
+
+      return createChatroom;
+    }(function (chatroom) {
+      return dispatch(createChatroom(chatroom));
+    }),
+    closeModal: function closeModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["closeModal"])());
+    },
+    clearChatroomErrors: function clearChatroomErrors() {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_3__["clearChatroomErrors"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_chatroom_add__WEBPACK_IMPORTED_MODULE_1__["default"])));
+
+/***/ }),
+
 /***/ "./frontend/components/chat/chatroom_header.jsx":
 /*!******************************************************!*\
   !*** ./frontend/components/chat/chatroom_header.jsx ***!
@@ -884,7 +1092,6 @@ function (_React$Component) {
       var channels = [];
       var directMessages = [];
       this.props.chatrooms.forEach(function (chatroom) {
-        // this.createSocket(chatroom.id);
         if (chatroom.chatroom_type === 'channel') {
           channels.push(chatroom);
         } else if (chatroom.chatroom_type === 'direct_message') {
@@ -916,7 +1123,8 @@ function (_React$Component) {
         directMessageList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "chatroom-category chatroom-direct-messages flex"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-plus"
+          className: "fas fa-plus",
+          onClick: this.props.openDirectMessageModal
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, directMessages.map(function (chatroom) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
             key: chatroom.id,
@@ -948,7 +1156,8 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads ")), channelList, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-channel-button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category add-channel-button flex"
+        className: "chatroom-category add-channel-button flex",
+        onClick: this.props.openChannelModal
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "+ Add a channel "))), directMessageList));
     }
   }]);
@@ -975,6 +1184,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -989,7 +1200,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchChatrooms: function fetchChatrooms(userId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["fetchChatrooms"])(userId));
@@ -1011,6 +1222,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     unsubscribeFromChatroom: function unsubscribeFromChatroom(chatroom) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["unsubscribeFromChatroom"])(chatroom));
+    },
+    openChannelModal: function openChannelModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__["openModal"])({
+        type: 'addChannel'
+      }));
+    },
+    openDirectMessageModal: function openDirectMessageModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__["openModal"])({
+        type: 'addDirectMessage'
+      }));
     }
   };
 };
@@ -1819,6 +2040,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/message_item_edit_container */ "./frontend/components/messages/message_item_edit_container.jsx");
+/* harmony import */ var _chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chat/chatroom_add_container */ "./frontend/components/chat/chatroom_add_container.jsx");
+
 
 
 
@@ -1842,13 +2065,19 @@ function Modal(_ref) {
       break;
 
     case 'addChannel':
-      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         chatroomType: modal.type
       });
       break;
 
     case 'addDirectMessage':
-      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        chatroomType: modal.type
+      });
+      break;
+
+    case 'createChannel':
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         chatroomType: modal.type
       });
       break;
@@ -2833,7 +3062,6 @@ var chatroomsErrorsReducer = function chatroomsErrorsReducer() {
 
   switch (action.type) {
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHATROOM_ERRORS"]:
-      debugger;
       return action.errors;
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_CHATROOMS"]:

@@ -2,6 +2,7 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import MessageItemEditContainer from '../messages/message_item_edit_container';
+import ChatroomAddContainer from '../chat/chatroom_add_container';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
@@ -13,10 +14,13 @@ function Modal({modal, closeModal}) {
       component = <MessageItemEditContainer message={modal.message} />;
       break;
     case 'addChannel':
-      component = <MessageItemEditContainer  chatroomType={modal.type}/>;
+      component = <ChatroomAddContainer  chatroomType={modal.type}/>;
       break;
     case 'addDirectMessage':
-      component = <MessageItemEditContainer chatroomType={modal.type} />;
+      component = <ChatroomAddContainer chatroomType={modal.type} />;
+      break;
+    case 'createChannel':
+      component = <ChatroomAddContainer chatroomType={modal.type} />;
       break;
     default:
       return null;

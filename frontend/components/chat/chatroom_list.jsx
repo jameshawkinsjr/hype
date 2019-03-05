@@ -82,7 +82,6 @@ class ChatroomList extends React.Component {
         let directMessages = [];
         
         this.props.chatrooms.forEach( chatroom => {
-            // this.createSocket(chatroom.id);
             if (chatroom.chatroom_type === 'channel'){
                 channels.push(chatroom);
             } else if (chatroom.chatroom_type === 'direct_message'){
@@ -120,7 +119,7 @@ class ChatroomList extends React.Component {
             <>
                 <div className="chatroom-category chatroom-direct-messages flex">
                     <h3> Direct Messages </h3>
-                            <i className="fas fa-plus"></i>
+                            <i className="fas fa-plus" onClick={ this.props.openDirectMessageModal } ></i>
                     </div>
                 <ul>
                 { directMessages.map( chatroom => (
@@ -146,7 +145,7 @@ class ChatroomList extends React.Component {
                     <div className="chatroom-category chatroom-all-threads-text flex"><i className="far fa-comment-alt"></i><h3> All Threads </h3></div>
                     { channelList }
                     <div className="add-channel-button">
-                        <div className="chatroom-category add-channel-button flex"><h3>+ Add a channel </h3></div>
+                        <div className="chatroom-category add-channel-button flex" onClick={ this.props.openChannelModal } ><h3>+ Add a channel </h3></div>
                     </div>
                     { directMessageList }
                 </div> 

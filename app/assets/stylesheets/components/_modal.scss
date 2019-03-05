@@ -32,4 +32,16 @@
       font-size: 14px;
       font-weight: 300;
     }
-}
+
+  }
+  
+  
+  .modal-full-screen  {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border: 5px solid red;
+
+  }
