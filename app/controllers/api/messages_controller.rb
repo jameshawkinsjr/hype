@@ -15,11 +15,12 @@ class Api::MessagesController < ApplicationController
                     body: @message.body,
                     author_name: @message.user.full_name,
                     author_alias: @message.user.alias,
+                    author_id: @message.user.id,
                     chatroom_id: @message.chatroom_id,
                     timestamp: @message.created_at.localtime.strftime("%l:%M %p"),
                     full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p")
                 )
-                render :show
+                render :_show
         else
             render json: @messages.errors.full_messages, status: 401
         end
@@ -32,7 +33,7 @@ class Api::MessagesController < ApplicationController
     def update
         @message = current_user.messages.find_by(id: params[:id])
         if @message && @message.update(message_params)
-            render :show
+            render :_show
         else
             render json: @message.errors.full_messages, status: 401
         end
@@ -42,6 +43,13 @@ class Api::MessagesController < ApplicationController
         @message = Message.find_by(id: params[:id])
         if @message
             @message.delete
+            ActionCable
+                .server
+                .broadcast(
+                    "room-#{@message.chatroom_id}:messages",
+                    deleted: true,
+                    id: @message.id
+                )
             render json: @message.id
         else
             render json: ["Message not found."],

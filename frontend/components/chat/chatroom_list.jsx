@@ -38,11 +38,13 @@ class ChatroomList extends React.Component {
             {   connected: () => { console.log(`Connected to channel ${chatroomId}`); },
                 disconnected: () => { console.log(`Disconnected to channel ${chatroomId}`); },
                 received: message => {
+                    if (message.deleted){
+                        this.props.removeMessage(message.id);
+                    } else {
                     this.props.receiveMessage(message);
                     if (!("Notification" in window)) {
-                        console.log("No Notifications");
                     } else if (Notification.permission === "granted") {
-                        debugger
+                        // debugger
                         let notification = new Notification(`${message.author_name}: ${message.body}`);
                     } else if (Notification.permission !== "denied") {
                         Notification.requestPermission().then(function (permission) {
@@ -51,7 +53,7 @@ class ChatroomList extends React.Component {
                           }
                         });
                       }
-                    },
+                    }},
                 create: function(message) {
                     this.perform(
                         'create', { 

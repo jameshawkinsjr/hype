@@ -28,6 +28,9 @@ class User < ApplicationRecord
         class_name: :Message
     has_many :chatroom_subscriptions
     has_many :chatrooms, through: :chatroom_subscriptions
+    # has_many :last_read_messages
+    #     foreign_key: :author_id,
+    #     class_name: :Message
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

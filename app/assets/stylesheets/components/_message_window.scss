@@ -154,6 +154,7 @@
 .message-item {
     justify-content: space-between;
     margin-left: 5px;
+    position: relative;
     .message-body-author-container {
         margin-top: 4px;
     }
@@ -164,32 +165,52 @@
 }
 
 .message-item-right {
-    position: relative;
     align-self: center;
+    background: $white;
     border: 1px solid $lighter-grey;
     color: $lighter-grey;
-    margin-right: 25px;
+    margin: 0 25px 0 10px;
     border-radius: 5px;
     height: 20px;
     padding: 3px 10px;
+    white-space: nowrap;
+    i {
+        margin: 0 5px;
+    }
 }
 
-.message-item-right .message-item-buttons-popup {
+.message-icons {
+    position: relative;
+}
+
+.message-icons .message-item-buttons-popup {
     position: absolute;
     font-size: 11px;
     bottom: 30px;
-    left: -75px;
-    // width: 175px;
+    white-space: nowrap;
+    left: -60px;
     visibility: hidden;
     background: $black;
     padding: 10px 5px;
     color: $white;
     text-align: center;
     font-weight: bold;
+    font-family: $font-sans-serif;
     border-radius: 5px;
 }
 
-.message-item-right:hover .message-item-buttons-popup {
+.message-item .message-item-right {
+    visibility: hidden;
+    position: absolute;
+    top: -15px;
+    right: 0;
+}
+
+.message-item:hover .message-item-right {
+    visibility: visible;
+    animation-name: appear;
+}
+.message-icons:hover .message-item-buttons-popup {
     visibility: visible;
     animation-name: appear;
     animation-duration: 1s;

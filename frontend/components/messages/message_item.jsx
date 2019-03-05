@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MessageItem = ({ message, destroyMessage, fetchMessages }) => {
+const MessageItem = ({ message, destroyMessage, openModal, currentUser }) => {
   // debugger
   let name;
   if (message.author_alias) {
@@ -13,6 +13,29 @@ const MessageItem = ({ message, destroyMessage, fetchMessages }) => {
   function deleteMessage() {
     destroyMessage(message.id);
   }
+  function editMessage() {
+    editMessage(message);
+  }
+
+  let editButtons = "";
+
+  if (message.author_id === currentUser.id) {
+      editButtons = (
+            <div className="message-item-right">
+                <div className="message-item-buttons">
+                  <i onClick={ openModal }className="message-icons fas fa-edit">
+                    <span className="message-item-buttons-popup"> Edit Message </span>
+                  </i>
+                  <i onClick={ deleteMessage }className="message-icons far fa-trash-alt">
+                    <span className="message-item-buttons-popup"> Delete Message </span>
+                  </i>
+                  {/* <i onClick={ deleteMessage }className="fas fa-ellipsis-h"></i>
+                  <span className="message-item-buttons-popup"> Delete Comment </span> */}
+                </div>
+            </div>
+        )
+    }
+
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
@@ -29,12 +52,7 @@ const MessageItem = ({ message, destroyMessage, fetchMessages }) => {
                     </div>
                 <div className='message-body-body'>{ message.body }</div>
             </div>
-            <div className="message-item-right">
-              <div className="message-item-buttons">
-                <i onClick={ deleteMessage }className="fas fa-ellipsis-h"></i>
-                <span className="message-item-buttons-popup"> Delete Comment </span>
-              </div>
-            </div>
+          { editButtons }
           </div>
     </li>
   )
