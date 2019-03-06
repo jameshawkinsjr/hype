@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 class ChatroomAdd extends React.Component {
@@ -18,7 +19,9 @@ class ChatroomAdd extends React.Component {
             topic: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.removeUser = this.removeUser.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);
+        this.subscribeToChatroom = this.subscribeToChatroom.bind(this);
     }
 
 
@@ -38,7 +41,7 @@ class ChatroomAdd extends React.Component {
 
         if (this.props.chatroomType === 'createDirectMessage'){
             this.setState( {header: "Direct Messages"});
-            this.setState( {inputBox: "Find or start a conversation"});
+            this.setState( {inputBox: "Find a user"});
             this.setState( {chatroom_type: "direct_message" });
             this.props.fetchUsers()
             .then ( () => this.setState( {users: this.props.users } ))
@@ -77,11 +80,27 @@ class ChatroomAdd extends React.Component {
         };
     }
 
+    subscribeToChatroom(chatroom) {
+        debugger
+        this.props.createChatroomSubscription( { chatroom_subscription: { chatroom_id: chatroom.id }} );
+    }
+
+    removeUser(user){
+        let usersToAdd = this.state.directMessageUsersToAdd;
+        let usersToDisplay = this.state.directMessageUsers;
+        let index = usersToDisplay.indexOf(user);
+        if (index > -1) {
+            usersToAdd.splice(index, 1);
+            usersToDisplay.splice(index, 1);
+        }
+        this.setState( { directMessageUsersToAdd: usersToAdd, directMessageUsers: usersToDisplay });
+    }
+
     addUser(user) {
-        if ( !this.state.directMessageUsersToAdd.includes(user) ){
+        if ( !this.state.directMessageUsersToAdd.includes(user.id) ){
             let usersToDisplay = this.state.directMessageUsers;
             let usersToAdd = this.state.directMessageUsersToAdd;
-            user.alias ? usersToDisplay.push(` ${user.alias}`) : usersToDisplay.push(` ${user.full_name}`);
+            user.alias ? usersToDisplay.push(`${user.alias}`) : usersToDisplay.push(`${user.full_name}`)
             usersToAdd.push(user.id);
             this.setState( { directMessageUsers: usersToDisplay });
             this.setState( { directMessageUsersToAdd: usersToAdd });
@@ -104,9 +123,50 @@ class ChatroomAdd extends React.Component {
         )
 
         let displayUserList = (
-            <ul className="join-channel-user-list flex">
+            <>
+                <h2>{ this.state.header }</h2>
+                <div className="outer-input">
+                <div className="join-channel-input flex">
+                    <div className="join-channel-inner-input flex">
+                        { this.state.directMessageUsers.map ( user => ( 
+                            <div className="individual-user flex" onClick={ () => this.removeUser(user)}> 
+                                <span className="individual-user-box"> {user} </span> 
+                                <span className="individual-user-x"> <i className="fas fa-times"></i></span> 
+                                
+                            </div> 
+                            ))
+                        }
+                        <input  type="text"
+                                placeholder={`${this.state.inputBox}`}
+                                autoFocus
+                                // value={ this.state.directMessageUsers}
+                                // onChange={this.handleInput('directMessageUsers')}
+                                onKeyDown={ (e) => this.handleEnterKey(e) }
+                        />
+                    </div>
+                        <button className="green-button" 
+                                onClick={this.handleSubmit}>
+                                Go
+                        </button>
+                </div>
+                </div>
+                    {   this.state.directMessageUsers.length > 1 ?
+                        (  
+                            <p> Create a direct message group with {this.state.directMessageUsers.length} other users </p>
+                        ) 
+                        :
+                        (
+                            <p> Create a direct message </p>
+                        )
+                    }
+                <ul className="join-channel-user-list flex">
                         {   
-                            this.state.users.map( user => (
+                            this.state.users.map( user => {
+                                if ( user.id === this.props.currentUser.id || user.full_name === "Hypebot"){
+                                    return ""
+                                } else if (this.state.directMessageUsersToAdd.includes(user.id)) {
+                                    return ""
+                                } else return (
                                 <li 
                                     key={`user-${user.id}`} 
                                     className="join-channel-user-list-item"
@@ -118,7 +178,7 @@ class ChatroomAdd extends React.Component {
                                             <div className="user-list-item flex">
                                                 {   user.alias ? 
                                                     (  
-                                                       <> <span className="full-name"> {user.alias} ◦</span> <span className="alias"> {user.full_name} </span> </>
+                                                    <> <span className="full-name"> {user.alias} ◦</span> <span className="alias"> {user.full_name} </span> </>
                                                     ) 
                                                     :
                                                     (
@@ -130,32 +190,58 @@ class ChatroomAdd extends React.Component {
                                         <i className="fas fa-level-down-alt"></i>
                                     </div>
                                 </li>
-                            ))
+                            )})
                         }
-                    </ul>   
+                    </ul>  
+                </> 
         )
+
+
         let displayChannelList = (
-            <ul className="join-channel-user-list flex">
-                        {   
-                            this.state.chatrooms.map( user => (
-                                <li 
-                                    key={`user-${user.id}`} 
-                                    className="join-channel-user-list-item"
-                                    onClick={ () => this.addUser(user) }
-                                >
-                                    <div className="user-list-item-container flex">
-                                        <div className="user-list-item-left flex">
-                                            <img className="profile-image-2" src={`https://robohash.org/${user.full_name}.png`} />
+            <div className="channel-input">
+            <div className="channel-input-header flex">
+                <h2>{ this.state.header }</h2>
+                <button className="green-button" 
+                        onClick={this.handleSubmit}>
+                        Create Channel
+                </button>
+            </div>
+
+            <div className="join-channel-inner-input flex">
+                    <i className=" fas fa-search"></i>
+                    <input  type="text"
+                            placeholder={`${this.state.inputBox}`}
+                            autoFocus
+                            onKeyDown={ (e) => this.handleEnterKey(e) }
+                    />
+            </div>
+
+                        <p> Channels you can join </p>
+                        <ul className="join-channel-user-list flex">
+                            {   this.state.chatrooms.map( chatroom => {
+                                { if (chatroom.chatroom_type === 'channel') {
+                                    return (
+                                        <Link   to={`/chatrooms/${chatroom.id}`}
+                                                onClick={ () => this.subscribeToChatroom(chatroom)}
+                                                >
+                                    <li 
+                                        key={`user-${chatroom.id}`} 
+                                        className="join-channel-user-list-item"
+                                    >
+                                        <div className="user-list-item-container flex">
+                                            <div className="user-list-item-left flex">
                                             <div className="user-list-item flex">
-                                                {user.alias ? ( `${user.alias} ◦ ${user.full_name}`) : `${user.full_name} ◦`} 
+                                                {`#  ${chatroom.title.replace(/\s+/g, '-').toLowerCase()}`}
+                                            </div> 
                                             </div>
+                                            <i className="fas fa-level-down-alt"></i>
                                         </div>
-                                        <i className="fas fa-level-down-alt"></i>
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </ul>   
+                                    </li>
+                                    </Link>
+                            )}}
+                        })}
+                        </ul>   
+            </div>
         )
 
         return (
@@ -167,28 +253,6 @@ class ChatroomAdd extends React.Component {
                             <h4>esc</h4>
                         </div>
                         <div className="join-channel-modal flex">
-                            <h2>{ this.state.header }</h2>
-                            <div className="join-channel-input flex">
-                                <input  type="text"
-                                        placeholder={`${this.state.inputBox}`}
-                                        value={ this.state.directMessageUsers }
-                                        // onChange={this.handleInput('directMessageUsers')}
-                                        onKeyDown={ (e) => this.handleEnterKey(e) }
-                                />
-                                <button className="green-button" 
-                                        onClick={this.handleSubmit}>
-                                        Go
-                                </button>
-                            </div>
-                            {   this.state.directMessageUsers.length > 1 ?
-                                (  
-                                    <p> Create a direct message group with {this.state.directMessageUsers.length} other users </p>
-                                ) 
-                                :
-                                (
-                                    <p> Create a direct message </p>
-                                )
-                            }
                             { this.props.chatroomType ==='joinChatroom' ? displayChannelList : displayUserList }
                         </div>
                 </div>

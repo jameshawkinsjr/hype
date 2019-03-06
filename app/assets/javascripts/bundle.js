@@ -680,6 +680,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -699,6 +700,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -727,7 +729,9 @@ function (_React$Component) {
       topic: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.removeUser = _this.removeUser.bind(_assertThisInitialized(_this));
     _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
+    _this.subscribeToChatroom = _this.subscribeToChatroom.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -757,7 +761,7 @@ function (_React$Component) {
           header: "Direct Messages"
         });
         this.setState({
-          inputBox: "Find or start a conversation"
+          inputBox: "Find a user"
         });
         this.setState({
           chatroom_type: "direct_message"
@@ -819,12 +823,39 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "subscribeToChatroom",
+    value: function subscribeToChatroom(chatroom) {
+      debugger;
+      this.props.createChatroomSubscription({
+        chatroom_subscription: {
+          chatroom_id: chatroom.id
+        }
+      });
+    }
+  }, {
+    key: "removeUser",
+    value: function removeUser(user) {
+      var usersToAdd = this.state.directMessageUsersToAdd;
+      var usersToDisplay = this.state.directMessageUsers;
+      var index = usersToDisplay.indexOf(user);
+
+      if (index > -1) {
+        usersToAdd.splice(index, 1);
+        usersToDisplay.splice(index, 1);
+      }
+
+      this.setState({
+        directMessageUsersToAdd: usersToAdd,
+        directMessageUsers: usersToDisplay
+      });
+    }
+  }, {
     key: "addUser",
     value: function addUser(user) {
-      if (!this.state.directMessageUsersToAdd.includes(user)) {
+      if (!this.state.directMessageUsersToAdd.includes(user.id)) {
         var usersToDisplay = this.state.directMessageUsers;
         var usersToAdd = this.state.directMessageUsersToAdd;
-        user.alias ? usersToDisplay.push(" ".concat(user.alias)) : usersToDisplay.push(" ".concat(user.full_name));
+        user.alias ? usersToDisplay.push("".concat(user.alias)) : usersToDisplay.push("".concat(user.full_name));
         usersToAdd.push(user.id);
         this.setState({
           directMessageUsers: usersToDisplay
@@ -851,10 +882,45 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "errors"
       }, errors));
-      var displayUserList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      var displayUserList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "outer-input"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-input flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-inner-input flex"
+      }, this.state.directMessageUsers.map(function (user) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "individual-user flex",
+          onClick: function onClick() {
+            return _this5.removeUser(user);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "individual-user-box"
+        }, " ", user, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "individual-user-x"
+        }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-times"
+        })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "".concat(this.state.inputBox),
+        autoFocus: true // value={ this.state.directMessageUsers}
+        // onChange={this.handleInput('directMessageUsers')}
+        ,
+        onKeyDown: function onKeyDown(e) {
+          return _this5.handleEnterKey(e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button",
+        onClick: this.handleSubmit
+      }, "Go"))), this.state.directMessageUsers.length > 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Create a direct message group with ", this.state.directMessageUsers.length, " other users ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Create a direct message "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "join-channel-user-list flex"
       }, this.state.users.map(function (user) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        if (user.id === _this5.props.currentUser.id || user.full_name === "Hypebot") {
+          return "";
+        } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
+          return "";
+        } else return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: "user-".concat(user.id),
           className: "join-channel-user-list-item",
           onClick: function onClick() {
@@ -878,29 +944,50 @@ function (_React$Component) {
         }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fas fa-level-down-alt"
         })));
-      }));
-      var displayChannelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      })));
+      var displayChannelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-input"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-input-header flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button",
+        onClick: this.handleSubmit
+      }, "Create Channel")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-inner-input flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: " fas fa-search"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "".concat(this.state.inputBox),
+        autoFocus: true,
+        onKeyDown: function onKeyDown(e) {
+          return _this5.handleEnterKey(e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Channels you can join "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "join-channel-user-list flex"
-      }, this.state.chatrooms.map(function (user) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: "user-".concat(user.id),
-          className: "join-channel-user-list-item",
-          onClick: function onClick() {
-            return _this5.addUser(user);
+      }, this.state.chatrooms.map(function (chatroom) {
+        {
+          if (chatroom.chatroom_type === 'channel') {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              to: "/chatrooms/".concat(chatroom.id),
+              onClick: function onClick() {
+                return _this5.subscribeToChatroom(chatroom);
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              key: "user-".concat(chatroom.id),
+              className: "join-channel-user-list-item"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item-container flex"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item-left flex"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item flex"
+            }, "#  ".concat(chatroom.title.replace(/\s+/g, '-').toLowerCase()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "fas fa-level-down-alt"
+            }))));
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item-container flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item-left flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "profile-image-2",
-          src: "https://robohash.org/".concat(user.full_name, ".png")
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item flex"
-        }, user.alias ? "".concat(user.alias, " \u25E6 ").concat(user.full_name) : "".concat(user.full_name, " \u25E6"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-level-down-alt"
-        })));
-      }));
+        }
+      })));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-modal-background flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -916,20 +1003,7 @@ function (_React$Component) {
         onClick: this.props.closeModal
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "esc")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-modal flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "join-channel-input flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        placeholder: "".concat(this.state.inputBox),
-        value: this.state.directMessageUsers // onChange={this.handleInput('directMessageUsers')}
-        ,
-        onKeyDown: function onKeyDown(e) {
-          return _this5.handleEnterKey(e);
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "green-button",
-        onClick: this.handleSubmit
-      }, "Go")), this.state.directMessageUsers.length > 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Create a direct message group with ", this.state.directMessageUsers.length, " other users ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Create a direct message "), this.props.chatroomType === 'joinChatroom' ? displayChannelList : displayUserList)));
+      }, this.props.chatroomType === 'joinChatroom' ? displayChannelList : displayUserList)));
     }
   }]);
 
@@ -993,19 +1067,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchChatrooms: function fetchChatrooms(userId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChatrooms"])(userId));
     },
-    createChatroomSubscription: function (_createChatroomSubscription) {
-      function createChatroomSubscription(_x) {
-        return _createChatroomSubscription.apply(this, arguments);
-      }
-
-      createChatroomSubscription.toString = function () {
-        return _createChatroomSubscription.toString();
-      };
-
-      return createChatroomSubscription;
-    }(function (chatroom) {
-      return dispatch(createChatroomSubscription(chatroom));
-    })
+    createChatroomSubscription: function createChatroomSubscription(chatroom) {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["createChatroomSubscription"])(chatroom));
+    }
   };
 };
 

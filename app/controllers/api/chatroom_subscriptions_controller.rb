@@ -4,6 +4,9 @@ class Api::ChatroomSubscriptionsController < ApplicationController
         @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:chatroom_id], chatroom_id: params[:user_id]
     end
     def create
+        if current_user.chatrooms.include?(params[:chatroom_subscription][:chatroom_id]
+            render json: @chatroom_subscription.chatroom_id
+        end
         @chatroom_subscription = ChatroomSubscription.new(chatroom_params)
         @chatroom_subscription.user_id = current_user.id
         if @chatroom_subscription.save

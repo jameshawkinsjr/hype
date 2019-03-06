@@ -12,10 +12,9 @@ class Api::ChatroomsController < ApplicationController
     def create
         @chatroom = Chatroom.new(chatroom_params)
         if @chatroom.save
-            debugger
             ChatroomSubscription.create!(user_id: current_user.id, chatroom_id: @chatroom.id)
-            params[:chatroom][:users].each do |user|
-                ChatroomSubscription.create!(user_id: user.id, chatroom_id: @chatroom.id)
+            params[:chatroom][:users].each do |userId|
+                ChatroomSubscription.create!(user_id: userId, chatroom_id: @chatroom.id)
             end
             render :show
         else

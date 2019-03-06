@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import ChatroomAdd from './chatroom_add';
 import { withRouter } from 'react-router-dom';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import { clearChatroomErrors, fetchChatrooms, createChatroom } from '../../actions/chatrooms_actions';
+import { clearChatroomErrors, fetchChatrooms, createChatroom, createChatroomSubscription } from '../../actions/chatrooms_actions';
 import { clearUserErrors, fetchUsers } from '../../actions/users_actions';
 import { selectAllUsers, selectAllChatrooms } from '../../reducers/selectors';
 
