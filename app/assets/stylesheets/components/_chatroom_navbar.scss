@@ -3,7 +3,7 @@
     border-style: solid;
     border-color: red;
     grid-template-columns: 220px auto;
-    grid-template-rows: 60px auto 100px;
+    grid-template-rows: minmax(60px, max-content) auto 100px;
     height: 100vh;
     width: 100vw;
   }

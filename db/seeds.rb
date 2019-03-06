@@ -16,7 +16,7 @@ hypebot = User.create!(full_name: "Hypebot", email: "Hypebot@hype-chat.com", pas
 jim = User.create!(full_name: "James Halpert", email: "J.Halpert@dunder-mifflin.org", alias: 'Jim Halpert', password: 'Jim123456')
 pam = User.create!(full_name: "Pam Beesly", email: "P.Beesly@dunder-mifflin.org", password: 'Pam123456')
 michael = User.create!(full_name: "Michael Scott", email: "M.Scott@dunder-mifflin.org", password: 'Michael123456')
-dwight = User.create!(full_name: "Dwight Schrute", email: "D.Schrute@dunder-mifflin.org", password: 'Dwight123456')
+dwight = User.create!(full_name: "Dwight Schrute - Assistant to the Regional Manager", email: "D.Schrute@dunder-mifflin.org", password: 'Dwight123456')
 andy = User.create!(full_name: "Andy Bernard", email: "A.Bernard@dunder-mifflin.org", alias: 'Nard Dog', password: 'Andy123456')
 toby = User.create!(full_name: "Toby Flenderson", email: "T.Flenderson@dunder-mifflin.org", password: 'Toby123456')
 kevin = User.create!(full_name: "Kevin Malone", email: "K.Malone@dunder-mifflin.org", password: 'Kevin123456')
@@ -74,7 +74,7 @@ yonkers = Chatroom.create!(title: "Yonkers Office", topic: "Yonkers Regional Dun
 
 dm1 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: jim.id)
 dm2 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: jim.id)
-dm3 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: jim.id)
+dm3 = Chatroom.create!(title: "", topic: "the boys", chatroom_type:"direct_message", admin_id: jim.id)
 dm4 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: pam.id)
 dm5 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: angela.id)
 dm6 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: ryan.id)

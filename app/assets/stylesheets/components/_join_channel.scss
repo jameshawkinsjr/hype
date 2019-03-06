@@ -52,32 +52,7 @@
                 margin-bottom: 20px;
                 padding: 10px;
                 overflow: auto;
-                .individual-user {
-                    background: #1D9BD1;
-                    align-items: center;
-                    // align-self: center;
-                    // justify-content: center;
-                    height: 30px;
-                    white-space: nowrap;
-                    font-family: $font-sans-serif;
-                    border-radius: 3px;
-                    margin: 8px;
-                    &:hover {
-                        cursor: pointer;
-                    }
-                    .individual-user-box {
-                        color: white;
-                        padding: 5px;
-                        font-size: 12px;
-                        font-weight: 600;
-                    }
-                    .individual-user-x {
-                        font-size: 14px;
-                        padding: 5px;
-                        color: white;
-                    }
 
-                }
                 .join-channel-inner-input{
                     border: 1px solid $med-grey;
                     border-radius: 5px;
@@ -236,19 +211,22 @@
         margin-left: 10px;
     }
     .user-list-item-name{
+        font-size: 14px;
         margin: 5px 0;
         font-weight: 700;
     }
 
     .user-list-item-topic {
-        font-weight: 500;
+        font-size: 12px;
+        font-weight: 400;
+        font-style: italic;
 
     }
     .user-list-item-description {
         margin: 5px 0;
         color: $med-grey;
         font-weight: 400;
-        font-size: 13px;
+        font-size: 12px;
     }
     input {
         box-sizing: border-box;
@@ -270,4 +248,111 @@
             font-size: 16px;
         }
     }
+}
+
+.create-channel-modal {
+    overflow: scroll;
+}
+
+.join-channel-modal {
+
+
+    .channel-create-header {
+        flex-direction: column;
+        width: 100%;
+        margin: 20px 0;
+        h2 {
+            padding: 0;
+            font-size: 20px;
+            margin: 0;
+        }
+        span {
+            font-family: $font-sans-serif;
+            color: $light-grey;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+
+    .create-channel-input-name {
+        height: 50px;
+    }
+
+    .create-channel-hashtag {
+        color: $light-grey;
+        align-self: center;
+        justify-self: center;
+        font-size: 20px;
+        margin-left: 15px;
+        margin-bottom: 0;
+    }
+
+    input {
+        height: initial;
+    }
+
+    .create-channel-input-optional{
+        font-family: $font-sans-serif;
+        color: $light-grey;
+        font-size: 14px;
+        font-weight: 300;
+
+
+    }
+
+    .create-channel-input-label {
+        font-family: $font-sans-serif;
+        color: $black;
+        font-size: 16px;
+        font-weight: 500;
+
+    }
+    .green-button {
+        float: right;
+    }
+
+    .join-channel-inner-input {
+        margin-top: 10px;
+        max-height: 150px;
+        overflow: hidden;
+    }
+
+    .individual-user-input{
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .join-channel-user-list {
+        height: 150px;
+    }
+
+    .not-active {
+        background: $lighter-grey;
+    }
+}
+
+.individual-user {
+    background: #1D9BD1;
+    align-items: center;
+    // align-self: center;
+    // justify-content: center;
+    height: 30px;
+    white-space: nowrap;
+    font-family: $font-sans-serif;
+    border-radius: 3px;
+    margin: 8px;
+    &:hover {
+        cursor: pointer;
+    }
+    .individual-user-box {
+        color: white;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .individual-user-x {
+        font-size: 14px;
+        padding: 5px;
+        color: white;
+    }
+
 }

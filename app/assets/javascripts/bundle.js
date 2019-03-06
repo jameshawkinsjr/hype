@@ -756,6 +756,17 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this3 = this;
 
+      this.props.fetchUsers().then(function () {
+        return _this3.setState({
+          users: _this3.props.users
+        });
+      });
+      this.props.fetchChatrooms("all").then(function () {
+        return _this3.setState({
+          chatrooms: _this3.props.chatrooms
+        });
+      });
+
       if (this.props.chatroomType === 'createDirectMessage') {
         this.setState({
           header: "Direct Messages"
@@ -766,11 +777,6 @@ function (_React$Component) {
         this.setState({
           chatroom_type: "direct_message"
         });
-        this.props.fetchUsers().then(function () {
-          return _this3.setState({
-            users: _this3.props.users
-          });
-        }); // List of all all users. Add each one to the state. Then create subscriptions
       } else if (this.props.chatroomType === 'joinChatroom') {
         this.setState({
           header: "Browse Channels"
@@ -778,24 +784,19 @@ function (_React$Component) {
         this.setState({
           inputBox: "Search Channels"
         });
-        this.props.fetchChatrooms("all").then(function () {
-          return _this3.setState({
-            chatrooms: _this3.props.chatrooms
-          });
-        }); // List of all available channels. Add each one to the state. Then create subscriptions
       } else {
         this.setState({
           header: "Create a Channel"
         });
         this.setState({
-          inputBox: "Search Channels"
+          inputBox: "e.g. leads"
         });
         this.setState({
           chatroom_type: "channel"
         });
         this.setState({
-          subtext: "Channels are where your members communicate. They're best when organized around a topic -- #leads for example.: Search Channels"
-        }); // List of all available channels. Add each one to the state. Then create subscriptions
+          subtext: "Channels are where your members communicate. They're best when organized around a topic - #leads for example."
+        });
       }
     }
   }, {
@@ -925,6 +926,7 @@ function (_React$Component) {
             return _this5.addUser(user);
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: "user-".concat(user.id),
           className: "user-list-item-container flex"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "user-list-item-left flex"
@@ -949,7 +951,7 @@ function (_React$Component) {
         className: "channel-input-header flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "green-button",
-        onClick: this.handleSubmit
+        onClick: this.props.openAddChannelModal
       }, "Create Channel")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-inner-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -967,6 +969,7 @@ function (_React$Component) {
         {
           if (chatroom.chatroom_type === 'channel') {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              key: "chatroom-".concat(chatroom.id),
               to: "/chatrooms/".concat(chatroom.id),
               onClick: function onClick() {
                 return _this5.subscribeToChatroom(chatroom);
@@ -992,6 +995,104 @@ function (_React$Component) {
           }
         }
       })));
+      var createAChannel = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-input join-channel-modal create-channel-modal"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-create-header channel-input-header channel-create-header flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-create-subtext"
+      }, this.state.subtext, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "create-channel-input-label"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-inner-input flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "create-channel-hashtag"
+      }, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "create-channel-input-name",
+        placeholder: "".concat(this.state.inputBox),
+        onChange: this.handleInput('title'),
+        value: this.state.title,
+        autoFocus: true,
+        onKeyDown: function onKeyDown(e) {
+          return _this5.handleEnterKey(e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "create-channel-input-label"
+      }, "Topic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "create-channel-input-optional"
+      }, "(optional)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-inner-input flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "create-channel-input-name",
+        onKeyDown: function onKeyDown(e) {
+          return _this5.handleEnterKey(e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "create-channel-input-label"
+      }, "Send invites to:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "create-channel-input-optional"
+      }, "(optional)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-inner-input individual-user-input flex"
+      }, this.state.directMessageUsers.map(function (user) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "individual-user flex",
+          onClick: function onClick() {
+            return _this5.removeUser(user);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "individual-user-box"
+        }, " ", user, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "individual-user-x"
+        }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-times"
+        })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "create-channel-input-name",
+        placeholder: "Click below to add names",
+        onKeyDown: function onKeyDown(e) {
+          return _this5.handleEnterKey(e);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "join-channel-user-list flex"
+      }, this.state.users.map(function (user) {
+        if (user.id === _this5.props.currentUser.id || user.full_name === "Hypebot") {
+          return "";
+        } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
+          return "";
+        } else return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "user-".concat(user.id),
+          className: "join-channel-user-list-item",
+          onClick: function onClick() {
+            return _this5.addUser(user);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: "user-".concat(user.id),
+          className: "user-list-item-container flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "user-list-item-left flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "profile-image-2",
+          src: "https://robohash.org/".concat(user.full_name, ".png")
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "user-list-item flex"
+        }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "full-name"
+        }, " ", user.alias, " \u25E6"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "alias"
+        }, " ", user.full_name, " "), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "full-name"
+        }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-level-down-alt"
+        })));
+      })), this.state.title ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button",
+        onClick: this.handleSubmit
+      }, "Create Channel") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "green-button not-active"
+      }, "Create Channel"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-modal-background flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1005,7 +1106,7 @@ function (_React$Component) {
       }, errors.length > 0 ? renderErrors : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-modal-escape",
         onClick: this.props.closeModal
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "esc")), this.props.chatroomType === 'joinChatroom' ? displayChannelList : displayUserList));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "esc")), this.props.chatroomType === 'joinChatroom' ? displayChannelList : this.props.chatroomType === 'createDirectMessage' ? displayUserList : createAChannel));
     }
   }]);
 
@@ -1071,6 +1172,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     subscribeToChatroom: function subscribeToChatroom(chatroom) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["subscribeToChatroom"])(chatroom));
+    },
+    openAddChannelModal: function openAddChannelModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["openModal"])({
+        type: 'createChannel'
+      }));
     }
   };
 };
@@ -1304,28 +1410,26 @@ function (_React$Component) {
         channel: 'MessagesChannel',
         room: chatroomId
       }, {
-        connected: function connected() {
-          console.log("Connected to channel ".concat(chatroomId));
+        connected: function connected() {//  console.log(`Connected to channel ${chatroomId}`); 
         },
-        disconnected: function disconnected() {
-          console.log("Disconnected to channel ".concat(chatroomId));
+        disconnected: function disconnected() {// console.log(`Disconnected to channel ${chatroomId}`); 
         },
         received: function received(message) {
           if (message.deleted) {
-            _this3.props.removeMessage(message.id);
-          } else {
-            _this3.props.receiveMessage(message);
+            _this3.props.removeMessage(message.id); // } else {
+            // this.props.receiveMessage(message);
+            // if (!("Notification" in window)) {
+            // } else if (Notification.permission === "granted") {
+            //     // debugger
+            //     let notification = new Notification(`${message.author_name}: ${message.body}`);
+            // } else if (Notification.permission !== "denied") {
+            //     Notification.requestPermission().then(function (permission) {
+            //         if (permission === "granted") {
+            //             let notification = new Notification(`${message.body}`);
+            //       }
+            //     });
+            //   }
 
-            if (!("Notification" in window)) {} else if (Notification.permission === "granted") {
-              // debugger
-              var notification = new Notification("".concat(message.author_name, ": ").concat(message.body));
-            } else if (Notification.permission !== "denied") {
-              Notification.requestPermission().then(function (permission) {
-                if (permission === "granted") {
-                  var _notification = new Notification("".concat(message.body));
-                }
-              });
-            }
           }
         },
         create: function create(message) {
@@ -1358,43 +1462,53 @@ function (_React$Component) {
       var directMessageList;
 
       if (channels) {
+        var that = this;
         channelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "chatroom-category chatroom-channels flex"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Channels "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "plus-rotate far fa-times-circle",
-          onClick: this.props.openJoinChannelModal
+          onClick: this.props.openAddChannelModal
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, channels.map(function (chatroom) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-            key: chatroom.id,
-            to: "/chatrooms/".concat(chatroom.id),
-            className: "active-chatroom"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "chatroom-name chatroom-channel-names flex"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "#  ", chatroom.title.replace(/\s+/g, '-').toLowerCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "message-icons far fa-times-circle"
-          }))));
+          if (chatroom.user_ids.includes(that.props.currentUser.id)) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+              key: chatroom.id,
+              to: "/chatrooms/".concat(chatroom.id),
+              className: "active-chatroom"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              className: "chatroom-name chatroom-channel-names flex"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "#  ", chatroom.title.replace(/\s+/g, '-').toLowerCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "message-icons far fa-times-circle",
+              onClick: function onClick() {
+                return _this4.unsubscribe(chatroom);
+              }
+            }))));
+          }
         })));
       }
 
       if (directMessages) {
+        var _that = this;
+
         directMessageList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "chatroom-category chatroom-direct-messages flex"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Direct Messages "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "plus-rotate far fa-times-circle",
           onClick: this.props.openDirectMessageModal
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, directMessages.map(function (chatroom) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-            key: chatroom.id,
-            to: "/chatrooms/".concat(chatroom.id),
-            className: "active-chatroom"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "chatroom-name"
-          }, "\u25E6 ", chatroom.users.join(", ") || "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "message-icons far fa-times-circle",
-            onClick: function onClick() {
-              return _this4.unsubscribe(chatroom);
-            }
-          })));
+          if (chatroom.user_ids.includes(_that.props.currentUser.id)) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+              key: chatroom.id,
+              to: "/chatrooms/".concat(chatroom.id),
+              className: "active-chatroom"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              className: "chatroom-name"
+            }, "\u25E6 ", chatroom.users.join(", ") || "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "message-icons far fa-times-circle",
+              onClick: function onClick() {
+                return _this4.unsubscribe(chatroom);
+              }
+            })));
+          }
         })));
       }
 
@@ -3639,6 +3753,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
 
@@ -3646,7 +3768,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1__["logger"]));
+  var middleware = [redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]];
+
+  if (true) {
+    middleware = [].concat(_toConsumableArray(middleware), [redux_logger__WEBPACK_IMPORTED_MODULE_1__["logger"]]);
+  }
+
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"].apply(void 0, _toConsumableArray(middleware)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -3804,9 +3932,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    loggedIn: Boolean(state.session.currentUserId)
+    loggedIn: Boolean(state.session.currentUserId),
+    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    currentUser: state.entities.users[state.session.currentUserId]
   };
 };
 
@@ -3836,7 +3966,19 @@ var Protected = function Protected(_ref2) {
       });
     }
   });
-};
+}; // const Chatroom = ({ currentUser, currentChatroom, path, component: Component }) => (
+//     <Route
+//         path = { path }
+//         render = { props => {
+//             debugger
+//             return (
+//                 currentChatroom.user_ids.includes(currentUser.id) ? <Component {...props} /> : <Redirect to="/chatrooms/1" />
+//             )}
+//         }
+//     />
+// );
+// export const ChatroomRoute = withRouter(connect(mapStateToProps)(Chatroom));
+
 
 var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Auth));
 var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Protected));

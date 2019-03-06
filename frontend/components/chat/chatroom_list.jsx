@@ -41,24 +41,28 @@ class ChatroomList extends React.Component {
                 room: 
                     chatroomId
             },  
-            {   connected: () => { console.log(`Connected to channel ${chatroomId}`); },
-                disconnected: () => { console.log(`Disconnected to channel ${chatroomId}`); },
+            {   connected: () => {
+                //  console.log(`Connected to channel ${chatroomId}`); 
+                },
+                disconnected: () => { 
+                    // console.log(`Disconnected to channel ${chatroomId}`); 
+                },
                 received: message => {
                     if (message.deleted){
                         this.props.removeMessage(message.id);
-                    } else {
-                    this.props.receiveMessage(message);
-                    if (!("Notification" in window)) {
-                    } else if (Notification.permission === "granted") {
-                        // debugger
-                        let notification = new Notification(`${message.author_name}: ${message.body}`);
-                    } else if (Notification.permission !== "denied") {
-                        Notification.requestPermission().then(function (permission) {
-                            if (permission === "granted") {
-                                let notification = new Notification(`${message.body}`);
-                          }
-                        });
-                      }
+                    // } else {
+                    // this.props.receiveMessage(message);
+                    // if (!("Notification" in window)) {
+                    // } else if (Notification.permission === "granted") {
+                    //     // debugger
+                    //     let notification = new Notification(`${message.author_name}: ${message.body}`);
+                    // } else if (Notification.permission !== "denied") {
+                    //     Notification.requestPermission().then(function (permission) {
+                    //         if (permission === "granted") {
+                    //             let notification = new Notification(`${message.body}`);
+                    //       }
+                    //     });
+                    //   }
                     }},
                 create: function(message) {
                     this.perform(
@@ -93,31 +97,35 @@ class ChatroomList extends React.Component {
         let directMessageList;
 
         if (channels){
+            let that = this;
             channelList = (
             <>
                 <div className="chatroom-category chatroom-channels flex">
                     <h3> Channels </h3>
-                    <i className="plus-rotate far fa-times-circle" onClick={ this.props.openJoinChannelModal } ></i>
+                    <i className="plus-rotate far fa-times-circle" onClick={ this.props.openAddChannelModal } ></i>
                     </div>
                 <ul>
-                    { channels.map( chatroom => (
+                    { channels.map( chatroom => {
+                        if (chatroom.user_ids.includes(that.props.currentUser.id)){
+                        return (
                         <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
                             <li className="chatroom-name chatroom-channel-names flex">
                             <div>
                                 #  { chatroom.title.replace(/\s+/g, '-').toLowerCase() }
                             </div>
                             <div>
-                                    <i className="message-icons far fa-times-circle"></i>
+                                    <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
                                 </div>
                             </li>
                         </NavLink>
-                    ))
+                    ) }} )
                     }
                 </ul>
             </>
             );
         }
         if (directMessages){
+            let that = this;
             directMessageList = (
             <>
                 <div className="chatroom-category chatroom-direct-messages flex">
@@ -125,14 +133,16 @@ class ChatroomList extends React.Component {
                             <i className="plus-rotate far fa-times-circle"onClick={ this.props.openDirectMessageModal } ></i>
                     </div>
                 <ul>
-                { directMessages.map( chatroom => (
+                { directMessages.map( chatroom => {
+                    if (chatroom.user_ids.includes(that.props.currentUser.id)){
+                        return (
                     <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
                             <li className="chatroom-name">
                                     ◦ { chatroom.users.join(", ") || "" }
                                     <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
                             </li>
                     </NavLink>
-                    ))
+                    ) }} )
                 }
                 </ul>
             </>
