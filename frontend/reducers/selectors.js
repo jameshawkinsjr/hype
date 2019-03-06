@@ -14,3 +14,7 @@ export const selectAllMessagesForChatroom = function(state, chatroomId) {
 export const selectAllChatrooms = (state) => (
     Object.values(state.entities.chatrooms)
 );
+
+export const selectAllUsers = (state) => (
+    Object.values(state.entities.users)
+);

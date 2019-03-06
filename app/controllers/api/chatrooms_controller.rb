@@ -1,15 +1,22 @@
 class Api::ChatroomsController < ApplicationController
 
     def index
-        user = User.find(params[:user_id])
-        @chatrooms = user.chatrooms
+        if params[:user_id] == "all"
+            @chatrooms = Chatroom.all
+        else
+            user = User.find(params[:user_id])
+            @chatrooms = user.chatrooms
+        end 
     end
 
     def create
         @chatroom = Chatroom.new(chatroom_params)
-        @chatroom.admin = current_user.id
         if @chatroom.save
+            debugger
             ChatroomSubscription.create!(user_id: current_user.id, chatroom_id: @chatroom.id)
+            params[:chatroom][:users].each do |user|
+                ChatroomSubscription.create!(user_id: user.id, chatroom_id: @chatroom.id)
+            end
             render :show
         else
             render json: @chatroom.errors.full_messages, status: 401
@@ -43,6 +50,6 @@ class Api::ChatroomsController < ApplicationController
 
     private
     def chatroom_params
-        params.require(:chatroom).permit(:title, :topic, :chatroom_type, :admin_id)
+        params.require(:chatroom).permit(:title, :topic, :chatroom_type, :admin_id, :users)
     end
 end

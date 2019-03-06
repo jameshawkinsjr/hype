@@ -95,7 +95,10 @@ class ChatroomList extends React.Component {
         if (channels){
             channelList = (
             <>
-                <div className="chatroom-category chatroom-channels"><h3> Channels </h3></div>
+                <div className="chatroom-category chatroom-channels flex">
+                    <h3> Channels </h3>
+                    <i className="plus-rotate far fa-times-circle" onClick={ this.props.openJoinChannelModal } ></i>
+                    </div>
                 <ul>
                     { channels.map( chatroom => (
                         <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
@@ -119,13 +122,13 @@ class ChatroomList extends React.Component {
             <>
                 <div className="chatroom-category chatroom-direct-messages flex">
                     <h3> Direct Messages </h3>
-                            <i className="fas fa-plus" onClick={ this.props.openDirectMessageModal } ></i>
+                            <i className="plus-rotate far fa-times-circle"onClick={ this.props.openDirectMessageModal } ></i>
                     </div>
                 <ul>
                 { directMessages.map( chatroom => (
                     <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
                             <li className="chatroom-name">
-                                    ◦ { chatroom.users.join(", ") }
+                                    ◦ { chatroom.users.join(", ") || "" }
                                     <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
                             </li>
                     </NavLink>
@@ -145,7 +148,7 @@ class ChatroomList extends React.Component {
                     <div className="chatroom-category chatroom-all-threads-text flex"><i className="far fa-comment-alt"></i><h3> All Threads </h3></div>
                     { channelList }
                     <div className="add-channel-button">
-                        <div className="chatroom-category add-channel-button flex" onClick={ this.props.openChannelModal } ><h3>+ Add a channel </h3></div>
+                        <div className="chatroom-category add-channel-button flex" onClick={ this.props.openJoinChannelModal } ><h3>+ Join a channel </h3></div>
                     </div>
                     { directMessageList }
                 </div> 

@@ -1,0 +1,145 @@
+.join-channel-modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: $white;
+    z-index: 10;
+    align-items: flex-start;
+    justify-content: center;
+    .join-channel-modal-container{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        max-width: 650px;
+
+        .join-channel-modal-escape {
+            align-self: flex-end;
+            margin-top: 20px;
+            margin-right: 20px;
+            padding: 10px 22px;
+            border-radius: 50%;
+            color: $med-grey;
+            h2 {
+                font-size: 30px;
+                font-family: $font-lato;
+                font-weight: 300;
+            }
+            h4 {
+                text-align: center;
+            }
+            &:hover {
+                background: rgba(189, 189, 189, 0.592);
+                color: $dark-grey;
+            }
+        }
+        .join-channel-modal {
+            padding: 10px 40px 10px 40px;
+            max-width: 650px;
+            background: $white;
+            flex-direction: column;
+            .join-channel-input {
+                height: 150px;
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                input {
+                    box-sizing: border-box;
+                    border: 1px solid $med-grey;
+                    height: 100%;
+                    width: 90%;
+                    font-size: 16px;
+                    color: $med-grey;
+                    border-radius: 3px;
+                    padding: 5px 10px;
+                    &:focus {
+                        -webkit-box-shadow: none !important;
+                        -moz-box-shadow: none !important;
+                        box-shadow: none !important;
+                        outline: none !important;
+                    }
+                    &::placeholder {
+                        color: $lighter-grey;
+                        font-size: 20px;
+                    }
+                }
+                button {
+                    height: 100%;
+                    width: 50px;
+                    margin-left: 10px;
+                }
+            }
+            p {
+                margin-bottom: 10px;
+            }
+            h2 {
+                font-size: 32px;
+                font-weight: 700;
+                margin-bottom: 35px;
+            }
+            .join-channel-user-list {
+                overflow: scroll;
+                flex-direction: column;
+                .join-channel-user-list-item {
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 60px;
+                    box-sizing: border-box;
+                    // padding: 5px;
+                    border-top: 1px solid $light-blue;
+                    // border-top: 1px solid $light-blue;
+                    border-left: 1px solid $white;
+                    margin: 0px 0px;
+                    
+                    &:hover {
+                        border-radius: 5px;
+                        border-left: 1px solid $light-blue;
+                        border-right: 1px solid $light-blue;
+                        background: $very-light-blue;
+                
+                    }
+
+                    .user-list-item-container {
+                        align-items: center;
+                        justify-content: space-between;
+                        height: 100%;
+                        margin-left: 10px;
+                        
+                        .profile-image-2 {
+                            border-radius: 5px;
+                            margin-left: 20px;
+                            margin-right: 5px;
+                            background: $light-blue;
+                            width: 40px;
+                            height: 40px;
+                        }
+                        .user-list-item-left {
+                            align-items: center;
+                            font-size: 14px;
+                            .alias {
+                                font-weight: 300;
+                            }
+                            .full-name {
+                                font-weight: 500;
+                            }
+                        }
+                        .fa-level-down-alt {
+                            transform: rotate(90deg);
+                            color: $blue;
+                            font-size: 12px;
+                            margin-right: 10px;
+                            visibility: hidden;
+                        }
+                        &:hover {
+                            .fa-level-down-alt {
+                                visibility: visible;
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}

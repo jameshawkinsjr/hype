@@ -20,6 +20,8 @@ class MessageWindow extends React.Component {
     componentDidMount() {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+        
+
     }
 
     componentDidUpdate(previousProps) {
@@ -28,6 +30,13 @@ class MessageWindow extends React.Component {
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
         }
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+        if ( this.props.currentChatroom ) {
+            if (this.props.currentChatroom.chatroom_type == 'channel') {
+                document.title = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} | hype`;
+            } else {
+                document.title = `${this.props.currentChatroom.users.join(", ")} | hype`;
+            }
+        }
     }
 
     handleInput() {

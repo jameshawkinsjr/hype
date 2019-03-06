@@ -20,8 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     destroyChatroom: chatroomId => dispatch(destroyChatroom(chatroomId)),
     createChatroom: chatroom => dispatch(createChatroom(chatroom)),
     unsubscribeFromChatroom: chatroom => dispatch(unsubscribeFromChatroom(chatroom)),
-    openChannelModal: () => dispatch(openModal({ type: 'addChannel'})),
-    openDirectMessageModal: () => dispatch(openModal({ type: 'addDirectMessage'})),
+    openAddChannelModal: () => dispatch(openModal({ type: 'createChannel'})),
+    openJoinChannelModal: () => dispatch(openModal({ type: 'joinChatroom'})),
+    openDirectMessageModal: () => dispatch(openModal({ type: 'createDirectMessage'})),
 
 });
 

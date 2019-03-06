@@ -15,7 +15,7 @@ const App = () => (
         <Modal />
         <Switch>
             <ProtectedRoute path="/chatrooms/:chatroomId" component={ChatContainer} />
-            <Route exact path="/chatrooms" render={() => (<Redirect to="/chatrooms/5"/>)}/>
+            <Route exact path="/chatrooms" render={() => (<Redirect to="/chatrooms/1"/>)}/>
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
             <Route exact path="/" component={LandingPageContainer} />

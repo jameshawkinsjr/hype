@@ -32,8 +32,8 @@ export const clearChatroomErrors = () => ({
 });
 
 // Thunk action creators
-export const fetchChatrooms = (chatroomId) => dispatch => (
-        ApiUtil.fetchChatrooms(chatroomId)
+export const fetchChatrooms = (userId) => dispatch => (
+        ApiUtil.fetchChatrooms(userId)
                 .then(chatrooms => dispatch(receiveChatrooms(chatrooms)),
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )

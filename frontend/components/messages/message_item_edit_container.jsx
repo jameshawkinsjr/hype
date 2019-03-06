@@ -5,13 +5,10 @@ import { editMessage } from '../../actions/messages_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { clearMessageErrors } from '../../actions/messages_actions';
 
-const mapStateToProps = function(state, ownProps){
-    // debugger
-    return ({
+const mapStateToProps = (state, ownProps) => ({
         message: ownProps.message,
         errors: state.errors.messages,
-    })
-}
+    });
 
 const mapDispatchToProps = (dispatch) => ({
     editMessage: message => dispatch(editMessage(message)),

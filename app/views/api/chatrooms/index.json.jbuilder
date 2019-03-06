@@ -11,9 +11,11 @@
         end
     end
     json.set! chatroom.id do
+        # json.partial! 'api/chatrooms/chatroom', chatroom: chatroom
         json.extract! chatroom, :id, :title, :chatroom_type, :topic, :created_at
         json.date_created chatroom.created_at.localtime.strftime("%-B %-e, %-Y")
         json.created_by User.find(chatroom.admin_id).full_name
         json.users usernames
+
     end
 end

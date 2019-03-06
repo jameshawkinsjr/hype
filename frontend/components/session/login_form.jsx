@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
     handleSubmit(e) {
         if (e) { e.preventDefault() }
         this.props.login(this.state)
-        .then( () => this.props.history.push('/chatrooms/5'));
+        .then( () => this.props.history.push('/chatrooms/1'));
     }
 
     componentWillUnmount() {

@@ -53,32 +53,36 @@ class MessageItemEdit extends React.Component {
         )
 
         return (
-            <div className="flex-column">
-            <div className="modal-body flex">
-            { errors.length > 0 ? renderErrors : ""}
-                <div className="signup-modal flex">
-                    <h2>Edit this message</h2>
-                    <form className="flex">
-                        <label > 
-                            <p>{this.props.message.author_alias || this.props.message.author_name}</p>
-                            <textarea  type="text"
-                                    className="input-outline"
-                                    value={this.state.body}
-                                    rows="5"
-                                    placeholder="Edit your message"
-                                    onChange={this.handleInput()}
-                                    onKeyDown={ (e) => this.handleEnterKey(e) }
-                                    autoComplete = "off"
-                                    autoFocus
-                            ></textarea>
-                        </label>
-                        <button className="green-button" 
-                                onClick={this.handleSubmit}>
-                                Edit Message
-                        </button>
-                    </form>
+            <div className="modal-background" onClick={this.props.closeModal}>
+                <div className="modal-child" onClick={e => e.stopPropagation()}>
+                    <div className="flex-column">
+                        <div className="modal-body flex">
+                        { errors.length > 0 ? renderErrors : ""}
+                            <div className="signup-modal flex">
+                                <h2>Edit this message</h2>
+                                <form className="flex">
+                                    <label > 
+                                        <p>{this.props.message.author_alias || this.props.message.author_name}</p>
+                                        <textarea  type="text"
+                                                className="input-outline"
+                                                value={this.state.body}
+                                                rows="5"
+                                                placeholder="Edit your message"
+                                                onChange={this.handleInput()}
+                                                onKeyDown={ (e) => this.handleEnterKey(e) }
+                                                autoComplete = "off"
+                                                autoFocus
+                                        ></textarea>
+                                    </label>
+                                    <button className="green-button" 
+                                            onClick={this.handleSubmit}>
+                                            Edit Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
         )
     }

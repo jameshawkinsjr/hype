@@ -43,12 +43,14 @@
     }
 }
 
-.chatroom-direct-messages {
+.chatroom-direct-messages, .chatroom-channels {
     justify-content: space-between;
     i {
-        font-size: 12px;
-        padding: 3px 18px 0 0; 
+        font-size: 14px;
+        padding: 3px 3px 3px 3px; 
+        margin-right: 13px;
         cursor: pointer;
+        transform: rotate(135deg);
         &:hover{
             color: $white;
         }

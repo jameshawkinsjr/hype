@@ -13,10 +13,10 @@ function Modal({modal, closeModal}) {
     case 'editMessage':
       component = <MessageItemEditContainer message={modal.message} />;
       break;
-    case 'addChannel':
+    case 'joinChatroom':
       component = <ChatroomAddContainer  chatroomType={modal.type}/>;
       break;
-    case 'addDirectMessage':
+    case 'createDirectMessage':
       component = <ChatroomAddContainer chatroomType={modal.type} />;
       break;
     case 'createChannel':
@@ -26,11 +26,9 @@ function Modal({modal, closeModal}) {
       return null;
   }
   return (
-    <div className="modal-background" onClick={closeModal}>
-      <div className="modal-child" onClick={e => e.stopPropagation()}>
+      <>
         { component }
-      </div>
-    </div>
+      </>
   );
 }
 

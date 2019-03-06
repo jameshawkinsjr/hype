@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.props.currentUser) {
-            this.props.history.push('/chatrooms/5');
+            this.props.history.push('/chatrooms/1');
         } else {
             this.props.landingPageSignup(this.state.email);
             this.props.history.push('/signup');
@@ -27,6 +27,7 @@ class LandingPage extends React.Component {
     }
         
     render () {
+        { document.title = `Where work happens | hype`}
         const navBar = this.props.currentUser ? (
             <Link to="/chatrooms"><div className="landing-page-nav-button purple-button">YOUR CHANNELS</div></Link>
         ) : (
