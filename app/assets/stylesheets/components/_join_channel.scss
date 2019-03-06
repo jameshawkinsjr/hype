@@ -147,11 +147,10 @@
                         align-items: center;
                         justify-content: space-between;
                         height: 100%;
-                        margin-left: 10px;
                         
                         .profile-image-2 {
                             border-radius: 5px;
-                            margin-left: 20px;
+                            margin-left: 10px;
                             margin-right: 5px;
                             background: $light-blue;
                             width: 40px;
@@ -187,6 +186,7 @@
     }
 }
 
+
 .channel-input{
     .channel-input-header {
         justify-content: space-between;
@@ -210,6 +210,19 @@
         color: $lighter-grey;
         margin-left: 10px;
     }
+    .join-channel-user-list {
+        height: 70%;
+        overflow: scroll;
+        flex-direction: column;
+        height: 500px;
+        a{
+            text-decoration: none;
+            color: $black;
+            height: 100%;
+        }
+    }
+
+    
     .join-channel-inner-input{
         border: 1px solid $med-grey;
         border-radius: 5px;
@@ -217,6 +230,25 @@
         flex-wrap: wrap;
         width: 100%;
         margin-bottom: 15px;
+    }
+    .user-list-item {
+        padding: 5px;
+        margin-left: 10px;
+    }
+    .user-list-item-name{
+        margin: 5px 0;
+        font-weight: 700;
+    }
+
+    .user-list-item-topic {
+        font-weight: 500;
+
+    }
+    .user-list-item-description {
+        margin: 5px 0;
+        color: $med-grey;
+        font-weight: 400;
+        font-size: 13px;
     }
     input {
         box-sizing: border-box;

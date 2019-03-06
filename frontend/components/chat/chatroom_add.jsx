@@ -38,7 +38,6 @@ class ChatroomAdd extends React.Component {
     }
 
     componentDidMount() {
-
         if (this.props.chatroomType === 'createDirectMessage'){
             this.setState( {header: "Direct Messages"});
             this.setState( {inputBox: "Find a user"});
@@ -81,8 +80,8 @@ class ChatroomAdd extends React.Component {
     }
 
     subscribeToChatroom(chatroom) {
-        debugger
-        this.props.createChatroomSubscription( { chatroom_subscription: { chatroom_id: chatroom.id }} );
+        this.props.subscribeToChatroom( { chatroom_id: chatroom.id } );
+        this.props.closeModal();
     }
 
     removeUser(user){
@@ -123,7 +122,7 @@ class ChatroomAdd extends React.Component {
         )
 
         let displayUserList = (
-            <>
+            <div className="join-channel-modal flex">
                 <h2>{ this.state.header }</h2>
                 <div className="outer-input">
                 <div className="join-channel-input flex">
@@ -139,8 +138,6 @@ class ChatroomAdd extends React.Component {
                         <input  type="text"
                                 placeholder={`${this.state.inputBox}`}
                                 autoFocus
-                                // value={ this.state.directMessageUsers}
-                                // onChange={this.handleInput('directMessageUsers')}
                                 onKeyDown={ (e) => this.handleEnterKey(e) }
                         />
                     </div>
@@ -193,30 +190,29 @@ class ChatroomAdd extends React.Component {
                             )})
                         }
                     </ul>  
-                </> 
+                </div> 
         )
 
 
         let displayChannelList = (
-            <div className="channel-input">
-            <div className="channel-input-header flex">
-                <h2>{ this.state.header }</h2>
-                <button className="green-button" 
-                        onClick={this.handleSubmit}>
-                        Create Channel
-                </button>
-            </div>
+            <div className="channel-input join-channel-modal">
+                    <div className="channel-input-header flex">
+                        <h2>{ this.state.header }</h2>
+                        <button className="green-button" 
+                                onClick={this.handleSubmit}>
+                                Create Channel
+                        </button>
+                    </div>
+                    <div className="join-channel-inner-input flex">
+                            <i className=" fas fa-search"></i>
+                            <input  type="text"
+                                    placeholder={`${this.state.inputBox}`}
+                                    autoFocus
+                                    onKeyDown={ (e) => this.handleEnterKey(e) }
+                            />
+                    </div>
 
-            <div className="join-channel-inner-input flex">
-                    <i className=" fas fa-search"></i>
-                    <input  type="text"
-                            placeholder={`${this.state.inputBox}`}
-                            autoFocus
-                            onKeyDown={ (e) => this.handleEnterKey(e) }
-                    />
-            </div>
-
-                        <p> Channels you can join </p>
+                            <p> Channels you can join </p>
                         <ul className="join-channel-user-list flex">
                             {   this.state.chatrooms.map( chatroom => {
                                 { if (chatroom.chatroom_type === 'channel') {
@@ -226,12 +222,20 @@ class ChatroomAdd extends React.Component {
                                                 >
                                     <li 
                                         key={`user-${chatroom.id}`} 
-                                        className="join-channel-user-list-item"
+                                        className="join-channel-user-list-item join-channel-channel-list-item"
                                     >
                                         <div className="user-list-item-container flex">
                                             <div className="user-list-item-left flex">
-                                            <div className="user-list-item flex">
+                                            <div className="user-list-item flex-column">
+                                            <div className="user-list-item-name">
                                                 {`#  ${chatroom.title.replace(/\s+/g, '-').toLowerCase()}`}
+                                            </div>
+                                            <div className="user-list-item-topic">
+                                                { `${chatroom.topic || ""}`}
+                                            </div>
+                                            <div className="user-list-item-description">
+                                                { `Created by ${chatroom.created_by} on ${chatroom.date_created}.`}
+                                            </div>
                                             </div> 
                                             </div>
                                             <i className="fas fa-level-down-alt"></i>
@@ -240,7 +244,7 @@ class ChatroomAdd extends React.Component {
                                     </Link>
                             )}}
                         })}
-                        </ul>   
+                    </ul>  
             </div>
         )
 
@@ -252,9 +256,7 @@ class ChatroomAdd extends React.Component {
                         <h2>X</h2>
                             <h4>esc</h4>
                         </div>
-                        <div className="join-channel-modal flex">
                             { this.props.chatroomType ==='joinChatroom' ? displayChannelList : displayUserList }
-                        </div>
                 </div>
             </div>
         )

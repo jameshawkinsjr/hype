@@ -67,15 +67,15 @@ export const destroyChatroom = (chatroomId) => dispatch => (
         )
 );
 
-export const subscribeToChatroom = (chatroom) => dispatch => (
-        ApiUtil.createChatroomSubscription(chatroom)
+export const subscribeToChatroom = (chatroom_subscription) => dispatch => (
+        ApiUtil.createChatroomSubscription(chatroom_subscription)
                 .then(chatroomId => dispatch(receiveChatroom(chatroomId)),
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )
 );
 
-export const unsubscribeFromChatroom = (chatroom) => dispatch => (
-        ApiUtil.destroyChatroomSubscription(chatroom)
+export const unsubscribeFromChatroom = (chatroom_subscription) => dispatch => (
+        ApiUtil.destroyChatroomSubscription(chatroom_subscription)
                 .then(chatroomId => dispatch(removeChatroom(chatroomId)),
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )

@@ -195,18 +195,18 @@ var destroyChatroom = function destroyChatroom(chatroomId) {
     });
   };
 };
-var subscribeToChatroom = function subscribeToChatroom(chatroom) {
+var subscribeToChatroom = function subscribeToChatroom(chatroom_subscription) {
   return function (dispatch) {
-    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroomSubscription"](chatroom).then(function (chatroomId) {
+    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroomSubscription"](chatroom_subscription).then(function (chatroomId) {
       return dispatch(receiveChatroom(chatroomId));
     }, function (err) {
       return dispatch(receiveChatroomErrors(err.responseJSON));
     });
   };
 };
-var unsubscribeFromChatroom = function unsubscribeFromChatroom(chatroom) {
+var unsubscribeFromChatroom = function unsubscribeFromChatroom(chatroom_subscription) {
   return function (dispatch) {
-    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyChatroomSubscription"](chatroom).then(function (chatroomId) {
+    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["destroyChatroomSubscription"](chatroom_subscription).then(function (chatroomId) {
       return dispatch(removeChatroom(chatroomId));
     }, function (err) {
       return dispatch(receiveChatroomErrors(err.responseJSON));
@@ -825,12 +825,10 @@ function (_React$Component) {
   }, {
     key: "subscribeToChatroom",
     value: function subscribeToChatroom(chatroom) {
-      debugger;
-      this.props.createChatroomSubscription({
-        chatroom_subscription: {
-          chatroom_id: chatroom.id
-        }
+      this.props.subscribeToChatroom({
+        chatroom_id: chatroom.id
       });
+      this.props.closeModal();
     }
   }, {
     key: "removeUser",
@@ -882,7 +880,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "errors"
       }, errors));
-      var displayUserList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var displayUserList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "join-channel-modal flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "outer-input"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-input flex"
@@ -904,9 +904,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "".concat(this.state.inputBox),
-        autoFocus: true // value={ this.state.directMessageUsers}
-        // onChange={this.handleInput('directMessageUsers')}
-        ,
+        autoFocus: true,
         onKeyDown: function onKeyDown(e) {
           return _this5.handleEnterKey(e);
         }
@@ -946,7 +944,7 @@ function (_React$Component) {
         })));
       })));
       var displayChannelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "channel-input"
+        className: "channel-input join-channel-modal"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-input-header flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -975,14 +973,20 @@ function (_React$Component) {
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
               key: "user-".concat(chatroom.id),
-              className: "join-channel-user-list-item"
+              className: "join-channel-user-list-item join-channel-channel-list-item"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "user-list-item-container flex"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "user-list-item-left flex"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "user-list-item flex"
-            }, "#  ".concat(chatroom.title.replace(/\s+/g, '-').toLowerCase()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "user-list-item flex-column"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item-name"
+            }, "#  ".concat(chatroom.title.replace(/\s+/g, '-').toLowerCase())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item-topic"
+            }, "".concat(chatroom.topic || "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "user-list-item-description"
+            }, "Created by ".concat(chatroom.created_by, " on ").concat(chatroom.date_created, ".")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
               className: "fas fa-level-down-alt"
             }))));
           }
@@ -1001,9 +1005,7 @@ function (_React$Component) {
       }, errors.length > 0 ? renderErrors : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "join-channel-modal-escape",
         onClick: this.props.closeModal
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "esc")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "join-channel-modal flex"
-      }, this.props.chatroomType === 'joinChatroom' ? displayChannelList : displayUserList)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "esc")), this.props.chatroomType === 'joinChatroom' ? displayChannelList : displayUserList));
     }
   }]);
 
@@ -1067,8 +1069,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchChatrooms: function fetchChatrooms(userId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChatrooms"])(userId));
     },
-    createChatroomSubscription: function createChatroomSubscription(chatroom) {
-      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["createChatroomSubscription"])(chatroom));
+    subscribeToChatroom: function subscribeToChatroom(chatroom) {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["subscribeToChatroom"])(chatroom));
     }
   };
 };
@@ -3709,12 +3711,12 @@ var destroyChatroom = function destroyChatroom(chatroomId) {
     url: "/api/chatrooms/".concat(chatroomId)
   });
 };
-var createChatroomSubscription = function createChatroomSubscription(chatroom) {
+var createChatroomSubscription = function createChatroomSubscription(chatroom_subscription) {
   return $.ajax({
     method: 'POST',
     url: "/api/chatroom_subscriptions/",
     data: {
-      chatroom: chatroom
+      chatroom_subscription: chatroom_subscription
     }
   });
 };

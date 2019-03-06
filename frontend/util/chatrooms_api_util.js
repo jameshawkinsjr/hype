@@ -41,11 +41,11 @@ export const destroyChatroom = (chatroomId) => (
     })
 );
 
-export const createChatroomSubscription = ( chatroom ) => (
+export const createChatroomSubscription = ( chatroom_subscription ) => (
     $.ajax({
         method: 'POST',
         url: `/api/chatroom_subscriptions/`,
-        data: { chatroom }
+        data: { chatroom_subscription }
     })
 );
 

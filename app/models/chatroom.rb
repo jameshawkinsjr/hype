@@ -14,7 +14,7 @@
 class Chatroom < ApplicationRecord
     validates :admin_id, :chatroom_type, presence: true
     validates :topic, length: { maximum: 50, too_long: "A topic can only be %{count} characters" }
-    validates :title, length: { maximum: 30, too_long: "A title can only be %{count} characters" }
+    validates :title, length: { maximum: 40, too_long: "A title can only be %{count} characters" }
     validates :chatroom_type, inclusion: { in: %w(channel direct_message) }
 
     has_one :admin,
