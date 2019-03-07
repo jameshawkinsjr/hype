@@ -11,13 +11,16 @@ class ChatroomList extends React.Component {
         this.props.fetchChatrooms(this.props.currentUser.id)
         .then(chatrooms => this.subscribeToAllChats());
         this.props.fetchUsers()
+        .then( () => this.props.closeModal() )
     }
 
 
     subscribeToAllChats() {
         this.props.chatrooms.forEach( chatroom => {
             this.createSocket(chatroom.id);
+
         });
+        this.createSocket(-1);
     }
 
     unsubscribe(chatroom){
@@ -47,6 +50,8 @@ class ChatroomList extends React.Component {
                 received: message => {
                     if (message.deleted){
                         this.props.removeMessage(message.id);
+                        this.props.fetchChatroom(message.chatroom_id);
+                    } else if (message.new_chatroom){
                         this.props.fetchChatroom(message.chatroom_id);
                     } else {
                     this.props.receiveMessage(message);
@@ -167,7 +172,12 @@ class ChatroomList extends React.Component {
                     >
                         <i className=" fas fa-search" ></i><h3> Jump To... </h3>
                     </div>
-                    <div className="chatroom-category chatroom-all-threads-text flex"><i className="far fa-comment-alt"></i><h3> All Threads </h3></div>
+                    <div 
+                        className="chatroom-category chatroom-all-threads-text flex" 
+                        onClick={ this.props.openJoinChannelModal }
+                    >   
+                        <i className="far fa-comment-alt"></i><h3> All Threads </h3>
+                    </div>
                     { channelList }
                     <div className="add-channel-button">
                         <div className="chatroom-category add-channel-button flex" onClick={ this.props.openJoinChannelModal } ><h3>+ Join a channel </h3></div>

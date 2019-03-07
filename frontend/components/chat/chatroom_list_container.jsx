@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     openAddChannelModal: () => dispatch(openModal({ type: 'createChannel'})),
     openJoinChannelModal: () => dispatch(openModal({ type: 'joinChatroom'})),
     openDirectMessageModal: () => dispatch(openModal({ type: 'createDirectMessage'})),
-
+    closeModal: () => dispatch(closeModal()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatroomList));

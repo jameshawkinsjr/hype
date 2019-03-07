@@ -45,7 +45,7 @@
     i {
         font-size: 14px;
         padding: 3px 3px 3px 3px; 
-        margin-right: 18px;
+        margin-right: 23px;
         cursor: pointer;
         transform: rotate(135deg);
         &:hover{
@@ -185,7 +185,8 @@
         border-radius: 40%;
         font-size: 13px;
         font-weight: 600;
-        margin: -1px;
+        margin-bottom: -1px;
+        margin-left: -3px;
     }
 }
 
@@ -199,11 +200,10 @@
 
 .chatroom-header {
     justify-content: space-between;
-    padding: 10px 0 0 15px;
     font-weight: 600;
     
     .chatroom-header-right {
-        width: 50px;
+        width: 100px;
         justify-content: space-between;
         a{
             font-size: 16px;
@@ -215,6 +215,8 @@
     }
 
     .chatroom-header-left {
+        margin-left: 20px;
+        align-self: center;
         flex-direction: column;
         h2 {
             font-size: 16px;

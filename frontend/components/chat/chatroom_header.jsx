@@ -39,10 +39,8 @@ class ChatroomHeader extends React.Component {
                 </div>
             </div>
             <div className="chatroom-header-right flex">
-                <Link to="/"><i className="fas fa-home"></i></Link>
-
-
-
+                {/* <Link to="/"><i className="fas fa-home"></i></Link> */}
+                <button className="nav-bar-button" onClick= { this.props.logout }> Sign Out </button>
             </div>
             </div>
         )

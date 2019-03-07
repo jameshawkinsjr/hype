@@ -3,6 +3,7 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import MessageItemEditContainer from '../messages/message_item_edit_container';
 import ChatroomAddContainer from '../chat/chatroom_add_container';
+import LoadingScreen from '../templates/loading_screen';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
@@ -21,6 +22,9 @@ function Modal({modal, closeModal}) {
       break;
     case 'createChannel':
       component = <ChatroomAddContainer chatroomType={modal.type} />;
+      break;
+    case 'loadingScreen':
+      component = <LoadingScreen />;
       break;
     default:
       return null;

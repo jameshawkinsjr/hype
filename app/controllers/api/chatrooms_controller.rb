@@ -16,6 +16,13 @@ class Api::ChatroomsController < ApplicationController
             params[:chatroom][:users].each do |userId|
                 ChatroomSubscription.create!(user_id: userId, chatroom_id: @chatroom.id)
             end
+            ActionCable
+                .server
+                .broadcast(
+                    "room-#{-1}:messages",
+                    update_chatroom: true,
+                    chatroom_id: @chatroom.id
+                )
             render :show
         else
             render json: @chatroom.errors.full_messages, status: 401

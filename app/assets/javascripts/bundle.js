@@ -691,6 +691,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
+/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -710,6 +712,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -878,6 +881,15 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "getPhotoUrl",
+    value: function getPhotoUrl(user) {
+      if (user.photoUrl) {
+        return user.photoUrl;
+      } else {
+        return window.images.robot_3;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this5 = this;
@@ -947,7 +959,7 @@ function (_React$Component) {
             className: "user-list-item-left flex"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "profile-image-2",
-            src: "https://robohash.org/".concat(user.full_name, ".png")
+            src: _this5.getPhotoUrl(user)
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "user-list-item flex"
           }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1285,11 +1297,10 @@ function (_React$Component) {
         className: "far fa-user"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, numUsers), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "  |  "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, topic))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-header-right flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-home"
-      }))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "nav-bar-button",
+        onClick: this.props.logout
+      }, " Sign Out ")));
     }
   }]);
 
@@ -1396,7 +1407,9 @@ function (_React$Component) {
       this.props.fetchChatrooms(this.props.currentUser.id).then(function (chatrooms) {
         return _this.subscribeToAllChats();
       });
-      this.props.fetchUsers();
+      this.props.fetchUsers().then(function () {
+        return _this.props.closeModal();
+      });
     }
   }, {
     key: "subscribeToAllChats",
@@ -1406,6 +1419,7 @@ function (_React$Component) {
       this.props.chatrooms.forEach(function (chatroom) {
         _this2.createSocket(chatroom.id);
       });
+      this.createSocket(-1);
     }
   }, {
     key: "unsubscribe",
@@ -1435,6 +1449,8 @@ function (_React$Component) {
           if (message.deleted) {
             _this3.props.removeMessage(message.id);
 
+            _this3.props.fetchChatroom(message.chatroom_id);
+          } else if (message.new_chatroom) {
             _this3.props.fetchChatroom(message.chatroom_id);
           } else {
             _this3.props.receiveMessage(message);
@@ -1550,7 +1566,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: " fas fa-search"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Jump To... ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "chatroom-category chatroom-all-threads-text flex"
+        className: "chatroom-category chatroom-all-threads-text flex",
+        onClick: this.props.openJoinChannelModal
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-comment-alt"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " All Threads ")), channelList, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1645,6 +1662,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["openModal"])({
         type: 'createDirectMessage'
       }));
+    },
+    closeModal: function closeModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["closeModal"])());
     }
   };
 };
@@ -1914,6 +1934,12 @@ var MessageItem = function MessageItem(_ref) {
     destroyMessage(message.id);
   }
 
+  var photoUrl = window.images.robot_3;
+
+  if (users[message.author_id].photoUrl) {
+    photoUrl = users[message.author_id].photoUrl;
+  }
+
   var editButtons = "";
 
   if (message.author_id === currentUser.id) {
@@ -1939,7 +1965,7 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-item-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
-    src: users[message.author_id].photoUrl
+    src: photoUrl
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2495,6 +2521,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _messages_message_item_edit_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/message_item_edit_container */ "./frontend/components/messages/message_item_edit_container.jsx");
 /* harmony import */ var _chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chat/chatroom_add_container */ "./frontend/components/chat/chatroom_add_container.jsx");
+/* harmony import */ var _templates_loading_screen__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/loading_screen */ "./frontend/components/templates/loading_screen.jsx");
+
 
 
 
@@ -2534,6 +2562,10 @@ function Modal(_ref) {
       component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chat_chatroom_add_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         chatroomType: modal.type
       });
+      break;
+
+    case 'loadingScreen':
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_loading_screen__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       break;
 
     default:
@@ -2624,9 +2656,7 @@ function (_React$Component) {
         className: "flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "bold"
-      }, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.props.logout
-      }, " Sign Out ")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-nav flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"
@@ -2795,6 +2825,8 @@ function (_React$Component) {
         e.preventDefault();
       }
 
+      ;
+      this.props.loadingModal();
       this.props.login(this.state).then(function () {
         return _this3.props.history.push('/chatrooms/1');
       });
@@ -2835,7 +2867,12 @@ function (_React$Component) {
         email: "P.Beesly@dunder-mifflin.org",
         password: "Pam123456"
       };
-      this.loginTyper(pam.email, pam.password, 0, this.handleSubmit); // setTimeout(this.props.demoMessage(24), 5000);
+      this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
+    }
+  }, {
+    key: "startDemo",
+    value: function startDemo() {
+      // setTimeout(this.props.demoMessage(24), 5000);
       // setTimeout(this.props.demoMessage(27), 9000);
       // setTimeout(this.props.demoMessage(32), 14000);
       // setTimeout(this.props.demoMessage(1), 3000);
@@ -2843,10 +2880,6 @@ function (_React$Component) {
       // setTimeout(this.props.demoMessage(7), 12000);
       // setTimeout(this.props.demoMessage(52), 7000);
       // setTimeout(this.props.demoMessage(3), 6000);
-    }
-  }, {
-    key: "startDemo",
-    value: function startDemo() {
       this.props.demoMessage();
     } // DEMO LOGIN loginTyper
 
@@ -2954,6 +2987,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login_form */ "./frontend/components/session/login_form.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -2976,6 +3011,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     demoMessage: function demoMessage(chatroomId) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_4__["demoMessage"])(chatroomId));
+    },
+    loadingModal: function loadingModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])({
+        type: 'loadingScreen'
+      }));
+    },
+    openDirectMessageModal: function openDirectMessageModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["openModal"])({
+        type: 'createDirectMessage'
+      }));
     }
   };
 };
@@ -3157,6 +3202,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _signup_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./signup_form */ "./frontend/components/session/signup_form.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -3176,6 +3223,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     clearSessionErrors: function clearSessionErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
+    },
+    loadingModal: function loadingModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])({
+        type: 'loadingScreen'
+      }));
     }
   };
 };
@@ -3271,6 +3323,36 @@ var Header = function Header() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./frontend/components/templates/loading_screen.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/templates/loading_screen.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var LoadingScreen = function LoadingScreen() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading-modal-background-white"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading-modal-child flex-column"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "loading-logo",
+    src: window.images.hype_medium_color
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading-spinner"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LoadingScreen);
 
 /***/ }),
 

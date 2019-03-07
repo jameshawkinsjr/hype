@@ -7,24 +7,17 @@
     font-weight: bold;
     align-items: center;
     color: white;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 
-    div {
-        // padding: 10px 0px 0px 20px;
+    .flex-column {
+        padding-left: 20px;
     }
     &:hover{
         background: #311134;
     }
-    button {
-        background: #2B649E;
-        border-radius: 5px;
-        cursor: pointer;
-        color: white;
-        margin-left: 5px;
+    img {
         height: 30px;
-        padding: 0 10px;
-        font-size: 12px;
-        font-family: $font-sans-serif;
+        width: auto;
     }
     button:hover {
         background: rgb(13, 74, 136); 
@@ -32,5 +25,21 @@
     h3 {
         font-size: 16px;
         padding-bottom: 5px;
+    }
+}
+
+.nav-bar-button {
+    align-self: center;
+    background: $blue;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    margin-left: 5px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: $font-sans-serif;
+    &:hover {
+        background: $dark-blue;
     }
 }

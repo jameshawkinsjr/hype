@@ -25,7 +25,8 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(e) {
-        if (e) { e.preventDefault() }
+        if (e) { e.preventDefault() }; 
+        this.props.loadingModal();
         this.props.login(this.state)
         .then( () => this.props.history.push('/chatrooms/1'));
     }
@@ -61,6 +62,9 @@ class LoginForm extends React.Component {
             password: "Pam123456"
         };
         this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
+    }
+
+    startDemo(){
         // setTimeout(this.props.demoMessage(24), 5000);
         // setTimeout(this.props.demoMessage(27), 9000);
         // setTimeout(this.props.demoMessage(32), 14000);
@@ -69,11 +73,9 @@ class LoginForm extends React.Component {
         // setTimeout(this.props.demoMessage(7), 12000);
         // setTimeout(this.props.demoMessage(52), 7000);
         // setTimeout(this.props.demoMessage(3), 6000);
-    }
-
-    startDemo(){
         this.props.demoMessage();
     }
+
     // DEMO LOGIN loginTyper
     loginTyper(email, password, i, submitCallback) {
         if (i < (email.length)) {

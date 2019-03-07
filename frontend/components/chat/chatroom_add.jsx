@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Cable from 'actioncable';
 
 
 class ChatroomAdd extends React.Component {
@@ -34,7 +35,7 @@ class ChatroomAdd extends React.Component {
             topic: this.state.topic,
             users: this.state.directMessageUsersToAdd
         })
-        .then( () => this.props.closeModal());
+        .then( () => this.props.closeModal())
     }
 
     componentDidMount() {
@@ -110,6 +111,15 @@ class ChatroomAdd extends React.Component {
         }
     }
 
+    getPhotoUrl(user) {
+        if (user.photoUrl) {
+            return user.photoUrl;
+        } else {
+            return window.images.robot_3;
+        }
+    }
+  
+
     render () {
 
         let errors = this.props.errors.map( error => 
@@ -177,7 +187,8 @@ class ChatroomAdd extends React.Component {
                                     <div key={`user-${user.id}`} 
                                         className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
-                                            <img className="profile-image-2" src={`https://robohash.org/${user.full_name}.png`} />
+                                            <img className="profile-image-2" src={ this.getPhotoUrl(user) } />
+                                            {/* <img className="profile-image-2" src={`https://robohash.org/${user.full_name}.png`} /> */}
                                             <div className="user-list-item flex">
                                                 {   user.alias ? 
                                                     ( <> <span className="full-name"> {user.alias} ◦</span> <span className="alias"> {user.full_name} </span> </> ) 

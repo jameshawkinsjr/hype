@@ -20,10 +20,11 @@ class NavBar extends React.Component {
             
             <div className="top-nav flex">
                 <div className="flex-column">
-                    <h3 className="bold">Welcome</h3>
+                    <h3 className="bold">Hype</h3>
+                    {/* <img className="landing-page-logo" src={ window.images.hype_small_white}/> */}
                     <p> { name }</p>
                     </div>
-                <button onClick= { this.props.logout }> Sign Out </button>
+                {/* <button onClick= { this.props.logout }> Sign Out </button> */}
             </div>
         ) : (
             <div className="top-nav flex">

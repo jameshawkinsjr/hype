@@ -13,6 +13,12 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
     destroyMessage(message.id);
   }
 
+  let photoUrl = window.images.robot_3;
+
+  if (users[message.author_id].photoUrl) {
+      photoUrl = users[message.author_id].photoUrl;
+  }
+
   let editButtons = "";
 
   if (message.author_id === currentUser.id) {
@@ -25,8 +31,6 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
                   <i onClick={ deleteMessage }className="message-icons far fa-trash-alt">
                     <span className="message-item-buttons-popup"> Delete Message </span>
                   </i>
-                  {/* <i onClick={ deleteMessage }className="fas fa-ellipsis-h"></i>
-                  <span className="message-item-buttons-popup"> Delete Comment </span> */}
                 </div>
             </div>
         )
@@ -35,7 +39,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <img className="profile-image" src={ users[message.author_id].photoUrl } /> 
+          <img className="profile-image" src={ photoUrl } /> 
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">
