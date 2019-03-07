@@ -18,10 +18,9 @@ class Api::UsersController < ApplicationController
             ChatroomSubscription.create!(user_id: @user.id, chatroom_id: Chatroom.fourth.id)
             ChatroomSubscription.create!(user_id: @user.id, chatroom_id: Chatroom.fifth.id)
             Message.create!(author_id: hypebot.id, body: "Hey there! Welcome to Hype. Thanks for stopping by!",chatroom_id: newDM.id)
-            # @user.photo.attach(io: "https://robohash.org/test.png", filename: 'test.png')
-            # file = open(`https://robohash.org/test.png`)
-            # @user.photo.attach(io: file, filename: "temp.#{file.content_type_parse.first.split("/").last}", content_type: file.content_type_parse.first)
-            # User.first.photo.attach(io: url("https://robohash.org/test.png"), filename: 'test.png')
+            Message.create!(author_id: hypebot.id, body: "Feel free to look around, add channels, or direct message users!",chatroom_id: newDM.id)
+            file = File.open("app/assets/images/profile_photos/robot2.png")
+            @user.photo.attach(io: file, filename: "#{@user.id}.png")
             render :show
         else
             render json: @user.errors.full_messages, status: 401

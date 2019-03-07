@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'static_pages#root'
+  
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:index, :create] do
@@ -15,9 +16,11 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
 
+
+  get '/demo/:id' => 'api/messages#demo'
   mount ActionCable.server => '/cable'
 
 
-  get '*path', to: redirect('/'), via: :all
+  # get '*path', to: redirect('/'), via: :all
   
 end

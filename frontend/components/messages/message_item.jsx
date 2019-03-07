@@ -12,11 +12,6 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
   function deleteMessage() {
     destroyMessage(message.id);
   }
-  function editMessage() {
-    editMessage(message);
-  }
-  let photoUrl
-  // users ? ( users[message.author_id].photoUrl ? photoUrl = users[message.author_id].photoUrl : photoUrl = "" ) : photoUrl = "";
 
   let editButtons = "";
 
@@ -40,7 +35,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <img className="profile-image" src={`https://robohash.org/${message.author_id}.png`} /> 
+          <img className="profile-image" src={ users[message.author_id].photoUrl } /> 
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">

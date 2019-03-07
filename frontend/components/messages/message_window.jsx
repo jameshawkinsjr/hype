@@ -18,13 +18,19 @@ class MessageWindow extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchMessages(this.props.match.params.chatroomId);
-        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
-        // check if user id is in the channel -- else push to channel/1
-        this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );
+            this.props.fetchMessages(this.props.match.params.chatroomId);
+            setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+            // check if user id is in the channel -- else push to channel/1
+            this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );
+        
+            
     }
 
     componentDidUpdate(previousProps) {
+        // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+        //     debugger
+        //     this.redirectToHome();
+        // }
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
             this.props.fetchMessages(this.props.match.params.chatroomId);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
@@ -39,6 +45,15 @@ class MessageWindow extends React.Component {
             } else {
                 document.title = `${this.props.currentChatroom.users.join(", ")} | hype`;
             }
+        }
+    }
+
+    redirectToHome() {
+        if (this.props.currentUser.chatroom_ids[0]) {
+            let firstChatroom = this.props.currentUser.chatroom_ids[0];
+            this.props.history.push(`/chatrooms/${firstChatroom}`);
+        } else {
+            this.props.history.push(`/chatrooms/1`);
         }
     }
 
@@ -69,7 +84,7 @@ class MessageWindow extends React.Component {
                 chatroomTitle = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()}`;
                 welcomeMessage = `${this.props.currentChatroom.created_by} created this channel on ${this.props.currentChatroom.date_created}. This is the very beginning of the #${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} channel.`;
             } else {
-                chatroomTitle = `${this.props.currentChatroom.users.join(", ")}`
+                chatroomTitle = `${this.props.currentChatroom.users.join(", ")}`;
                 welcomeMessage = `This is the very beginning of your direct message history with ${this.props.currentChatroom.users.join(", ")}. Only the ${this.props.currentChatroom.users.length + 1} of you are in this conversation and no one else can join it.`;
         }}
         return (

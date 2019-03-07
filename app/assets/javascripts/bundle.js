@@ -230,7 +230,7 @@ var clearUnreadMessages = function clearUnreadMessages(chatroom_subscription) {
 /*!**********************************************!*\
   !*** ./frontend/actions/messages_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, RECEIVE_MESSAGE_ERRORS, CLEAR_MESSAGE_ERRORS, REMOVE_MESSAGE, receiveMessages, receiveMessage, removeMessage, receiveMessageErrors, clearMessageErrors, fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
+/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, RECEIVE_MESSAGE_ERRORS, CLEAR_MESSAGE_ERRORS, REMOVE_MESSAGE, receiveMessages, receiveMessage, removeMessage, receiveMessageErrors, clearMessageErrors, fetchMessages, fetchMessage, createMessage, demoMessage, editMessage, destroyMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -248,6 +248,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demoMessage", function() { return demoMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editMessage", function() { return editMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyMessage", function() { return destroyMessage; });
 /* harmony import */ var _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/messages_api_util */ "./frontend/util/messages_api_util.js");
@@ -309,6 +310,11 @@ var fetchMessage = function fetchMessage(messageId) {
 var createMessage = function createMessage(message) {
   return function (dispatch) {
     return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message);
+  };
+};
+var demoMessage = function demoMessage(chatroomId) {
+  return function (dispatch) {
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["demoMessage"](chatroomId);
   };
 };
 var editMessage = function editMessage(message) {
@@ -758,6 +764,18 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.newState();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.chatroomType != prevProps.chatroomType) {
+        this.newState();
+      }
+    }
+  }, {
+    key: "newState",
+    value: function newState() {
       var _this3 = this;
 
       this.props.fetchUsers().then(function () {
@@ -776,24 +794,15 @@ function (_React$Component) {
           header: "Direct Messages"
         });
         this.setState({
-          inputBox: "Find a user"
-        });
-        this.setState({
           chatroom_type: "direct_message"
         });
       } else if (this.props.chatroomType === 'joinChatroom') {
         this.setState({
           header: "Browse Channels"
         });
-        this.setState({
-          inputBox: "Search Channels"
-        });
       } else {
         this.setState({
           header: "Create a Channel"
-        });
-        this.setState({
-          inputBox: "e.g. leads"
         });
         this.setState({
           chatroom_type: "channel"
@@ -908,7 +917,8 @@ function (_React$Component) {
         })));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        placeholder: "".concat(this.state.inputBox),
+        placeholder: "Find a user",
+        onChange: this.handleInput('inputBox'),
         autoFocus: true,
         onKeyDown: function onKeyDown(e) {
           return _this5.handleEnterKey(e);
@@ -923,31 +933,33 @@ function (_React$Component) {
           return "";
         } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
           return "";
-        } else return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: "user-".concat(user.id),
-          className: "join-channel-user-list-item",
-          onClick: function onClick() {
-            return _this5.addUser(user);
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: "user-".concat(user.id),
-          className: "user-list-item-container flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item-left flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "profile-image-2",
-          src: "https://robohash.org/".concat(user.full_name, ".png")
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item flex"
-        }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "full-name"
-        }, " ", user.alias, " \u25E6"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "alias"
-        }, " ", user.full_name, " "), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "full-name"
-        }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-level-down-alt"
-        })));
+        } else if (user.full_name.toLowerCase().startsWith(_this5.state.inputBox.toLowerCase())) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: "user-".concat(user.id),
+            className: "join-channel-user-list-item",
+            onClick: function onClick() {
+              return _this5.addUser(user);
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: "user-".concat(user.id),
+            className: "user-list-item-container flex"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "user-list-item-left flex"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "profile-image-2",
+            src: "https://robohash.org/".concat(user.full_name, ".png")
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "user-list-item flex"
+          }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "full-name"
+          }, " ", user.alias, " \u25E6"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "alias"
+          }, " ", user.full_name, " "), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "full-name"
+          }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-level-down-alt"
+          })));
+        }
       })));
       var displayChannelList = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-input join-channel-modal"
@@ -962,7 +974,8 @@ function (_React$Component) {
         className: " fas fa-search"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        placeholder: "".concat(this.state.inputBox),
+        placeholder: "Search Channels",
+        onChange: this.handleInput('inputBox'),
         autoFocus: true,
         onKeyDown: function onKeyDown(e) {
           return _this5.handleEnterKey(e);
@@ -971,7 +984,7 @@ function (_React$Component) {
         className: "join-channel-user-list flex"
       }, this.state.chatrooms.map(function (chatroom) {
         {
-          if (chatroom.chatroom_type === 'channel') {
+          if (chatroom.chatroom_type === 'channel' && chatroom.title.startsWith(_this5.state.inputBox.toLowerCase())) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
               key: "chatroom-".concat(chatroom.id),
               to: "/chatrooms/".concat(chatroom.id),
@@ -979,7 +992,7 @@ function (_React$Component) {
                 return _this5.subscribeToChatroom(chatroom);
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-              key: "user-".concat(chatroom.id),
+              key: "chatroom-".concat(chatroom.id),
               className: "join-channel-user-list-item join-channel-channel-list-item"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "user-list-item-container flex"
@@ -1014,7 +1027,7 @@ function (_React$Component) {
       }, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "create-channel-input-name",
-        placeholder: "".concat(this.state.inputBox),
+        placeholder: "e.g. leads",
         onChange: this.handleInput('title'),
         value: this.state.title,
         autoFocus: true,
@@ -1056,6 +1069,7 @@ function (_React$Component) {
         type: "text",
         className: "create-channel-input-name",
         placeholder: "Click below to add names",
+        onChange: this.handleInput('inputBox'),
         onKeyDown: function onKeyDown(e) {
           return _this5.handleEnterKey(e);
         }
@@ -1066,31 +1080,33 @@ function (_React$Component) {
           return "";
         } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
           return "";
-        } else return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: "user-".concat(user.id),
-          className: "join-channel-user-list-item",
-          onClick: function onClick() {
-            return _this5.addUser(user);
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: "user-".concat(user.id),
-          className: "user-list-item-container flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item-left flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "profile-image-2",
-          src: "https://robohash.org/".concat(user.full_name, ".png")
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user-list-item flex"
-        }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "full-name"
-        }, " ", user.alias, " \u25E6"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "alias"
-        }, " ", user.full_name, " "), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "full-name"
-        }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-level-down-alt"
-        })));
+        } else if (user.full_name.toLowerCase().startsWith(_this5.state.inputBox.toLowerCase())) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: "user-".concat(user.id),
+            className: "join-channel-user-list-item",
+            onClick: function onClick() {
+              return _this5.addUser(user);
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: "user-".concat(user.id),
+            className: "user-list-item-container flex"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "user-list-item-left flex"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "profile-image-2",
+            src: "https://robohash.org/".concat(user.full_name, ".png")
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "user-list-item flex"
+          }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "full-name"
+          }, " ", user.alias, " \u25E6"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "alias"
+          }, " ", user.full_name, " "), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "full-name"
+          }, user.full_name, " \u25E6 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-level-down-alt"
+          })));
+        }
       })), this.state.title ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "green-button",
         onClick: this.handleSubmit
@@ -1380,6 +1396,7 @@ function (_React$Component) {
       this.props.fetchChatrooms(this.props.currentUser.id).then(function (chatrooms) {
         return _this.subscribeToAllChats();
       });
+      this.props.fetchUsers();
     }
   }, {
     key: "subscribeToAllChats",
@@ -1417,6 +1434,8 @@ function (_React$Component) {
         received: function received(message) {
           if (message.deleted) {
             _this3.props.removeMessage(message.id);
+
+            _this3.props.fetchChatroom(message.chatroom_id);
           } else {
             _this3.props.receiveMessage(message);
 
@@ -1526,6 +1545,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-all-threads"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.props.openJoinChannelModal,
         className: "chatroom-category chatroom-jump-to flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: " fas fa-search"
@@ -1562,9 +1582,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chatroom_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatroom_list */ "./frontend/components/chat/chatroom_list.jsx");
 /* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -1576,7 +1598,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
-    chatrooms: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllChatrooms"])(state)
+    chatrooms: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_6__["selectAllChatrooms"])(state)
   };
 };
 
@@ -1587,6 +1609,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     },
     fetchChatroom: function fetchChatroom(chatroomId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["fetchChatroom"])(chatroomId));
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])());
     },
     receiveMessage: function receiveMessage(message) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
@@ -1607,24 +1632,24 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["unsubscribeFromChatroom"])(chatroom));
     },
     openAddChannelModal: function openAddChannelModal() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__["openModal"])({
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["openModal"])({
         type: 'createChannel'
       }));
     },
     openJoinChannelModal: function openJoinChannelModal() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__["openModal"])({
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["openModal"])({
         type: 'joinChatroom'
       }));
     },
     openDirectMessageModal: function openDirectMessageModal() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__["openModal"])({
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["openModal"])({
         type: 'createDirectMessage'
       }));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_chatroom_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_chatroom_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -1889,12 +1914,6 @@ var MessageItem = function MessageItem(_ref) {
     destroyMessage(message.id);
   }
 
-  function editMessage() {
-    editMessage(message);
-  }
-
-  var photoUrl; // users ? ( users[message.author_id].photoUrl ? photoUrl = users[message.author_id].photoUrl : photoUrl = "" ) : photoUrl = "";
-
   var editButtons = "";
 
   if (message.author_id === currentUser.id) {
@@ -1920,7 +1939,7 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-item-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
-    src: "https://robohash.org/".concat(message.author_id, ".png")
+    src: users[message.author_id].photoUrl
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2274,6 +2293,10 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
+      // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+      //     debugger
+      //     this.redirectToHome();
+      // }
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.setState({
@@ -2297,6 +2320,16 @@ function (_React$Component) {
         } else {
           document.title = "".concat(this.props.currentChatroom.users.join(", "), " | hype");
         }
+      }
+    }
+  }, {
+    key: "redirectToHome",
+    value: function redirectToHome() {
+      if (this.props.currentUser.chatroom_ids[0]) {
+        var firstChatroom = this.props.currentUser.chatroom_ids[0];
+        this.props.history.push("/chatrooms/".concat(firstChatroom));
+      } else {
+        this.props.history.push("/chatrooms/1");
       }
     }
   }, {
@@ -2776,6 +2809,7 @@ function (_React$Component) {
     key: "loginMichael",
     value: function loginMichael(e) {
       var michael = {
+        name: "Michael",
         email: "M.Scott@dunder-mifflin.org",
         password: "Michael123456"
       };
@@ -2786,6 +2820,7 @@ function (_React$Component) {
     value: function loginJim(e) {
       e.preventDefault();
       var jim = {
+        name: "Jim",
         email: "J.Halpert@dunder-mifflin.org",
         password: "Jim123456"
       };
@@ -2796,10 +2831,23 @@ function (_React$Component) {
     value: function loginPam(e) {
       e.preventDefault();
       var pam = {
+        name: 'Pam',
         email: "P.Beesly@dunder-mifflin.org",
         password: "Pam123456"
       };
-      this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
+      this.loginTyper(pam.email, pam.password, 0, this.handleSubmit); // setTimeout(this.props.demoMessage(24), 5000);
+      // setTimeout(this.props.demoMessage(27), 9000);
+      // setTimeout(this.props.demoMessage(32), 14000);
+      // setTimeout(this.props.demoMessage(1), 3000);
+      // setTimeout(this.props.demoMessage(3), 18000);
+      // setTimeout(this.props.demoMessage(7), 12000);
+      // setTimeout(this.props.demoMessage(52), 7000);
+      // setTimeout(this.props.demoMessage(3), 6000);
+    }
+  }, {
+    key: "startDemo",
+    value: function startDemo() {
+      this.props.demoMessage();
     } // DEMO LOGIN loginTyper
 
   }, {
@@ -2905,6 +2953,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _login_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login_form */ "./frontend/components/session/login_form.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
+
 
 
 
@@ -2923,6 +2973,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     clearSessionErrors: function clearSessionErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
+    },
+    demoMessage: function demoMessage(chatroomId) {
+      return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_4__["demoMessage"])(chatroomId));
     }
   };
 };
@@ -3899,12 +3952,13 @@ var destroyChatroomSubscription = function destroyChatroomSubscription(chatroom)
 /*!********************************************!*\
   !*** ./frontend/util/messages_api_util.js ***!
   \********************************************/
-/*! exports provided: fetchMessages, fetchMessage, createMessage, editMessage, destroyMessage */
+/*! exports provided: fetchMessages, demoMessage, fetchMessage, createMessage, editMessage, destroyMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demoMessage", function() { return demoMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editMessage", function() { return editMessage; });
@@ -3913,6 +3967,12 @@ var fetchMessages = function fetchMessages(chatroomId) {
   return $.ajax({
     method: 'GET',
     url: "/api/chatrooms/".concat(chatroomId, "/messages")
+  });
+};
+var demoMessage = function demoMessage(chatroomId) {
+  return $.ajax({
+    method: 'GET',
+    url: "/demo/".concat(chatroomId)
   });
 };
 var fetchMessage = function fetchMessage(messageId) {

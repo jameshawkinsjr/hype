@@ -10,6 +10,7 @@ class ChatroomList extends React.Component {
     componentDidMount() {
         this.props.fetchChatrooms(this.props.currentUser.id)
         .then(chatrooms => this.subscribeToAllChats());
+        this.props.fetchUsers()
     }
 
 
@@ -46,6 +47,7 @@ class ChatroomList extends React.Component {
                 received: message => {
                     if (message.deleted){
                         this.props.removeMessage(message.id);
+                        this.props.fetchChatroom(message.chatroom_id);
                     } else {
                     this.props.receiveMessage(message);
                     this.props.fetchChatroom(message.chatroom_id);
@@ -159,8 +161,11 @@ class ChatroomList extends React.Component {
         return (
                 <div className="chatroom-skeleton flex">
                 <div className="chatroom-all-threads">  
-                    <div className="chatroom-category chatroom-jump-to flex">
-                        <i className=" fas fa-search"></i><h3> Jump To... </h3>
+                    <div 
+                        onClick={ this.props.openJoinChannelModal }
+                        className="chatroom-category chatroom-jump-to flex"
+                    >
+                        <i className=" fas fa-search" ></i><h3> Jump To... </h3>
                     </div>
                     <div className="chatroom-category chatroom-all-threads-text flex"><i className="far fa-comment-alt"></i><h3> All Threads </h3></div>
                     { channelList }

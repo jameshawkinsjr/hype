@@ -5,6 +5,13 @@ export const fetchMessages = (chatroomId) => (
     })
 );
 
+export const demoMessage = chatroomId => (
+    $.ajax({
+        method: 'GET',
+        url: `/demo/${chatroomId}`
+    })
+);
+
 export const fetchMessage = (messageId) => (
     $.ajax({
         method: 'GET',

@@ -64,7 +64,11 @@
         font-size: 15px;
     }
 
-
+    
+    
+}
+.chatroom-jump-to {
+    cursor: pointer;
 }
 .add-channel-button{
     align-items: center;
@@ -81,19 +85,24 @@
     font-size: 15px;
     padding: 6px 0 6px 20px;
     width: 220px;
+    color: $white;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     box-sizing: border-box;
-    color: $white;
+    text-overflow: ellipsis;
     a {
         color: $white;
+        white-space: nowrap;
+        overflow: hidden;
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+    
     }
-    // &:not(.active){
-    //     &:hover{
-    //     background: #311134;
-    //     }
-    // }
+    &:hover {
+        span {
+            width: 135px;
+        }
+    }
     &.unread {
         color: $white;
         font-weight: 600;
@@ -109,6 +118,15 @@
             color: $white;
         }
     }
+    span {
+        width: 175px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+        padding-bottom: 5px; 
+        margin-bottom: -5px;
+    }
 }
 
 .active-chatroom:hover .message-icons {
@@ -119,29 +137,30 @@
 }
 .unread {
     .chatroom-name, .chatroom-name.div {
-        span{
+        white-space: nowrap;
+        overflow: hidden;
+        box-sizing: border-box;
+        text-overflow: ellipsis;    
+    
+    span {
             width: 135px;
             display: inline-block;
             text-overflow: ellipsis;
             overflow-x: hidden;
-            overflow-y: visible;
             white-space: nowrap;
-        }
+            padding-bottom: 5px; 
+            margin-bottom: -5px;
     // display: flex;
     // position: relative;
     // justify-items: flex-end;
     }
+}
 }
 
 .unread {
     font-weight: 700;
 }
 
-.chatroom-name-div {
-    span {
-        padding-bottom: 5px; margin-bottom: -5px
-    }
-}
 .active-chatroom {
     display: flex;
     position: relative;
@@ -162,11 +181,11 @@
         color: $white;
         visibility: visible;
         background: $unread-pink;
-        padding: 3px 5px;
-        border-radius: 20px;
+        padding: 4px 8px;
+        border-radius: 40%;
         font-size: 13px;
         font-weight: 600;
-        // margin-right: 10px;
+        margin: -1px;
     }
 }
 

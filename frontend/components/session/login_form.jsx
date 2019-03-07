@@ -37,6 +37,7 @@ class LoginForm extends React.Component {
     // DEMO LOGINS
     loginMichael(e){
         const michael = {
+            name: "Michael",
             email: "M.Scott@dunder-mifflin.org",
             password: "Michael123456"
         };
@@ -45,18 +46,33 @@ class LoginForm extends React.Component {
     loginJim(e){
         e.preventDefault();
         const jim = {
+            name: "Jim",
             email: "J.Halpert@dunder-mifflin.org",
             password: "Jim123456"
         };
         this.loginTyper(jim.email, jim.password, 0, this.handleSubmit)
+
     }
     loginPam(e){
         e.preventDefault();
         const pam = {
+            name: 'Pam',
             email: "P.Beesly@dunder-mifflin.org",
             password: "Pam123456"
         };
-        this.loginTyper(pam.email, pam.password, 0, this.handleSubmit)
+        this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
+        // setTimeout(this.props.demoMessage(24), 5000);
+        // setTimeout(this.props.demoMessage(27), 9000);
+        // setTimeout(this.props.demoMessage(32), 14000);
+        // setTimeout(this.props.demoMessage(1), 3000);
+        // setTimeout(this.props.demoMessage(3), 18000);
+        // setTimeout(this.props.demoMessage(7), 12000);
+        // setTimeout(this.props.demoMessage(52), 7000);
+        // setTimeout(this.props.demoMessage(3), 6000);
+    }
+
+    startDemo(){
+        this.props.demoMessage();
     }
     // DEMO LOGIN loginTyper
     loginTyper(email, password, i, submitCallback) {

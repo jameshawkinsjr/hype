@@ -9,7 +9,7 @@ class ChatroomAdd extends React.Component {
             users: this.props.users,
             chatrooms: this.props.chatrooms,
             header: "",
-            inputBox: "",
+            inputBox: ``,
             subtext: "",
             directMessageUsers: [],
             directMessageUsersToAdd: [],
@@ -38,20 +38,27 @@ class ChatroomAdd extends React.Component {
     }
 
     componentDidMount() {
-            this.props.fetchUsers()
+        this.newState();
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.chatroomType != prevProps.chatroomType){
+            this.newState();
+        }
+    }
+
+    newState() {
+        this.props.fetchUsers()
         .then ( () => this.setState( {users: this.props.users } ));
         this.props.fetchChatrooms("all")
         .then ( () => this.setState( {chatrooms: this.props.chatrooms } ));
         if (this.props.chatroomType === 'createDirectMessage'){
             this.setState( {header: "Direct Messages"});
-            this.setState( {inputBox: "Find a user"});
             this.setState( {chatroom_type: "direct_message" });
         } else if (this.props.chatroomType === 'joinChatroom') {
             this.setState( {header: "Browse Channels"});
-            this.setState( {inputBox: "Search Channels"});
         } else {
             this.setState( {header: "Create a Channel"});
-            this.setState( {inputBox: "e.g. leads"});
             this.setState( {chatroom_type: "channel" });
             this.setState( {subtext: "Channels are where your members communicate. They're best when organized around a topic - #leads for example."});
         }
@@ -133,7 +140,8 @@ class ChatroomAdd extends React.Component {
                             ))
                         }
                         <input  type="text"
-                                placeholder={`${this.state.inputBox}`}
+                                placeholder="Find a user"
+                                onChange={this.handleInput('inputBox')}
                                 autoFocus
                                 onKeyDown={ (e) => this.handleEnterKey(e) }
                         />
@@ -160,7 +168,8 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (this.state.directMessageUsersToAdd.includes(user.id)) {
                                     return ""
-                                } else return (
+                                } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
+                                    return (
                                 <li key={`user-${user.id}`} 
                                     className="join-channel-user-list-item"
                                     onClick={ () => this.addUser(user) }
@@ -180,7 +189,7 @@ class ChatroomAdd extends React.Component {
                                         <i className="fas fa-level-down-alt"></i>
                                     </div>
                                 </li>
-                            )})
+                            )}})
                         }
                     </ul>  
                 </div> 
@@ -199,7 +208,8 @@ class ChatroomAdd extends React.Component {
                     <div className="join-channel-inner-input flex">
                             <i className=" fas fa-search"></i>
                             <input  type="text"
-                                    placeholder={`${this.state.inputBox}`}
+                                    placeholder="Search Channels"
+                                    onChange={this.handleInput('inputBox')}
                                     autoFocus
                                     onKeyDown={ (e) => this.handleEnterKey(e) }
                             />
@@ -208,13 +218,13 @@ class ChatroomAdd extends React.Component {
                             <p> Channels you can join </p>
                         <ul className="join-channel-user-list flex">
                             {   this.state.chatrooms.map( chatroom => {
-                                { if (chatroom.chatroom_type === 'channel') {
+                                { if (chatroom.chatroom_type === 'channel' && chatroom.title.startsWith(this.state.inputBox.toLowerCase()) ) {
                                     return (
                                         <Link   key={`chatroom-${chatroom.id}`} 
                                                 to={`/chatrooms/${chatroom.id}`}
                                                 onClick={ () => this.subscribeToChatroom(chatroom)}
                                                 >
-                                    <li key={`user-${chatroom.id}`} 
+                                    <li key={`chatroom-${chatroom.id}`} 
                                         className="join-channel-user-list-item join-channel-channel-list-item"
                                     >
                                         <div className="user-list-item-container flex">
@@ -252,7 +262,7 @@ class ChatroomAdd extends React.Component {
                             <h3 className="create-channel-hashtag">#</h3>
                             <input  type="text"
                                     className="create-channel-input-name"
-                                    placeholder={`${this.state.inputBox}`}
+                                    placeholder="e.g. leads"
                                     onChange={this.handleInput('title')}
                                     value={this.state.title}
                                     autoFocus
@@ -279,6 +289,7 @@ class ChatroomAdd extends React.Component {
                             <input  type="text"
                                     className="create-channel-input-name"
                                     placeholder={`Click below to add names`}
+                                    onChange={this.handleInput('inputBox')}
                                     onKeyDown={ (e) => this.handleEnterKey(e) }
                             />
                     </div>
@@ -289,7 +300,8 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (this.state.directMessageUsersToAdd.includes(user.id)) {
                                     return ""
-                                } else return (
+                                } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
+                                     return (
                                 <li key={`user-${user.id}`} 
                                     className="join-channel-user-list-item"
                                     onClick={ () => this.addUser(user) }
@@ -309,7 +321,7 @@ class ChatroomAdd extends React.Component {
                                         <i className="fas fa-level-down-alt"></i>
                                     </div>
                                 </li>
-                            )})
+                            )}})
                         }
                     </ul> 
                     { this.state.title ? 

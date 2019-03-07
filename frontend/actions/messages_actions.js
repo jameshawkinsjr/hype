@@ -49,6 +49,9 @@ export const fetchMessage = (messageId) => dispatch => (
 export const createMessage = (message) => dispatch => (
         ApiUtil.createMessage(message)
 );
+export const demoMessage = (chatroomId) => dispatch => (
+        ApiUtil.demoMessage(chatroomId)
+);
 
 export const editMessage = (message) => dispatch => (
         ApiUtil.editMessage(message)
