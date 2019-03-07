@@ -33,6 +33,10 @@
                 background: rgba(189, 189, 189, 0.592);
                 color: $dark-grey;
             }
+            &:active{
+                background: $green;
+                color: $white;
+            }
         }
         .join-channel-modal {
             padding: 10px 40px 10px 40px;
@@ -321,8 +325,8 @@
         max-height: 150px;
         overflow: hidden;
     }
-    .join-channel-user-list {
-        height: 150px;
+    .create-channel-user-list {
+        max-height: 150px;
     }
 
     .not-active {

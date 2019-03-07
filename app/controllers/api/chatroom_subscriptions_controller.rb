@@ -1,12 +1,12 @@
 class Api::ChatroomSubscriptionsController < ApplicationController
 
     def show
-        @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:chatroom_id], chatroom_id: params[:user_id]
+        @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:chatroom_id], user_id: params[:user_id]
     end
     def create
         @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
         if current_user.chatrooms.include?(@chatroom.id)
-            render json: @chatroom_subscription.chatroom_id
+            render :show
         else 
             @chatroom_subscription = ChatroomSubscription.new(chatroom_params)
             @chatroom_subscription.user_id = current_user.id
@@ -18,8 +18,19 @@ class Api::ChatroomSubscriptionsController < ApplicationController
         end
     end
 
+    def update
+        @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
+        if @chatroom.messages
+            last_message = @chatroom.messages.last.id
+        else 
+            last_message = 0
+        end
+        @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: @chatroom.id, user_id: current_user.id
+        @chatroom_subscription.update(last_read_message: last_message )
+        render :show
+    end
+
     def destroy
-        # debugger
         @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:id], user_id: current_user.id
         if @chatroom_subscription
             @chatroom_subscription.delete

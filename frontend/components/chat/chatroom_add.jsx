@@ -38,8 +38,8 @@ class ChatroomAdd extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchUsers()
-        .then ( () => this.setState( {users: this.props.users } ))
+            this.props.fetchUsers()
+        .then ( () => this.setState( {users: this.props.users } ));
         this.props.fetchChatrooms("all")
         .then ( () => this.setState( {chatrooms: this.props.chatrooms } ));
         if (this.props.chatroomType === 'createDirectMessage'){
@@ -282,7 +282,7 @@ class ChatroomAdd extends React.Component {
                                     onKeyDown={ (e) => this.handleEnterKey(e) }
                             />
                     </div>
-                    <ul className="join-channel-user-list flex">
+                    <ul className="create-channel-user-list join-channel-user-list flex">
                         {   
                             this.state.users.map( user => {
                                 if ( user.id === this.props.currentUser.id || user.full_name === "Hypebot"){

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChatroomList from './chatroom_list';
-import { fetchChatrooms, receiveChatroom, destroyChatroom, createChatroom, unsubscribeFromChatroom} from '../../actions/chatrooms_actions';
+import { fetchChatrooms, fetchChatroom, receiveChatroom, destroyChatroom, createChatroom, unsubscribeFromChatroom} from '../../actions/chatrooms_actions';
 import { receiveMessage, removeMessage } from '../../actions/messages_actions';
 import { withRouter } from 'react-router-dom';
 import { selectAllChatrooms } from '../../reducers/selectors';
@@ -14,6 +14,7 @@ const mapStateToProps = ( state, ownProps ) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     fetchChatrooms: userId => dispatch(fetchChatrooms(userId)),
+    fetchChatroom: chatroomId => dispatch(fetchChatroom(chatroomId)),
     receiveMessage: message => dispatch(receiveMessage(message)),
     removeMessage: message => dispatch(removeMessage(message)),
     receiveChatroom: chatroom => dispatch(receiveChatroom(chatroom)),

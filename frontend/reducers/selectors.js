@@ -7,7 +7,6 @@ export const selectAllMessagesForChatroom = function(state, chatroomId) {
     let filteredMessages = messages.filter( function (message) {
         return message.chatroom_id == chatroomId;
     });
-    // debugger
     return filteredMessages;
 
 };

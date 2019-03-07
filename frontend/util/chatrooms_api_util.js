@@ -5,13 +5,6 @@ export const fetchChatrooms = (userId) => (
     })
 );
 
-// export const fetchAllChatrooms = () => (
-//     $.ajax({
-//         method: 'GET',
-//         url: `/api/chatrooms`
-//     })
-// );
-
 export const fetchChatroom = (chatroomId) => (
     $.ajax({
         method: 'GET',
@@ -45,6 +38,14 @@ export const createChatroomSubscription = ( chatroom_subscription ) => (
     $.ajax({
         method: 'POST',
         url: `/api/chatroom_subscriptions/`,
+        data: { chatroom_subscription }
+    })
+);
+
+export const clearUnreadMessages = ( chatroom_subscription ) => (
+    $.ajax({
+        method: 'PATCH',
+        url: `/api/chatroom_subscriptions/${chatroom_subscription.chatroom_id}`,
         data: { chatroom_subscription }
     })
 );

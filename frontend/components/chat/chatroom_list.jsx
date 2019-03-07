@@ -12,9 +12,6 @@ class ChatroomList extends React.Component {
         .then(chatrooms => this.subscribeToAllChats());
     }
 
-    componentDidUpdate(previousProps) {
-    }
-
 
     subscribeToAllChats() {
         this.props.chatrooms.forEach( chatroom => {
@@ -23,7 +20,6 @@ class ChatroomList extends React.Component {
     }
 
     unsubscribe(chatroom){
-        // debugger
         this.props.unsubscribeFromChatroom(chatroom);
     }
 
@@ -50,11 +46,11 @@ class ChatroomList extends React.Component {
                 received: message => {
                     if (message.deleted){
                         this.props.removeMessage(message.id);
-                    // } else {
-                    // this.props.receiveMessage(message);
+                    } else {
+                    this.props.receiveMessage(message);
+                    this.props.fetchChatroom(message.chatroom_id);
                     // if (!("Notification" in window)) {
                     // } else if (Notification.permission === "granted") {
-                    //     // debugger
                     //     let notification = new Notification(`${message.author_name}: ${message.body}`);
                     // } else if (Notification.permission !== "denied") {
                     //     Notification.requestPermission().then(function (permission) {
@@ -84,7 +80,6 @@ class ChatroomList extends React.Component {
 
         let channels = [];
         let directMessages = [];
-        
         this.props.chatrooms.forEach( chatroom => {
             if (chatroom.chatroom_type === 'channel'){
                 channels.push(chatroom);
@@ -108,13 +103,17 @@ class ChatroomList extends React.Component {
                     { channels.map( chatroom => {
                         if (chatroom.user_ids.includes(that.props.currentUser.id)){
                         return (
-                        <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
-                            <li className="chatroom-name chatroom-channel-names flex">
-                            <div>
-                                #  { chatroom.title.replace(/\s+/g, '-').toLowerCase() }
-                            </div>
-                            <div>
-                                    <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
+                        <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className={`active-chatroom ${chatroom.unread_message_count > 0 ? "unread" : ""} `}>
+                            <li className={`chatroom-name chatroom-channel-names flex ${chatroom.unread_message_count > 0 ? "unread" : ""}`}>
+                                <div className="chatroom-name-div">
+                                    #  <span>{ chatroom.title.replace(/\s+/g, '-').toLowerCase() }</span>
+                                </div>
+                                <div>
+                                    { chatroom.unread_message_count === 0 ?
+                                    ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> )
+                                    :
+                                    ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count} </div> )
+                                    }
                                 </div>
                             </li>
                         </NavLink>
@@ -136,10 +135,18 @@ class ChatroomList extends React.Component {
                 { directMessages.map( chatroom => {
                     if (chatroom.user_ids.includes(that.props.currentUser.id)){
                         return (
-                    <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className="active-chatroom">
-                            <li className="chatroom-name">
-                                    ◦ { chatroom.users.join(", ") || "" }
-                                    <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i>
+                    <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className={`active-chatroom ${chatroom.unread_message_count > 0 ? "unread" : ""} `}>
+                            <li className={`chatroom-name chatroom-channel-names flex ${chatroom.unread_message_count > 0 ? "unread" : ""}`}>
+                                    <div className="chatroom-name-div">
+                                    ◦ <span>{ chatroom.users.join(", ") || "" }</span>
+                                    </div>
+                                    <div>
+                                        { chatroom.unread_message_count === 0 ?
+                                        ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> )
+                                        :
+                                        ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count} </div> )
+                                        }
+                                    </div>
                             </li>
                     </NavLink>
                     ) }} )

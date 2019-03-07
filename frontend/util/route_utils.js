@@ -24,18 +24,6 @@ const Protected = ({ loggedIn, path, component: Component }) => (
         )}
     />
 );
-// const Chatroom = ({ currentUser, currentChatroom, path, component: Component }) => (
-//     <Route
-//         path = { path }
-//         render = { props => {
-//             debugger
-//             return (
-//                 currentChatroom.user_ids.includes(currentUser.id) ? <Component {...props} /> : <Redirect to="/chatrooms/1" />
-//             )}
-//         }
-//     />
-// );
 
-// export const ChatroomRoute = withRouter(connect(mapStateToProps)(Chatroom));
 export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
 export const ProtectedRoute = withRouter(connect(mapStateToProps)(Protected));

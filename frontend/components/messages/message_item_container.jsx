@@ -5,6 +5,7 @@ import { destroyMessage, fetchMessages } from '../../actions/messages_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => ({
+    users: state.entities.users,
     currentUser: state.entities.users[state.session.currentUserId],
     message: ownProps.message,
 });

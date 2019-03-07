@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
     def index
-        @users = User.all
+        @users = User.with_attached_photo.all
     end
 
     def create
@@ -18,6 +18,10 @@ class Api::UsersController < ApplicationController
             ChatroomSubscription.create!(user_id: @user.id, chatroom_id: Chatroom.fourth.id)
             ChatroomSubscription.create!(user_id: @user.id, chatroom_id: Chatroom.fifth.id)
             Message.create!(author_id: hypebot.id, body: "Hey there! Welcome to Hype. Thanks for stopping by!",chatroom_id: newDM.id)
+            # @user.photo.attach(io: "https://robohash.org/test.png", filename: 'test.png')
+            # file = open(`https://robohash.org/test.png`)
+            # @user.photo.attach(io: file, filename: "temp.#{file.content_type_parse.first.split("/").last}", content_type: file.content_type_parse.first)
+            # User.first.photo.attach(io: url("https://robohash.org/test.png"), filename: 'test.png')
             render :show
         else
             render json: @user.errors.full_messages, status: 401

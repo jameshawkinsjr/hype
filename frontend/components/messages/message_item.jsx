@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MessageItem = ({ message, destroyMessage, openModal, currentUser }) => {
-  // debugger
+const MessageItem = ({ message, destroyMessage, openModal, currentUser, users }) => {
   let name;
   if (message.author_alias) {
       name = message.author_alias;
@@ -16,6 +15,8 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser }) => {
   function editMessage() {
     editMessage(message);
   }
+  let photoUrl
+  // users ? ( users[message.author_id].photoUrl ? photoUrl = users[message.author_id].photoUrl : photoUrl = "" ) : photoUrl = "";
 
   let editButtons = "";
 
@@ -39,7 +40,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser }) => {
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <img className="profile-image" src={`https://robohash.org/${name}.png`} />
+          <img className="profile-image" src={`https://robohash.org/${message.author_id}.png`} /> 
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">

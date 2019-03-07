@@ -80,3 +80,10 @@ export const unsubscribeFromChatroom = (chatroom_subscription) => dispatch => (
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )
 );
+
+export const clearUnreadMessages = (chatroom_subscription) => dispatch => (
+        ApiUtil.clearUnreadMessages(chatroom_subscription)
+                .then(chatroomId => dispatch(receiveChatroom(chatroomId)),
+                err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
+        )
+);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import NavBarContainer from './navbar/navbar_container'
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ChatContainer from './chat/chat_container';
@@ -19,7 +18,6 @@ const App = () => (
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
             <Route exact path="/" component={LandingPageContainer} />
-            <Route exact path="/nav" component={NavBarContainer} />
             <Route component={PageNotFound} />
         </Switch>
     </header>

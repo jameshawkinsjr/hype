@@ -1,4 +1,3 @@
-# json.extract! @message, :id, :body, :chatroom_id, :author_id, :parent_id, :created_at, :updated_at
 
 json.extract! @message, :id, :body, :chatroom_id, :author_id, :parent_id
 json.timestamp @message.created_at.localtime.strftime("%l:%M %p")

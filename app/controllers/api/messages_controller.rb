@@ -7,6 +7,12 @@ class Api::MessagesController < ApplicationController
     def create
         @message = Message.new(message_params)
         if @message.save
+            sub = ChatroomSubscription.find_by(chatroom_id: @message.chatroom_id, user_id: current_user.id)
+             if sub
+                chatroom = Chatroom.find @message.chatroom_id
+                last_read_message = sub.last_read_message || 0
+                @unread_message_count = chatroom.messages.count { |message| message.id > last_read_message }
+            end
             ActionCable
                 .server
                 .broadcast(
@@ -18,11 +24,12 @@ class Api::MessagesController < ApplicationController
                     author_id: @message.user.id,
                     chatroom_id: @message.chatroom_id,
                     timestamp: @message.created_at.localtime.strftime("%l:%M %p"),
-                    full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p")
+                    full_timestamp: @message.created_at.localtime.strftime("%-B %-e, %-Y at %l:%M %p"),
+                    # unread_message_count: @unread_message_count
                 )
                 render :_show
         else
-            render json: @messages.errors.full_messages, status: 401
+            render json: @message.errors.full_messages, status: 401
         end
     end
 
