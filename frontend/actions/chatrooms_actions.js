@@ -6,6 +6,7 @@ export const RECEIVE_CHATROOM = 'RECEIVE_CHATROOM';
 export const RECEIVE_CHATROOM_ERRORS = 'RECEIVE_CHATROOM_ERRORS';
 export const CLEAR_CHATROOM_ERRORS = 'CLEAR_CHATROOM_ERRORS';
 export const REMOVE_CHATROOM = 'REMOVE_CHATROOM';
+export const SUBSCRIBE_CHATROOM = 'SUBSCRIBE_CHATROOM';
 
 export const receiveChatrooms = chatrooms => ({
         type: RECEIVE_ALL_CHATROOMS,
@@ -14,6 +15,10 @@ export const receiveChatrooms = chatrooms => ({
 
 export const receiveChatroom = chatroom => ({
         type: RECEIVE_CHATROOM,
+        chatroom,
+});
+export const subscribeChatroom = chatroom => ({
+        type: SUBSCRIBE_CHATROOM,
         chatroom,
 });
 
@@ -48,7 +53,7 @@ export const fetchChatroom = (chatroomId) => dispatch => (
 
 export const createChatroom = (chatroom) => dispatch => (
         ApiUtil.createChatroom(chatroom)
-                .then(chatroom => dispatch(receiveChatroom(chatroom)),
+                .then(chatroom => dispatch(subscribeChatroom(chatroom)),
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )
 );
@@ -69,7 +74,7 @@ export const destroyChatroom = (chatroomId) => dispatch => (
 
 export const subscribeToChatroom = (chatroom_subscription) => dispatch => (
         ApiUtil.createChatroomSubscription(chatroom_subscription)
-                .then(chatroomId => dispatch(receiveChatroom(chatroomId)),
+                .then(chatroom => dispatch(subscribeChatroom(chatroom)),
                 err => (dispatch(receiveChatroomErrors(err.responseJSON)))       
         )
 );

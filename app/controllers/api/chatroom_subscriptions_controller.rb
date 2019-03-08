@@ -20,6 +20,7 @@ class Api::ChatroomSubscriptionsController < ApplicationController
 
     def update
         @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
+        # debugger
         if @chatroom.messages
             last_message = @chatroom.messages.last.id
         else 

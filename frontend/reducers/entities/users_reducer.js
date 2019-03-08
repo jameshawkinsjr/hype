@@ -1,5 +1,6 @@
 import {RECEIVE_CURRENT_USER } from '../../actions/session_actions';
 import {RECEIVE_ALL_USERS } from '../../actions/users_actions';
+import {RECEIVE_ALL_MESSAGES } from '../../actions/messages_actions';
 import merge from 'lodash/merge';
 
 
@@ -8,6 +9,7 @@ const usersReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case RECEIVE_ALL_USERS:
+        case RECEIVE_ALL_MESSAGES:
             newState = merge({}, state, action.users);
             return newState;
         case RECEIVE_CURRENT_USER:

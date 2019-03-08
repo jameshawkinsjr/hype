@@ -90,7 +90,7 @@
 /*!***********************************************!*\
   !*** ./frontend/actions/chatrooms_actions.js ***!
   \***********************************************/
-/*! exports provided: RECEIVE_ALL_CHATROOMS, RECEIVE_CHATROOM, RECEIVE_CHATROOM_ERRORS, CLEAR_CHATROOM_ERRORS, REMOVE_CHATROOM, receiveChatrooms, receiveChatroom, removeChatroom, receiveChatroomErrors, clearChatroomErrors, fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom, subscribeToChatroom, unsubscribeFromChatroom, clearUnreadMessages */
+/*! exports provided: RECEIVE_ALL_CHATROOMS, RECEIVE_CHATROOM, RECEIVE_CHATROOM_ERRORS, CLEAR_CHATROOM_ERRORS, REMOVE_CHATROOM, SUBSCRIBE_CHATROOM, receiveChatrooms, receiveChatroom, subscribeChatroom, removeChatroom, receiveChatroomErrors, clearChatroomErrors, fetchChatrooms, fetchChatroom, createChatroom, editChatroom, destroyChatroom, subscribeToChatroom, unsubscribeFromChatroom, clearUnreadMessages */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,8 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHATROOM_ERRORS", function() { return RECEIVE_CHATROOM_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_CHATROOM_ERRORS", function() { return CLEAR_CHATROOM_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_CHATROOM", function() { return REMOVE_CHATROOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBSCRIBE_CHATROOM", function() { return SUBSCRIBE_CHATROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveChatrooms", function() { return receiveChatrooms; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveChatroom", function() { return receiveChatroom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subscribeChatroom", function() { return subscribeChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeChatroom", function() { return removeChatroom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveChatroomErrors", function() { return receiveChatroomErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearChatroomErrors", function() { return clearChatroomErrors; });
@@ -121,6 +123,7 @@ var RECEIVE_CHATROOM = 'RECEIVE_CHATROOM';
 var RECEIVE_CHATROOM_ERRORS = 'RECEIVE_CHATROOM_ERRORS';
 var CLEAR_CHATROOM_ERRORS = 'CLEAR_CHATROOM_ERRORS';
 var REMOVE_CHATROOM = 'REMOVE_CHATROOM';
+var SUBSCRIBE_CHATROOM = 'SUBSCRIBE_CHATROOM';
 var receiveChatrooms = function receiveChatrooms(chatrooms) {
   return {
     type: RECEIVE_ALL_CHATROOMS,
@@ -130,6 +133,12 @@ var receiveChatrooms = function receiveChatrooms(chatrooms) {
 var receiveChatroom = function receiveChatroom(chatroom) {
   return {
     type: RECEIVE_CHATROOM,
+    chatroom: chatroom
+  };
+};
+var subscribeChatroom = function subscribeChatroom(chatroom) {
+  return {
+    type: SUBSCRIBE_CHATROOM,
     chatroom: chatroom
   };
 };
@@ -172,7 +181,7 @@ var fetchChatroom = function fetchChatroom(chatroomId) {
 var createChatroom = function createChatroom(chatroom) {
   return function (dispatch) {
     return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroom"](chatroom).then(function (chatroom) {
-      return dispatch(receiveChatroom(chatroom));
+      return dispatch(subscribeChatroom(chatroom));
     }, function (err) {
       return dispatch(receiveChatroomErrors(err.responseJSON));
     });
@@ -198,8 +207,8 @@ var destroyChatroom = function destroyChatroom(chatroomId) {
 };
 var subscribeToChatroom = function subscribeToChatroom(chatroom_subscription) {
   return function (dispatch) {
-    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroomSubscription"](chatroom_subscription).then(function (chatroomId) {
-      return dispatch(receiveChatroom(chatroomId));
+    return _util_chatrooms_api_util__WEBPACK_IMPORTED_MODULE_0__["createChatroomSubscription"](chatroom_subscription).then(function (chatroom) {
+      return dispatch(subscribeChatroom(chatroom));
     }, function (err) {
       return dispatch(receiveChatroomErrors(err.responseJSON));
     });
@@ -259,10 +268,13 @@ var RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 var RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
 var CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
 var REMOVE_MESSAGE = 'REMOVE_MESSAGE';
-var receiveMessages = function receiveMessages(messages) {
+var receiveMessages = function receiveMessages(_ref) {
+  var messages = _ref.messages,
+      users = _ref.users;
   return {
     type: RECEIVE_ALL_MESSAGES,
-    messages: messages
+    messages: messages,
+    users: users
   };
 };
 var receiveMessage = function receiveMessage(message) {
@@ -291,8 +303,8 @@ var clearMessageErrors = function clearMessageErrors() {
 
 var fetchMessages = function fetchMessages(chatroomId) {
   return function (dispatch) {
-    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](chatroomId).then(function (messages) {
-      return dispatch(receiveMessages(messages));
+    return _util_messages_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](chatroomId).then(function (payload) {
+      return dispatch(receiveMessages(payload));
     }, function (err) {
       return dispatch(receiveMessageErrors(err.responseJSON));
     });
@@ -589,6 +601,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/message_window_container */ "./frontend/components/messages/message_window_container.jsx");
 /* harmony import */ var _chatroom_list_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chatroom_list_container */ "./frontend/components/chat/chatroom_list_container.jsx");
 /* harmony import */ var _chatroom_header_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chatroom_header_container */ "./frontend/components/chat/chatroom_header_container.jsx");
+/* harmony import */ var _sidebar_chatroom_details_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sidebar/chatroom_details_container */ "./frontend/components/sidebar/chatroom_details_container.jsx");
+/* harmony import */ var _sidebar_user_details_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../sidebar/user_details_container */ "./frontend/components/sidebar/user_details_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -614,6 +628,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
 var Chat =
 /*#__PURE__*/
 function (_React$Component) {
@@ -626,11 +643,22 @@ function (_React$Component) {
   }
 
   _createClass(Chat, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUsers();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-grid-container flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chatroom_header_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chatroom_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chatroom_header_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chatroom_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_window_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/chatrooms/:chatroomId/details",
+        component: _sidebar_chatroom_details_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/chatrooms/:chatroomId/user/:userId",
+        component: _sidebar_user_details_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+      }));
     }
   }]);
 
@@ -654,6 +682,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat */ "./frontend/components/chat/chat.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+
 
 
 
@@ -663,7 +693,10 @@ var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities,
       session = _ref.session;
   return {
-    currentUser: entities.users[session.currentUserId]
+    currentUser: entities.users[session.currentUserId],
+    users: entities.users,
+    chatrooms: entities.chatrooms,
+    messages: entities.messages
   };
 };
 
@@ -671,6 +704,35 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+    },
+    fetchChatroom: function (_fetchChatroom) {
+      function fetchChatroom(_x) {
+        return _fetchChatroom.apply(this, arguments);
+      }
+
+      fetchChatroom.toString = function () {
+        return _fetchChatroom.toString();
+      };
+
+      return fetchChatroom;
+    }(function (chatroomId) {
+      return dispatch(fetchChatroom(chatroomId));
+    }),
+    fetchMessages: function (_fetchMessages) {
+      function fetchMessages(_x2) {
+        return _fetchMessages.apply(this, arguments);
+      }
+
+      fetchMessages.toString = function () {
+        return _fetchMessages.toString();
+      };
+
+      return fetchMessages;
+    }(function (chatroomId) {
+      return dispatch(fetchMessages(chatroomId));
+    }),
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])());
     }
   };
 };
@@ -1106,7 +1168,7 @@ function (_React$Component) {
             className: "user-list-item-left flex"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "profile-image-2",
-            src: "https://robohash.org/".concat(user.full_name, ".png")
+            src: _this5.getPhotoUrl(user)
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "user-list-item flex"
           }, user.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1272,11 +1334,13 @@ function (_React$Component) {
       var userList = "";
       var numUsers = 0;
       var topic = "";
+      var chatroomId = 1;
 
       if (this.props.currentChatroom) {
         userList = this.props.currentChatroom.users.join(", ");
         numUsers = this.props.currentChatroom.users.length + 1;
         topic = this.props.currentChatroom.topic;
+        chatroomId = this.props.currentChatroom.id;
 
         if (this.props.currentChatroom.chatroom_type == 'channel') {
           chatroomTitle = "#".concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase());
@@ -1289,7 +1353,9 @@ function (_React$Component) {
         className: "chatroom-header flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-header-left flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", chatroomTitle, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/chatrooms/".concat(chatroomId, "/details")
+      }, chatroomTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chatroom-header-left-subcolumn flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-star"
@@ -1934,12 +2000,6 @@ var MessageItem = function MessageItem(_ref) {
     destroyMessage(message.id);
   }
 
-  var photoUrl = window.images.robot_3;
-
-  if (users[message.author_id].photoUrl) {
-    photoUrl = users[message.author_id].photoUrl;
-  }
-
   var editButtons = "";
 
   if (message.author_id === currentUser.id) {
@@ -1965,7 +2025,7 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-item-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
-    src: photoUrl
+    src: users[message.author_id].photoUrl
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2001,6 +2061,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+
 
 
 
@@ -2035,6 +2097,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     }),
     fetchMessages: function fetchMessages(chatroomId) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatroomId));
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])());
     },
     openModal: function openModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])({
@@ -2307,6 +2372,7 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.fetchUsers();
       this.props.fetchMessages(this.props.match.params.chatroomId);
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
@@ -2319,10 +2385,11 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
-      // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-      //     debugger
-      //     this.redirectToHome();
-      // }
+      if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
+        // debugger
+        this.redirectToHome();
+      }
+
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.setState({
@@ -2416,7 +2483,8 @@ function (_React$Component) {
       }, this.props.messages.map(function (message) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
-          message: message
+          message: message,
+          users: _this3.props.users
         });
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
@@ -2461,7 +2529,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 /* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
@@ -2473,8 +2543,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
-    messages: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllMessagesForChatroom"])(state, ownProps.match.params.chatroomId),
-    chatrooms: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["selectAllChatrooms"])(state),
+    messages: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_6__["selectAllMessagesForChatroom"])(state, ownProps.match.params.chatroomId),
+    chatrooms: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_6__["selectAllChatrooms"])(state),
     errors: state.errors.messages
   };
 };
@@ -2486,6 +2556,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchMessages: function fetchMessages(chatroomId) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])(chatroomId));
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])());
     },
     clearUnreadMessages: function clearUnreadMessages(chatroom) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["clearUnreadMessages"])(chatroom));
@@ -3236,6 +3309,397 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/sidebar/chatroom_details.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/sidebar/chatroom_details.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var ChatroomDetails =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ChatroomDetails, _React$Component);
+
+  function ChatroomDetails(props) {
+    var _this;
+
+    _classCallCheck(this, ChatroomDetails);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ChatroomDetails).call(this, props));
+    _this.state = {
+      header: "",
+      numUsers: 0,
+      topic: null,
+      chatroomId: 1,
+      users: [],
+      currentUserId: -1
+    };
+    return _this;
+  }
+
+  _createClass(ChatroomDetails, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchUsers().then(function () {
+        return _this2.props.fetchChatroom();
+      }).then(function () {
+        return _this2.setInfo();
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.match.params.chatroomId != prevProps.match.params.chatroomId) {
+        this.setInfo();
+      }
+    }
+  }, {
+    key: "setInfo",
+    value: function setInfo() {
+      if (this.props.currentChatroom) {
+        this.setState({
+          users: this.props.currentChatroom.user_ids
+        });
+        this.setState({
+          numUsers: this.props.currentChatroom.users.length + 1
+        });
+        this.setState({
+          topic: this.props.currentChatroom.topic
+        });
+
+        if (this.props.currentChatroom.chatroom_type == 'channel') {
+          this.setState({
+            header: "About #".concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase())
+          });
+        } else {
+          this.setState({
+            header: "About this conversation"
+          });
+        }
+      }
+    }
+  }, {
+    key: "getPhotoUrl",
+    value: function getPhotoUrl(user) {
+      if (user.photoUrl) {
+        return user.photoUrl;
+      } else {
+        return window.images.robot_3;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-container flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-header flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "sidebar-chatroom-details-escape",
+        to: "/chatrooms/".concat(this.state.chatroomId)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"))), this.state.topic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-details flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.topic)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-users flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-user"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.numUsers, " members")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "sidebar-chatroom-details-user-list flex-column"
+      }, this.state.users.map(function (userId) {
+        var newUser = _this3.props.users[userId];
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          key: "user-".concat(newUser.id),
+          to: "/chatrooms/".concat(_this3.state.chatroomId, "/user/").concat(newUser.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "sidebar-chatroom-details-user-list-item flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "profile-image-small",
+          src: _this3.getPhotoUrl(newUser)
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.alias ? newUser.alias : newUser.full_name, " ")));
+      })));
+    }
+  }]);
+
+  return ChatroomDetails;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ChatroomDetails);
+
+/***/ }),
+
+/***/ "./frontend/components/sidebar/chatroom_details_container.jsx":
+/*!********************************************************************!*\
+  !*** ./frontend/components/sidebar/chatroom_details_container.jsx ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _chatroom_details__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatroom_details */ "./frontend/components/sidebar/chatroom_details.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    currentUser: state.entities.users[ownProps.match.params.userId],
+    users: state.entities.users,
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])());
+    },
+    fetchChatroom: function fetchChatroom() {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_5__["fetchChatroom"])(ownProps.match.params.chatroomId));
+    }
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_chatroom_details__WEBPACK_IMPORTED_MODULE_1__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/sidebar/user_details.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/sidebar/user_details.jsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var UserDetails =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(UserDetails, _React$Component);
+
+  function UserDetails(props) {
+    var _this;
+
+    _classCallCheck(this, UserDetails);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDetails).call(this, props));
+    _this.state = {
+      header: "",
+      numUsers: 0,
+      topic: null,
+      chatroomId: 1,
+      users: [],
+      currentUserId: -1
+    };
+    return _this;
+  }
+
+  _createClass(UserDetails, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchUsers().then(function () {
+        return _this2.props.fetchChatroom();
+      }).then(function () {
+        return _this2.setInfo();
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.match.params.chatroomId != prevProps.match.params.chatroomId) {
+        this.setInfo();
+      }
+    }
+  }, {
+    key: "setInfo",
+    value: function setInfo() {
+      if (this.props.currentChatroom) {
+        this.setState({
+          users: this.props.currentChatroom.user_ids
+        });
+        this.setState({
+          numUsers: this.props.currentChatroom.users.length + 1
+        });
+        this.setState({
+          topic: this.props.currentChatroom.topic
+        });
+
+        if (this.props.currentChatroom.chatroom_type == 'channel') {
+          this.setState({
+            header: "About #".concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase())
+          });
+        } else {
+          this.setState({
+            header: "About this conversation"
+          });
+        }
+      }
+    }
+  }, {
+    key: "getPhotoUrl",
+    value: function getPhotoUrl(user) {
+      if (user.photoUrl) {
+        return user.photoUrl;
+      } else {
+        return window.images.robot_3;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-container flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-header flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "sidebar-chatroom-details-escape",
+        to: "/chatrooms/".concat(this.state.chatroomId)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"))), this.state.topic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-details flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.topic)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-chatroom-details-users flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-user"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.numUsers, " members")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "sidebar-chatroom-details-user-list flex-column"
+      }, this.state.users.map(function (userId) {
+        var newUser = _this3.props.users[userId];
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          key: "user-".concat(newUser.id),
+          to: "/chatrooms/".concat(_this3.state.chatroomId, "/user/").concat(newUser.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "sidebar-chatroom-details-user-list-item flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "profile-image-small",
+          src: _this3.getPhotoUrl(newUser)
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.alias ? newUser.alias : newUser.full_name, " ")));
+      })));
+    }
+  }]);
+
+  return UserDetails;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (UserDetails);
+
+/***/ }),
+
+/***/ "./frontend/components/sidebar/user_details_container.jsx":
+/*!****************************************************************!*\
+  !*** ./frontend/components/sidebar/user_details_container.jsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _user_details__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_details */ "./frontend/components/sidebar/user_details.jsx");
+/* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _chatroom_details__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chatroom_details */ "./frontend/components/sidebar/chatroom_details.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+
+
+
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    currentUser: state.entities.users[ownProps.match.params.userId],
+    users: state.entities.users,
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_7__["fetchUsers"])());
+    },
+    fetchChatroom: function fetchChatroom() {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["fetchChatroom"])(ownProps.match.params.chatroomId));
+    }
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_user_details__WEBPACK_IMPORTED_MODULE_1__["default"])));
+
+/***/ }),
+
 /***/ "./frontend/components/templates/footer.jsx":
 /*!**************************************************!*\
   !*** ./frontend/components/templates/footer.jsx ***!
@@ -3469,13 +3933,10 @@ var chatroomsReducer = function chatroomsReducer() {
       return newState;
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHATROOM"]:
+    case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["SUBSCRIBE_CHATROOM"]:
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state);
       newState[action.chatroom.id] = action.chatroom;
       return newState;
-    // case RECEIVE_MESSAGE:
-    //     newState = merge({}, state);
-    //     newState[action.message.chatroom_id].unread_message_count = action.message.unread_message_count;
-    //     return newState;
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_CHATROOM"]:
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state);
@@ -3573,9 +4034,11 @@ var messagesReducer = function messagesReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_3__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3589,7 +4052,8 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_ALL_USERS"]:
-      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.users);
+    case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_ALL_MESSAGES"]:
+      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, state, action.users);
       return newState;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
@@ -3631,6 +4095,7 @@ var chatroomsErrorsReducer = function chatroomsErrorsReducer() {
       return [];
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHATROOM"]:
+    case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["SUBSCRIBE_CHATROOM"]:
       return [];
 
     case _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_CHATROOM_ERRORS"]:

@@ -14,10 +14,12 @@ class ChatroomHeader extends React.Component {
         let userList = "";
         let numUsers = 0;
         let topic = "";
+        let chatroomId = 1;
         if ( this.props.currentChatroom ) {
             userList = this.props.currentChatroom.users.join(", ");
             numUsers = this.props.currentChatroom.users.length+1;
             topic = this.props.currentChatroom.topic;
+            chatroomId = this.props.currentChatroom.id;
             if (this.props.currentChatroom.chatroom_type == 'channel') {
                 chatroomTitle = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()}`;
             } else {
@@ -28,7 +30,7 @@ class ChatroomHeader extends React.Component {
         return (
             <div className="chatroom-header flex">
             <div className="chatroom-header-left flex">
-                <h2> { chatroomTitle } </h2>
+            <Link to={`/chatrooms/${chatroomId}/details`}>{ chatroomTitle }</Link>
                 <div className="chatroom-header-left-subcolumn flex">
                     <i className="far fa-star"></i>
                     <pre>  |  </pre>

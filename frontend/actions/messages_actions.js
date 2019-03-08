@@ -7,9 +7,10 @@ export const RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
 export const CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 
-export const receiveMessages = messages => ({
+export const receiveMessages = ({messages, users}) => ({
         type: RECEIVE_ALL_MESSAGES,
         messages,
+        users,
 });
 
 export const receiveMessage = message => ({
@@ -34,7 +35,7 @@ export const clearMessageErrors = () => ({
 // Thunk action creators
 export const fetchMessages = (chatroomId) => dispatch => (
         ApiUtil.fetchMessages(chatroomId)
-                .then(messages => dispatch(receiveMessages(messages)),
+                .then(payload => dispatch(receiveMessages(payload)),
                 err => (dispatch(receiveMessageErrors(err.responseJSON)))       
         )
 );

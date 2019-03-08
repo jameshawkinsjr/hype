@@ -13,12 +13,6 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
     destroyMessage(message.id);
   }
 
-  let photoUrl = window.images.robot_3;
-
-  if (users[message.author_id].photoUrl) {
-      photoUrl = users[message.author_id].photoUrl;
-  }
-
   let editButtons = "";
 
   if (message.author_id === currentUser.id) {
@@ -39,7 +33,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users })
 
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <img className="profile-image" src={ photoUrl } /> 
+          <img className="profile-image" src={ users[message.author_id].photoUrl } /> 
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">

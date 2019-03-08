@@ -8,6 +8,7 @@ import Modal from './modal/modal';
 import PageNotFound from './templates/page_not_found';
 import { AuthRoute, ProtectedRoute } from '../util/route_utils';
 
+
 const App = () => (
     <>
     <header>

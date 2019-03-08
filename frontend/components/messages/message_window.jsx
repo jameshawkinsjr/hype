@@ -18,6 +18,7 @@ class MessageWindow extends React.Component {
     }
 
     componentDidMount() {
+            this.props.fetchUsers();
             this.props.fetchMessages(this.props.match.params.chatroomId);
             setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             // check if user id is in the channel -- else push to channel/1
@@ -27,10 +28,10 @@ class MessageWindow extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-        //     debugger
-        //     this.redirectToHome();
-        // }
+        if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+            // debugger
+            this.redirectToHome();
+        }
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
             this.props.fetchMessages(this.props.match.params.chatroomId);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
@@ -97,7 +98,7 @@ class MessageWindow extends React.Component {
                 <ul className="message-list flex">
                     {   
                         this.props.messages.map( message => (
-                            <MessageItemContainer key={message.id} message={message} />
+                            <MessageItemContainer key={message.id} message={message} users={this.props.users}/>
                         ))
                     }
                 </ul>

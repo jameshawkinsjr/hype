@@ -10,7 +10,7 @@ class ChatroomAdd extends React.Component {
             users: this.props.users,
             chatrooms: this.props.chatrooms,
             header: "",
-            inputBox: ``,
+            inputBox: "",
             subtext: "",
             directMessageUsers: [],
             directMessageUsersToAdd: [],
@@ -49,6 +49,7 @@ class ChatroomAdd extends React.Component {
     }
 
     newState() {
+        
         this.props.fetchUsers()
         .then ( () => this.setState( {users: this.props.users } ));
         this.props.fetchChatrooms("all")
@@ -173,6 +174,7 @@ class ChatroomAdd extends React.Component {
                     }
                 <ul className="join-channel-user-list flex">
                         {   
+                            
                             this.state.users.map( user => {
                                 if ( user.id === this.props.currentUser.id || user.full_name === "Hypebot"){
                                     return ""
@@ -320,7 +322,7 @@ class ChatroomAdd extends React.Component {
                                     <div key={`user-${user.id}`} 
                                         className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
-                                            <img className="profile-image-2" src={`https://robohash.org/${user.full_name}.png`} />
+                                            <img className="profile-image-2" src={ this.getPhotoUrl(user) } />
                                             <div className="user-list-item flex">
                                                 {   user.alias ? 
                                                     ( <> <span className="full-name"> {user.alias} ◦</span> <span className="alias"> {user.full_name} </span> </> ) 
