@@ -4,7 +4,7 @@
 
 </div>
 <p align="center">
-  <a href="https://hype-chat.com/">
+  <a href="http://hype-chat.com/">
     <img src="https://github.com/jameshawkinsjr/hype/blob/master/app/assets/images/hype_large.png" alt="hype logo" width="150">
   </a>
 </p>
