@@ -20,7 +20,7 @@ class Api::ChatroomsController < ApplicationController
                 .server
                 .broadcast(
                     "room-#{-1}:messages",
-                    update_chatroom: true,
+                    new_chatroom: true,
                     chatroom_id: @chatroom.id
                 )
             render :show

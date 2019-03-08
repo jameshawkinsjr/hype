@@ -21,6 +21,11 @@ class ChatroomList extends React.Component {
         this.createSocket(-1);
     }
 
+    subscribeToChat(chatroomId) {
+        console.log("New Subscription")
+        this.createSocket(chatroomId);
+    }
+
     unsubscribe(chatroom){
         this.props.unsubscribeFromChatroom(chatroom);
     }
@@ -40,7 +45,7 @@ class ChatroomList extends React.Component {
                     chatroomId
             },  
             {   connected: () => {
-                //  console.log(`Connected to channel ${chatroomId}`); 
+                 console.log(`Connected to channel ${chatroomId}`); 
                 },
                 disconnected: () => { 
                     // console.log(`Disconnected to channel ${chatroomId}`); 
@@ -50,7 +55,9 @@ class ChatroomList extends React.Component {
                         this.props.removeMessage(message.id);
                         this.props.fetchChatroom(message.chatroom_id);
                     } else if (message.new_chatroom){
+                        console.log("New Chatroom")
                         this.props.fetchChatroom(message.chatroom_id);
+                        this.subscribeToChat(message.chatroom_id);
                     } else {
                     this.props.receiveMessage(message);
                     this.props.fetchChatroom(message.chatroom_id);

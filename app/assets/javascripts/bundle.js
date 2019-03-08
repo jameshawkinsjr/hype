@@ -1491,6 +1491,12 @@ function (_React$Component) {
       this.createSocket(-1);
     }
   }, {
+    key: "subscribeToChat",
+    value: function subscribeToChat(chatroomId) {
+      console.log("New Subscription");
+      this.createSocket(chatroomId);
+    }
+  }, {
     key: "unsubscribe",
     value: function unsubscribe(chatroom) {
       this.props.unsubscribeFromChatroom(chatroom);
@@ -1510,7 +1516,8 @@ function (_React$Component) {
         channel: 'MessagesChannel',
         room: chatroomId
       }, {
-        connected: function connected() {//  console.log(`Connected to channel ${chatroomId}`); 
+        connected: function connected() {
+          console.log("Connected to channel ".concat(chatroomId));
         },
         disconnected: function disconnected() {// console.log(`Disconnected to channel ${chatroomId}`); 
         },
@@ -1520,7 +1527,11 @@ function (_React$Component) {
 
             _this3.props.fetchChatroom(message.chatroom_id);
           } else if (message.new_chatroom) {
+            console.log("New Chatroom");
+
             _this3.props.fetchChatroom(message.chatroom_id);
+
+            _this3.subscribeToChat(message.chatroom_id);
           } else {
             _this3.props.receiveMessage(message);
 
