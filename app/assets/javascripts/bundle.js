@@ -2403,9 +2403,15 @@ function (_React$Component) {
       body: "",
       author_id: _this.props.currentUser.id,
       chatroom_id: _this.props.match.params.chatroomId,
-      parent_id: null
+      parent_id: null,
+      demo_message: {
+        body: "I don't know, I don't know about that.",
+        author_id: 1,
+        chatroom_id: 8
+      }
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.submitDemo = _this.submitDemo.bind(_assertThisInitialized(_this));
     _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2546,7 +2552,70 @@ function (_React$Component) {
         className: "message-form-right-box flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "@"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-smile"
-      }))));
+      }), this.props.currentUser.full_name === "Pam Beesly" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "nav-bar-button purple",
+        onClick: this.submitDemo
+      }, " Demo ") : "")));
+    }
+  }, {
+    key: "submitDemo",
+    value: function submitDemo() {
+      var _this5 = this;
+
+      var demoMessages = ["You look nice today", "Where are the TPS reports!!!!", "Would you mind coming in on Saturday?", "How was your weekend?", "Want to grab a drink after work?", "I finally watched that cool Netflix documentary you were talking about", "I'm gonna go to lunch", "Honestly, don't feel like coming in to work today", "Check out this funny cat video I just found", "Can you swing by my office at 2pm?", "When is our meeting?", "I finally finished that report", "I'm so behind on everything!"];
+      var newChatrooms = [{
+        title: "Weekend Gang",
+        admin_id: this.props.currentUser.id,
+        chatroom_type: 'channel',
+        topic: "What should we do this weekend?",
+        users: [1, 4, 5, 7, 8, 9]
+      }, {
+        title: "Don't invite Michael",
+        admin_id: this.props.currentUser.id,
+        chatroom_type: 'channel',
+        topic: "Surprise party?",
+        users: [4, 13, 20]
+      }, {
+        title: "",
+        admin_id: this.props.currentUser.id,
+        chatroom_type: 'direct_message',
+        topic: "",
+        users: [17]
+      }];
+
+      var _loop = function _loop(i) {
+        var timeout = Math.floor(Math.random() * 10000);
+        var currentUserId = _this5.props.currentUser.id;
+        var chatroomIds = _this5.props.currentUser.chatroom_ids;
+        var randomChatroom = chatroomIds[Math.floor(Math.random() * chatroomIds.length)];
+
+        var randomUser = _this5.props.chatrooms.find(function (chatroom) {
+          return chatroom.id === randomChatroom;
+        }).user_ids.find(function (user) {
+          return user != currentUserId;
+        });
+
+        var randomMessage = demoMessages.shift();
+        var payload = {
+          body: randomMessage,
+          author_id: randomUser,
+          chatroom_id: randomChatroom
+        };
+        setTimeout(function () {
+          return _this5.props.createMessage(payload);
+        }, timeout);
+      };
+
+      for (var i = 0; i < demoMessages.length; i++) {
+        _loop(i);
+      }
+
+      for (var i = 0; i < newChatrooms.length; i++) {
+        var timeout = Math.floor(Math.random() * 10000);
+        setTimeout(function () {
+          return _this5.props.createChatroom(newChatrooms.shift());
+        }, timeout);
+      }
     }
   }]);
 
@@ -2618,6 +2687,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createMessage: function createMessage(message) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["createMessage"])(message));
+    },
+    createChatroom: function createChatroom(chatroom) {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["createChatroom"])(chatroom));
     },
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["closeModal"])());
@@ -3710,16 +3782,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 
 var demo = function demo() {
-  // console.log("test");
-  Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["demoMessage"])(-1); // setTimeout(this.props.demoMessage(24), 5000);
-  // setTimeout(this.props.demoMessage(27), 9000);
-  // setTimeout(this.props.demoMessage(32), 14000);
-  // setTimeout(this.props.demoMessage(1), 3000);
-  // setTimeout(this.props.demoMessage(3), 18000);
-  // setTimeout(this.props.demoMessage(7), 12000);
-  // setTimeout(this.props.demoMessage(52), 7000);
-  // setTimeout(this.props.demoMessage(3), 6000);
-  // this.props.demoMessage();
+  console.log("test");
+  setTimeout(function () {
+    return Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["createMessage"])(message1);
+  }, 5000); // setTimeout( () => createMessage(27), 9000);
+  // setTimeout( () => createMessage(32), 14000);
+  // setTimeout( () => createMessage(1), 3000);
+  // setTimeout( () => createMessage(3), 18000);
+  // setTimeout( () => createMessage(7), 12000);
+  // setTimeout( () => createMessage(52), 7000);
+  // setTimeout( () => createMessage(3), 6000);
+};
+var message1 = {
+  body: "I don't know, I don't know about that.",
+  author_id: 1,
+  chatroom_id: 9
 };
 
 /***/ }),
@@ -4021,7 +4098,7 @@ var messagesReducer = function messagesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var newState;
+  var newState; // debugger
 
   switch (action.type) {
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:

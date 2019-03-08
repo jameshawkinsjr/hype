@@ -12,20 +12,25 @@ class MessageWindow extends React.Component {
             author_id: this.props.currentUser.id,
             chatroom_id: this.props.match.params.chatroomId,
             parent_id: null,
+            demo_message: {
+                body: "I don't know, I don't know about that.",
+                author_id: 1,
+                chatroom_id: 8
+            }
+            
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.submitDemo = this.submitDemo.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);
     }
 
+   
     componentDidMount() {
-            
             this.props.fetchUsers();
             this.props.fetchMessages(this.props.match.params.chatroomId);
             setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } )
             .then( () => this.props.closeModal() );
-        
-            
     }
 
     componentDidUpdate(previousProps) {
@@ -65,7 +70,7 @@ class MessageWindow extends React.Component {
             this.setState({ body: e.target.value });
         };
     }
-
+        
     handleSubmit(e) {
         e.preventDefault();
         this.props.createMessage( this.state );
@@ -121,11 +126,76 @@ class MessageWindow extends React.Component {
             <div className="message-form-right-box flex">
                 <p>@</p>
                 <i className="far fa-smile"></i>
+                { this.props.currentUser.full_name === "Pam Beesly" ? (<button className="nav-bar-button purple" onClick= { this.submitDemo }> Demo </button>) : "" }
             </div>
             </div>
         </>
         )
     }
+
+
+    submitDemo(){
+
+        let demoMessages = [
+            "You look nice today",
+            "Where are the TPS reports!!!!",
+            "Would you mind coming in on Saturday?",
+            "How was your weekend?",
+            "Want to grab a drink after work?",
+            "I finally watched that cool Netflix documentary you were talking about",
+            "I'm gonna go to lunch",
+            "Honestly, don't feel like coming in to work today",
+            "Check out this funny cat video I just found",
+            "Can you swing by my office at 2pm?",
+            "When is our meeting?",
+            "I finally finished that report",
+            "I'm so behind on everything!",
+        ]
+
+        let newChatrooms = [
+            { 
+                title: "Weekend Gang", 
+                admin_id: this.props.currentUser.id,
+                chatroom_type: 'channel',
+                topic: "What should we do this weekend?",
+                users: [1,4, 5, 7, 8, 9]
+            }, 
+            { 
+                title: "Don't invite Michael",
+                admin_id: this.props.currentUser.id,
+                chatroom_type: 'channel',
+                topic: "Surprise party?",
+                users: [4,13,20] 
+            }, 
+            { 
+                title: "", 
+                admin_id: this.props.currentUser.id,
+                chatroom_type: 'direct_message',
+                topic: "",
+                users: [17]
+            }
+        ]
+
+        for (let i = 0; i < demoMessages.length; i++)  {
+            let timeout = Math.floor(Math.random()*10000)
+            let currentUserId = this.props.currentUser.id
+            let chatroomIds = this.props.currentUser.chatroom_ids
+            let randomChatroom = chatroomIds[Math.floor(Math.random()*chatroomIds.length)]
+            let randomUser = this.props.chatrooms.find( chatroom => chatroom.id === randomChatroom  ).user_ids.find( user => user != currentUserId)
+            let randomMessage = demoMessages.shift()
+            let payload = {  body: randomMessage, author_id: randomUser, chatroom_id: randomChatroom}
+            setTimeout( () => this.props.createMessage( payload ), timeout);
+        }
+
+        for (let i = 0; i < newChatrooms.length; i++)  {
+            let timeout = Math.floor(Math.random()*10000)
+            setTimeout( () => this.props.createChatroom( newChatrooms.shift() ), timeout);
+        }
+    }
 }
 
 export default MessageWindow;
+
+
+
+

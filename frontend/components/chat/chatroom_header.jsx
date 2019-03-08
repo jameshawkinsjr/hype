@@ -20,7 +20,6 @@ class ChatroomHeader extends React.Component {
                 chatroomTitle = userList;
         }}
 
-
         return (
             <div className="chatroom-header flex">
             <div className="chatroom-header-left flex">
