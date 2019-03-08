@@ -586,9 +586,7 @@ var App = function App() {
     component: _landing_page_landing_page_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     component: _templates_page_not_found__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "flex"
-  }));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -1992,7 +1990,8 @@ var MessageItem = function MessageItem(_ref) {
       destroyMessage = _ref.destroyMessage,
       openModal = _ref.openModal,
       currentUser = _ref.currentUser,
-      users = _ref.users;
+      users = _ref.users,
+      currentChatroom = _ref.currentChatroom;
   var name;
 
   if (message.author_alias) {
@@ -2030,10 +2029,12 @@ var MessageItem = function MessageItem(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: "message-".concat(message.id),
     className: "message-item-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/chatrooms/".concat(currentChatroom.id, "/user/").concat(message.author_id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
     src: users[message.author_id].photoUrl
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "message-item-left flex"
@@ -2041,7 +2042,9 @@ var MessageItem = function MessageItem(_ref) {
     className: "message-body-author-container flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-author"
-  }, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/chatrooms/".concat(currentChatroom.id, "/user/").concat(message.author_id)
+  }, name, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-timestamp"
   }, message.timestamp, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-full-timestamp"
@@ -2080,6 +2083,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     users: state.entities.users,
     currentUser: state.entities.users[state.session.currentUserId],
+    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
     message: ownProps.message
   };
 };
@@ -2379,6 +2383,8 @@ function (_React$Component) {
   _createClass(MessageWindow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.props.fetchUsers();
       this.props.fetchMessages(this.props.match.params.chatroomId);
       setTimeout(function () {
@@ -2386,25 +2392,24 @@ function (_React$Component) {
       }, 500);
       this.props.clearUnreadMessages({
         chatroom_id: this.props.match.params.chatroomId
-      }); // .then( () => this.props.closeModal() );
+      }).then(function () {
+        return _this2.props.closeModal();
+      });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
-      // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-      //     this.props.history.push(`/chatrooms/1`);
-      //     // this.redirectToHome();
-      // }
+      if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
+        this.props.history.push("/chatrooms/1"); // this.redirectToHome();
+      }
+
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.setState({
           chatroom_id: this.props.match.params.chatroomId
         });
-      }
+      } // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
 
-      setTimeout(function () {
-        return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
-      }, 500);
 
       if (this.props.currentChatroom) {
         if (this.props.currentChatroom.unread_message_count > 0) {
@@ -2422,20 +2427,21 @@ function (_React$Component) {
     }
   }, {
     key: "redirectToHome",
-    value: function redirectToHome() {// if (this.props.currentUser.chatroom_ids[0]) {
-      //     let firstChatroom = this.props.currentUser.chatroom_ids[0];
-      //     this.props.history.push(`/chatrooms/${firstChatroom}`);
-      // } else {
-      //     this.props.history.push(`/chatrooms/1`);
-      // }
+    value: function redirectToHome() {
+      if (this.props.currentUser.chatroom_ids[0]) {
+        var firstChatroom = this.props.currentUser.chatroom_ids[0];
+        this.props.history.push("/chatrooms/".concat(firstChatroom));
+      } else {
+        this.props.history.push("/chatrooms/1");
+      }
     }
   }, {
     key: "handleInput",
     value: function handleInput() {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        _this2.setState({
+        _this3.setState({
           body: e.target.value
         });
       };
@@ -2462,7 +2468,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var chatroomTitle = "";
       var welcomeMessage = "";
@@ -2488,7 +2494,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message,
-          users: _this3.props.users
+          users: _this4.props.users
         });
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
@@ -2502,7 +2508,7 @@ function (_React$Component) {
         className: "message-form",
         autoFocus: true,
         onKeyPress: function onKeyPress(e) {
-          return _this3.handleEnterKey(e);
+          return _this4.handleEnterKey(e);
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-right-box flex"
@@ -2907,8 +2913,8 @@ function (_React$Component) {
         e.preventDefault();
       }
 
-      ; // this.props.loadingModal();
-
+      ;
+      this.props.loadingModal();
       this.props.login(this.state).then(function () {
         return _this3.props.history.push('/chatrooms/1');
       });
@@ -3455,7 +3461,9 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "profile-image-small",
           src: _this3.getPhotoUrl(newUser)
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.alias ? newUser.alias : newUser.full_name, " ")));
+        }), newUser.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.full_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, "    "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "alias"
+        }, newUser.alias), " ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.full_name, " ")));
       })));
     }
   }]);

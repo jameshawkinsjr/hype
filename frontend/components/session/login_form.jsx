@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
 
     handleSubmit(e) {
         if (e) { e.preventDefault() }; 
-        // this.props.loadingModal();
+        this.props.loadingModal();
         this.props.login(this.state)
         .then( () => this.props.history.push('/chatrooms/1'));
     }

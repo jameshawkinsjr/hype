@@ -22,8 +22,6 @@ const App = () => (
             <Route component={PageNotFound} />
         </Switch>
     </header>
-    <section className="flex">
-    </section>
     </>
 );
 

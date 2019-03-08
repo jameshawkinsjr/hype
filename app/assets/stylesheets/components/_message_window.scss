@@ -224,6 +224,9 @@
     font-size: 15px;
     font-weight: 600;
     white-space: nowrap;
+    a {
+        color: $black;
+    }
 }
 
 .message-body-timestamp {

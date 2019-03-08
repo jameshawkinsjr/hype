@@ -22,21 +22,21 @@ class MessageWindow extends React.Component {
             this.props.fetchMessages(this.props.match.params.chatroomId);
             setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } )
-            // .then( () => this.props.closeModal() );
+            .then( () => this.props.closeModal() );
         
             
     }
 
     componentDidUpdate(previousProps) {
-        // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-        //     this.props.history.push(`/chatrooms/1`);
-        //     // this.redirectToHome();
-        // }
+        if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+            this.props.history.push(`/chatrooms/1`);
+            // this.redirectToHome();
+        }
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
             this.props.fetchMessages(this.props.match.params.chatroomId);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
         }
-        setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+        // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
         if ( this.props.currentChatroom ) {
             if (this.props.currentChatroom.unread_message_count > 0) {
                 this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );
@@ -50,12 +50,12 @@ class MessageWindow extends React.Component {
     }
 
     redirectToHome() {
-        // if (this.props.currentUser.chatroom_ids[0]) {
-        //     let firstChatroom = this.props.currentUser.chatroom_ids[0];
-        //     this.props.history.push(`/chatrooms/${firstChatroom}`);
-        // } else {
-        //     this.props.history.push(`/chatrooms/1`);
-        // }
+        if (this.props.currentUser.chatroom_ids[0]) {
+            let firstChatroom = this.props.currentUser.chatroom_ids[0];
+            this.props.history.push(`/chatrooms/${firstChatroom}`);
+        } else {
+            this.props.history.push(`/chatrooms/1`);
+        }
     }
 
     handleInput() {

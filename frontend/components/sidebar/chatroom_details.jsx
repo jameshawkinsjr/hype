@@ -74,7 +74,11 @@ class ChatroomDetails extends React.Component {
                                 <Link key={`user-${newUser.id}`} to={`/chatrooms/${this.state.chatroomId}/user/${newUser.id}`}>
                                 <li  className="sidebar-chatroom-details-user-list-item flex" >
                                     <img className="profile-image-small" src={ this.getPhotoUrl(newUser) } /> 
-                                    <p>{ newUser.alias ? newUser.alias : newUser.full_name } </p>
+                                    {   newUser.alias ? 
+                                                    ( <> <p>{newUser.full_name}</p><pre>    </pre> <p className="alias">{newUser.alias}</p> </> ) 
+                                                    :
+                                                    ( <p>{newUser.full_name} </p>  )
+                                    }
                                 </li>
                                 </Link>
                             ) } )

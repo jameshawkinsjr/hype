@@ -5,7 +5,7 @@
     grid-row-end: span 2;
     border-left: 1px solid $medium-grey;
     overflow-y: scroll;
-    width: minmax(250px, 500px);
+    min-width: 400px;
 }
 
 .sidebar-chatroom-details-header {
@@ -42,7 +42,7 @@
 
 .sidebar-user-details-small {
     flex-direction: column;
-    padding: 15px;
+    padding: 15px 25px;
 }
 
 .sidebar-user-details-box-1{
@@ -53,7 +53,7 @@
 .sidebar-user-details-box {
     color: black;
     
-    // justify-content: space-between;
+    justify-content: space-between;
 }
 
 .sidebar-chatroom-details-details, .sidebar-chatroom-details-users {
@@ -70,6 +70,7 @@
         font-size: 16px;
         font-weight: 400;
     }
+
 }
 
 .sidebar-chatroom-details-details {
@@ -82,14 +83,28 @@
 .sidebar-chatroom-details-user-list {
     font-size: 20px;
     overflow: scroll;
+    padding: 5px 10px 5px 5px;
 
     li {
+        box-sizing: border-box;
         min-height: 45px;
         align-content: center;
         color: $black;
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid $white;
+
 
         &:hover{
+            box-sizing: border-box;
             background: $very-light-blue;
+            border: 1px solid $light-blue;
+        }
+
+        .alias {
+            font-weight: 300;
+            font-size: 12px;
+            color: $med-grey;
         }
     }
     .profile-image-small  {
