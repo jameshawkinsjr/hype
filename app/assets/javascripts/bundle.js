@@ -3286,6 +3286,7 @@ function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
+      this.props.loadingModal();
       this.props.signup(this.state).then(function () {
         return _this3.props.history.push('/chatrooms/1');
       });
