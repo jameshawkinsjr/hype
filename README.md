@@ -26,15 +26,18 @@ hype is a real-time messaging app built to clone the app [Slack](https://slack.c
 * At channel creation, users can search for available users or channels to invite
 
 ### Real-time Unread Message Counts & Notifications
-By implementing ActionCable and websockets
-
-<img src="https://github.com/jameshawkinsjr/hype/blob/master/docs/gifs/hype-demo.gif">
-
 In order to push live updates to the end-user, I created an ActionCable subscription that listened for various actions, so that a user can see live updates without refreshing the page. When a user logs in, they are subscribed to a general purpose websocket, that allows for broadcasting of any wide-scale changes, such as creation or deletion of channels.
 
 * Receiving new inbound messages
 * Listening for newly created chatrooms, so that a user can automatically join and subscribe
 * Watching for deleted messages (in which they will disappear in realtime)
+
+<div align="center">
+<img src="https://github.com/jameshawkinsjr/hype/blob/master/docs/gifs/hype-demo.gif">
+
+##### Real-time notifications and unread message counts
+</div>
+
 
 ```js
 createSocket(chatroomId) {
@@ -78,17 +81,25 @@ createSocket(chatroomId) {
 ### Real-time Messaging with other users
 WIth ActionCable, users can direct message one another in real time. Upon login, a subscribes to a websocket for each chatroom that they're a part of, allowing for granular live messaging.
 
+<div align="center">
 <img src="https://github.com/jameshawkinsjr/hype/blob/master/docs/gifs/hype-chatting.gif">
 
+##### Live messaging with other users
+</div>
 
 
 
 
 ### User lookup & direct message thread creation
 
+When adding users to a direct message thread or a chatroom, you can start tying to see other users that can join. On click, their names are added to the input box and the users you've added will all be added when the account is created.
+
+<div align="center">
 <img src="https://github.com/jameshawkinsjr/hype/blob/master/docs/gifs/hype-direct-message.gif">
 
-When adding users to a direct message thread or a chatroom, you can start tying to see other users that can join. On click, their names are added to the input box and the users you've added will all be added when the account is created.
+##### User search for channel and direct message creation
+</div>
+
 
 
 ## Technologies
