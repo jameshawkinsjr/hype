@@ -20,15 +20,19 @@ class Api::ChatroomSubscriptionsController < ApplicationController
 
     def update
         @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
-        # debugger
         if @chatroom.messages
             last_message = @chatroom.messages.last.id
         else 
             last_message = 0
         end
         @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: @chatroom.id, user_id: current_user.id
-        @chatroom_subscription.update(last_read_message: last_message )
-        render :show
+        if @chatroom_subscription
+            @chatroom_subscription.update(last_read_message: last_message )
+            render :show
+        else
+            render json: ["Not subscribed to this chatroom."],
+            status: 404
+        end
     end
 
     def destroy

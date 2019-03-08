@@ -1,7 +1,6 @@
 import { demoMessage } from '../../actions/messages_actions';
 
 export const demo = () => {
-    // debugger
     // console.log("test");
     demoMessage(-1);
     // setTimeout(this.props.demoMessage(24), 5000);

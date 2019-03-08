@@ -833,6 +833,7 @@ function (_React$Component) {
       }).then(function () {
         return _this2.props.closeModal();
       });
+      this.props.fetchUser(this.props.currentUser.id);
     }
   }, {
     key: "componentDidMount",
@@ -915,6 +916,7 @@ function (_React$Component) {
       this.props.subscribeToChatroom({
         chatroom_id: chatroom.id
       });
+      this.props.fetchUser(this.props.currentUser.id);
       this.props.closeModal();
     }
   }, {
@@ -1268,6 +1270,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])());
     },
+    fetchUser: function fetchUser() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUser"])());
+    },
     fetchChatrooms: function fetchChatrooms(userId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChatrooms"])(userId));
     },
@@ -1478,7 +1483,7 @@ function (_React$Component) {
 
       this.props.fetchChatrooms(this.props.currentUser.id).then(function (chatrooms) {
         return _this.subscribeToAllChats();
-      }); // this.props.fetchUsers()
+      });
     }
   }, {
     key: "subscribeToAllChats",
@@ -1493,18 +1498,21 @@ function (_React$Component) {
   }, {
     key: "subscribeToChat",
     value: function subscribeToChat(chatroomId) {
-      console.log("New Subscription");
       this.createSocket(chatroomId);
     }
   }, {
     key: "unsubscribe",
     value: function unsubscribe(chatroom) {
-      this.props.unsubscribeFromChatroom(chatroom);
+      var _this3 = this;
+
+      this.props.unsubscribeFromChatroom(chatroom).then(function () {
+        return _this3.props.history.push("/chatrooms/1");
+      });
     }
   }, {
     key: "createSocket",
     value: function createSocket(chatroomId) {
-      var _this3 = this;
+      var _this4 = this;
 
       var cable;
 
@@ -1516,26 +1524,23 @@ function (_React$Component) {
         channel: 'MessagesChannel',
         room: chatroomId
       }, {
-        connected: function connected() {
-          console.log("Connected to channel ".concat(chatroomId));
+        connected: function connected() {//  console.log(`Connected to channel ${chatroomId}`); 
         },
         disconnected: function disconnected() {// console.log(`Disconnected to channel ${chatroomId}`); 
         },
         received: function received(message) {
           if (message.deleted) {
-            _this3.props.removeMessage(message.id);
+            _this4.props.removeMessage(message.id);
 
-            _this3.props.fetchChatroom(message.chatroom_id);
+            _this4.props.fetchChatroom(message.chatroom_id);
           } else if (message.new_chatroom) {
-            console.log("New Chatroom");
+            _this4.props.fetchChatroom(message.chatroom_id);
 
-            _this3.props.fetchChatroom(message.chatroom_id);
-
-            _this3.subscribeToChat(message.chatroom_id);
+            _this4.props.fetchUser(_this4.props.currentUser.id);
           } else {
-            _this3.props.receiveMessage(message);
+            _this4.props.receiveMessage(message);
 
-            _this3.props.fetchChatroom(message.chatroom_id); // if (!("Notification" in window)) {
+            _this4.props.fetchChatroom(message.chatroom_id); // if (!("Notification" in window)) {
             // } else if (Notification.permission === "granted") {
             //     let notification = new Notification(`${message.author_name}: ${message.body}`);
             // } else if (Notification.permission !== "denied") {
@@ -1561,7 +1566,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var channels = [];
       var directMessages = [];
@@ -1597,7 +1602,7 @@ function (_React$Component) {
             }, "#  ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, chatroom.title.replace(/\s+/g, '-').toLowerCase())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, chatroom.unread_message_count === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
               className: "message-icons far fa-times-circle",
               onClick: function onClick() {
-                return _this4.unsubscribe(chatroom);
+                return _this5.unsubscribe(chatroom);
               }
             }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "message-icons unread-message-count-class"
@@ -1627,7 +1632,7 @@ function (_React$Component) {
             }, "\u25E6 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, chatroom.users.join(", ") || "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, chatroom.unread_message_count === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
               className: "message-icons far fa-times-circle",
               onClick: function onClick() {
-                return _this4.unsubscribe(chatroom);
+                return _this5.unsubscribe(chatroom);
               }
             }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "message-icons unread-message-count-class"
@@ -1710,6 +1715,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUsers"])());
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(userId));
     },
     receiveMessage: function receiveMessage(message) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
@@ -2004,7 +2012,9 @@ var MessageItem = function MessageItem(_ref) {
       openModal = _ref.openModal,
       currentUser = _ref.currentUser,
       users = _ref.users,
+      chatroomId = _ref.chatroomId,
       currentChatroom = _ref.currentChatroom;
+  // debugger
   var name;
 
   if (message.author_alias) {
@@ -2049,7 +2059,7 @@ var MessageItem = function MessageItem(_ref) {
     key: "message-".concat(message.id),
     className: "message-item-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/chatrooms/".concat(currentChatroom.id, "/user/").concat(message.author_id)
+    to: "/chatrooms/".concat(chatroomId, "/user/").concat(message.author_id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "profile-image",
     src: photoUrl
@@ -2062,7 +2072,7 @@ var MessageItem = function MessageItem(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-author"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/chatrooms/".concat(currentChatroom.id, "/user/").concat(message.author_id)
+    to: "/chatrooms/".concat(chatroomId, "/user/").concat(message.author_id)
   }, name, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-timestamp"
   }, message.timestamp, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2102,7 +2112,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     users: state.entities.users,
     currentUser: state.entities.users[state.session.currentUserId],
-    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    // currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    chatroomId: ownProps.match.params.chatroomId,
     message: ownProps.message
   };
 };
@@ -2418,15 +2429,17 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
-      // // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-      // //     this.props.history.push(`/chatrooms/1`);
-      // //     // this.redirectToHome();
-      // }
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+        this.props.fetchUser(this.props.currentUser.id);
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.setState({
           chatroom_id: this.props.match.params.chatroomId
         });
+      }
+
+      if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
+        // this.props.history.push(`/chatrooms/1`);
+        this.redirectToHome();
       } // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
 
 
@@ -2509,13 +2522,13 @@ function (_React$Component) {
         className: "message-window-first-message"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, chatroomTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, welcomeMessage, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "message-list flex"
-      }, this.props.messages.map(function (message) {
+      }, this.props.messages[0] ? this.props.messages.map(function (message) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message,
           users: _this4.props.users
         });
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-left-box flex"
@@ -2590,6 +2603,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])());
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUser"])(userId));
     },
     clearUnreadMessages: function clearUnreadMessages(chatroom) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["clearUnreadMessages"])(chatroom));
@@ -3394,7 +3410,7 @@ function (_React$Component) {
         return _this2.props.fetchChatroom();
       }).then(function () {
         return _this2.setInfo();
-      }); // debugger
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -3694,7 +3710,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/messages_actions */ "./frontend/actions/messages_actions.js");
 
 var demo = function demo() {
-  // debugger
   // console.log("test");
   Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["demoMessage"])(-1); // setTimeout(this.props.demoMessage(24), 5000);
   // setTimeout(this.props.demoMessage(27), 9000);

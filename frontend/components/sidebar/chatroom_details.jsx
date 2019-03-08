@@ -18,7 +18,6 @@ class ChatroomDetails extends React.Component {
         this.props.fetchUsers()
         .then ( () => this.props.fetchChatroom())
         .then ( () => this.setInfo() );
-        // debugger
     }
 
     componentDidUpdate(prevProps){

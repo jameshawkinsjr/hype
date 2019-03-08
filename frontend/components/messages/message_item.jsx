@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, currentChatroom }) => {
+const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, chatroomId, currentChatroom }) => {
+  // debugger
   let name;
   if (message.author_alias) {
       name = message.author_alias;
@@ -40,12 +41,12 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
     
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <Link to={`/chatrooms/${currentChatroom.id}/user/${message.author_id}`}><img className="profile-image" src={ photoUrl } /></Link>
+          <Link to={`/chatrooms/${chatroomId}/user/${message.author_id}`}><img className="profile-image" src={ photoUrl } /></Link>
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">
                     <span className='message-body-author'> 
-                    <Link to={`/chatrooms/${currentChatroom.id}/user/${message.author_id}`}>{ name } </Link>
+                    <Link to={`/chatrooms/${chatroomId}/user/${message.author_id}`}>{ name } </Link>
                     </span>
                       <span className="message-body-timestamp">{ message.timestamp }
                         <span className="message-body-full-timestamp">{ message.full_timestamp }</span>

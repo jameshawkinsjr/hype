@@ -36,6 +36,7 @@ class ChatroomAdd extends React.Component {
             users: this.state.directMessageUsersToAdd
         })
         .then( () => this.props.closeModal())
+        this.props.fetchUser(this.props.currentUser.id);
     }
 
     componentDidMount() {
@@ -87,6 +88,7 @@ class ChatroomAdd extends React.Component {
 
     subscribeToChatroom(chatroom) {
         this.props.subscribeToChatroom( { chatroom_id: chatroom.id } );
+        this.props.fetchUser(this.props.currentUser.id);
         this.props.closeModal();
     }
 

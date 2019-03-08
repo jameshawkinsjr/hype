@@ -18,6 +18,7 @@ class MessageWindow extends React.Component {
     }
 
     componentDidMount() {
+            
             this.props.fetchUsers();
             this.props.fetchMessages(this.props.match.params.chatroomId);
             setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
@@ -28,13 +29,14 @@ class MessageWindow extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        // // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-        // //     this.props.history.push(`/chatrooms/1`);
-        // //     // this.redirectToHome();
-        // }
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+            this.props.fetchUser(this.props.currentUser.id);
             this.props.fetchMessages(this.props.match.params.chatroomId);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
+        }
+        if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+            // this.props.history.push(`/chatrooms/1`);
+            this.redirectToHome();
         }
         // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
         if ( this.props.currentChatroom ) {
@@ -96,10 +98,11 @@ class MessageWindow extends React.Component {
                 <p>{ welcomeMessage } </p>
             </div>
                 <ul className="message-list flex">
-                    {   
+                    {   this.props.messages[0] ? (
                         this.props.messages.map( message => (
                             <MessageItemContainer key={message.id} message={message} users={this.props.users}/>
                         ))
+                    ) : ""
                     }
                 </ul>
             </div>

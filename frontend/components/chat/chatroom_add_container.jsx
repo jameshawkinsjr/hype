@@ -3,7 +3,7 @@ import ChatroomAdd from './chatroom_add';
 import { withRouter } from 'react-router-dom';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { clearChatroomErrors, fetchChatrooms, createChatroom, subscribeToChatroom } from '../../actions/chatrooms_actions';
-import { clearUserErrors, fetchUsers } from '../../actions/users_actions';
+import { clearUserErrors, fetchUsers, fetchUser } from '../../actions/users_actions';
 import { selectAllUsers, selectAllChatrooms } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
     clearChatroomErrors: () => dispatch(clearChatroomErrors()),
     clearUserErrors: () => dispatch(clearUserErrors()),
     fetchUsers: () => dispatch(fetchUsers()),
+    fetchUser: () => dispatch(fetchUser()),
     fetchChatrooms: (userId) => dispatch(fetchChatrooms(userId)),
     subscribeToChatroom: (chatroom) => dispatch(subscribeToChatroom(chatroom)),
     openAddChannelModal: () => dispatch(openModal({ type: 'createChannel'})),

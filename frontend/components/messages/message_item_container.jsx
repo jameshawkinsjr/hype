@@ -8,7 +8,8 @@ import { fetchUsers } from '../../actions/users_actions';
 const mapStateToProps = (state, ownProps) => ({
     users: state.entities.users,
     currentUser: state.entities.users[state.session.currentUserId],
-    currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    // currentChatroom: state.entities.chatrooms[ownProps.match.params.chatroomId],
+    chatroomId: ownProps.match.params.chatroomId,
     message: ownProps.message,
 });
 

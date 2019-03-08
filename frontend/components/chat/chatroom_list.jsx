@@ -10,7 +10,6 @@ class ChatroomList extends React.Component {
     componentDidMount() {
         this.props.fetchChatrooms(this.props.currentUser.id)
         .then(chatrooms => this.subscribeToAllChats())
-        // this.props.fetchUsers()
     }
 
 
@@ -22,12 +21,12 @@ class ChatroomList extends React.Component {
     }
 
     subscribeToChat(chatroomId) {
-        console.log("New Subscription")
         this.createSocket(chatroomId);
     }
 
     unsubscribe(chatroom){
-        this.props.unsubscribeFromChatroom(chatroom);
+        this.props.unsubscribeFromChatroom(chatroom)
+        .then( () => this.props.history.push(`/chatrooms/1`) )
     }
 
 
@@ -45,7 +44,7 @@ class ChatroomList extends React.Component {
                     chatroomId
             },  
             {   connected: () => {
-                 console.log(`Connected to channel ${chatroomId}`); 
+                //  console.log(`Connected to channel ${chatroomId}`); 
                 },
                 disconnected: () => { 
                     // console.log(`Disconnected to channel ${chatroomId}`); 
@@ -55,9 +54,8 @@ class ChatroomList extends React.Component {
                         this.props.removeMessage(message.id);
                         this.props.fetchChatroom(message.chatroom_id);
                     } else if (message.new_chatroom){
-                        console.log("New Chatroom")
                         this.props.fetchChatroom(message.chatroom_id);
-                        this.subscribeToChat(message.chatroom_id);
+                        this.props.fetchUser(this.props.currentUser.id);
                     } else {
                     this.props.receiveMessage(message);
                     this.props.fetchChatroom(message.chatroom_id);
