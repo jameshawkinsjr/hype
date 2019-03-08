@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     login: user => dispatch(login(user)),
     clearSessionErrors: () => dispatch(clearSessionErrors()),
-    demoMessage: (chatroomId) => dispatch(demoMessage(chatroomId)),
     loadingModal: () => dispatch(openModal({ type: 'loadingScreen'})),
     openDirectMessageModal: () => dispatch(openModal({ type: 'createDirectMessage'})),
 });

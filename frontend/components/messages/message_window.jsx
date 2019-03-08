@@ -28,10 +28,10 @@ class MessageWindow extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-            this.props.history.push(`/chatrooms/1`);
-            // this.redirectToHome();
-        }
+        // // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+        // //     this.props.history.push(`/chatrooms/1`);
+        // //     // this.redirectToHome();
+        // }
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
             this.props.fetchMessages(this.props.match.params.chatroomId);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});

@@ -18,6 +18,7 @@ class ChatroomDetails extends React.Component {
         this.props.fetchUsers()
         .then ( () => this.props.fetchChatroom())
         .then ( () => this.setInfo() );
+        // debugger
     }
 
     componentDidUpdate(prevProps){
@@ -32,6 +33,7 @@ class ChatroomDetails extends React.Component {
             this.setState({ users: this.props.currentChatroom.user_ids });
             this.setState({ numUsers: this.props.currentChatroom.users.length+1});
             this.setState({ topic: this.props.currentChatroom.topic});
+            this.setState({ chatroomId: this.props.match.params.chatroomId});
             if (this.props.currentChatroom.chatroom_type == 'channel') {
                 this.setState( {header: `About #${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()}` });
             } else {

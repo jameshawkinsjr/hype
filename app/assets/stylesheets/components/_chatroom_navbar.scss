@@ -196,7 +196,7 @@
 
 .chatroom-header {
     grid-column-start: 2;
-    grid-column-end: span 2;
+    grid-column-end: span 1;
     grid-row-start: 1;
     grid-row-end: span 1;
     border-bottom: 1px solid $lighter-grey;
@@ -207,8 +207,9 @@
     font-weight: 600;
     
     .chatroom-header-right {
-        width: 100px;
-        justify-content: space-between;
+        margin-right: 25px;
+        width: 300px;
+        justify-content: flex-end;
         a{
             font-size: 16px;
             padding-top: 10px;

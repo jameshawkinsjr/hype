@@ -300,6 +300,7 @@ michaels_office = Chatroom.create!(title: "Michael's Office", topic: "The Manage
         ChatroomSubscription.create!(user_id: michael.id, chatroom_id: michaels_office.id)
         ChatroomSubscription.create!(user_id: dwight.id, chatroom_id: michaels_office.id)
         ChatroomSubscription.create!(user_id: andy.id, chatroom_id: michaels_office.id)
+        ChatroomSubscription.create!(user_id: pam.id, chatroom_id: michaels_office.id)
         #Messages
         Message.create!(author_id: michael.id,body: "It's Grotti. He's following up.",chatroom_id: michaels_office.id)
         Message.create!(author_id: andy.id,body: "Already? This, this guy is persistent!",chatroom_id: michaels_office.id)
@@ -391,7 +392,7 @@ dwights_farm = Chatroom.create!(title: "Schrute Farms", topic: "Beats, Bears, Ba
         ChatroomSubscription.create!(user_id: pam.id, chatroom_id: dwights_farm.id)
         ChatroomSubscription.create!(user_id: ryan.id, chatroom_id: dwights_farm.id)
         ChatroomSubscription.create!(user_id: kelly.id, chatroom_id: dwights_farm.id)
-        #Messages
+#         #Messages
         Message.create!(author_id: dwight.id,body: "Schrute Farms, guten tag. How can I help you? Yes, we have availability on those nights. How many in your party? Oh no, I'm sorry, no king beds. No queen either. Well, we make our own mattresses that don't conform to the traditional sizes. Closest would be twin. Thank you so much for calling. Call back again. Aufedersein!",chatroom_id: dwights_farm.id)
         Message.create!(author_id: jim.id,body: "Hey Dwight.",chatroom_id: dwights_farm.id)
         Message.create!(author_id: dwight.id,body: "None of your business, Jim.",chatroom_id: dwights_farm.id)
@@ -428,12 +429,47 @@ warehouse = Chatroom.create!(title: "The Warehouse", topic: "", chatroom_type:"c
         ChatroomSubscription.create!(user_id: nate.id, chatroom_id: warehouse.id)
         ChatroomSubscription.create!(user_id: jim.id, chatroom_id: warehouse.id)
         ChatroomSubscription.create!(user_id: michael.id, chatroom_id: warehouse.id)
-
         #Messages
+        Message.create!(author_id: roy.id,body: "I think after I lost Culpepper and T.O it was over, man.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Oh, yeah, I need McMahon, Deion Branch to have big games or else I'm done.",chatroom_id: warehouse.id)
+        Message.create!(author_id: roy.id,body: "It's possible. I can't believe you traded Shaun Alexander, man.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "I had to. I needed defense.",chatroom_id: warehouse.id)
+        Message.create!(author_id: roy.id,body: "Come on! Shaun Alexander? He's the best back in the league.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "It's defense.",chatroom_id: warehouse.id)
+        Message.create!(author_id: roy.id,body: "Oh, no. That is not worth it.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "It is worth it.",chatroom_id: warehouse.id)
+        Message.create!(author_id: roy.id,body: "Never.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Are you kidding? You wait.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "[clears throat] Notice anything different about me?",chatroom_id: warehouse.id)
+        Message.create!(author_id: val.id,body: "You're wearing the beanie. You like it?",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Super comfortable. Like sweatpants for my head.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "I love it too Val. It's it's really itchy, uh but to be fair my head is constantly itching so I can't really peg it on the hat.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "[noticing all the warehouse workers wearing homemade beanies] Wow. It's like the nation of Islam down here.",chatroom_id: warehouse.id)
+        Message.create!(author_id: val.id,body: "I like to knit, don't hate. And who's that for?",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Oh, this is a gift, for....my man Nate here.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "What?",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Yeah.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "Darryl, you shouldn't have.",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Hey.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "Can I open it?",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "No, no, no. Maybe just later.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "Ah, I can't wait. I'm sorry. I get too excited. [opens gift] Darryl.",chatroom_id: warehouse.id)
+        Message.create!(author_id: val.id,body: "Wow. Those are really nice.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "They're so elegant.",chatroom_id: warehouse.id)
+        Message.create!(author_id: val.id,body: "Cashmere.",chatroom_id: warehouse.id)
+        Message.create!(author_id: nate.id,body: "How'd you know?",chatroom_id: warehouse.id)
+        Message.create!(author_id: darryl.id,body: "Just a hunch. Your gift is on the way.",chatroom_id: warehouse.id)
+        Message.create!(author_id: val.id,body: "Can't wait.",chatroom_id: warehouse.id)
+
+
 vance = Chatroom.create!(title: "Vance Refrigeration", topic: "Your go-to place for refrigeration", chatroom_type:"channel", admin_id: bob.id)
         #Subscriptions
         ChatroomSubscription.create!(user_id: bob.id, chatroom_id: vance.id)
         ChatroomSubscription.create!(user_id: phyllis.id, chatroom_id: vance.id)
+        ChatroomSubscription.create!(user_id: ryan.id, chatroom_id: vance.id)
+        ChatroomSubscription.create!(user_id: kevin.id, chatroom_id: vance.id)
+        ChatroomSubscription.create!(user_id: stanley.id, chatroom_id: vance.id)
+        ChatroomSubscription.create!(user_id: michael.id, chatroom_id: vance.id)
         #Messages
         Message.create!(author_id: ryan.id,body: "Hey.",chatroom_id: vance.id)
         Message.create!(author_id: phyllis.id,body: "Does everybody know my boyfriend, Bob Vance?",chatroom_id: vance.id)
@@ -583,12 +619,12 @@ toby2 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", a
         ChatroomSubscription.create!(user_id: toby.id, chatroom_id: toby2.id)
         ChatroomSubscription.create!(user_id: jim.id, chatroom_id: toby2.id)
         Message.create!(author_id: toby.id,body: "Hey Jim - I think you forgot to submit your weekly review",chatroom_id: toby2.id)
-        Message.create!(author_id: toby.id,body: "I'll get on that as soon as possible",chatroom_id: toby2.id)
+        Message.create!(author_id: jim.id,body: "I'll get on that as soon as possible",chatroom_id: toby2.id)
 
 # Michael and Toby
 toby3 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: toby.id)
         ChatroomSubscription.create!(user_id: toby.id, chatroom_id: toby3.id)
-        ChatroomSubscription.create!(user_id: jim.id, chatroom_id: toby3.id)
+        ChatroomSubscription.create!(user_id: michael.id, chatroom_id: toby3.id)
         Message.create!(author_id: toby.id,body: "You really need to fill out those reports",chatroom_id: toby3.id)
         Message.create!(author_id: michael.id,body: "This is why no one likes you Toby",chatroom_id: toby3.id)
 
@@ -808,8 +844,8 @@ dm20 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", ad
         ChatroomSubscription.create!(user_id: jim.id, chatroom_id: dm20.id)
         ChatroomSubscription.create!(user_id: darryl.id, chatroom_id: dm20.id)
         #Messages
-        Message.create!(author_id: jim.id,body: "Great! How about yours?",chatroom_id: dm18.id)
-        Message.create!(author_id: darryl.id,body: "Hey Jim - how was your weekend?",chatroom_id: dm18.id)
+        Message.create!(author_id: darryl.id,body: "Hey Jim - how was your weekend?",chatroom_id: dm20.id)
+        Message.create!(author_id: jim.id,body: "Great! How about yours?",chatroom_id: dm20.id)
 
 #        
 dm21 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: pam.id)
@@ -817,7 +853,7 @@ dm21 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", ad
         ChatroomSubscription.create!(user_id: phyllis.id, chatroom_id: dm21.id)
         ChatroomSubscription.create!(user_id: pam.id, chatroom_id: dm21.id)
         #Messages
-        Message.create!(author_id: phyllis.id,body: "Hey honey - just wanted to say you need to fix your makeup?",chatroom_id: dm21.id)
+        Message.create!(author_id: phyllis.id,body: "Sweetie - just wanted to say you need to fix your makeup",chatroom_id: dm21.id)
 
 #        
 dm22 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: michael.id)
@@ -854,15 +890,35 @@ dm24 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", ad
         Message.create!(author_id: pam.id,body: "This is over.",chatroom_id: dm24.id)
         Message.create!(author_id: roy.id,body: "Yeah, you're right. This is so over. You kidding me, Pam!? Come on! God!",chatroom_id: dm24.id)
 
-
-
-
+#Erin Andy Phyllis Pam
+dm25 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: andy.id)
+        #Subscriptions
+        ChatroomSubscription.create!(user_id: pam.id, chatroom_id: dm25.id)
+        ChatroomSubscription.create!(user_id: erin.id, chatroom_id: dm25.id)
+        ChatroomSubscription.create!(user_id: andy.id, chatroom_id: dm25.id)
+        ChatroomSubscription.create!(user_id: phyllis.id, chatroom_id: dm25.id)
+        #Messages
+        Message.create!(author_id: andy.id,body: "[puts up a poster in the break room with 'IF YOU ARE ON THE SEARCH COMMITTEE PLEASE CONSIDER ANDY' on it in bold lettering]",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "[commenting on the poster] It's good. I really hope you get it!",chatroom_id: dm25.id)
+        Message.create!(author_id: andy.id,body: "The manager job? Nah, I'm barely interested. I just can't not go for it. You know, it's not the Bernard way. We give it the old college try, and then, in defeat, we show grace.",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "Still, I'd really like to see this office with you in the boss's chair.",chatroom_id: dm25.id)
+        Message.create!(author_id: andy.id,body: "Don't even... [getting really happy and excited] EEEHHHH!!!!",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "You in the boss's chair!",chatroom_id: dm25.id)
+        Message.create!(author_id: andy.id,body: "EEEHHH!! No. Hehe.",chatroom_id: dm25.id)
+        Message.create!(author_id: andy.id,body: "In my family, you don't really go out and get things. If you want something, you write it on a list, and then the housekeeper goes out and gets it, on Wednesdays and Fridays. So, I don't know, I guess you could say this job is on my list, and... [awkwardly smiling] we'll see what Rosa comes back with.",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "[checks to see that she is alone with Phyllis] Did you hear anything?",chatroom_id: dm25.id)
+        Message.create!(author_id: phyllis.id,body: "Oh, I'm sure they'll let us know when they get the results. [Erin crosses fingers and smiles excitedly]",chatroom_id: dm25.id)
+        Message.create!(author_id: phyllis.id,body: "It turns out that Erin was born in the basic time and region that I gave away a child.",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "So, Phyllis might be my mom. I mean, the chances are tiny, but...",chatroom_id: dm25.id)
+        Message.create!(author_id: phyllis.id,body: "But, probably not, I mean, it was a big year for babies. Porky's had come out.",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "Yeah. I'm sure I was just another Porky's baby.",chatroom_id: dm25.id)
+        Message.create!(author_id: phyllis.id,body: "Mm.",chatroom_id: dm25.id)
+        Message.create!(author_id: erin.id,body: "But why not find out.",chatroom_id: dm25.id)
         
-        
-        
-
-
-
+        dm26 = Chatroom.create!(title: "", topic: "", chatroom_type:"direct_message", admin_id: kevin.id)
+        ChatroomSubscription.create!(user_id: pam.id, chatroom_id: dm26.id)
+        ChatroomSubscription.create!(user_id: kevin.id, chatroom_id: dm26.id)
+        Message.create!(author_id: kevin.id,body: "Hi Pam.", chatroom_id: dm26.id)
 
 
 

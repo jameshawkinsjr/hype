@@ -4,6 +4,7 @@
     grid-row-start: 2;
     grid-row-end: span 2;
     border-left: 1px solid $medium-grey;
+    border-top: 1px solid $lighter-grey;
     overflow-y: scroll;
     min-width: 400px;
 }
@@ -20,8 +21,17 @@
     }
 }
 
-.sidebar-user-details-profile {
-
+.sidebar-user-details-back-arrow {
+    a {
+        font-size: 24px;
+        color: $lighter-grey;
+        padding-left: 15px;
+    }
+    align-items: center;
+    justify-content: flex-start;
+    height: 50px;
+    background: $very-light-grey;
+    border-bottom: 2px solid $medium-grey;
 }
 
 .sidebar-user-details-profile-image {
@@ -33,7 +43,7 @@
 
 .sidebar-user-details-name {
     border-bottom: 1px solid $medium-grey;
-    padding: 10px;
+    padding: 15px;
     h2 {
         font-size: 20px;
         font-weight: 700;
@@ -42,7 +52,7 @@
 
 .sidebar-user-details-small {
     flex-direction: column;
-    padding: 15px 25px;
+    padding: 15px 15px;
 }
 
 .sidebar-user-details-box-1{

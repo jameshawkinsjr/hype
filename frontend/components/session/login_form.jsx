@@ -35,6 +35,8 @@ class LoginForm extends React.Component {
         this.props.clearSessionErrors();
     }
 
+
+
     // DEMO LOGINS
     loginMichael(e){
         const michael = {
@@ -61,19 +63,8 @@ class LoginForm extends React.Component {
             email: "P.Beesly@dunder-mifflin.org",
             password: "Pam123456"
         };
-        this.loginTyper(pam.email, pam.password, 0, this.handleSubmit);
-    }
+        this.loginTyper(pam.email, pam.password, 0, this.handleSubmit)
 
-    startDemo(){
-        // setTimeout(this.props.demoMessage(24), 5000);
-        // setTimeout(this.props.demoMessage(27), 9000);
-        // setTimeout(this.props.demoMessage(32), 14000);
-        // setTimeout(this.props.demoMessage(1), 3000);
-        // setTimeout(this.props.demoMessage(3), 18000);
-        // setTimeout(this.props.demoMessage(7), 12000);
-        // setTimeout(this.props.demoMessage(52), 7000);
-        // setTimeout(this.props.demoMessage(3), 6000);
-        this.props.demoMessage();
     }
 
     // DEMO LOGIN loginTyper

@@ -30,9 +30,17 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
         )
     }
 
+
+    let photoUrl = "";
+
+    if (users[message.author_id]) {
+      photoUrl = users[message.author_id].photoUrl;
+    }
+
+    
   return (
     <li key={`message-${message.id}`} className="message-item-container">
-          <Link to={`/chatrooms/${currentChatroom.id}/user/${message.author_id}`}><img className="profile-image" src={ users[message.author_id].photoUrl } /></Link>
+          <Link to={`/chatrooms/${currentChatroom.id}/user/${message.author_id}`}><img className="profile-image" src={ photoUrl } /></Link>
           <div className="message-item flex">
             <div className="message-item-left flex">
                 <div className="message-body-author-container flex">

@@ -6,6 +6,9 @@ import { fetchUsers } from '../../actions/users_actions';
 import { withRouter } from 'react-router-dom';
 import { selectAllChatrooms } from '../../reducers/selectors';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import { demoMessage } from '../../actions/messages_actions';
+
+
 
 const mapStateToProps = ( state, ownProps ) => ({
     currentUser: state.entities.users[state.session.currentUserId],
@@ -27,6 +30,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     openJoinChannelModal: () => dispatch(openModal({ type: 'joinChatroom'})),
     openDirectMessageModal: () => dispatch(openModal({ type: 'createDirectMessage'})),
     closeModal: () => dispatch(closeModal()),
+    demoMessage: (chatroomId) => dispatch(demoMessage(chatroomId)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatroomList));

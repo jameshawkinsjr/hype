@@ -186,7 +186,7 @@ class ChatroomAdd extends React.Component {
                                     className="join-channel-user-list-item"
                                     onClick={ () => this.addUser(user) }
                                 >
-                                    <div key={`user-${user.id}`} 
+                                    <div 
                                         className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
                                             <img className="profile-image-2" src={ this.getPhotoUrl(user) } />

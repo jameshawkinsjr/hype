@@ -2,12 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ChatroomHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
     render() {
 
         let chatroomTitle = "";
@@ -42,7 +36,7 @@ class ChatroomHeader extends React.Component {
             </div>
             <div className="chatroom-header-right flex">
                 {/* <Link to="/"><i className="fas fa-home"></i></Link> */}
-                <button className="nav-bar-button" onClick= { this.props.logout }> Sign Out </button>
+                {/* { this.props.currentUser.full_name === "Pam Beesly" ? (<button className="nav-bar-button purple" onClick= { this.props.demo }> Demo </button>) : "" } */}
             </div>
             </div>
         )

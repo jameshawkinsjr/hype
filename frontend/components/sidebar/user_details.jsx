@@ -32,6 +32,9 @@ class UserDetails extends React.Component {
             <div className="sidebar-chatroom-details-container flex-column">
                 { this.props.currentUser ? (
                     <>
+                    <div className="sidebar-user-details-back-arrow flex">
+                        <Link to={`/chatrooms/${this.props.match.params.chatroomId}/details`}><i className="fas fa-arrow-left"></i></Link>
+                    </div>
                     <div className="sidebar-user-details-profile flex">
                         <img className="sidebar-user-details-profile-image" src={ this.getPhotoUrl(this.props.currentUser) } /> 
                     </div>
