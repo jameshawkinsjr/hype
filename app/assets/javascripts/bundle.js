@@ -2425,7 +2425,7 @@ function (_React$Component) {
       this.props.fetchMessages(this.props.match.params.chatroomId);
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
-      }, 500);
+      }, 1000);
       this.props.clearUnreadMessages({
         chatroom_id: this.props.match.params.chatroomId
       }).then(function () {
@@ -2584,7 +2584,7 @@ function (_React$Component) {
       }];
 
       var _loop = function _loop(i) {
-        var timeout = Math.floor(Math.random() * 10000);
+        var timeout = Math.floor(Math.random() * 15000);
         var currentUserId = _this5.props.currentUser.id;
         var chatroomIds = _this5.props.currentUser.chatroom_ids;
         var randomChatroom = chatroomIds[Math.floor(Math.random() * chatroomIds.length)];
@@ -2611,7 +2611,7 @@ function (_React$Component) {
       }
 
       for (var i = 0; i < newChatrooms.length; i++) {
-        var timeout = Math.floor(Math.random() * 10000);
+        var timeout = Math.floor(Math.random() * 15000);
         setTimeout(function () {
           return _this5.props.createChatroom(newChatrooms.shift());
         }, timeout);

@@ -28,7 +28,7 @@ class MessageWindow extends React.Component {
     componentDidMount() {
             this.props.fetchUsers();
             this.props.fetchMessages(this.props.match.params.chatroomId);
-            setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
+            setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 1000);
             this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } )
             .then( () => this.props.closeModal() );
     }
@@ -177,7 +177,7 @@ class MessageWindow extends React.Component {
         ]
 
         for (let i = 0; i < demoMessages.length; i++)  {
-            let timeout = Math.floor(Math.random()*10000)
+            let timeout = Math.floor(Math.random()*15000)
             let currentUserId = this.props.currentUser.id
             let chatroomIds = this.props.currentUser.chatroom_ids
             let randomChatroom = chatroomIds[Math.floor(Math.random()*chatroomIds.length)]
@@ -188,7 +188,7 @@ class MessageWindow extends React.Component {
         }
 
         for (let i = 0; i < newChatrooms.length; i++)  {
-            let timeout = Math.floor(Math.random()*10000)
+            let timeout = Math.floor(Math.random()*15000)
             setTimeout( () => this.props.createChatroom( newChatrooms.shift() ), timeout);
         }
     }
