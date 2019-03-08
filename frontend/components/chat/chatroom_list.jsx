@@ -9,16 +9,14 @@ class ChatroomList extends React.Component {
 
     componentDidMount() {
         this.props.fetchChatrooms(this.props.currentUser.id)
-        .then(chatrooms => this.subscribeToAllChats());
-        this.props.fetchUsers()
-        .then( () => this.props.closeModal() )
+        .then(chatrooms => this.subscribeToAllChats())
+        // this.props.fetchUsers()
     }
 
 
     subscribeToAllChats() {
         this.props.chatrooms.forEach( chatroom => {
             this.createSocket(chatroom.id);
-
         });
         this.createSocket(-1);
     }

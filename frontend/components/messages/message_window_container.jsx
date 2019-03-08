@@ -5,6 +5,7 @@ import { fetchMessages, receiveMessage, destroyMessage, createMessage } from '..
 import { fetchChatroom, clearUnreadMessages } from '../../actions/chatrooms_actions';
 import { fetchUsers } from '../../actions/users_actions';
 import { selectAllMessages, selectAllChatrooms, selectAllMessagesForChatroom } from '../../reducers/selectors';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     receiveMessage: message => dispatch(receiveMessage(message)),
     destroyMessage: messageId => dispatch(destroyMessage(messageId)),
     createMessage: message => dispatch(createMessage(message)),
+    closeModal: () => dispatch(closeModal()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MessageWindow));

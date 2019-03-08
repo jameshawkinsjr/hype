@@ -20,6 +20,42 @@
     }
 }
 
+.sidebar-user-details-profile {
+
+}
+
+.sidebar-user-details-profile-image {
+    margin: 15px;
+    border-radius: 10px;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.sidebar-user-details-name {
+    border-bottom: 1px solid $medium-grey;
+    padding: 10px;
+    h2 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
+.sidebar-user-details-small {
+    flex-direction: column;
+    padding: 15px;
+}
+
+.sidebar-user-details-box-1{
+    color: $light-grey;
+    padding: 0 40px 10px 0;
+}
+
+.sidebar-user-details-box {
+    color: black;
+    
+    // justify-content: space-between;
+}
+
 .sidebar-chatroom-details-details, .sidebar-chatroom-details-users {
     min-height: 50px;
     border-bottom: 1px solid $medium-grey;

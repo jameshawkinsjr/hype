@@ -1,3 +1,7 @@
+.profile-image-2, .profile-image, .profile-image-small, .sidebar-user-details-profile-image {
+    border: 1px solid $med-grey;
+}
+
 .full-message-window {
     grid-column-start: 2;
     grid-column-end: span 1;

@@ -13,7 +13,8 @@ const usersReducer = (state = {}, action) => {
             newState = merge({}, state, action.users);
             return newState;
         case RECEIVE_CURRENT_USER:
-            let currentUser = { [action.currentUser.id] : action.currentUser };
+            let user = Object.values(action.currentUser)[0]
+            let currentUser = { [user.id] : user };
             return Object.assign({}, state, currentUser);
         default:
             return state;

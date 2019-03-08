@@ -473,7 +473,7 @@ var logout = function logout() {
 /*!*******************************************!*\
   !*** ./frontend/actions/users_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_USERS, RECEIVE_USER_ERRORS, CLEAR_USER_ERRORS, receiveUsers, receiveUsersErrors, clearUserErrors, fetchUsers */
+/*! exports provided: RECEIVE_ALL_USERS, RECEIVE_USER_ERRORS, CLEAR_USER_ERRORS, receiveUsers, receiveUsersErrors, clearUserErrors, fetchUsers, fetchUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -485,6 +485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsersErrors", function() { return receiveUsersErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearUserErrors", function() { return clearUserErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony import */ var _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/users_api_util */ "./frontend/util/users_api_util.js");
  // Action creators
 
@@ -512,6 +513,15 @@ var clearUserErrors = function clearUserErrors() {
 var fetchUsers = function fetchUsers() {
   return function (dispatch) {
     return _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"]().then(function (users) {
+      return dispatch(receiveUsers(users));
+    }, function (err) {
+      return dispatch(receiveUsersErrors(err.responseJSON));
+    });
+  };
+};
+var fetchUser = function fetchUser(userId) {
+  return function (dispatch) {
+    return _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](userId).then(function (users) {
       return dispatch(receiveUsers(users));
     }, function (err) {
       return dispatch(receiveUsersErrors(err.responseJSON));
@@ -1472,10 +1482,7 @@ function (_React$Component) {
 
       this.props.fetchChatrooms(this.props.currentUser.id).then(function (chatrooms) {
         return _this.subscribeToAllChats();
-      });
-      this.props.fetchUsers().then(function () {
-        return _this.props.closeModal();
-      });
+      }); // this.props.fetchUsers()
     }
   }, {
     key: "subscribeToAllChats",
@@ -2376,20 +2383,18 @@ function (_React$Component) {
       this.props.fetchMessages(this.props.match.params.chatroomId);
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
-      }, 500); // check if user id is in the channel -- else push to channel/1
-
+      }, 500);
       this.props.clearUnreadMessages({
         chatroom_id: this.props.match.params.chatroomId
-      });
+      }); // .then( () => this.props.closeModal() );
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
-      if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
-        // debugger
-        this.redirectToHome();
-      }
-
+      // if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
+      //     this.props.history.push(`/chatrooms/1`);
+      //     // this.redirectToHome();
+      // }
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
         this.props.fetchMessages(this.props.match.params.chatroomId);
         this.setState({
@@ -2417,13 +2422,12 @@ function (_React$Component) {
     }
   }, {
     key: "redirectToHome",
-    value: function redirectToHome() {
-      if (this.props.currentUser.chatroom_ids[0]) {
-        var firstChatroom = this.props.currentUser.chatroom_ids[0];
-        this.props.history.push("/chatrooms/".concat(firstChatroom));
-      } else {
-        this.props.history.push("/chatrooms/1");
-      }
+    value: function redirectToHome() {// if (this.props.currentUser.chatroom_ids[0]) {
+      //     let firstChatroom = this.props.currentUser.chatroom_ids[0];
+      //     this.props.history.push(`/chatrooms/${firstChatroom}`);
+      // } else {
+      //     this.props.history.push(`/chatrooms/1`);
+      // }
     }
   }, {
     key: "handleInput",
@@ -2531,6 +2535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -2571,6 +2577,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createMessage: function createMessage(message) {
       return dispatch(Object(_actions_messages_actions__WEBPACK_IMPORTED_MODULE_3__["createMessage"])(message));
+    },
+    closeModal: function closeModal() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_7__["closeModal"])());
     }
   };
 };
@@ -2898,8 +2907,8 @@ function (_React$Component) {
         e.preventDefault();
       }
 
-      ;
-      this.props.loadingModal();
+      ; // this.props.loadingModal();
+
       this.props.login(this.state).then(function () {
         return _this3.props.history.push('/chatrooms/1');
       });
@@ -3546,65 +3555,27 @@ function (_React$Component) {
     _classCallCheck(this, UserDetails);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDetails).call(this, props));
-    _this.state = {
-      header: "",
-      numUsers: 0,
-      topic: null,
-      chatroomId: 1,
-      users: [],
-      currentUserId: -1
-    };
+    _this.state = {};
     return _this;
   }
 
   _createClass(UserDetails, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      this.props.fetchUsers().then(function () {
-        return _this2.props.fetchChatroom();
-      }).then(function () {
-        return _this2.setInfo();
-      });
+      this.props.fetchUser(this.props.match.params.userId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (this.props.match.params.chatroomId != prevProps.match.params.chatroomId) {
-        this.setInfo();
-      }
-    }
-  }, {
-    key: "setInfo",
-    value: function setInfo() {
-      if (this.props.currentChatroom) {
-        this.setState({
-          users: this.props.currentChatroom.user_ids
-        });
-        this.setState({
-          numUsers: this.props.currentChatroom.users.length + 1
-        });
-        this.setState({
-          topic: this.props.currentChatroom.topic
-        });
-
-        if (this.props.currentChatroom.chatroom_type == 'channel') {
-          this.setState({
-            header: "About #".concat(this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase())
-          });
-        } else {
-          this.setState({
-            header: "About this conversation"
-          });
-        }
+      if (this.props.match.params.userId != prevProps.match.params.userId) {
+        this.props.fetchUser(this.props.match.params.userId);
       }
     }
   }, {
     key: "getPhotoUrl",
-    value: function getPhotoUrl(user) {
-      if (user.photoUrl) {
-        return user.photoUrl;
+    value: function getPhotoUrl() {
+      if (this.props.currentUser.photoUrl) {
+        return this.props.currentUser.photoUrl;
       } else {
         return window.images.robot_3;
       }
@@ -3612,35 +3583,26 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-chatroom-details-container flex-column"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sidebar-chatroom-details-header flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "sidebar-chatroom-details-escape",
-        to: "/chatrooms/".concat(this.state.chatroomId)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "X"))), this.state.topic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sidebar-chatroom-details-details flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.topic)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sidebar-chatroom-details-users flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-user"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.numUsers, " members")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "sidebar-chatroom-details-user-list flex-column"
-      }, this.state.users.map(function (userId) {
-        var newUser = _this3.props.users[userId];
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          key: "user-".concat(newUser.id),
-          to: "/chatrooms/".concat(_this3.state.chatroomId, "/user/").concat(newUser.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "sidebar-chatroom-details-user-list-item flex"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "profile-image-small",
-          src: _this3.getPhotoUrl(newUser)
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, newUser.alias ? newUser.alias : newUser.full_name, " ")));
-      })));
+      }, this.props.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-user-details-profile flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "sidebar-user-details-profile-image",
+        src: this.getPhotoUrl(this.props.currentUser)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-user-details-name flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", this.props.currentUser.full_name, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-user-details-small flex"
+      }, this.props.currentUser.alias ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-user-details-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "sidebar-user-details-box-1"
+      }, " Alias: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", this.props.currentUser.alias, " ")) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-user-details-box flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "sidebar-user-details-box-1"
+      }, " Email: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", this.props.currentUser.email, " ")))) : "");
     }
   }]);
 
@@ -3662,16 +3624,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _user_details__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_details */ "./frontend/components/sidebar/user_details.jsx");
-/* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _chatroom_details__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chatroom_details */ "./frontend/components/sidebar/chatroom_details.jsx");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
-/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
-
-
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/chatrooms_actions */ "./frontend/actions/chatrooms_actions.js");
 
 
 
@@ -3684,10 +3639,13 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     currentUser: state.entities.users[ownProps.match.params.userId],
     users: state.entities.users,
     fetchUsers: function fetchUsers() {
-      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_7__["fetchUsers"])());
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUsers"])());
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUser"])(userId));
     },
     fetchChatroom: function fetchChatroom() {
-      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["fetchChatroom"])(ownProps.match.params.chatroomId));
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChatroom"])(ownProps.match.params.chatroomId));
     }
   };
 };
@@ -3696,7 +3654,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {};
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_user_details__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_user_details__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -4057,7 +4015,9 @@ var usersReducer = function usersReducer() {
       return newState;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      var currentUser = _defineProperty({}, action.currentUser.id, action.currentUser);
+      var user = Object.values(action.currentUser)[0];
+
+      var currentUser = _defineProperty({}, user.id, user);
 
       return Object.assign({}, state, currentUser);
 
@@ -4295,8 +4255,9 @@ var sessionReducer = function sessionReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+      var user = Object.values(action.currentUser)[0];
       return {
-        currentUserId: action.currentUser.id
+        currentUserId: user.id
       };
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
@@ -4658,16 +4619,23 @@ var logout = function logout(user) {
 /*!*****************************************!*\
   !*** ./frontend/util/users_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchUsers */
+/*! exports provided: fetchUsers, fetchUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 var fetchUsers = function fetchUsers() {
   return $.ajax({
     method: "GET",
     url: "/api/users/"
+  });
+};
+var fetchUser = function fetchUser(userId) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/users/".concat(userId)
   });
 };
 

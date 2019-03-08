@@ -1,7 +1,13 @@
+require 'open-uri'
+
 class Api::UsersController < ApplicationController
 
     def index
         @users = User.with_attached_photo.all
+    end
+
+    def show
+        @user = User.with_attached_photo.find params[:id]
     end
 
     def create
@@ -19,8 +25,8 @@ class Api::UsersController < ApplicationController
             ChatroomSubscription.create!(user_id: @user.id, chatroom_id: Chatroom.fifth.id)
             Message.create!(author_id: hypebot.id, body: "Hey there! Welcome to Hype. Thanks for stopping by!",chatroom_id: newDM.id)
             Message.create!(author_id: hypebot.id, body: "Feel free to look around, add channels, or direct message users!",chatroom_id: newDM.id)
-            file = File.open("app/assets/images/profile_photos/robot2.png")
-            @user.photo.attach(io: file, filename: "#{@user.id}.png")
+            file = open('https://robohash.org/44.png') 
+            @user.photo.attach(io: file, filename: '44.png')
             render :show
         else
             render json: @user.errors.full_messages, status: 401

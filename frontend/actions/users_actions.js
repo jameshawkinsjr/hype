@@ -25,3 +25,10 @@ export const fetchUsers = () => dispatch => (
             err => (dispatch(receiveUsersErrors(err.responseJSON)))
         )   
 );
+
+export const fetchUser = (userId) => dispatch => (
+    ApiUtil.fetchUser(userId)
+        .then(users => dispatch(receiveUsers(users)),
+            err => (dispatch(receiveUsersErrors(err.responseJSON)))
+        )   
+);
