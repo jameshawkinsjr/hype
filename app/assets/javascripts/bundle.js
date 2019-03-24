@@ -830,10 +830,13 @@ function (_React$Component) {
         admin_id: this.props.currentUser.id,
         topic: this.state.topic,
         users: this.state.directMessageUsersToAdd
-      }).then(function () {
-        return _this2.props.closeModal();
+      }).then(function (chatroom) {
+        _this2.props.fetchUser(_this2.props.currentUser.id);
+
+        _this2.props.history.push("/chatrooms/".concat(chatroom.id));
+
+        _this2.props.closeModal();
       });
-      this.props.fetchUser(this.props.currentUser.id);
     }
   }, {
     key: "componentDidMount",
@@ -988,6 +991,7 @@ function (_React$Component) {
         className: "join-channel-inner-input flex"
       }, this.state.directMessageUsers.map(function (user) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: "user4-".concat(user),
           className: "individual-user flex",
           onClick: function onClick() {
             return _this5.removeUser(user);
@@ -1075,7 +1079,7 @@ function (_React$Component) {
                 return _this5.subscribeToChatroom(chatroom);
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-              key: "chatroom-".concat(chatroom.id),
+              key: "chatroom2-".concat(chatroom.id),
               className: "join-channel-user-list-item join-channel-channel-list-item"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "user-list-item-container flex"
@@ -1137,6 +1141,7 @@ function (_React$Component) {
         className: "join-channel-inner-input individual-user-input flex"
       }, this.state.directMessageUsers.map(function (user) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: "user3-".concat(user),
           className: "individual-user flex",
           onClick: function onClick() {
             return _this5.removeUser(user);
@@ -1165,13 +1170,12 @@ function (_React$Component) {
           return "";
         } else if (user.full_name.toLowerCase().startsWith(_this5.state.inputBox.toLowerCase())) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: "user-".concat(user.id),
+            key: "user2-".concat(user.id),
             className: "join-channel-user-list-item",
             onClick: function onClick() {
               return _this5.addUser(user);
             }
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: "user-".concat(user.id),
             className: "user-list-item-container flex"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "user-list-item-left flex"

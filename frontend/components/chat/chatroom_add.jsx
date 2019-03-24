@@ -35,8 +35,11 @@ class ChatroomAdd extends React.Component {
             topic: this.state.topic,
             users: this.state.directMessageUsersToAdd
         })
-        .then( () => this.props.closeModal())
-        this.props.fetchUser(this.props.currentUser.id);
+        .then( (chatroom) => {
+            this.props.fetchUser(this.props.currentUser.id);
+            this.props.history.push(`/chatrooms/${chatroom.id}`);
+            this.props.closeModal();
+        });
     }
 
     componentDidMount() {
@@ -86,7 +89,7 @@ class ChatroomAdd extends React.Component {
     }
 
     subscribeToChatroom(chatroom) {
-        this.props.subscribeToChatroom( { chatroom_id: chatroom.id } );
+        this.props.subscribeToChatroom( { chatroom_id: chatroom.id } )
         this.props.fetchUser(this.props.currentUser.id);
         this.props.closeModal();
     }
@@ -144,7 +147,7 @@ class ChatroomAdd extends React.Component {
                 <div className="join-channel-input flex">
                     <div className="join-channel-inner-input flex">
                         { this.state.directMessageUsers.map ( user => ( 
-                            <div className="individual-user flex" onClick={ () => this.removeUser(user)}> 
+                            <div key={`user4-${user}`} className="individual-user flex" onClick={ () => this.removeUser(user)}> 
                                 <span className="individual-user-box"> {user} </span> 
                                 <span className="individual-user-x"> <i className="fas fa-times"></i></span> 
                                 
@@ -183,10 +186,7 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
                                     return (
-                                <li key={`user-${user.id}`} 
-                                    className="join-channel-user-list-item"
-                                    onClick={ () => this.addUser(user) }
-                                >
+                                <li key={`user-${user.id}`} className="join-channel-user-list-item" onClick={ () => this.addUser(user) } >
                                     <div 
                                         className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
@@ -237,27 +237,25 @@ class ChatroomAdd extends React.Component {
                                                 to={`/chatrooms/${chatroom.id}`}
                                                 onClick={ () => this.subscribeToChatroom(chatroom)}
                                                 >
-                                    <li key={`chatroom-${chatroom.id}`} 
-                                        className="join-channel-user-list-item join-channel-channel-list-item"
-                                    >
-                                        <div className="user-list-item-container flex">
-                                            <div className="user-list-item-left flex">
-                                            <div className="user-list-item flex-column">
-                                            <div className="user-list-item-name">
-                                                {`#  ${chatroom.title.replace(/\s+/g, '-').toLowerCase()}`}
-                                            </div>
-                                            <div className="user-list-item-topic">
-                                                { `${chatroom.topic || ""}`}
-                                            </div>
-                                            <div className="user-list-item-description">
-                                                { `Created by ${chatroom.created_by} on ${chatroom.date_created}.`}
-                                            </div>
-                                            </div> 
-                                            </div>
-                                            <i className="fas fa-level-down-alt"></i>
-                                        </div>
-                                    </li>
-                                    </Link>
+                                            <li key={`chatroom2-${chatroom.id}`}  className="join-channel-user-list-item join-channel-channel-list-item">
+                                                <div className="user-list-item-container flex">
+                                                    <div className="user-list-item-left flex">
+                                                    <div className="user-list-item flex-column">
+                                                    <div className="user-list-item-name">
+                                                        {`#  ${chatroom.title.replace(/\s+/g, '-').toLowerCase()}`}
+                                                    </div>
+                                                    <div className="user-list-item-topic">
+                                                        { `${chatroom.topic || ""}`}
+                                                    </div>
+                                                    <div className="user-list-item-description">
+                                                        { `Created by ${chatroom.created_by} on ${chatroom.date_created}.`}
+                                                    </div>
+                                                    </div> 
+                                                    </div>
+                                                    <i className="fas fa-level-down-alt"></i>
+                                                </div>
+                                            </li>
+                                        </Link>
                             )}}
                         })}
                     </ul>  
@@ -292,7 +290,7 @@ class ChatroomAdd extends React.Component {
                     <span className="create-channel-input-label">Send invites to:</span><span className="create-channel-input-optional">(optional)</span>
                     <div className="join-channel-inner-input individual-user-input flex">
                     { this.state.directMessageUsers.map ( user => ( 
-                            <div className="individual-user flex" onClick={ () => this.removeUser(user)}> 
+                            <div key={`user3-${user}`} className="individual-user flex" onClick={ () => this.removeUser(user)}> 
                                 <span className="individual-user-box"> {user} </span> 
                                 <span className="individual-user-x"> <i className="fas fa-times"></i></span> 
                                 
@@ -315,12 +313,8 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
                                      return (
-                                <li key={`user-${user.id}`} 
-                                    className="join-channel-user-list-item"
-                                    onClick={ () => this.addUser(user) }
-                                >
-                                    <div key={`user-${user.id}`} 
-                                        className="user-list-item-container flex">
+                                <li key={`user2-${user.id}`} className="join-channel-user-list-item" onClick={ () => this.addUser(user) }>
+                                    <div className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
                                             <img className="profile-image-2" src={ this.getPhotoUrl(user) } />
                                             <div className="user-list-item flex">

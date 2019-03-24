@@ -1,8 +1,16 @@
 class Api::ChatroomSubscriptionsController < ApplicationController
 
     def show
-        @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:chatroom_id], user_id: params[:user_id]
+        @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:id], user_id: current_user.id
+        if @chatroom_subscription
+            @chatroom = Chatroom.find(params[:id])
+            render :show
+        else
+            render json: ["Not subscribed to this chatroom."],
+            status: 404
+        end
     end
+
     def create
         @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
         if current_user.chatrooms.include?(@chatroom.id)
@@ -14,13 +22,13 @@ class Api::ChatroomSubscriptionsController < ApplicationController
                 render :show
             else
                 render json: @chatroom_subscription.errors.full_messages, status: 401
-            end
+        end
         end
     end
 
     def update
         @chatroom = Chatroom.find(params[:chatroom_subscription][:chatroom_id])
-        if @chatroom.messages
+        if @chatroom.messages.last
             last_message = @chatroom.messages.last.id
         else 
             last_message = 0
