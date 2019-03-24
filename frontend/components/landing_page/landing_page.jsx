@@ -79,11 +79,11 @@ class LandingPage extends React.Component {
                     </div>
                     {/* Middle Hero Image Color */}
                     <img className="hero-image hero-1-color hero-middle-color" src={ window.images.hero_1_color} />
-                    <div className="hero-1-caption hero-image-caption">Autodesk fosters open communication with Hype</div>
                     <img className="hero-image hero-2-color hero-middle-color" src={ window.images.hero_2_color} />
+                    <div className="hero-1-caption hero-image-caption">Autodesk fosters open communication with Hype</div>
                     <div className="hero-2-caption hero-image-caption">Away transforms creativity and customer support with Hype</div>
+                    <div className="hero-3-caption hero-image-caption">Molly Moon creates a recipe for success with Hype</div>
                     <img className="hero-image hero-3-color hero-middle-color" src={ window.images.hero_3_color} /> 
-                    <div  className="hero-3-caption hero-image-caption">Molly Moon creates a recipe for success with Hype</div>
                     {/* Top Left Hero Image Black and White */}
                     <div className="top-left">
                         <img className="hero-image hero-1-bw-tl hero-top-left" src={ window.images.hero_1_bw} />

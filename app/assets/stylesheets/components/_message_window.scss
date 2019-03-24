@@ -212,11 +212,11 @@
 
 .message-item:hover .message-item-right {
     visibility: visible;
-    animation-name: appear;
+    animation-name: appear2;
 }
 .message-icons:hover .message-item-buttons-popup {
     visibility: visible;
-    animation-name: appear;
+    animation-name: appear2;
     animation-duration: 1s;
 }
 
@@ -262,11 +262,11 @@
 
 .message-body-timestamp:hover .message-body-full-timestamp {
     visibility: visible;
-    animation-name: appear;
+    animation-name: appear2;
     animation-duration: 1s;
 }
 
-@keyframes appear {
+@keyframes appear2 {
     0%   {opacity: 0;}
     25%   {opacity: 0;}
     100%   {opacity: 1;}

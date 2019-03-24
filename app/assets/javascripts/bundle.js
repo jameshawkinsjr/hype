@@ -1907,19 +1907,19 @@ function (_React$Component) {
       }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sign in."), " "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-color hero-middle-color",
         src: window.images.hero_1_color
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hero-1-caption hero-image-caption"
-      }, "Autodesk fosters open communication with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-2-color hero-middle-color",
         src: window.images.hero_2_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hero-1-caption hero-image-caption"
+      }, "Autodesk fosters open communication with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hero-2-caption hero-image-caption"
-      }, "Away transforms creativity and customer support with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, "Away transforms creativity and customer support with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hero-3-caption hero-image-caption"
+      }, "Molly Moon creates a recipe for success with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-3-color hero-middle-color",
         src: window.images.hero_3_color
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hero-3-caption hero-image-caption"
-      }, "Molly Moon creates a recipe for success with Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "hero-image hero-1-bw-tl hero-top-left",

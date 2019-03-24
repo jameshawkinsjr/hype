@@ -5,18 +5,7 @@
     grid-template-rows: 100px 69px 125px auto 286px 30px;
     width: 1100px;
     height: 760px;
-    // border: 1px solid black;
-    div {
-        // border: 1px solid black;
-    }
-    img {
-        // border: 1px solid black;
-    }
 }
-
-.landing-page-nav-login {
-
-};
 
 .landing-page-hero {
     width: 1100px;
@@ -25,10 +14,6 @@
 .landing-page-images {
     width: 100%;
 };
-
-.hero-image {
-    // height: 100px;
-}
 
 .hero-quote {
     grid-column-start: 2;
@@ -152,48 +137,34 @@
 .hero-1-caption {
     animation: appear 12s infinite;
     -webkit-animation: appear 12s infinite;
-    animation-timing-function: ease-out;
 }
 .hero-2-caption {
     animation: appear 12s infinite;
     -webkit-animation: appear 12s infinite;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in-out;
     -webkit-animation-delay: 4s;
-    animation-delay: 4s;}
+    animation-delay: 4s;
+}
 .hero-3-caption {
     animation: appear 12s infinite;
     -webkit-animation: appear 12s infinite;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in-out;
     -webkit-animation-delay: 8s;
     animation-delay: 8s;
 }
 
 @keyframes appear {
     0%   { opacity:0; }
-    12%   { opacity:1; }
+    5%   { opacity:1; }
     28%  { opacity:1; }
     33%  { opacity:0; }
     100% { opacity:0; }
   
 }
 
-@-o-keyframes appear{
+@-webkit-keyframes appear{
     0%   { opacity:0; }
-    9%   { opacity:1; }
-    28%  { opacity:1; }
-    33%  { opacity:0; }
-    100% { opacity:0; }
-  }
-  @-moz-keyframes appear{
-    0%   { opacity:0; }
-    9%   { opacity:1; }
-    28%  { opacity:1; }
-    33%  { opacity:0; }
-    100% { opacity:0; }
-  }
-  @-webkit-keyframes appear{
-    0%   { opacity:0; }
-    9%   { opacity:1; }
+    5%   { opacity:1; }
     28%  { opacity:1; }
     33%  { opacity:0; }
     100% { opacity:0; }
@@ -259,7 +230,6 @@
     animation: scale2 12s infinite;
     -webkit-animation: scale2 12s infinite;
     animation-timing-function: ease-out;
-    z-index: 2;
     position: relative;
 }
 .hero-3-bw-tl {
@@ -313,7 +283,6 @@
     animation: scale3 12s infinite;
     -webkit-animation: scale3 12s infinite;
     animation-timing-function: ease-out;
-    z-index: 2;
     position: relative;
 }
 .hero-1-bw-br {
