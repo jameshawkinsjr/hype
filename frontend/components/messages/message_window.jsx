@@ -1,7 +1,5 @@
 import React from 'react';
 import MessageItemContainer from './message_item_container';
-import Cable from 'actioncable';
-// import EmojiPicker from 'emoji-picker-react';
 
 
 class MessageWindow extends React.Component {
@@ -27,23 +25,22 @@ class MessageWindow extends React.Component {
    
     componentDidMount() {
             this.props.fetchUsers();
-            this.props.fetchMessages(this.props.match.params.chatroomId);
-            setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 1000);
-            this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } )
+            this.props.fetchMessages(this.props.match.params.chatroomId)
             .then( () => this.props.closeModal() );
+            this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );
+            setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 1000);
     }
 
     componentDidUpdate(previousProps) {
         if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
             this.props.fetchUser(this.props.currentUser.id);
-            this.props.fetchMessages(this.props.match.params.chatroomId);
+            this.props.fetchMessages(this.props.match.params.chatroomId)
+            .then( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
         }
         if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
-            // this.props.history.push(`/chatrooms/1`);
             this.redirectToHome();
         }
-        // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
         if ( this.props.currentChatroom ) {
             if (this.props.currentChatroom.unread_message_count > 0) {
                 this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );

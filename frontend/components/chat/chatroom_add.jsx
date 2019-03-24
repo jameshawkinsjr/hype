@@ -50,7 +50,6 @@ class ChatroomAdd extends React.Component {
     }
 
     newState() {
-        
         this.props.fetchUsers()
         .then ( () => this.setState( {users: this.props.users } ));
         this.props.fetchChatrooms("all")
@@ -192,7 +191,6 @@ class ChatroomAdd extends React.Component {
                                         className="user-list-item-container flex">
                                         <div className="user-list-item-left flex">
                                             <img className="profile-image-2" src={ this.getPhotoUrl(user) } />
-                                            {/* <img className="profile-image-2" src={`https://robohash.org/${user.full_name}.png`} /> */}
                                             <div className="user-list-item flex">
                                                 {   user.alias ? 
                                                     ( <> <span className="full-name"> {user.alias} ◦</span> <span className="alias"> {user.full_name} </span> </> ) 

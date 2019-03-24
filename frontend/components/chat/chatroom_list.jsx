@@ -9,7 +9,7 @@ class ChatroomList extends React.Component {
 
     componentDidMount() {
         this.props.fetchChatrooms(this.props.currentUser.id)
-        .then(chatrooms => this.subscribeToAllChats())
+        .then(chatrooms => this.subscribeToAllChats());
     }
 
 
@@ -26,7 +26,7 @@ class ChatroomList extends React.Component {
 
     unsubscribe(chatroom){
         this.props.unsubscribeFromChatroom(chatroom)
-        .then( () => this.props.history.push(`/chatrooms/1`) )
+        .then( () => this.props.history.push(`/chatrooms/1`) );
     }
 
 

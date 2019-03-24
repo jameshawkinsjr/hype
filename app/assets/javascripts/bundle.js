@@ -2364,8 +2364,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _message_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item_container */ "./frontend/components/messages/message_item_container.jsx");
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2386,7 +2384,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // import EmojiPicker from 'emoji-picker-react';
 
 var MessageWindow =
 /*#__PURE__*/
@@ -2422,32 +2419,32 @@ function (_React$Component) {
       var _this2 = this;
 
       this.props.fetchUsers();
-      this.props.fetchMessages(this.props.match.params.chatroomId);
+      this.props.fetchMessages(this.props.match.params.chatroomId).then(function () {
+        return _this2.props.closeModal();
+      });
+      this.props.clearUnreadMessages({
+        chatroom_id: this.props.match.params.chatroomId
+      });
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
       }, 1000);
-      this.props.clearUnreadMessages({
-        chatroom_id: this.props.match.params.chatroomId
-      }).then(function () {
-        return _this2.props.closeModal();
-      });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(previousProps) {
       if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
         this.props.fetchUser(this.props.currentUser.id);
-        this.props.fetchMessages(this.props.match.params.chatroomId);
+        this.props.fetchMessages(this.props.match.params.chatroomId).then(function () {
+          return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
+        }, 500);
         this.setState({
           chatroom_id: this.props.match.params.chatroomId
         });
       }
 
       if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
-        // this.props.history.push(`/chatrooms/1`);
         this.redirectToHome();
-      } // setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
-
+      }
 
       if (this.props.currentChatroom) {
         if (this.props.currentChatroom.unread_message_count > 0) {
@@ -3024,9 +3021,10 @@ function (_React$Component) {
       }
 
       ;
-      this.props.loadingModal();
       this.props.login(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms/1');
+        _this3.props.loadingModal();
+
+        _this3.props.history.push('/chatrooms/1');
       });
     }
   }, {
@@ -3286,9 +3284,10 @@ function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      this.props.loadingModal();
       this.props.signup(this.state).then(function () {
-        return _this3.props.history.push('/chatrooms/1');
+        _this3.props.loadingModal();
+
+        _this3.props.history.push('/chatrooms/1');
       });
     }
   }, {
