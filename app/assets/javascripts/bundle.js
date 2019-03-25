@@ -2018,7 +2018,6 @@ var MessageItem = function MessageItem(_ref) {
       users = _ref.users,
       chatroomId = _ref.chatroomId,
       currentChatroom = _ref.currentChatroom;
-  // debugger
   var name;
 
   if (message.author_alias) {
@@ -4102,7 +4101,7 @@ var messagesReducer = function messagesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var newState; // debugger
+  var newState;
 
   switch (action.type) {
     case _actions_messages_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:

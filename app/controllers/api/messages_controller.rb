@@ -1,7 +1,7 @@
 class Api::MessagesController < ApplicationController
 
     def index
-        @messages = Message.where(chatroom_id: params[:chatroom_id])
+        @messages = Message.where(chatroom_id: params[:chatroom_id]).includes(:user)
     end
 
     def create
@@ -34,7 +34,7 @@ class Api::MessagesController < ApplicationController
     end
 
     def show
-        @message = Message.find_by(id: params[:id])
+        @message = Message.find_by(id: params[:id]).includes(:user)
     end
     
     def update

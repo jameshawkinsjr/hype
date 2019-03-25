@@ -3,7 +3,7 @@ require 'open-uri'
 class Api::UsersController < ApplicationController
 
     def index
-        @users = User.with_attached_photo.all
+        @users = User.with_attached_photo.all.includes(:chatrooms)
     end
 
     def show

@@ -2,7 +2,7 @@ class Api::ChatroomsController < ApplicationController
 
     def index
         if params[:user_id] == "all"
-            @chatrooms = Chatroom.all
+            @chatrooms = Chatroom.all.includes(:users, :messages);
         else
             user = User.find(params[:user_id])
             @chatrooms = user.chatrooms
@@ -30,12 +30,12 @@ class Api::ChatroomsController < ApplicationController
     end
 
     def show
-        @chatroom = Chatroom.find_by(id: params[:id])
+        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
     end
 
     
     def update
-        @chatroom = Chatroom.find_by(id: params[:id])
+        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
         if @chatroom.update(chatroom_params)
             render :show
         else
@@ -44,7 +44,7 @@ class Api::ChatroomsController < ApplicationController
     end
 
     def destroy
-        @chatroom = Chatroom.find_by(id: params[:id])
+        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
         if @chatroom
             @chatroom.delete
             render json: ["Chatroom successfully deleted."]

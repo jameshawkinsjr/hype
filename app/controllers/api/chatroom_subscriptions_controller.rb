@@ -3,7 +3,7 @@ class Api::ChatroomSubscriptionsController < ApplicationController
     def show
         @chatroom_subscription = ChatroomSubscription.find_by chatroom_id: params[:id], user_id: current_user.id
         if @chatroom_subscription
-            @chatroom = Chatroom.find(params[:id])
+            @chatroom = Chatroom.find(params[:id]).includes(:users, :messages)
             render :show
         else
             render json: ["Not subscribed to this chatroom."],

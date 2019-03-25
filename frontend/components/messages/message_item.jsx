@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, chatroomId, currentChatroom }) => {
-  // debugger
   let name;
   if (message.author_alias) {
       name = message.author_alias;
