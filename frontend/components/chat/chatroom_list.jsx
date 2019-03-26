@@ -44,7 +44,7 @@ class ChatroomList extends React.Component {
                     chatroomId
             },  
             {   connected: () => {
-                //  console.log(`Connected to channel ${chatroomId}`); 
+                 console.log(`Connected to channel ${chatroomId}`); 
                 },
                 disconnected: () => { 
                     // console.log(`Disconnected to channel ${chatroomId}`); 

@@ -10,12 +10,6 @@ class MessageWindow extends React.Component {
             author_id: this.props.currentUser.id,
             chatroom_id: this.props.match.params.chatroomId,
             parent_id: null,
-            demo_message: {
-                body: "I don't know, I don't know about that.",
-                author_id: 1,
-                chatroom_id: 8
-            }
-            
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.submitDemo = this.submitDemo.bind(this);

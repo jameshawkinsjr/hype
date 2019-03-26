@@ -30,12 +30,12 @@ class Api::ChatroomsController < ApplicationController
     end
 
     def show
-        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
+        @chatroom = Chatroom.includes(:users, :messages).find_by(id: params[:id])
     end
 
     
     def update
-        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
+        @chatroom = Chatroom.includes(:users, :messages).find_by(id: params[:id])
         if @chatroom.update(chatroom_params)
             render :show
         else
@@ -44,7 +44,7 @@ class Api::ChatroomsController < ApplicationController
     end
 
     def destroy
-        @chatroom = Chatroom.find_by(id: params[:id]).includes(:users, :messages)
+        @chatroom = Chatroom.includes(:users, :messages).find_by(id: params[:id])
         if @chatroom
             @chatroom.delete
             render json: ["Chatroom successfully deleted."]

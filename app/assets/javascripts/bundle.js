@@ -1528,7 +1528,8 @@ function (_React$Component) {
         channel: 'MessagesChannel',
         room: chatroomId
       }, {
-        connected: function connected() {//  console.log(`Connected to channel ${chatroomId}`); 
+        connected: function connected() {
+          console.log("Connected to channel ".concat(chatroomId));
         },
         disconnected: function disconnected() {// console.log(`Disconnected to channel ${chatroomId}`); 
         },
@@ -2403,12 +2404,7 @@ function (_React$Component) {
       body: "",
       author_id: _this.props.currentUser.id,
       chatroom_id: _this.props.match.params.chatroomId,
-      parent_id: null,
-      demo_message: {
-        body: "I don't know, I don't know about that.",
-        author_id: 1,
-        chatroom_id: 8
-      }
+      parent_id: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.submitDemo = _this.submitDemo.bind(_assertThisInitialized(_this));
