@@ -16,7 +16,6 @@ class MessageWindow extends React.Component {
         this.handleEnterKey = this.handleEnterKey.bind(this);
     }
 
-   
     componentDidMount() {
             this.props.fetchUsers();
             this.props.fetchMessages(this.props.match.params.chatroomId)
@@ -37,7 +36,8 @@ class MessageWindow extends React.Component {
         }
         if ( this.props.currentChatroom ) {
             if (this.props.currentChatroom.unread_message_count > 0) {
-                this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } );
+                this.props.clearUnreadMessages( { chatroom_id: this.props.match.params.chatroomId } )
+                .then( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             }
             if (this.props.currentChatroom.chatroom_type == 'channel') {
                 document.title = `#${this.props.currentChatroom.title.replace(/\s+/g, '-').toLowerCase()} | hype`;

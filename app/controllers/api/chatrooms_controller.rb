@@ -21,7 +21,9 @@ class Api::ChatroomsController < ApplicationController
                 .broadcast(
                     "room-#{-1}:messages",
                     new_chatroom: true,
-                    chatroom_id: @chatroom.id
+                    chatroom_id: @chatroom.id,
+                    current_user: current_user.id,
+                    is_admin: @chatroom.admin_id === current_user.id, 
                 )
             render :show
         else

@@ -35,9 +35,7 @@ class ChatroomAdd extends React.Component {
             topic: this.state.topic,
             users: this.state.directMessageUsersToAdd
         })
-        .then( (chatroom) => {
-            this.props.fetchUser(this.props.currentUser.id);
-            this.props.history.push(`/chatrooms/${chatroom.id}`);
+        .then( () => {
             this.props.closeModal();
         });
     }

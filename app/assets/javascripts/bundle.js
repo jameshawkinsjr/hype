@@ -830,11 +830,7 @@ function (_React$Component) {
         admin_id: this.props.currentUser.id,
         topic: this.state.topic,
         users: this.state.directMessageUsersToAdd
-      }).then(function (chatroom) {
-        _this2.props.fetchUser(_this2.props.currentUser.id);
-
-        _this2.props.history.push("/chatrooms/".concat(chatroom.id));
-
+      }).then(function () {
         _this2.props.closeModal();
       });
     }
@@ -1528,8 +1524,7 @@ function (_React$Component) {
         channel: 'MessagesChannel',
         room: chatroomId
       }, {
-        connected: function connected() {
-          console.log("Connected to channel ".concat(chatroomId));
+        connected: function connected() {//  console.log(`Connected to channel ${chatroomId}`); 
         },
         disconnected: function disconnected() {// console.log(`Disconnected to channel ${chatroomId}`); 
         },
@@ -1541,7 +1536,13 @@ function (_React$Component) {
           } else if (message.new_chatroom) {
             _this4.props.fetchChatroom(message.chatroom_id);
 
-            _this4.props.fetchUser(_this4.props.currentUser.id);
+            _this4.createSocket(message.chatroom_id);
+
+            _this4.props.fetchUser(message.current_user).then(function () {
+              if (message.is_admin) {
+                _this4.props.history.push("/chatrooms/".concat(message.chatroom_id));
+              }
+            });
           } else {
             _this4.props.receiveMessage(message);
 
@@ -2449,7 +2450,9 @@ function (_React$Component) {
         if (this.props.currentChatroom.unread_message_count > 0) {
           this.props.clearUnreadMessages({
             chatroom_id: this.props.match.params.chatroomId
-          });
+          }).then(function () {
+            return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
+          }, 500);
         }
 
         if (this.props.currentChatroom.chatroom_type == 'channel') {

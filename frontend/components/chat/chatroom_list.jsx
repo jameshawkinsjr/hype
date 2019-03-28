@@ -44,7 +44,7 @@ class ChatroomList extends React.Component {
                     chatroomId
             },  
             {   connected: () => {
-                 console.log(`Connected to channel ${chatroomId}`); 
+                //  console.log(`Connected to channel ${chatroomId}`); 
                 },
                 disconnected: () => { 
                     // console.log(`Disconnected to channel ${chatroomId}`); 
@@ -55,7 +55,13 @@ class ChatroomList extends React.Component {
                         this.props.fetchChatroom(message.chatroom_id);
                     } else if (message.new_chatroom){
                         this.props.fetchChatroom(message.chatroom_id);
-                        this.props.fetchUser(this.props.currentUser.id);
+                        this.createSocket(message.chatroom_id);
+                        this.props.fetchUser(message.current_user)
+                        .then ( () => {
+                            if (message.is_admin){
+                                this.props.history.push(`/chatrooms/${message.chatroom_id}`);
+                             }
+                        })
                     } else {
                     this.props.receiveMessage(message);
                     this.props.fetchChatroom(message.chatroom_id);
