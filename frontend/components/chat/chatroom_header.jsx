@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ChatroomHeader extends React.Component {
+
+    unsubscribe(chatroom){
+        this.props.unsubscribeFromChatroom(chatroom)
+        .then( () => this.props.history.push(`/chatrooms/1`) );
+    }
+    destroy(chatroom){
+        this.props.destroyChatroom(chatroom.id)
+        .then( () => this.props.history.push(`/chatrooms/1`) );
+    }
+
     render() {
 
         let chatroomTitle = "";
@@ -34,6 +44,8 @@ class ChatroomHeader extends React.Component {
                 </div>
             </div>
             <div className="chatroom-header-right flex">
+                {/* {<button className="nav-bar-button purple" onClick= { () => this.unsubscribe(this.props.currentChatroom) }> Leave Chatroom </button>}
+                {<button className="nav-bar-button purple" onClick= { () => this.destroy(this.props.currentChatroom) }> Delete Chatroom </button>} */}
                 {/* <Link to="/"><i className="fas fa-home"></i></Link> */}
                 {/* { this.props.currentUser.full_name === "Pam Beesly" ? (<button className="nav-bar-button purple" onClick= { this.props.demo }> Demo </button>) : "" } */}
             </div>

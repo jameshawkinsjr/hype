@@ -49,6 +49,13 @@ class Api::ChatroomsController < ApplicationController
         @chatroom = Chatroom.includes(:users, :messages).find_by(id: params[:id])
         if @chatroom
             @chatroom.delete
+            ActionCable
+            .server
+            .broadcast(
+                "room-#{-1}:messages",
+                deleted_chatroom: true,
+                current_user: current_user.id,
+            )
             render json: ["Chatroom successfully deleted."]
         else
             render json: ["Chatroom not found."],

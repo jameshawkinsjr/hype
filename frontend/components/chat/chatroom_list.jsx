@@ -12,6 +12,12 @@ class ChatroomList extends React.Component {
         .then(chatrooms => this.subscribeToAllChats());
     }
 
+    componentDidUpdate(previousProps) {
+        if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+            this.props.fetchChatrooms(this.props.currentUser.id);
+        }
+    }
+
 
     subscribeToAllChats() {
         this.props.chatrooms.forEach( chatroom => {
@@ -53,6 +59,8 @@ class ChatroomList extends React.Component {
                     if (message.deleted){
                         this.props.removeMessage(message.id);
                         this.props.fetchChatroom(message.chatroom_id);
+                    } else if (message.deleted_chatroom){
+                        this.props.fetchChatrooms(message.current_user)
                     } else if (message.new_chatroom){
                         this.props.fetchChatroom(message.chatroom_id);
                         this.createSocket(message.chatroom_id);
@@ -65,6 +73,7 @@ class ChatroomList extends React.Component {
                     } else {
                     this.props.receiveMessage(message);
                     this.props.fetchChatroom(message.chatroom_id);
+                    // Browser push notifications
                     // if (!("Notification" in window)) {
                     // } else if (Notification.permission === "granted") {
                     //     let notification = new Notification(`${message.author_name}: ${message.body}`);
@@ -124,13 +133,6 @@ class ChatroomList extends React.Component {
                                 <div className="chatroom-name-div">
                                     #  <span className="chatroom-channel-name">{ chatroom.title.replace(/\s+/g, '-').toLowerCase() }</span>
                                 </div>
-                                {/* <div> */}
-                                    {/* { chatroom.unread_message_count === 0 ? */}
-                                    {/* ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> ) */}
-                                    {/* : */}
-                                    {/* // ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count > 9 ? "9+" : chatroom.unread_message_count} </div> ) */}
-                                    {/* } */}
-                                {/* </div> */}
                             </li>
                         </NavLink>
                     ) }} )

@@ -1335,6 +1335,24 @@ function (_React$Component) {
   }
 
   _createClass(ChatroomHeader, [{
+    key: "unsubscribe",
+    value: function unsubscribe(chatroom) {
+      var _this = this;
+
+      this.props.unsubscribeFromChatroom(chatroom).then(function () {
+        return _this.props.history.push("/chatrooms/1");
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(chatroom) {
+      var _this2 = this;
+
+      this.props.destroyChatroom(chatroom.id).then(function () {
+        return _this2.props.history.push("/chatrooms/1");
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var chatroomTitle = "";
@@ -1415,6 +1433,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     destroyChatroom: function destroyChatroom(chatroomId) {
       return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["destroyChatroom"])(chatroomId));
     },
+    unsubscribeFromChatroom: function unsubscribeFromChatroom(chatroom) {
+      return dispatch(Object(_actions_chatrooms_actions__WEBPACK_IMPORTED_MODULE_2__["unsubscribeFromChatroom"])(chatroom));
+    },
     logout: function logout() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logout"])());
     },
@@ -1485,6 +1506,13 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(previousProps) {
+      if (this.props.match.params.chatroomId != previousProps.match.params.chatroomId) {
+        this.props.fetchChatrooms(this.props.currentUser.id);
+      }
+    }
+  }, {
     key: "subscribeToAllChats",
     value: function subscribeToAllChats() {
       var _this2 = this;
@@ -1532,6 +1560,8 @@ function (_React$Component) {
             _this4.props.removeMessage(message.id);
 
             _this4.props.fetchChatroom(message.chatroom_id);
+          } else if (message.deleted_chatroom) {
+            _this4.props.fetchChatrooms(message.current_user);
           } else if (message.new_chatroom) {
             _this4.props.fetchChatroom(message.chatroom_id);
 
@@ -1545,7 +1575,8 @@ function (_React$Component) {
           } else {
             _this4.props.receiveMessage(message);
 
-            _this4.props.fetchChatroom(message.chatroom_id); // if (!("Notification" in window)) {
+            _this4.props.fetchChatroom(message.chatroom_id); // Browser push notifications
+            // if (!("Notification" in window)) {
             // } else if (Notification.permission === "granted") {
             //     let notification = new Notification(`${message.author_name}: ${message.body}`);
             // } else if (Notification.permission !== "denied") {

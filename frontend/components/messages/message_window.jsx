@@ -120,7 +120,6 @@ class MessageWindow extends React.Component {
                     ) : ""
                     }
                 </ul>
-
             </div>
             <div className="message-form-input flex">
             <div className="message-form-left-box flex">

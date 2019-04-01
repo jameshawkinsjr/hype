@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChatroomHeader from './chatroom_header';
-import { destroyChatroom } from '../../actions/chatrooms_actions';
+import { destroyChatroom, unsubscribeFromChatroom } from '../../actions/chatrooms_actions';
 import { logout } from '../../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 import { demo } from '../templates/demo';
@@ -13,6 +13,7 @@ const mapStateToProps = ( state, ownProps ) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     destroyChatroom: chatroomId => dispatch(destroyChatroom(chatroomId)),
+    unsubscribeFromChatroom: chatroom => dispatch(unsubscribeFromChatroom(chatroom)),
     logout: () => dispatch(logout()),
     demo: () => dispatch(demo()),
 });

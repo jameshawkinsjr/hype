@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { fetchMessages, receiveMessage, destroyMessage, createMessage } from '../../actions/messages_actions';
 import { fetchChatroom, clearUnreadMessages, createChatroom } from '../../actions/chatrooms_actions';
 import { fetchUsers, fetchUser } from '../../actions/users_actions';
-import { selectAllMessages, selectAllChatrooms, selectAllMessagesForChatroom } from '../../reducers/selectors';
-import { openModal, closeModal } from '../../actions/modal_actions';
+import { selectAllChatrooms, selectAllMessagesForChatroom } from '../../reducers/selectors';
+import { closeModal } from '../../actions/modal_actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
