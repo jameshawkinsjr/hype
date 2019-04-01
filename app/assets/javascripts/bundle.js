@@ -1017,7 +1017,7 @@ function (_React$Component) {
           return "";
         } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
           return "";
-        } else if (user.full_name.toLowerCase().startsWith(_this5.state.inputBox.toLowerCase())) {
+        } else if (user.full_name.toLowerCase().includes(_this5.state.inputBox.toLowerCase())) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: "user-".concat(user.id),
             className: "join-channel-user-list-item",
@@ -1067,7 +1067,7 @@ function (_React$Component) {
         className: "join-channel-user-list flex"
       }, this.state.chatrooms.map(function (chatroom) {
         {
-          if (chatroom.chatroom_type === 'channel' && chatroom.title.startsWith(_this5.state.inputBox.toLowerCase())) {
+          if (chatroom.chatroom_type === 'channel' && chatroom.title.toLowerCase().includes(_this5.state.inputBox.toLowerCase())) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
               key: "chatroom-".concat(chatroom.id),
               to: "/chatrooms/".concat(chatroom.id),
@@ -1075,7 +1075,6 @@ function (_React$Component) {
                 return _this5.subscribeToChatroom(chatroom);
               }
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-              key: "chatroom2-".concat(chatroom.id),
               className: "join-channel-user-list-item join-channel-channel-list-item"
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "user-list-item-container flex"
@@ -1164,7 +1163,7 @@ function (_React$Component) {
           return "";
         } else if (_this5.state.directMessageUsersToAdd.includes(user.id)) {
           return "";
-        } else if (user.full_name.toLowerCase().startsWith(_this5.state.inputBox.toLowerCase())) {
+        } else if (user.full_name.toLowerCase().includes(_this5.state.inputBox.toLowerCase())) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: "user2-".concat(user.id),
             className: "join-channel-user-list-item",

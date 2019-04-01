@@ -182,7 +182,7 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (this.state.directMessageUsersToAdd.includes(user.id)) {
                                     return ""
-                                } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
+                                } else if (user.full_name.toLowerCase().includes(this.state.inputBox.toLowerCase()) ){
                                     return (
                                 <li key={`user-${user.id}`} className="join-channel-user-list-item" onClick={ () => this.addUser(user) } >
                                     <div 
@@ -229,13 +229,13 @@ class ChatroomAdd extends React.Component {
                             <p> Channels you can join </p>
                         <ul className="join-channel-user-list flex">
                             {   this.state.chatrooms.map( chatroom => {
-                                { if (chatroom.chatroom_type === 'channel' && chatroom.title.startsWith(this.state.inputBox.toLowerCase()) ) {
+                                { if (chatroom.chatroom_type === 'channel' && chatroom.title.toLowerCase().includes(this.state.inputBox.toLowerCase()) ) {
                                     return (
                                         <Link   key={`chatroom-${chatroom.id}`} 
                                                 to={`/chatrooms/${chatroom.id}`}
                                                 onClick={ () => this.subscribeToChatroom(chatroom)}
                                                 >
-                                            <li key={`chatroom2-${chatroom.id}`}  className="join-channel-user-list-item join-channel-channel-list-item">
+                                            <li className="join-channel-user-list-item join-channel-channel-list-item">
                                                 <div className="user-list-item-container flex">
                                                     <div className="user-list-item-left flex">
                                                     <div className="user-list-item flex-column">
@@ -309,7 +309,7 @@ class ChatroomAdd extends React.Component {
                                     return ""
                                 } else if (this.state.directMessageUsersToAdd.includes(user.id)) {
                                     return ""
-                                } else if (user.full_name.toLowerCase().startsWith(this.state.inputBox.toLowerCase()) ){
+                                } else if (user.full_name.toLowerCase().includes(this.state.inputBox.toLowerCase()) ){
                                      return (
                                 <li key={`user2-${user.id}`} className="join-channel-user-list-item" onClick={ () => this.addUser(user) }>
                                     <div className="user-list-item-container flex">
