@@ -122,15 +122,15 @@ class ChatroomList extends React.Component {
                         <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className={`active-chatroom ${chatroom.unread_message_count > 0 ? "unread" : ""} `}>
                             <li className={`chatroom-name chatroom-channel-names flex ${chatroom.unread_message_count > 0 ? "unread" : ""}`}>
                                 <div className="chatroom-name-div">
-                                    #  <span>{ chatroom.title.replace(/\s+/g, '-').toLowerCase() }</span>
+                                    #  <span className="chatroom-channel-name">{ chatroom.title.replace(/\s+/g, '-').toLowerCase() }</span>
                                 </div>
-                                <div>
-                                    { chatroom.unread_message_count === 0 ?
-                                    ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> )
-                                    :
-                                    ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count} </div> )
-                                    }
-                                </div>
+                                {/* <div> */}
+                                    {/* { chatroom.unread_message_count === 0 ? */}
+                                    {/* ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> ) */}
+                                    {/* : */}
+                                    {/* // ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count > 9 ? "9+" : chatroom.unread_message_count} </div> ) */}
+                                    {/* } */}
+                                {/* </div> */}
                             </li>
                         </NavLink>
                     ) }} )
@@ -154,13 +154,13 @@ class ChatroomList extends React.Component {
                     <NavLink key={chatroom.id} to={`/chatrooms/${chatroom.id}`} className={`active-chatroom ${chatroom.unread_message_count > 0 ? "unread" : ""} `}>
                             <li className={`chatroom-name chatroom-channel-names flex ${chatroom.unread_message_count > 0 ? "unread" : ""}`}>
                                     <div className="chatroom-name-div">
-                                    ◦ <span>{ chatroom.users.join(", ") || "" }</span>
+                                    ◦ <span className='direct-message-name'>{ chatroom.users.join(", ") || "" }</span>
                                     </div>
                                     <div>
                                         { chatroom.unread_message_count === 0 ?
                                         ( <i className="message-icons far fa-times-circle" onClick={ () => this.unsubscribe(chatroom) }></i> )
                                         :
-                                        ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count} </div> )
+                                        ( <div className="message-icons unread-message-count-class"> {chatroom.unread_message_count > 9 ? "9+" : chatroom.unread_message_count} </div> )
                                         }
                                     </div>
                             </li>

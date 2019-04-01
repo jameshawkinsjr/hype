@@ -111,7 +111,7 @@
         margin-right: 5px;
         visibility: hidden;
         position: absolute;
-        left: 180px;
+        left: 178px;
         bottom: 5px;
         color: $med-grey;
         &:hover{
@@ -142,17 +142,16 @@
         box-sizing: border-box;
         text-overflow: ellipsis;    
     
-    span {
-            width: 135px;
+    .direct-message-name, .chatroom-channel-name {
             display: inline-block;
             text-overflow: ellipsis;
             overflow-x: hidden;
             white-space: nowrap;
             padding-bottom: 5px; 
             margin-bottom: -5px;
-    // display: flex;
-    // position: relative;
-    // justify-items: flex-end;
+    }
+    .direct-message-name {
+        width: 135px;
     }
 }
 }

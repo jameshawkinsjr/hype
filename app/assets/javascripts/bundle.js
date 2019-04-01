@@ -1604,14 +1604,9 @@ function (_React$Component) {
               className: "chatroom-name chatroom-channel-names flex ".concat(chatroom.unread_message_count > 0 ? "unread" : "")
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "chatroom-name-div"
-            }, "#  ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, chatroom.title.replace(/\s+/g, '-').toLowerCase())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, chatroom.unread_message_count === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "message-icons far fa-times-circle",
-              onClick: function onClick() {
-                return _this5.unsubscribe(chatroom);
-              }
-            }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "message-icons unread-message-count-class"
-            }, " ", chatroom.unread_message_count, " "))));
+            }, "#  ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "chatroom-channel-name"
+            }, chatroom.title.replace(/\s+/g, '-').toLowerCase()))));
           }
         })));
       }
@@ -1634,14 +1629,16 @@ function (_React$Component) {
               className: "chatroom-name chatroom-channel-names flex ".concat(chatroom.unread_message_count > 0 ? "unread" : "")
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "chatroom-name-div"
-            }, "\u25E6 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, chatroom.users.join(", ") || "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, chatroom.unread_message_count === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            }, "\u25E6 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "direct-message-name"
+            }, chatroom.users.join(", ") || "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, chatroom.unread_message_count === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
               className: "message-icons far fa-times-circle",
               onClick: function onClick() {
                 return _this5.unsubscribe(chatroom);
               }
             }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "message-icons unread-message-count-class"
-            }, " ", chatroom.unread_message_count, " "))));
+            }, " ", chatroom.unread_message_count > 9 ? "9+" : chatroom.unread_message_count, " "))));
           }
         })));
       }
@@ -2008,6 +2005,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var emoji_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! emoji-js */ "./node_modules/emoji-js/lib/emoji.js");
+/* harmony import */ var emoji_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(emoji_js__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -2057,8 +2057,17 @@ var MessageItem = function MessageItem(_ref) {
 
   if (users[message.author_id]) {
     photoUrl = users[message.author_id].photoUrl;
-  }
+  } // debugger
 
+
+  var jsemoji = new emoji_js__WEBPACK_IMPORTED_MODULE_2___default.a();
+  var messageBody = message.body;
+  jsemoji.img_set = 'emojione';
+  jsemoji.img_sets.emojione.path = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/32/';
+  jsemoji.supports_css = false;
+  jsemoji.allow_native = false;
+  jsemoji.replace_mode = 'unified';
+  messageBody = jsemoji.replace_colons(messageBody);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: "message-".concat(message.id),
     className: "message-item-container"
@@ -2082,8 +2091,11 @@ var MessageItem = function MessageItem(_ref) {
   }, message.timestamp, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "message-body-full-timestamp"
   }, message.full_timestamp))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "message-body-body"
-  }, message.body)), editButtons));
+    className: "message-body-body",
+    dangerouslySetInnerHTML: {
+      __html: messageBody
+    }
+  })), editButtons));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageItem);
@@ -2368,6 +2380,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _message_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_item_container */ "./frontend/components/messages/message_item_container.jsx");
+/* harmony import */ var emoji_picker_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! emoji-picker-react */ "./node_modules/emoji-picker-react/dist/index.js");
+/* harmony import */ var emoji_picker_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(emoji_picker_react__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2385,6 +2399,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2409,6 +2424,7 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.submitDemo = _this.submitDemo.bind(_assertThisInitialized(_this));
     _this.handleEnterKey = _this.handleEnterKey.bind(_assertThisInitialized(_this));
+    _this.handleEmoji = _this.handleEmoji.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2502,6 +2518,15 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "handleEmoji",
+    value: function handleEmoji(data) {
+      var newBody = this.state.body;
+      newBody += " :".concat(data.name, ": ");
+      this.setState({
+        body: newBody
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -2532,7 +2557,11 @@ function (_React$Component) {
           message: message,
           users: _this4.props.users
         });
-      }) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        onEmojiClick: function onEmojiClick(code, data) {
+          return _this4.handleEmoji(data);
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-left-box flex"
@@ -5493,6 +5522,2658 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function() {
   }
 }).call(this);
 
+
+/***/ }),
+
+/***/ "./node_modules/emoji-js/lib/emoji.js":
+/*!********************************************!*\
+  !*** ./node_modules/emoji-js/lib/emoji.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+;(function() {
+
+	var root = this;
+	var previous_emoji = root.EmojiConvertor;
+
+
+	/**
+	 * @global
+	 * @namespace
+	 */
+
+	var emoji = function(){
+
+		var self = this;
+
+		/**
+		 * The set of images to use for graphical emoji.
+		 *
+		 * @memberof emoji
+		 * @type {string}
+		 */
+		self.img_set = 'apple';
+
+		/**
+		 * Configuration details for different image sets. This includes a path to a directory containing the
+		 * individual images (`path`) and a URL to sprite sheets (`sheet`). All of these images can be found
+		 * in the [emoji-data repository]{@link https://github.com/iamcal/emoji-data}. Using a CDN for these
+		 * is not a bad idea.
+		 *
+		 * @memberof emoji
+		 * @type {object}
+		 */
+		self.img_sets = {
+			'apple' : {'path' : '/emoji-data/img-apple-64/', 'sheet' : '/emoji-data/sheet_apple_64.png', 'sheet_size' : 64, 'mask' : 1},
+			'google' : {'path' : '/emoji-data/img-google-64/', 'sheet' : '/emoji-data/sheet_google_64.png', 'sheet_size' : 64, 'mask' : 2},
+			'twitter' : {'path' : '/emoji-data/img-twitter-64/', 'sheet' : '/emoji-data/sheet_twitter_64.png', 'sheet_size' : 64, 'mask' : 4},
+			'emojione' : {'path' : '/emoji-data/img-emojione-64/', 'sheet' : '/emoji-data/sheet_emojione_64.png', 'sheet_size' : 64, 'mask' : 8},
+			'facebook' : {'path' : '/emoji-data/img-facebook-64/', 'sheet' : '/emoji-data/sheet_facebook_64.png', 'sheet_size' : 64, 'mask' : 16},
+			'messenger' : {'path' : '/emoji-data/img-messenger-64/', 'sheet' : '/emoji-data/sheet_messenger_64.png', 'sheet_size' : 64, 'mask' : 32},
+		};
+
+		/**
+		 * Use a CSS class instead of specifying a sprite or background image for
+		 * the span representing the emoticon. This requires a CSS sheet with
+		 * emoticon data-uris.
+		 *
+		 * @memberof emoji
+		 * @type bool
+		 * @todo document how to build the CSS stylesheet self requires.
+		 */
+		self.use_css_imgs = false;
+
+		/**
+		 * Instead of replacing emoticons with the appropriate representations,
+		 * replace them with their colon string representation.
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.colons_mode = false;
+		self.text_mode = false;
+
+		/**
+		 * If true, sets the "title" property on the span or image that gets
+		 * inserted for the emoticon.
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.include_title = false;
+
+		/**
+		 * If true, sets the text of the span or image that gets inserted for the
+		 * emoticon.
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.include_text = false;
+
+		/**
+		 * If the platform supports native emoticons, use those instead
+		 * of the fallbacks.
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.allow_native = true;
+
+		/**
+		 * Wrap native with a <span class="emoji-native"></span> to allow styling
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.wrap_native = false;
+
+		/**
+		 * Set to true to use CSS sprites instead of individual images on 
+		 * platforms that support it.
+		 *
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.use_sheet = false;
+
+		/**
+		 *
+		 * Set to true to avoid black & white native Windows emoji being used.
+		 *
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.avoid_ms_emoji = true;
+
+		/**
+		 *
+		 * Set to true to allow :CAPITALIZATION:
+		 *
+		 * @memberof emoji
+		 * @type bool
+		 */
+		self.allow_caps = false;
+
+
+		/**
+		 *
+		 * Suffix to allow for individual image cache busting
+		 *
+		 * @memberof emoji
+		 * @type string
+		 */
+		self.img_suffix = '';
+
+
+		// Keeps track of what has been initialized.
+		/** @private */
+		self.inits = {};
+		self.map = {};
+
+		// discover the environment settings
+		self.init_env();
+
+		return self;
+	}
+
+	emoji.prototype.noConflict = function(){
+		root.EmojiConvertor = previous_emoji;
+		return emoji;
+	}
+
+
+	/**
+	 * @memberof emoji
+	 * @param {string} str A string potentially containing ascii emoticons
+	 * (ie. `:)`)
+	 *
+	 * @returns {string} A new string with all emoticons in `str`
+	 * replaced by a representatation that's supported by the current
+	 * environtment.
+	 */
+	emoji.prototype.replace_emoticons = function(str){
+		var self = this;
+		var colonized = self.replace_emoticons_with_colons(str);
+		return self.replace_colons(colonized);
+	};
+
+	/**
+	 * @memberof emoji
+	 * @param {string} str A string potentially containing ascii emoticons
+	 * (ie. `:)`)
+	 *
+	 * @returns {string} A new string with all emoticons in `str`
+	 * replaced by their colon string representations (ie. `:smile:`)
+	 */
+	emoji.prototype.replace_emoticons_with_colons = function(str){
+		var self = this;
+		self.init_emoticons();
+		var _prev_offset = 0;
+		var emoticons_with_parens = [];
+		var str_replaced = str.replace(self.rx_emoticons, function(m, $1, emoticon, offset){
+			var prev_offset = _prev_offset;
+			_prev_offset = offset + m.length;
+
+			var has_open_paren = emoticon.indexOf('(') !== -1;
+			var has_close_paren = emoticon.indexOf(')') !== -1;
+
+			/*
+			 * Track paren-having emoticons for fixing later
+			 */
+			if ((has_open_paren || has_close_paren) && emoticons_with_parens.indexOf(emoticon) == -1) {
+				emoticons_with_parens.push(emoticon);
+			}
+
+			/*
+			 * Look for preceding open paren for emoticons that contain a close paren
+			 * This prevents matching "8)" inside "(around 7 - 8)"
+			 */
+			if (has_close_paren && !has_open_paren) {
+				var piece = str.substring(prev_offset, offset);
+				if (piece.indexOf('(') !== -1 && piece.indexOf(')') === -1) return m;
+			}
+
+			/*
+			 * See if we're in a numbered list
+			 * This prevents matching "8)" inside "7) foo\n8) bar"
+			 */
+			if (m === '\n8)') {
+				var before_match = str.substring(0, offset);
+				if (/\n?(6\)|7\))/.test(before_match)) return m;
+			}
+
+			var val = self.data[self.map.emoticons[emoticon]][3][0];
+			return val ? $1+':'+val+':' : m;
+		});
+
+		/*
+		 * Come back and fix emoticons we ignored because they were inside parens.
+		 * It's useful to do self at the end so we don't get tripped up by other,
+		 * normal emoticons
+		 */
+		if (emoticons_with_parens.length) {
+			var escaped_emoticons = emoticons_with_parens.map(self.escape_rx);
+			var parenthetical_rx = new RegExp('(\\(.+)('+escaped_emoticons.join('|')+')(.+\\))', 'g');
+
+			str_replaced = str_replaced.replace(parenthetical_rx, function(m, $1, emoticon, $2) {
+				var val = self.data[self.map.emoticons[emoticon]][3][0];
+				return val ? $1+':'+val+':'+$2 : m;
+			});
+		}
+
+		return str_replaced;
+	};
+
+	/**
+	 * @memberof emoji
+	 * @param {string} str A string potentially containing colon string
+	 * representations of emoticons (ie. `:smile:`)
+	 *
+	 * @returns {string} A new string with all colon string emoticons replaced
+	 * with the appropriate representation.
+	 */
+	emoji.prototype.replace_colons = function(str){
+		var self = this;
+		self.init_colons();
+
+		return str.replace(self.rx_colons, function(m){
+			var idx = m.substr(1, m.length-2);
+			if (self.allow_caps) idx = idx.toLowerCase();
+
+			// special case - an emoji with a skintone modified
+			if (idx.indexOf('::skin-tone-') > -1){
+
+				var skin_tone = idx.substr(-1, 1);
+				var skin_idx = 'skin-tone-'+skin_tone;
+				var skin_val = self.map.colons[skin_idx];
+
+				idx = idx.substr(0, idx.length - 13);
+
+				var val = self.map.colons[idx];
+				if (val){
+					return self.replacement(val, idx, ':', {
+						'idx'		: skin_val,
+						'actual'	: skin_idx,
+						'wrapper'	: ':'
+					});
+				}else{
+					return ':' + idx + ':' + self.replacement(skin_val, skin_idx, ':');
+				}
+			}else{
+				var val = self.map.colons[idx];
+				return val ? self.replacement(val, idx, ':') : m;
+			}
+		});
+	};
+
+	/**
+	 * @memberof emoji
+	 * @param {string} str A string potentially containing unified unicode
+	 * emoticons. (ie. 😄)
+	 *
+	 * @returns {string} A new string with all unicode emoticons replaced with
+	 * the appropriate representation for the current environment.
+	 */
+	emoji.prototype.replace_unified = function(str){
+		var self = this;
+		self.init_unified();
+		return str.replace(self.rx_unified, function(m, p1, p2){
+
+			var val = self.map.unified[p1];
+			if (val){
+				var idx = null;
+				if (p2 == '\uD83C\uDFFB') idx = '1f3fb';
+				if (p2 == '\uD83C\uDFFC') idx = '1f3fc';
+				if (p2 == '\uD83C\uDFFD') idx = '1f3fd';
+				if (p2 == '\uD83C\uDFFE') idx = '1f3fe';
+				if (p2 == '\uD83C\uDFFF') idx = '1f3ff';
+				if (idx){
+					return self.replacement(val, null, null, {
+						idx	: idx,
+						actual	: p2,
+						wrapper	: ''
+					});
+					}
+				return self.replacement(val);
+			}
+
+			val = self.map.unified_vars[p1];
+			if (val){
+				return self.replacement(val[0], null, null, {
+					'idx'		: val[1],
+					'actual'	: '',
+					'wrapper'	: '',
+				});
+			}
+
+			return m;
+		});
+	};
+
+	emoji.prototype.addAliases = function(map){
+		var self = this;
+
+		self.init_colons();
+		for (var i in map){
+			self.map.colons[i] = map[i];
+		}
+	};
+
+	emoji.prototype.removeAliases = function(list){
+		var self = this;
+
+		for (var i=0; i<list.length; i++){
+			var alias = list[i];
+
+			// first, delete the alias mapping
+			delete self.map.colons[alias];
+
+			// now reset it to the default, if one exists
+			finder_block: {
+				for (var j in self.data){
+					for (var k=0; k<self.data[j][3].length; k++){
+						if (alias == self.data[j][3][k]){
+							self.map.colons[alias] = j;
+							break finder_block;
+						}
+					}
+				}
+			}
+		}
+	};
+
+
+	// Does the actual replacement of a character with the appropriate
+	/** @private */
+	emoji.prototype.replacement = function(idx, actual, wrapper, variation, is_extra){
+		var self = this;
+
+		var full_idx = idx;
+
+		// for emoji with variation modifiers, set `extra` to the standalone output for the
+		// modifier (used if we can't combine the glyph) and set variation_idx to key of the
+		// variation modifier (used below)
+		var extra = '';
+		var var_idx = null;
+		if (typeof variation === 'object'){
+			extra = self.replacement(variation.idx, variation.actual, variation.wrapper, undefined, true);
+			var_idx = variation.idx;
+		}
+
+		// deal with simple modes (colons and text) first
+		wrapper = wrapper || '';
+		if (self.colons_mode) return ':'+self.data[idx][3][0]+':'+extra;
+		var text_name = (actual) ? wrapper+actual+wrapper : self.data[idx][8] || wrapper+self.data[idx][3][0]+wrapper;
+		if (self.text_mode) return text_name + extra;
+
+		// figure out which images and code points to use, based on the skin variations. this information is also used for
+		// unified native output mode
+		var img = self.find_image(idx, var_idx);
+
+		// native modes next.
+		// for variations selectors, we just need to output them raw, which `extra` will contain. since softbank and google don't
+		// support skin variations, we'll keep `extra` around, every if we have a valid variation selector
+		self.init_env();
+		if (self.replace_mode == 'softbank' && self.allow_native && self.data[idx][1]) return self.format_native(self.data[idx][1] + extra, !is_extra);
+		if (self.replace_mode == 'google'   && self.allow_native && self.data[idx][2]) return self.format_native(self.data[idx][2] + extra, !is_extra);
+
+		// for unified (and images, below), we can use the variation info and throw away the `extra` contents
+		if (img.is_var){
+			extra = '';
+		}
+		if (self.replace_mode == 'unified' && self.allow_native) return self.format_native(img.unified + extra, !is_extra);
+
+
+		// finally deal with image modes.
+		// the call to .find_image() earlier checked if the image set and particular emoji supports variations,
+		// otherwise we can return it as a separate image (already calculated in `extra`).
+		// first we set up the params we'll use if we can't use a variation.
+		var title = self.include_title ? ' title="'+(actual || self.data[idx][3][0])+'"' : '';
+		var text  = self.include_text  ? wrapper+(actual || self.data[idx][3][0])+wrapper : '';
+
+		// custom image for this glyph?
+		if (self.data[idx][7]){
+			img.path = self.data[idx][7];
+			img.px = null;
+			img.py = null;
+			img.is_var = false;
+		}
+
+		// if we're displaying a variation, include it in the text
+		if (img.is_var && self.include_text && variation && variation.actual && variation.wrapper) {
+			text += variation.wrapper+variation.actual+variation.wrapper;
+		}
+
+		// output
+		if (self.supports_css) {
+			if (self.use_sheet && img.px != null && img.py != null){
+				var sheet_size = self.sheet_size * (img.sheet_size+2); // size of image in pixels
+				var sheet_x = 100 * (((img.px * (img.sheet_size+2)) + 1) / (sheet_size - img.sheet_size));
+				var sheet_y = 100 * (((img.py * (img.sheet_size+2)) + 1) / (sheet_size - img.sheet_size));
+				var sheet_sz = 100 * (sheet_size / img.sheet_size);
+
+				var style = 'background: url('+img.sheet+');background-position:'+(sheet_x)+'% '+(sheet_y)+'%;background-size:'+sheet_sz+'% '+sheet_sz+'%';
+				return '<span class="emoji-outer emoji-sizer"><span class="emoji-inner" style="'+style+'"'+title+' data-codepoints="'+img.full_idx+'">'+text+'</span></span>'+extra;
+			}else if (self.use_css_imgs){
+				return '<span class="emoji emoji-'+idx+'"'+title+' data-codepoints="'+img.full_idx+'">'+text+'</span>'+extra;
+			}else{
+				return '<span class="emoji emoji-sizer" style="background-image:url('+img.path+')"'+title+' data-codepoints="'+img.full_idx+'">'+text+'</span>'+extra;
+			}
+		}
+		return '<img src="'+img.path+'" class="emoji" data-codepoints="'+img.full_idx+'" '+title+'/>'+extra;
+	};
+
+	// Wraps the output of a native endpoint, if configured
+	/** @private */
+	emoji.prototype.format_native = function(native, allow_wrap){
+		var self = this;
+
+		if (self.wrap_native && allow_wrap){
+			return '<span class="emoji-native">'+ native + '</span>';
+		}
+		return native;
+	};
+
+	// Finds the best image to display, taking into account image set precedence and obsoletes
+	/** @private */
+	emoji.prototype.find_image = function(idx, var_idx){
+		var self = this;
+
+		// set up some initial state
+		var out = {
+			'path'		: '',
+			'sheet'		: '',
+			'sheet_size'	: 0,
+			'px'		: self.data[idx][4],
+			'py'		: self.data[idx][5],
+			'full_idx'	: idx,
+			'is_var'	: false,
+			'unified'	: self.data[idx][0][0]
+		};
+		var use_mask = self.data[idx][6];
+
+		// can we use a variation?
+		if (var_idx && self.variations_data[idx] && self.variations_data[idx][var_idx]){
+			var var_data = self.variations_data[idx][var_idx];
+
+			out.px = var_data[1];
+			out.py = var_data[2];
+			out.full_idx = var_data[0];
+			out.is_var = true;
+			out.unified = var_data[4];
+			use_mask = var_data[3];
+		}
+
+		// this matches `build/build_image.php` `in emoji-data`, so that sheet and images modes always
+		// agree about the image to use.
+		var try_order = [self.img_set, 'apple', 'emojione', 'google', 'twitter', 'facebook', 'messenger'];
+
+		// for each image set, see if we have the image we need. otherwise check for an obsolete in
+		// that image set
+		for (var j=0; j<try_order.length; j++){
+			if (use_mask & self.img_sets[try_order[j]].mask){
+				out.path = self.img_sets[try_order[j]].path+out.full_idx+'.png' + self.img_suffix;
+				// if we're not changing glyph, use our base set for sheets - it has every glyph
+				out.sheet = self.img_sets[self.img_set].sheet;
+				out.sheet_size = self.img_sets[self.img_set].sheet_size;
+				return out;
+			}
+			if (self.obsoletes_data[out.full_idx]){
+				var ob_data = self.obsoletes_data[out.full_idx];
+
+				if (ob_data[3] & self.img_sets[try_order[j]].mask){
+					out.path = self.img_sets[try_order[j]].path+ob_data[0]+'.png' + self.img_suffix;
+					out.sheet = self.img_sets[try_order[j]].sheet;
+					out.sheet_size = self.img_sets[try_order[j]].sheet_size;
+					out.px = ob_data[1];
+					out.py = ob_data[2];
+					return out;
+				}
+			}
+		}
+
+		return out;
+	};
+
+	// Initializes the text emoticon data
+	/** @private */
+	emoji.prototype.init_emoticons = function(){
+		var self = this;
+		if (self.inits.emoticons) return;
+		self.init_colons(); // we require this for the emoticons map
+		self.inits.emoticons = 1;
+		
+		var a = [];
+		self.map.emoticons = {};
+		for (var i in self.emoticons_data){
+			// because we never see some characters in our text except as entities, we must do some replacing
+			var emoticon = i.replace(/\&/g, '&amp;').replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
+			
+			if (!self.map.colons[self.emoticons_data[i]]) continue;
+
+			self.map.emoticons[emoticon] = self.map.colons[self.emoticons_data[i]];
+			a.push(self.escape_rx(emoticon));
+		}
+		self.rx_emoticons = new RegExp(('(^|\\s)('+a.join('|')+')(?=$|[\\s|\\?\\.,!])'), 'g');
+	};
+
+	// Initializes the colon string data
+	/** @private */
+	emoji.prototype.init_colons = function(){
+		var self = this;
+		if (self.inits.colons) return;
+		self.inits.colons = 1;
+		self.rx_colons = new RegExp('\:[a-zA-Z0-9-_+]+\:(\:skin-tone-[2-6]\:)?', 'g');
+		self.map.colons = {};
+		for (var i in self.data){
+			for (var j=0; j<self.data[i][3].length; j++){
+				self.map.colons[self.data[i][3][j]] = i;
+			}
+		}
+	};
+
+	// initializes the unified unicode emoticon data
+	/** @private */
+	emoji.prototype.init_unified = function(){
+		var self = this;
+		if (self.inits.unified) return;
+		self.inits.unified = 1;
+
+		var a = [];
+		self.map.unified = {};
+		self.map.unified_vars = {};
+
+		for (var i in self.data){
+			for (var j=0; j<self.data[i][0].length; j++){
+				a.push(self.data[i][0][j].replace('*', '\\*'));
+				self.map.unified[self.data[i][0][j]] = i;
+			}
+		}
+		for (var i in self.variations_data){
+			// skip simple append-style skin tones
+			if (self.variations_data[i]['1f3fb'][0] == i+'-1f3fb') continue;
+
+			for (var k in self.variations_data[i]){
+				for (var j=0; j<self.variations_data[i][k][4].length; j++){
+					a.push(self.variations_data[i][k][4][j].replace('*', '\\*'));
+					self.map.unified_vars[self.variations_data[i][k][4][j]] = [i, k];
+				}
+			}
+		}
+
+		a = a.sort(function(a,b){
+			 return b.length - a.length;
+		});
+
+		self.rx_unified = new RegExp('('+a.join('|')+')(\uD83C[\uDFFB-\uDFFF])?', "g");
+	};
+
+	// initializes the environment, figuring out what representation
+	// of emoticons is best.
+	/** @private */
+	emoji.prototype.init_env = function(){
+		var self = this;
+		if (self.inits.env) return;
+		self.inits.env = 1;
+		self.replace_mode = 'img';
+		self.supports_css = false;
+		if (typeof(navigator) !== 'undefined') {
+			var ua = navigator.userAgent;
+			if (typeof window !== 'undefined' && window.getComputedStyle){
+				try {
+					var st = window.getComputedStyle(document.body);
+					if (st['background-size'] || st['backgroundSize']){
+						self.supports_css = true;
+					}
+				} catch(e){
+					// Swallow an exception caused by hidden iFrames on Firefox
+					// https://github.com/iamcal/js-emoji/issues/73
+					if (ua.match(/Firefox/i)){
+						self.supports_css = true;
+					}
+				}
+			}
+			if (ua.match(/(iPhone|iPod|iPad|iPhone\s+Simulator)/i)){
+				if (ua.match(/OS\s+[12345]/i)){
+					self.replace_mode = 'softbank';
+					return;
+				}
+				if (ua.match(/OS\s+[6789]/i)){
+					self.replace_mode = 'unified';
+					return;
+				}
+			}
+			if (ua.match(/Mac OS X 10[._ ](?:[789]|1\d)/i)){
+				self.replace_mode = 'unified';
+				return;
+			}
+			if (!self.avoid_ms_emoji){
+				if (ua.match(/Windows NT 6.[1-9]/i) || ua.match(/Windows NT 10.[0-9]/i)){
+					if (!ua.match(/Chrome/i) && !ua.match(/MSIE 8/i)){
+						self.replace_mode = 'unified';
+						return;
+					}
+				}
+			}
+		}
+
+		// Need a better way to detect android devices that actually
+		// support emoji.
+		if (false){}
+		if (self.supports_css){
+			self.replace_mode = 'css';
+		}
+		// nothing fancy detected - use images
+	};
+	/** @private */
+	emoji.prototype.escape_rx = function(text){
+		return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+	};
+	emoji.prototype.sheet_size = 52;
+	/** @private */
+	emoji.prototype.data = {
+		"0023-fe0f-20e3":[["\u0023\uFE0F\u20E3","\u0023\u20E3"],"\uE210","\uDBBA\uDC2C",["hash"],0,0,15,0],
+		"002a-fe0f-20e3":[["\u002A\uFE0F\u20E3","\u002A\u20E3"],"","",["keycap_star"],0,1,15,0],
+		"0030-fe0f-20e3":[["\u0030\uFE0F\u20E3","\u0030\u20E3"],"\uE225","\uDBBA\uDC37",["zero"],0,2,15,0],
+		"0031-fe0f-20e3":[["\u0031\uFE0F\u20E3","\u0031\u20E3"],"\uE21C","\uDBBA\uDC2E",["one"],0,3,15,0],
+		"0032-fe0f-20e3":[["\u0032\uFE0F\u20E3","\u0032\u20E3"],"\uE21D","\uDBBA\uDC2F",["two"],0,4,15,0],
+		"0033-fe0f-20e3":[["\u0033\uFE0F\u20E3","\u0033\u20E3"],"\uE21E","\uDBBA\uDC30",["three"],0,5,15,0],
+		"0034-fe0f-20e3":[["\u0034\uFE0F\u20E3","\u0034\u20E3"],"\uE21F","\uDBBA\uDC31",["four"],0,6,15,0],
+		"0035-fe0f-20e3":[["\u0035\uFE0F\u20E3","\u0035\u20E3"],"\uE220","\uDBBA\uDC32",["five"],0,7,15,0],
+		"0036-fe0f-20e3":[["\u0036\uFE0F\u20E3","\u0036\u20E3"],"\uE221","\uDBBA\uDC33",["six"],0,8,15,0],
+		"0037-fe0f-20e3":[["\u0037\uFE0F\u20E3","\u0037\u20E3"],"\uE222","\uDBBA\uDC34",["seven"],0,9,15,0],
+		"0038-fe0f-20e3":[["\u0038\uFE0F\u20E3","\u0038\u20E3"],"\uE223","\uDBBA\uDC35",["eight"],0,10,15,0],
+		"0039-fe0f-20e3":[["\u0039\uFE0F\u20E3","\u0039\u20E3"],"\uE224","\uDBBA\uDC36",["nine"],0,11,15,0],
+		"00a9-fe0f":[["\u00A9\uFE0F","\u00A9"],"\uE24E","\uDBBA\uDF29",["copyright"],0,12,11,0],
+		"00ae-fe0f":[["\u00AE\uFE0F","\u00AE"],"\uE24F","\uDBBA\uDF2D",["registered"],0,13,11,0],
+		"1f004":[["\uD83C\uDC04"],"\uE12D","\uDBBA\uDC0B",["mahjong"],0,14,63,0],
+		"1f0cf":[["\uD83C\uDCCF"],"","\uDBBA\uDC12",["black_joker"],0,15,63,0],
+		"1f170-fe0f":[["\uD83C\uDD70\uFE0F","\uD83C\uDD70"],"\uE532","\uDBB9\uDD0B",["a"],0,16,63,0],
+		"1f171-fe0f":[["\uD83C\uDD71\uFE0F","\uD83C\uDD71"],"\uE533","\uDBB9\uDD0C",["b"],0,17,63,0],
+		"1f17e-fe0f":[["\uD83C\uDD7E\uFE0F","\uD83C\uDD7E"],"\uE535","\uDBB9\uDD0E",["o2"],0,18,63,0],
+		"1f17f-fe0f":[["\uD83C\uDD7F\uFE0F","\uD83C\uDD7F"],"\uE14F","\uDBB9\uDFF6",["parking"],0,19,63,0],
+		"1f18e":[["\uD83C\uDD8E"],"\uE534","\uDBB9\uDD0D",["ab"],0,20,63,0],
+		"1f191":[["\uD83C\uDD91"],"","\uDBBA\uDF84",["cl"],0,21,63,0],
+		"1f192":[["\uD83C\uDD92"],"\uE214","\uDBBA\uDF38",["cool"],0,22,63,0],
+		"1f193":[["\uD83C\uDD93"],"","\uDBBA\uDF21",["free"],0,23,63,0],
+		"1f194":[["\uD83C\uDD94"],"\uE229","\uDBBA\uDF81",["id"],0,24,63,0],
+		"1f195":[["\uD83C\uDD95"],"\uE212","\uDBBA\uDF36",["new"],0,25,63,0],
+		"1f196":[["\uD83C\uDD96"],"","\uDBBA\uDF28",["ng"],0,26,63,0],
+		"1f197":[["\uD83C\uDD97"],"\uE24D","\uDBBA\uDF27",["ok"],0,27,63,0],
+		"1f198":[["\uD83C\uDD98"],"","\uDBBA\uDF4F",["sos"],0,28,63,0],
+		"1f199":[["\uD83C\uDD99"],"\uE213","\uDBBA\uDF37",["up"],0,29,63,0],
+		"1f19a":[["\uD83C\uDD9A"],"\uE12E","\uDBBA\uDF32",["vs"],0,30,63,0],
+		"1f1e6-1f1e8":[["\uD83C\uDDE6\uD83C\uDDE8"],"","",["flag-ac"],0,31,63,0],
+		"1f1e6-1f1e9":[["\uD83C\uDDE6\uD83C\uDDE9"],"","",["flag-ad"],0,32,63,0],
+		"1f1e6-1f1ea":[["\uD83C\uDDE6\uD83C\uDDEA"],"","",["flag-ae"],0,33,63,0],
+		"1f1e6-1f1eb":[["\uD83C\uDDE6\uD83C\uDDEB"],"","",["flag-af"],0,34,63,0],
+		"1f1e6-1f1ec":[["\uD83C\uDDE6\uD83C\uDDEC"],"","",["flag-ag"],0,35,63,0],
+		"1f1e6-1f1ee":[["\uD83C\uDDE6\uD83C\uDDEE"],"","",["flag-ai"],0,36,63,0],
+		"1f1e6-1f1f1":[["\uD83C\uDDE6\uD83C\uDDF1"],"","",["flag-al"],0,37,63,0],
+		"1f1e6-1f1f2":[["\uD83C\uDDE6\uD83C\uDDF2"],"","",["flag-am"],0,38,63,0],
+		"1f1e6-1f1f4":[["\uD83C\uDDE6\uD83C\uDDF4"],"","",["flag-ao"],0,39,63,0],
+		"1f1e6-1f1f6":[["\uD83C\uDDE6\uD83C\uDDF6"],"","",["flag-aq"],0,40,63,0],
+		"1f1e6-1f1f7":[["\uD83C\uDDE6\uD83C\uDDF7"],"","",["flag-ar"],0,41,63,0],
+		"1f1e6-1f1f8":[["\uD83C\uDDE6\uD83C\uDDF8"],"","",["flag-as"],0,42,63,0],
+		"1f1e6-1f1f9":[["\uD83C\uDDE6\uD83C\uDDF9"],"","",["flag-at"],0,43,63,0],
+		"1f1e6-1f1fa":[["\uD83C\uDDE6\uD83C\uDDFA"],"","",["flag-au"],0,44,63,0],
+		"1f1e6-1f1fc":[["\uD83C\uDDE6\uD83C\uDDFC"],"","",["flag-aw"],0,45,63,0],
+		"1f1e6-1f1fd":[["\uD83C\uDDE6\uD83C\uDDFD"],"","",["flag-ax"],0,46,63,0],
+		"1f1e6-1f1ff":[["\uD83C\uDDE6\uD83C\uDDFF"],"","",["flag-az"],0,47,63,0],
+		"1f1e7-1f1e6":[["\uD83C\uDDE7\uD83C\uDDE6"],"","",["flag-ba"],0,48,31,0],
+		"1f1e7-1f1e7":[["\uD83C\uDDE7\uD83C\uDDE7"],"","",["flag-bb"],0,49,63,0],
+		"1f1e7-1f1e9":[["\uD83C\uDDE7\uD83C\uDDE9"],"","",["flag-bd"],0,50,63,0],
+		"1f1e7-1f1ea":[["\uD83C\uDDE7\uD83C\uDDEA"],"","",["flag-be"],0,51,63,0],
+		"1f1e7-1f1eb":[["\uD83C\uDDE7\uD83C\uDDEB"],"","",["flag-bf"],1,0,63,0],
+		"1f1e7-1f1ec":[["\uD83C\uDDE7\uD83C\uDDEC"],"","",["flag-bg"],1,1,63,0],
+		"1f1e7-1f1ed":[["\uD83C\uDDE7\uD83C\uDDED"],"","",["flag-bh"],1,2,63,0],
+		"1f1e7-1f1ee":[["\uD83C\uDDE7\uD83C\uDDEE"],"","",["flag-bi"],1,3,63,0],
+		"1f1e7-1f1ef":[["\uD83C\uDDE7\uD83C\uDDEF"],"","",["flag-bj"],1,4,63,0],
+		"1f1e7-1f1f1":[["\uD83C\uDDE7\uD83C\uDDF1"],"","",["flag-bl"],1,5,61,0],
+		"1f1e7-1f1f2":[["\uD83C\uDDE7\uD83C\uDDF2"],"","",["flag-bm"],1,6,63,0],
+		"1f1e7-1f1f3":[["\uD83C\uDDE7\uD83C\uDDF3"],"","",["flag-bn"],1,7,31,0],
+		"1f1e7-1f1f4":[["\uD83C\uDDE7\uD83C\uDDF4"],"","",["flag-bo"],1,8,63,0],
+		"1f1e7-1f1f6":[["\uD83C\uDDE7\uD83C\uDDF6"],"","",["flag-bq"],1,9,61,0],
+		"1f1e7-1f1f7":[["\uD83C\uDDE7\uD83C\uDDF7"],"","",["flag-br"],1,10,63,0],
+		"1f1e7-1f1f8":[["\uD83C\uDDE7\uD83C\uDDF8"],"","",["flag-bs"],1,11,63,0],
+		"1f1e7-1f1f9":[["\uD83C\uDDE7\uD83C\uDDF9"],"","",["flag-bt"],1,12,63,0],
+		"1f1e7-1f1fb":[["\uD83C\uDDE7\uD83C\uDDFB"],"","",["flag-bv"],1,13,63,0],
+		"1f1e7-1f1fc":[["\uD83C\uDDE7\uD83C\uDDFC"],"","",["flag-bw"],1,14,63,0],
+		"1f1e7-1f1fe":[["\uD83C\uDDE7\uD83C\uDDFE"],"","",["flag-by"],1,15,63,0],
+		"1f1e7-1f1ff":[["\uD83C\uDDE7\uD83C\uDDFF"],"","",["flag-bz"],1,16,63,0],
+		"1f1e8-1f1e6":[["\uD83C\uDDE8\uD83C\uDDE6"],"","",["flag-ca"],1,17,63,0],
+		"1f1e8-1f1e8":[["\uD83C\uDDE8\uD83C\uDDE8"],"","",["flag-cc"],1,18,63,0],
+		"1f1e8-1f1e9":[["\uD83C\uDDE8\uD83C\uDDE9"],"","",["flag-cd"],1,19,63,0],
+		"1f1e8-1f1eb":[["\uD83C\uDDE8\uD83C\uDDEB"],"","",["flag-cf"],1,20,63,0],
+		"1f1e8-1f1ec":[["\uD83C\uDDE8\uD83C\uDDEC"],"","",["flag-cg"],1,21,63,0],
+		"1f1e8-1f1ed":[["\uD83C\uDDE8\uD83C\uDDED"],"","",["flag-ch"],1,22,63,0],
+		"1f1e8-1f1ee":[["\uD83C\uDDE8\uD83C\uDDEE"],"","",["flag-ci"],1,23,63,0],
+		"1f1e8-1f1f0":[["\uD83C\uDDE8\uD83C\uDDF0"],"","",["flag-ck"],1,24,63,0],
+		"1f1e8-1f1f1":[["\uD83C\uDDE8\uD83C\uDDF1"],"","",["flag-cl"],1,25,63,0],
+		"1f1e8-1f1f2":[["\uD83C\uDDE8\uD83C\uDDF2"],"","",["flag-cm"],1,26,63,0],
+		"1f1e8-1f1f3":[["\uD83C\uDDE8\uD83C\uDDF3"],"\uE513","\uDBB9\uDCED",["cn","flag-cn"],1,27,63,0],
+		"1f1e8-1f1f4":[["\uD83C\uDDE8\uD83C\uDDF4"],"","",["flag-co"],1,28,63,0],
+		"1f1e8-1f1f5":[["\uD83C\uDDE8\uD83C\uDDF5"],"","",["flag-cp"],1,29,31,0],
+		"1f1e8-1f1f7":[["\uD83C\uDDE8\uD83C\uDDF7"],"","",["flag-cr"],1,30,63,0],
+		"1f1e8-1f1fa":[["\uD83C\uDDE8\uD83C\uDDFA"],"","",["flag-cu"],1,31,63,0],
+		"1f1e8-1f1fb":[["\uD83C\uDDE8\uD83C\uDDFB"],"","",["flag-cv"],1,32,63,0],
+		"1f1e8-1f1fc":[["\uD83C\uDDE8\uD83C\uDDFC"],"","",["flag-cw"],1,33,63,0],
+		"1f1e8-1f1fd":[["\uD83C\uDDE8\uD83C\uDDFD"],"","",["flag-cx"],1,34,63,0],
+		"1f1e8-1f1fe":[["\uD83C\uDDE8\uD83C\uDDFE"],"","",["flag-cy"],1,35,63,0],
+		"1f1e8-1f1ff":[["\uD83C\uDDE8\uD83C\uDDFF"],"","",["flag-cz"],1,36,63,0],
+		"1f1e9-1f1ea":[["\uD83C\uDDE9\uD83C\uDDEA"],"\uE50E","\uDBB9\uDCE8",["de","flag-de"],1,37,63,0],
+		"1f1e9-1f1ec":[["\uD83C\uDDE9\uD83C\uDDEC"],"","",["flag-dg"],1,38,61,0],
+		"1f1e9-1f1ef":[["\uD83C\uDDE9\uD83C\uDDEF"],"","",["flag-dj"],1,39,63,0],
+		"1f1e9-1f1f0":[["\uD83C\uDDE9\uD83C\uDDF0"],"","",["flag-dk"],1,40,63,0],
+		"1f1e9-1f1f2":[["\uD83C\uDDE9\uD83C\uDDF2"],"","",["flag-dm"],1,41,63,0],
+		"1f1e9-1f1f4":[["\uD83C\uDDE9\uD83C\uDDF4"],"","",["flag-do"],1,42,63,0],
+		"1f1e9-1f1ff":[["\uD83C\uDDE9\uD83C\uDDFF"],"","",["flag-dz"],1,43,63,0],
+		"1f1ea-1f1e6":[["\uD83C\uDDEA\uD83C\uDDE6"],"","",["flag-ea"],1,44,61,0],
+		"1f1ea-1f1e8":[["\uD83C\uDDEA\uD83C\uDDE8"],"","",["flag-ec"],1,45,63,0],
+		"1f1ea-1f1ea":[["\uD83C\uDDEA\uD83C\uDDEA"],"","",["flag-ee"],1,46,63,0],
+		"1f1ea-1f1ec":[["\uD83C\uDDEA\uD83C\uDDEC"],"","",["flag-eg"],1,47,63,0],
+		"1f1ea-1f1ed":[["\uD83C\uDDEA\uD83C\uDDED"],"","",["flag-eh"],1,48,61,0],
+		"1f1ea-1f1f7":[["\uD83C\uDDEA\uD83C\uDDF7"],"","",["flag-er"],1,49,63,0],
+		"1f1ea-1f1f8":[["\uD83C\uDDEA\uD83C\uDDF8"],"\uE511","\uDBB9\uDCEB",["es","flag-es"],1,50,63,0],
+		"1f1ea-1f1f9":[["\uD83C\uDDEA\uD83C\uDDF9"],"","",["flag-et"],1,51,63,0],
+		"1f1ea-1f1fa":[["\uD83C\uDDEA\uD83C\uDDFA"],"","",["flag-eu"],2,0,63,0],
+		"1f1eb-1f1ee":[["\uD83C\uDDEB\uD83C\uDDEE"],"","",["flag-fi"],2,1,63,0],
+		"1f1eb-1f1ef":[["\uD83C\uDDEB\uD83C\uDDEF"],"","",["flag-fj"],2,2,63,0],
+		"1f1eb-1f1f0":[["\uD83C\uDDEB\uD83C\uDDF0"],"","",["flag-fk"],2,3,61,0],
+		"1f1eb-1f1f2":[["\uD83C\uDDEB\uD83C\uDDF2"],"","",["flag-fm"],2,4,63,0],
+		"1f1eb-1f1f4":[["\uD83C\uDDEB\uD83C\uDDF4"],"","",["flag-fo"],2,5,63,0],
+		"1f1eb-1f1f7":[["\uD83C\uDDEB\uD83C\uDDF7"],"\uE50D","\uDBB9\uDCE7",["fr","flag-fr"],2,6,63,0],
+		"1f1ec-1f1e6":[["\uD83C\uDDEC\uD83C\uDDE6"],"","",["flag-ga"],2,7,63,0],
+		"1f1ec-1f1e7":[["\uD83C\uDDEC\uD83C\uDDE7"],"\uE510","\uDBB9\uDCEA",["gb","uk","flag-gb"],2,8,63,0],
+		"1f1ec-1f1e9":[["\uD83C\uDDEC\uD83C\uDDE9"],"","",["flag-gd"],2,9,63,0],
+		"1f1ec-1f1ea":[["\uD83C\uDDEC\uD83C\uDDEA"],"","",["flag-ge"],2,10,63,0],
+		"1f1ec-1f1eb":[["\uD83C\uDDEC\uD83C\uDDEB"],"","",["flag-gf"],2,11,61,0],
+		"1f1ec-1f1ec":[["\uD83C\uDDEC\uD83C\uDDEC"],"","",["flag-gg"],2,12,63,0],
+		"1f1ec-1f1ed":[["\uD83C\uDDEC\uD83C\uDDED"],"","",["flag-gh"],2,13,63,0],
+		"1f1ec-1f1ee":[["\uD83C\uDDEC\uD83C\uDDEE"],"","",["flag-gi"],2,14,63,0],
+		"1f1ec-1f1f1":[["\uD83C\uDDEC\uD83C\uDDF1"],"","",["flag-gl"],2,15,63,0],
+		"1f1ec-1f1f2":[["\uD83C\uDDEC\uD83C\uDDF2"],"","",["flag-gm"],2,16,63,0],
+		"1f1ec-1f1f3":[["\uD83C\uDDEC\uD83C\uDDF3"],"","",["flag-gn"],2,17,63,0],
+		"1f1ec-1f1f5":[["\uD83C\uDDEC\uD83C\uDDF5"],"","",["flag-gp"],2,18,61,0],
+		"1f1ec-1f1f6":[["\uD83C\uDDEC\uD83C\uDDF6"],"","",["flag-gq"],2,19,63,0],
+		"1f1ec-1f1f7":[["\uD83C\uDDEC\uD83C\uDDF7"],"","",["flag-gr"],2,20,63,0],
+		"1f1ec-1f1f8":[["\uD83C\uDDEC\uD83C\uDDF8"],"","",["flag-gs"],2,21,61,0],
+		"1f1ec-1f1f9":[["\uD83C\uDDEC\uD83C\uDDF9"],"","",["flag-gt"],2,22,63,0],
+		"1f1ec-1f1fa":[["\uD83C\uDDEC\uD83C\uDDFA"],"","",["flag-gu"],2,23,63,0],
+		"1f1ec-1f1fc":[["\uD83C\uDDEC\uD83C\uDDFC"],"","",["flag-gw"],2,24,63,0],
+		"1f1ec-1f1fe":[["\uD83C\uDDEC\uD83C\uDDFE"],"","",["flag-gy"],2,25,63,0],
+		"1f1ed-1f1f0":[["\uD83C\uDDED\uD83C\uDDF0"],"","",["flag-hk"],2,26,63,0],
+		"1f1ed-1f1f2":[["\uD83C\uDDED\uD83C\uDDF2"],"","",["flag-hm"],2,27,63,0],
+		"1f1ed-1f1f3":[["\uD83C\uDDED\uD83C\uDDF3"],"","",["flag-hn"],2,28,63,0],
+		"1f1ed-1f1f7":[["\uD83C\uDDED\uD83C\uDDF7"],"","",["flag-hr"],2,29,63,0],
+		"1f1ed-1f1f9":[["\uD83C\uDDED\uD83C\uDDF9"],"","",["flag-ht"],2,30,63,0],
+		"1f1ed-1f1fa":[["\uD83C\uDDED\uD83C\uDDFA"],"","",["flag-hu"],2,31,63,0],
+		"1f1ee-1f1e8":[["\uD83C\uDDEE\uD83C\uDDE8"],"","",["flag-ic"],2,32,63,0],
+		"1f1ee-1f1e9":[["\uD83C\uDDEE\uD83C\uDDE9"],"","",["flag-id"],2,33,63,0],
+		"1f1ee-1f1ea":[["\uD83C\uDDEE\uD83C\uDDEA"],"","",["flag-ie"],2,34,63,0],
+		"1f1ee-1f1f1":[["\uD83C\uDDEE\uD83C\uDDF1"],"","",["flag-il"],2,35,63,0],
+		"1f1ee-1f1f2":[["\uD83C\uDDEE\uD83C\uDDF2"],"","",["flag-im"],2,36,63,0],
+		"1f1ee-1f1f3":[["\uD83C\uDDEE\uD83C\uDDF3"],"","",["flag-in"],2,37,63,0],
+		"1f1ee-1f1f4":[["\uD83C\uDDEE\uD83C\uDDF4"],"","",["flag-io"],2,38,63,0],
+		"1f1ee-1f1f6":[["\uD83C\uDDEE\uD83C\uDDF6"],"","",["flag-iq"],2,39,63,0],
+		"1f1ee-1f1f7":[["\uD83C\uDDEE\uD83C\uDDF7"],"","",["flag-ir"],2,40,63,0],
+		"1f1ee-1f1f8":[["\uD83C\uDDEE\uD83C\uDDF8"],"","",["flag-is"],2,41,63,0],
+		"1f1ee-1f1f9":[["\uD83C\uDDEE\uD83C\uDDF9"],"\uE50F","\uDBB9\uDCE9",["it","flag-it"],2,42,63,0],
+		"1f1ef-1f1ea":[["\uD83C\uDDEF\uD83C\uDDEA"],"","",["flag-je"],2,43,63,0],
+		"1f1ef-1f1f2":[["\uD83C\uDDEF\uD83C\uDDF2"],"","",["flag-jm"],2,44,63,0],
+		"1f1ef-1f1f4":[["\uD83C\uDDEF\uD83C\uDDF4"],"","",["flag-jo"],2,45,63,0],
+		"1f1ef-1f1f5":[["\uD83C\uDDEF\uD83C\uDDF5"],"\uE50B","\uDBB9\uDCE5",["jp","flag-jp"],2,46,63,0],
+		"1f1f0-1f1ea":[["\uD83C\uDDF0\uD83C\uDDEA"],"","",["flag-ke"],2,47,63,0],
+		"1f1f0-1f1ec":[["\uD83C\uDDF0\uD83C\uDDEC"],"","",["flag-kg"],2,48,63,0],
+		"1f1f0-1f1ed":[["\uD83C\uDDF0\uD83C\uDDED"],"","",["flag-kh"],2,49,63,0],
+		"1f1f0-1f1ee":[["\uD83C\uDDF0\uD83C\uDDEE"],"","",["flag-ki"],2,50,63,0],
+		"1f1f0-1f1f2":[["\uD83C\uDDF0\uD83C\uDDF2"],"","",["flag-km"],2,51,63,0],
+		"1f1f0-1f1f3":[["\uD83C\uDDF0\uD83C\uDDF3"],"","",["flag-kn"],3,0,63,0],
+		"1f1f0-1f1f5":[["\uD83C\uDDF0\uD83C\uDDF5"],"","",["flag-kp"],3,1,63,0],
+		"1f1f0-1f1f7":[["\uD83C\uDDF0\uD83C\uDDF7"],"\uE514","\uDBB9\uDCEE",["kr","flag-kr"],3,2,63,0],
+		"1f1f0-1f1fc":[["\uD83C\uDDF0\uD83C\uDDFC"],"","",["flag-kw"],3,3,63,0],
+		"1f1f0-1f1fe":[["\uD83C\uDDF0\uD83C\uDDFE"],"","",["flag-ky"],3,4,63,0],
+		"1f1f0-1f1ff":[["\uD83C\uDDF0\uD83C\uDDFF"],"","",["flag-kz"],3,5,63,0],
+		"1f1f1-1f1e6":[["\uD83C\uDDF1\uD83C\uDDE6"],"","",["flag-la"],3,6,63,0],
+		"1f1f1-1f1e7":[["\uD83C\uDDF1\uD83C\uDDE7"],"","",["flag-lb"],3,7,63,0],
+		"1f1f1-1f1e8":[["\uD83C\uDDF1\uD83C\uDDE8"],"","",["flag-lc"],3,8,63,0],
+		"1f1f1-1f1ee":[["\uD83C\uDDF1\uD83C\uDDEE"],"","",["flag-li"],3,9,63,0],
+		"1f1f1-1f1f0":[["\uD83C\uDDF1\uD83C\uDDF0"],"","",["flag-lk"],3,10,63,0],
+		"1f1f1-1f1f7":[["\uD83C\uDDF1\uD83C\uDDF7"],"","",["flag-lr"],3,11,63,0],
+		"1f1f1-1f1f8":[["\uD83C\uDDF1\uD83C\uDDF8"],"","",["flag-ls"],3,12,63,0],
+		"1f1f1-1f1f9":[["\uD83C\uDDF1\uD83C\uDDF9"],"","",["flag-lt"],3,13,63,0],
+		"1f1f1-1f1fa":[["\uD83C\uDDF1\uD83C\uDDFA"],"","",["flag-lu"],3,14,63,0],
+		"1f1f1-1f1fb":[["\uD83C\uDDF1\uD83C\uDDFB"],"","",["flag-lv"],3,15,63,0],
+		"1f1f1-1f1fe":[["\uD83C\uDDF1\uD83C\uDDFE"],"","",["flag-ly"],3,16,63,0],
+		"1f1f2-1f1e6":[["\uD83C\uDDF2\uD83C\uDDE6"],"","",["flag-ma"],3,17,63,0],
+		"1f1f2-1f1e8":[["\uD83C\uDDF2\uD83C\uDDE8"],"","",["flag-mc"],3,18,63,0],
+		"1f1f2-1f1e9":[["\uD83C\uDDF2\uD83C\uDDE9"],"","",["flag-md"],3,19,63,0],
+		"1f1f2-1f1ea":[["\uD83C\uDDF2\uD83C\uDDEA"],"","",["flag-me"],3,20,63,0],
+		"1f1f2-1f1eb":[["\uD83C\uDDF2\uD83C\uDDEB"],"","",["flag-mf"],3,21,61,0],
+		"1f1f2-1f1ec":[["\uD83C\uDDF2\uD83C\uDDEC"],"","",["flag-mg"],3,22,63,0],
+		"1f1f2-1f1ed":[["\uD83C\uDDF2\uD83C\uDDED"],"","",["flag-mh"],3,23,63,0],
+		"1f1f2-1f1f0":[["\uD83C\uDDF2\uD83C\uDDF0"],"","",["flag-mk"],3,24,63,0],
+		"1f1f2-1f1f1":[["\uD83C\uDDF2\uD83C\uDDF1"],"","",["flag-ml"],3,25,63,0],
+		"1f1f2-1f1f2":[["\uD83C\uDDF2\uD83C\uDDF2"],"","",["flag-mm"],3,26,63,0],
+		"1f1f2-1f1f3":[["\uD83C\uDDF2\uD83C\uDDF3"],"","",["flag-mn"],3,27,63,0],
+		"1f1f2-1f1f4":[["\uD83C\uDDF2\uD83C\uDDF4"],"","",["flag-mo"],3,28,63,0],
+		"1f1f2-1f1f5":[["\uD83C\uDDF2\uD83C\uDDF5"],"","",["flag-mp"],3,29,63,0],
+		"1f1f2-1f1f6":[["\uD83C\uDDF2\uD83C\uDDF6"],"","",["flag-mq"],3,30,61,0],
+		"1f1f2-1f1f7":[["\uD83C\uDDF2\uD83C\uDDF7"],"","",["flag-mr"],3,31,63,0],
+		"1f1f2-1f1f8":[["\uD83C\uDDF2\uD83C\uDDF8"],"","",["flag-ms"],3,32,63,0],
+		"1f1f2-1f1f9":[["\uD83C\uDDF2\uD83C\uDDF9"],"","",["flag-mt"],3,33,63,0],
+		"1f1f2-1f1fa":[["\uD83C\uDDF2\uD83C\uDDFA"],"","",["flag-mu"],3,34,63,0],
+		"1f1f2-1f1fb":[["\uD83C\uDDF2\uD83C\uDDFB"],"","",["flag-mv"],3,35,63,0],
+		"1f1f2-1f1fc":[["\uD83C\uDDF2\uD83C\uDDFC"],"","",["flag-mw"],3,36,63,0],
+		"1f1f2-1f1fd":[["\uD83C\uDDF2\uD83C\uDDFD"],"","",["flag-mx"],3,37,63,0],
+		"1f1f2-1f1fe":[["\uD83C\uDDF2\uD83C\uDDFE"],"","",["flag-my"],3,38,63,0],
+		"1f1f2-1f1ff":[["\uD83C\uDDF2\uD83C\uDDFF"],"","",["flag-mz"],3,39,63,0],
+		"1f1f3-1f1e6":[["\uD83C\uDDF3\uD83C\uDDE6"],"","",["flag-na"],3,40,63,0],
+		"1f1f3-1f1e8":[["\uD83C\uDDF3\uD83C\uDDE8"],"","",["flag-nc"],3,41,61,0],
+		"1f1f3-1f1ea":[["\uD83C\uDDF3\uD83C\uDDEA"],"","",["flag-ne"],3,42,63,0],
+		"1f1f3-1f1eb":[["\uD83C\uDDF3\uD83C\uDDEB"],"","",["flag-nf"],3,43,63,0],
+		"1f1f3-1f1ec":[["\uD83C\uDDF3\uD83C\uDDEC"],"","",["flag-ng"],3,44,63,0],
+		"1f1f3-1f1ee":[["\uD83C\uDDF3\uD83C\uDDEE"],"","",["flag-ni"],3,45,63,0],
+		"1f1f3-1f1f1":[["\uD83C\uDDF3\uD83C\uDDF1"],"","",["flag-nl"],3,46,63,0],
+		"1f1f3-1f1f4":[["\uD83C\uDDF3\uD83C\uDDF4"],"","",["flag-no"],3,47,63,0],
+		"1f1f3-1f1f5":[["\uD83C\uDDF3\uD83C\uDDF5"],"","",["flag-np"],3,48,63,0],
+		"1f1f3-1f1f7":[["\uD83C\uDDF3\uD83C\uDDF7"],"","",["flag-nr"],3,49,63,0],
+		"1f1f3-1f1fa":[["\uD83C\uDDF3\uD83C\uDDFA"],"","",["flag-nu"],3,50,63,0],
+		"1f1f3-1f1ff":[["\uD83C\uDDF3\uD83C\uDDFF"],"","",["flag-nz"],3,51,63,0],
+		"1f1f4-1f1f2":[["\uD83C\uDDF4\uD83C\uDDF2"],"","",["flag-om"],4,0,63,0],
+		"1f1f5-1f1e6":[["\uD83C\uDDF5\uD83C\uDDE6"],"","",["flag-pa"],4,1,63,0],
+		"1f1f5-1f1ea":[["\uD83C\uDDF5\uD83C\uDDEA"],"","",["flag-pe"],4,2,63,0],
+		"1f1f5-1f1eb":[["\uD83C\uDDF5\uD83C\uDDEB"],"","",["flag-pf"],4,3,63,0],
+		"1f1f5-1f1ec":[["\uD83C\uDDF5\uD83C\uDDEC"],"","",["flag-pg"],4,4,63,0],
+		"1f1f5-1f1ed":[["\uD83C\uDDF5\uD83C\uDDED"],"","",["flag-ph"],4,5,63,0],
+		"1f1f5-1f1f0":[["\uD83C\uDDF5\uD83C\uDDF0"],"","",["flag-pk"],4,6,63,0],
+		"1f1f5-1f1f1":[["\uD83C\uDDF5\uD83C\uDDF1"],"","",["flag-pl"],4,7,63,0],
+		"1f1f5-1f1f2":[["\uD83C\uDDF5\uD83C\uDDF2"],"","",["flag-pm"],4,8,61,0],
+		"1f1f5-1f1f3":[["\uD83C\uDDF5\uD83C\uDDF3"],"","",["flag-pn"],4,9,63,0],
+		"1f1f5-1f1f7":[["\uD83C\uDDF5\uD83C\uDDF7"],"","",["flag-pr"],4,10,63,0],
+		"1f1f5-1f1f8":[["\uD83C\uDDF5\uD83C\uDDF8"],"","",["flag-ps"],4,11,63,0],
+		"1f1f5-1f1f9":[["\uD83C\uDDF5\uD83C\uDDF9"],"","",["flag-pt"],4,12,63,0],
+		"1f1f5-1f1fc":[["\uD83C\uDDF5\uD83C\uDDFC"],"","",["flag-pw"],4,13,63,0],
+		"1f1f5-1f1fe":[["\uD83C\uDDF5\uD83C\uDDFE"],"","",["flag-py"],4,14,63,0],
+		"1f1f6-1f1e6":[["\uD83C\uDDF6\uD83C\uDDE6"],"","",["flag-qa"],4,15,63,0],
+		"1f1f7-1f1ea":[["\uD83C\uDDF7\uD83C\uDDEA"],"","",["flag-re"],4,16,61,0],
+		"1f1f7-1f1f4":[["\uD83C\uDDF7\uD83C\uDDF4"],"","",["flag-ro"],4,17,63,0],
+		"1f1f7-1f1f8":[["\uD83C\uDDF7\uD83C\uDDF8"],"","",["flag-rs"],4,18,63,0],
+		"1f1f7-1f1fa":[["\uD83C\uDDF7\uD83C\uDDFA"],"\uE512","\uDBB9\uDCEC",["ru","flag-ru"],4,19,63,0],
+		"1f1f7-1f1fc":[["\uD83C\uDDF7\uD83C\uDDFC"],"","",["flag-rw"],4,20,63,0],
+		"1f1f8-1f1e6":[["\uD83C\uDDF8\uD83C\uDDE6"],"","",["flag-sa"],4,21,63,0],
+		"1f1f8-1f1e7":[["\uD83C\uDDF8\uD83C\uDDE7"],"","",["flag-sb"],4,22,63,0],
+		"1f1f8-1f1e8":[["\uD83C\uDDF8\uD83C\uDDE8"],"","",["flag-sc"],4,23,63,0],
+		"1f1f8-1f1e9":[["\uD83C\uDDF8\uD83C\uDDE9"],"","",["flag-sd"],4,24,63,0],
+		"1f1f8-1f1ea":[["\uD83C\uDDF8\uD83C\uDDEA"],"","",["flag-se"],4,25,63,0],
+		"1f1f8-1f1ec":[["\uD83C\uDDF8\uD83C\uDDEC"],"","",["flag-sg"],4,26,63,0],
+		"1f1f8-1f1ed":[["\uD83C\uDDF8\uD83C\uDDED"],"","",["flag-sh"],4,27,63,0],
+		"1f1f8-1f1ee":[["\uD83C\uDDF8\uD83C\uDDEE"],"","",["flag-si"],4,28,63,0],
+		"1f1f8-1f1ef":[["\uD83C\uDDF8\uD83C\uDDEF"],"","",["flag-sj"],4,29,63,0],
+		"1f1f8-1f1f0":[["\uD83C\uDDF8\uD83C\uDDF0"],"","",["flag-sk"],4,30,63,0],
+		"1f1f8-1f1f1":[["\uD83C\uDDF8\uD83C\uDDF1"],"","",["flag-sl"],4,31,63,0],
+		"1f1f8-1f1f2":[["\uD83C\uDDF8\uD83C\uDDF2"],"","",["flag-sm"],4,32,63,0],
+		"1f1f8-1f1f3":[["\uD83C\uDDF8\uD83C\uDDF3"],"","",["flag-sn"],4,33,63,0],
+		"1f1f8-1f1f4":[["\uD83C\uDDF8\uD83C\uDDF4"],"","",["flag-so"],4,34,63,0],
+		"1f1f8-1f1f7":[["\uD83C\uDDF8\uD83C\uDDF7"],"","",["flag-sr"],4,35,63,0],
+		"1f1f8-1f1f8":[["\uD83C\uDDF8\uD83C\uDDF8"],"","",["flag-ss"],4,36,63,0],
+		"1f1f8-1f1f9":[["\uD83C\uDDF8\uD83C\uDDF9"],"","",["flag-st"],4,37,63,0],
+		"1f1f8-1f1fb":[["\uD83C\uDDF8\uD83C\uDDFB"],"","",["flag-sv"],4,38,63,0],
+		"1f1f8-1f1fd":[["\uD83C\uDDF8\uD83C\uDDFD"],"","",["flag-sx"],4,39,63,0],
+		"1f1f8-1f1fe":[["\uD83C\uDDF8\uD83C\uDDFE"],"","",["flag-sy"],4,40,63,0],
+		"1f1f8-1f1ff":[["\uD83C\uDDF8\uD83C\uDDFF"],"","",["flag-sz"],4,41,63,0],
+		"1f1f9-1f1e6":[["\uD83C\uDDF9\uD83C\uDDE6"],"","",["flag-ta"],4,42,63,0],
+		"1f1f9-1f1e8":[["\uD83C\uDDF9\uD83C\uDDE8"],"","",["flag-tc"],4,43,63,0],
+		"1f1f9-1f1e9":[["\uD83C\uDDF9\uD83C\uDDE9"],"","",["flag-td"],4,44,63,0],
+		"1f1f9-1f1eb":[["\uD83C\uDDF9\uD83C\uDDEB"],"","",["flag-tf"],4,45,61,0],
+		"1f1f9-1f1ec":[["\uD83C\uDDF9\uD83C\uDDEC"],"","",["flag-tg"],4,46,63,0],
+		"1f1f9-1f1ed":[["\uD83C\uDDF9\uD83C\uDDED"],"","",["flag-th"],4,47,63,0],
+		"1f1f9-1f1ef":[["\uD83C\uDDF9\uD83C\uDDEF"],"","",["flag-tj"],4,48,63,0],
+		"1f1f9-1f1f0":[["\uD83C\uDDF9\uD83C\uDDF0"],"","",["flag-tk"],4,49,63,0],
+		"1f1f9-1f1f1":[["\uD83C\uDDF9\uD83C\uDDF1"],"","",["flag-tl"],4,50,63,0],
+		"1f1f9-1f1f2":[["\uD83C\uDDF9\uD83C\uDDF2"],"","",["flag-tm"],4,51,63,0],
+		"1f1f9-1f1f3":[["\uD83C\uDDF9\uD83C\uDDF3"],"","",["flag-tn"],5,0,63,0],
+		"1f1f9-1f1f4":[["\uD83C\uDDF9\uD83C\uDDF4"],"","",["flag-to"],5,1,63,0],
+		"1f1f9-1f1f7":[["\uD83C\uDDF9\uD83C\uDDF7"],"","",["flag-tr"],5,2,63,0],
+		"1f1f9-1f1f9":[["\uD83C\uDDF9\uD83C\uDDF9"],"","",["flag-tt"],5,3,63,0],
+		"1f1f9-1f1fb":[["\uD83C\uDDF9\uD83C\uDDFB"],"","",["flag-tv"],5,4,63,0],
+		"1f1f9-1f1fc":[["\uD83C\uDDF9\uD83C\uDDFC"],"","",["flag-tw"],5,5,63,0],
+		"1f1f9-1f1ff":[["\uD83C\uDDF9\uD83C\uDDFF"],"","",["flag-tz"],5,6,63,0],
+		"1f1fa-1f1e6":[["\uD83C\uDDFA\uD83C\uDDE6"],"","",["flag-ua"],5,7,63,0],
+		"1f1fa-1f1ec":[["\uD83C\uDDFA\uD83C\uDDEC"],"","",["flag-ug"],5,8,63,0],
+		"1f1fa-1f1f2":[["\uD83C\uDDFA\uD83C\uDDF2"],"","",["flag-um"],5,9,63,0],
+		"1f1fa-1f1f3":[["\uD83C\uDDFA\uD83C\uDDF3"],"","",["flag-un"],5,10,30,0],
+		"1f1fa-1f1f8":[["\uD83C\uDDFA\uD83C\uDDF8"],"\uE50C","\uDBB9\uDCE6",["us","flag-us"],5,11,63,0],
+		"1f1fa-1f1fe":[["\uD83C\uDDFA\uD83C\uDDFE"],"","",["flag-uy"],5,12,63,0],
+		"1f1fa-1f1ff":[["\uD83C\uDDFA\uD83C\uDDFF"],"","",["flag-uz"],5,13,63,0],
+		"1f1fb-1f1e6":[["\uD83C\uDDFB\uD83C\uDDE6"],"","",["flag-va"],5,14,63,0],
+		"1f1fb-1f1e8":[["\uD83C\uDDFB\uD83C\uDDE8"],"","",["flag-vc"],5,15,63,0],
+		"1f1fb-1f1ea":[["\uD83C\uDDFB\uD83C\uDDEA"],"","",["flag-ve"],5,16,63,0],
+		"1f1fb-1f1ec":[["\uD83C\uDDFB\uD83C\uDDEC"],"","",["flag-vg"],5,17,63,0],
+		"1f1fb-1f1ee":[["\uD83C\uDDFB\uD83C\uDDEE"],"","",["flag-vi"],5,18,63,0],
+		"1f1fb-1f1f3":[["\uD83C\uDDFB\uD83C\uDDF3"],"","",["flag-vn"],5,19,63,0],
+		"1f1fb-1f1fa":[["\uD83C\uDDFB\uD83C\uDDFA"],"","",["flag-vu"],5,20,63,0],
+		"1f1fc-1f1eb":[["\uD83C\uDDFC\uD83C\uDDEB"],"","",["flag-wf"],5,21,61,0],
+		"1f1fc-1f1f8":[["\uD83C\uDDFC\uD83C\uDDF8"],"","",["flag-ws"],5,22,63,0],
+		"1f1fd-1f1f0":[["\uD83C\uDDFD\uD83C\uDDF0"],"","",["flag-xk"],5,23,61,0],
+		"1f1fe-1f1ea":[["\uD83C\uDDFE\uD83C\uDDEA"],"","",["flag-ye"],5,24,63,0],
+		"1f1fe-1f1f9":[["\uD83C\uDDFE\uD83C\uDDF9"],"","",["flag-yt"],5,25,61,0],
+		"1f1ff-1f1e6":[["\uD83C\uDDFF\uD83C\uDDE6"],"","",["flag-za"],5,26,63,0],
+		"1f1ff-1f1f2":[["\uD83C\uDDFF\uD83C\uDDF2"],"","",["flag-zm"],5,27,63,0],
+		"1f1ff-1f1fc":[["\uD83C\uDDFF\uD83C\uDDFC"],"","",["flag-zw"],5,28,63,0],
+		"1f201":[["\uD83C\uDE01"],"\uE203","\uDBBA\uDF24",["koko"],5,29,63,0],
+		"1f202-fe0f":[["\uD83C\uDE02\uFE0F","\uD83C\uDE02"],"\uE228","\uDBBA\uDF3F",["sa"],5,30,63,0],
+		"1f21a":[["\uD83C\uDE1A"],"\uE216","\uDBBA\uDF3A",["u7121"],5,31,63,0],
+		"1f22f":[["\uD83C\uDE2F"],"\uE22C","\uDBBA\uDF40",["u6307"],5,32,63,0],
+		"1f232":[["\uD83C\uDE32"],"","\uDBBA\uDF2E",["u7981"],5,33,63,0],
+		"1f233":[["\uD83C\uDE33"],"\uE22B","\uDBBA\uDF2F",["u7a7a"],5,34,63,0],
+		"1f234":[["\uD83C\uDE34"],"","\uDBBA\uDF30",["u5408"],5,35,63,0],
+		"1f235":[["\uD83C\uDE35"],"\uE22A","\uDBBA\uDF31",["u6e80"],5,36,63,0],
+		"1f236":[["\uD83C\uDE36"],"\uE215","\uDBBA\uDF39",["u6709"],5,37,63,0],
+		"1f237-fe0f":[["\uD83C\uDE37\uFE0F","\uD83C\uDE37"],"\uE217","\uDBBA\uDF3B",["u6708"],5,38,63,0],
+		"1f238":[["\uD83C\uDE38"],"\uE218","\uDBBA\uDF3C",["u7533"],5,39,63,0],
+		"1f239":[["\uD83C\uDE39"],"\uE227","\uDBBA\uDF3E",["u5272"],5,40,63,0],
+		"1f23a":[["\uD83C\uDE3A"],"\uE22D","\uDBBA\uDF41",["u55b6"],5,41,63,0],
+		"1f250":[["\uD83C\uDE50"],"\uE226","\uDBBA\uDF3D",["ideograph_advantage"],5,42,63,0],
+		"1f251":[["\uD83C\uDE51"],"","\uDBBA\uDF50",["accept"],5,43,63,0],
+		"1f300":[["\uD83C\uDF00"],"\uE443","\uDBB8\uDC05",["cyclone"],5,44,63,0],
+		"1f301":[["\uD83C\uDF01"],"","\uDBB8\uDC06",["foggy"],5,45,63,0],
+		"1f302":[["\uD83C\uDF02"],"\uE43C","\uDBB8\uDC07",["closed_umbrella"],5,46,63,0],
+		"1f303":[["\uD83C\uDF03"],"\uE44B","\uDBB8\uDC08",["night_with_stars"],5,47,63,0],
+		"1f304":[["\uD83C\uDF04"],"\uE04D","\uDBB8\uDC09",["sunrise_over_mountains"],5,48,63,0],
+		"1f305":[["\uD83C\uDF05"],"\uE449","\uDBB8\uDC0A",["sunrise"],5,49,63,0],
+		"1f306":[["\uD83C\uDF06"],"\uE146","\uDBB8\uDC0B",["city_sunset"],5,50,63,0],
+		"1f307":[["\uD83C\uDF07"],"\uE44A","\uDBB8\uDC0C",["city_sunrise"],5,51,63,0],
+		"1f308":[["\uD83C\uDF08"],"\uE44C","\uDBB8\uDC0D",["rainbow"],6,0,63,0],
+		"1f309":[["\uD83C\uDF09"],"","\uDBB8\uDC10",["bridge_at_night"],6,1,63,0],
+		"1f30a":[["\uD83C\uDF0A"],"\uE43E","\uDBB8\uDC38",["ocean"],6,2,63,0],
+		"1f30b":[["\uD83C\uDF0B"],"","\uDBB8\uDC3A",["volcano"],6,3,63,0],
+		"1f30c":[["\uD83C\uDF0C"],"","\uDBB8\uDC3B",["milky_way"],6,4,63,0],
+		"1f30d":[["\uD83C\uDF0D"],"","",["earth_africa"],6,5,63,0],
+		"1f30e":[["\uD83C\uDF0E"],"","",["earth_americas"],6,6,63,0],
+		"1f30f":[["\uD83C\uDF0F"],"","\uDBB8\uDC39",["earth_asia"],6,7,63,0],
+		"1f310":[["\uD83C\uDF10"],"","",["globe_with_meridians"],6,8,63,0],
+		"1f311":[["\uD83C\uDF11"],"","\uDBB8\uDC11",["new_moon"],6,9,63,0],
+		"1f312":[["\uD83C\uDF12"],"","",["waxing_crescent_moon"],6,10,63,0],
+		"1f313":[["\uD83C\uDF13"],"","\uDBB8\uDC13",["first_quarter_moon"],6,11,63,0],
+		"1f314":[["\uD83C\uDF14"],"","\uDBB8\uDC12",["moon","waxing_gibbous_moon"],6,12,63,0],
+		"1f315":[["\uD83C\uDF15"],"","\uDBB8\uDC15",["full_moon"],6,13,63,0],
+		"1f316":[["\uD83C\uDF16"],"","",["waning_gibbous_moon"],6,14,63,0],
+		"1f317":[["\uD83C\uDF17"],"","",["last_quarter_moon"],6,15,63,0],
+		"1f318":[["\uD83C\uDF18"],"","",["waning_crescent_moon"],6,16,63,0],
+		"1f319":[["\uD83C\uDF19"],"\uE04C","\uDBB8\uDC14",["crescent_moon"],6,17,63,0],
+		"1f31a":[["\uD83C\uDF1A"],"","",["new_moon_with_face"],6,18,63,0],
+		"1f31b":[["\uD83C\uDF1B"],"","\uDBB8\uDC16",["first_quarter_moon_with_face"],6,19,63,0],
+		"1f31c":[["\uD83C\uDF1C"],"","",["last_quarter_moon_with_face"],6,20,63,0],
+		"1f31d":[["\uD83C\uDF1D"],"","",["full_moon_with_face"],6,21,63,0],
+		"1f31e":[["\uD83C\uDF1E"],"","",["sun_with_face"],6,22,63,0],
+		"1f31f":[["\uD83C\uDF1F"],"\uE335","\uDBBA\uDF69",["star2"],6,23,63,0],
+		"1f320":[["\uD83C\uDF20"],"","\uDBBA\uDF6A",["stars"],6,24,63,0],
+		"1f321-fe0f":[["\uD83C\uDF21\uFE0F","\uD83C\uDF21"],"","",["thermometer"],6,25,31,0],
+		"1f324-fe0f":[["\uD83C\uDF24\uFE0F","\uD83C\uDF24"],"","",["mostly_sunny","sun_small_cloud"],6,26,31,0],
+		"1f325-fe0f":[["\uD83C\uDF25\uFE0F","\uD83C\uDF25"],"","",["barely_sunny","sun_behind_cloud"],6,27,31,0],
+		"1f326-fe0f":[["\uD83C\uDF26\uFE0F","\uD83C\uDF26"],"","",["partly_sunny_rain","sun_behind_rain_cloud"],6,28,31,0],
+		"1f327-fe0f":[["\uD83C\uDF27\uFE0F","\uD83C\uDF27"],"","",["rain_cloud"],6,29,31,0],
+		"1f328-fe0f":[["\uD83C\uDF28\uFE0F","\uD83C\uDF28"],"","",["snow_cloud"],6,30,31,0],
+		"1f329-fe0f":[["\uD83C\uDF29\uFE0F","\uD83C\uDF29"],"","",["lightning","lightning_cloud"],6,31,31,0],
+		"1f32a-fe0f":[["\uD83C\uDF2A\uFE0F","\uD83C\uDF2A"],"","",["tornado","tornado_cloud"],6,32,31,0],
+		"1f32b-fe0f":[["\uD83C\uDF2B\uFE0F","\uD83C\uDF2B"],"","",["fog"],6,33,31,0],
+		"1f32c-fe0f":[["\uD83C\uDF2C\uFE0F","\uD83C\uDF2C"],"","",["wind_blowing_face"],6,34,31,0],
+		"1f32d":[["\uD83C\uDF2D"],"","",["hotdog"],6,35,31,0],
+		"1f32e":[["\uD83C\uDF2E"],"","",["taco"],6,36,31,0],
+		"1f32f":[["\uD83C\uDF2F"],"","",["burrito"],6,37,31,0],
+		"1f330":[["\uD83C\uDF30"],"","\uDBB8\uDC4C",["chestnut"],6,38,63,0],
+		"1f331":[["\uD83C\uDF31"],"","\uDBB8\uDC3E",["seedling"],6,39,63,0],
+		"1f332":[["\uD83C\uDF32"],"","",["evergreen_tree"],6,40,63,0],
+		"1f333":[["\uD83C\uDF33"],"","",["deciduous_tree"],6,41,63,0],
+		"1f334":[["\uD83C\uDF34"],"\uE307","\uDBB8\uDC47",["palm_tree"],6,42,63,0],
+		"1f335":[["\uD83C\uDF35"],"\uE308","\uDBB8\uDC48",["cactus"],6,43,63,0],
+		"1f336-fe0f":[["\uD83C\uDF36\uFE0F","\uD83C\uDF36"],"","",["hot_pepper"],6,44,31,0],
+		"1f337":[["\uD83C\uDF37"],"\uE304","\uDBB8\uDC3D",["tulip"],6,45,63,0],
+		"1f338":[["\uD83C\uDF38"],"\uE030","\uDBB8\uDC40",["cherry_blossom"],6,46,63,0],
+		"1f339":[["\uD83C\uDF39"],"\uE032","\uDBB8\uDC41",["rose"],6,47,63,0],
+		"1f33a":[["\uD83C\uDF3A"],"\uE303","\uDBB8\uDC45",["hibiscus"],6,48,63,0],
+		"1f33b":[["\uD83C\uDF3B"],"\uE305","\uDBB8\uDC46",["sunflower"],6,49,63,0],
+		"1f33c":[["\uD83C\uDF3C"],"","\uDBB8\uDC4D",["blossom"],6,50,63,0],
+		"1f33d":[["\uD83C\uDF3D"],"","\uDBB8\uDC4A",["corn"],6,51,63,0],
+		"1f33e":[["\uD83C\uDF3E"],"\uE444","\uDBB8\uDC49",["ear_of_rice"],7,0,63,0],
+		"1f33f":[["\uD83C\uDF3F"],"","\uDBB8\uDC4E",["herb"],7,1,63,0],
+		"1f340":[["\uD83C\uDF40"],"\uE110","\uDBB8\uDC3C",["four_leaf_clover"],7,2,63,0],
+		"1f341":[["\uD83C\uDF41"],"\uE118","\uDBB8\uDC3F",["maple_leaf"],7,3,63,0],
+		"1f342":[["\uD83C\uDF42"],"\uE119","\uDBB8\uDC42",["fallen_leaf"],7,4,63,0],
+		"1f343":[["\uD83C\uDF43"],"\uE447","\uDBB8\uDC43",["leaves"],7,5,63,0],
+		"1f344":[["\uD83C\uDF44"],"","\uDBB8\uDC4B",["mushroom"],7,6,63,0],
+		"1f345":[["\uD83C\uDF45"],"\uE349","\uDBB8\uDC55",["tomato"],7,7,63,0],
+		"1f346":[["\uD83C\uDF46"],"\uE34A","\uDBB8\uDC56",["eggplant"],7,8,63,0],
+		"1f347":[["\uD83C\uDF47"],"","\uDBB8\uDC59",["grapes"],7,9,63,0],
+		"1f348":[["\uD83C\uDF48"],"","\uDBB8\uDC57",["melon"],7,10,63,0],
+		"1f349":[["\uD83C\uDF49"],"\uE348","\uDBB8\uDC54",["watermelon"],7,11,63,0],
+		"1f34a":[["\uD83C\uDF4A"],"\uE346","\uDBB8\uDC52",["tangerine"],7,12,63,0],
+		"1f34b":[["\uD83C\uDF4B"],"","",["lemon"],7,13,63,0],
+		"1f34c":[["\uD83C\uDF4C"],"","\uDBB8\uDC50",["banana"],7,14,63,0],
+		"1f34d":[["\uD83C\uDF4D"],"","\uDBB8\uDC58",["pineapple"],7,15,63,0],
+		"1f34e":[["\uD83C\uDF4E"],"\uE345","\uDBB8\uDC51",["apple"],7,16,63,0],
+		"1f34f":[["\uD83C\uDF4F"],"","\uDBB8\uDC5B",["green_apple"],7,17,63,0],
+		"1f350":[["\uD83C\uDF50"],"","",["pear"],7,18,63,0],
+		"1f351":[["\uD83C\uDF51"],"","\uDBB8\uDC5A",["peach"],7,19,63,0],
+		"1f352":[["\uD83C\uDF52"],"","\uDBB8\uDC4F",["cherries"],7,20,63,0],
+		"1f353":[["\uD83C\uDF53"],"\uE347","\uDBB8\uDC53",["strawberry"],7,21,63,0],
+		"1f354":[["\uD83C\uDF54"],"\uE120","\uDBBA\uDD60",["hamburger"],7,22,63,0],
+		"1f355":[["\uD83C\uDF55"],"","\uDBBA\uDD75",["pizza"],7,23,63,0],
+		"1f356":[["\uD83C\uDF56"],"","\uDBBA\uDD72",["meat_on_bone"],7,24,63,0],
+		"1f357":[["\uD83C\uDF57"],"","\uDBBA\uDD76",["poultry_leg"],7,25,63,0],
+		"1f358":[["\uD83C\uDF58"],"\uE33D","\uDBBA\uDD69",["rice_cracker"],7,26,63,0],
+		"1f359":[["\uD83C\uDF59"],"\uE342","\uDBBA\uDD61",["rice_ball"],7,27,63,0],
+		"1f35a":[["\uD83C\uDF5A"],"\uE33E","\uDBBA\uDD6A",["rice"],7,28,63,0],
+		"1f35b":[["\uD83C\uDF5B"],"\uE341","\uDBBA\uDD6C",["curry"],7,29,63,0],
+		"1f35c":[["\uD83C\uDF5C"],"\uE340","\uDBBA\uDD63",["ramen"],7,30,63,0],
+		"1f35d":[["\uD83C\uDF5D"],"\uE33F","\uDBBA\uDD6B",["spaghetti"],7,31,63,0],
+		"1f35e":[["\uD83C\uDF5E"],"\uE339","\uDBBA\uDD64",["bread"],7,32,63,0],
+		"1f35f":[["\uD83C\uDF5F"],"\uE33B","\uDBBA\uDD67",["fries"],7,33,63,0],
+		"1f360":[["\uD83C\uDF60"],"","\uDBBA\uDD74",["sweet_potato"],7,34,63,0],
+		"1f361":[["\uD83C\uDF61"],"\uE33C","\uDBBA\uDD68",["dango"],7,35,63,0],
+		"1f362":[["\uD83C\uDF62"],"\uE343","\uDBBA\uDD6D",["oden"],7,36,63,0],
+		"1f363":[["\uD83C\uDF63"],"\uE344","\uDBBA\uDD6E",["sushi"],7,37,63,0],
+		"1f364":[["\uD83C\uDF64"],"","\uDBBA\uDD7F",["fried_shrimp"],7,38,63,0],
+		"1f365":[["\uD83C\uDF65"],"","\uDBBA\uDD73",["fish_cake"],7,39,63,0],
+		"1f366":[["\uD83C\uDF66"],"\uE33A","\uDBBA\uDD66",["icecream"],7,40,63,0],
+		"1f367":[["\uD83C\uDF67"],"\uE43F","\uDBBA\uDD71",["shaved_ice"],7,41,63,0],
+		"1f368":[["\uD83C\uDF68"],"","\uDBBA\uDD77",["ice_cream"],7,42,63,0],
+		"1f369":[["\uD83C\uDF69"],"","\uDBBA\uDD78",["doughnut"],7,43,63,0],
+		"1f36a":[["\uD83C\uDF6A"],"","\uDBBA\uDD79",["cookie"],7,44,63,0],
+		"1f36b":[["\uD83C\uDF6B"],"","\uDBBA\uDD7A",["chocolate_bar"],7,45,63,0],
+		"1f36c":[["\uD83C\uDF6C"],"","\uDBBA\uDD7B",["candy"],7,46,63,0],
+		"1f36d":[["\uD83C\uDF6D"],"","\uDBBA\uDD7C",["lollipop"],7,47,63,0],
+		"1f36e":[["\uD83C\uDF6E"],"","\uDBBA\uDD7D",["custard"],7,48,63,0],
+		"1f36f":[["\uD83C\uDF6F"],"","\uDBBA\uDD7E",["honey_pot"],7,49,63,0],
+		"1f370":[["\uD83C\uDF70"],"\uE046","\uDBBA\uDD62",["cake"],7,50,63,0],
+		"1f371":[["\uD83C\uDF71"],"\uE34C","\uDBBA\uDD6F",["bento"],7,51,63,0],
+		"1f372":[["\uD83C\uDF72"],"\uE34D","\uDBBA\uDD70",["stew"],8,0,63,0],
+		"1f373":[["\uD83C\uDF73"],"\uE147","\uDBBA\uDD65",["fried_egg","cooking"],8,1,63,0],
+		"1f374":[["\uD83C\uDF74"],"\uE043","\uDBBA\uDD80",["fork_and_knife"],8,2,63,0],
+		"1f375":[["\uD83C\uDF75"],"\uE338","\uDBBA\uDD84",["tea"],8,3,63,0],
+		"1f376":[["\uD83C\uDF76"],"\uE30B","\uDBBA\uDD85",["sake"],8,4,63,0],
+		"1f377":[["\uD83C\uDF77"],"","\uDBBA\uDD86",["wine_glass"],8,5,63,0],
+		"1f378":[["\uD83C\uDF78"],"\uE044","\uDBBA\uDD82",["cocktail"],8,6,63,0],
+		"1f379":[["\uD83C\uDF79"],"","\uDBBA\uDD88",["tropical_drink"],8,7,63,0],
+		"1f37a":[["\uD83C\uDF7A"],"\uE047","\uDBBA\uDD83",["beer"],8,8,63,0],
+		"1f37b":[["\uD83C\uDF7B"],"\uE30C","\uDBBA\uDD87",["beers"],8,9,63,0],
+		"1f37c":[["\uD83C\uDF7C"],"","",["baby_bottle"],8,10,63,0],
+		"1f37d-fe0f":[["\uD83C\uDF7D\uFE0F","\uD83C\uDF7D"],"","",["knife_fork_plate"],8,11,31,0],
+		"1f37e":[["\uD83C\uDF7E"],"","",["champagne"],8,12,31,0],
+		"1f37f":[["\uD83C\uDF7F"],"","",["popcorn"],8,13,31,0],
+		"1f380":[["\uD83C\uDF80"],"\uE314","\uDBB9\uDD0F",["ribbon"],8,14,63,0],
+		"1f381":[["\uD83C\uDF81"],"\uE112","\uDBB9\uDD10",["gift"],8,15,63,0],
+		"1f382":[["\uD83C\uDF82"],"\uE34B","\uDBB9\uDD11",["birthday"],8,16,63,0],
+		"1f383":[["\uD83C\uDF83"],"\uE445","\uDBB9\uDD1F",["jack_o_lantern"],8,17,63,0],
+		"1f384":[["\uD83C\uDF84"],"\uE033","\uDBB9\uDD12",["christmas_tree"],8,18,63,0],
+		"1f385":[["\uD83C\uDF85"],"\uE448","\uDBB9\uDD13",["santa"],8,19,63,0],
+		"1f386":[["\uD83C\uDF86"],"\uE117","\uDBB9\uDD15",["fireworks"],8,25,63,0],
+		"1f387":[["\uD83C\uDF87"],"\uE440","\uDBB9\uDD1D",["sparkler"],8,26,63,0],
+		"1f388":[["\uD83C\uDF88"],"\uE310","\uDBB9\uDD16",["balloon"],8,27,63,0],
+		"1f389":[["\uD83C\uDF89"],"\uE312","\uDBB9\uDD17",["tada"],8,28,63,0],
+		"1f38a":[["\uD83C\uDF8A"],"","\uDBB9\uDD20",["confetti_ball"],8,29,63,0],
+		"1f38b":[["\uD83C\uDF8B"],"","\uDBB9\uDD21",["tanabata_tree"],8,30,63,0],
+		"1f38c":[["\uD83C\uDF8C"],"\uE143","\uDBB9\uDD14",["crossed_flags"],8,31,63,0],
+		"1f38d":[["\uD83C\uDF8D"],"\uE436","\uDBB9\uDD18",["bamboo"],8,32,63,0],
+		"1f38e":[["\uD83C\uDF8E"],"\uE438","\uDBB9\uDD19",["dolls"],8,33,63,0],
+		"1f38f":[["\uD83C\uDF8F"],"\uE43B","\uDBB9\uDD1C",["flags"],8,34,63,0],
+		"1f390":[["\uD83C\uDF90"],"\uE442","\uDBB9\uDD1E",["wind_chime"],8,35,63,0],
+		"1f391":[["\uD83C\uDF91"],"\uE446","\uDBB8\uDC17",["rice_scene"],8,36,63,0],
+		"1f392":[["\uD83C\uDF92"],"\uE43A","\uDBB9\uDD1B",["school_satchel"],8,37,63,0],
+		"1f393":[["\uD83C\uDF93"],"\uE439","\uDBB9\uDD1A",["mortar_board"],8,38,63,0],
+		"1f396-fe0f":[["\uD83C\uDF96\uFE0F","\uD83C\uDF96"],"","",["medal"],8,39,31,0],
+		"1f397-fe0f":[["\uD83C\uDF97\uFE0F","\uD83C\uDF97"],"","",["reminder_ribbon"],8,40,31,0],
+		"1f399-fe0f":[["\uD83C\uDF99\uFE0F","\uD83C\uDF99"],"","",["studio_microphone"],8,41,31,0],
+		"1f39a-fe0f":[["\uD83C\uDF9A\uFE0F","\uD83C\uDF9A"],"","",["level_slider"],8,42,31,0],
+		"1f39b-fe0f":[["\uD83C\uDF9B\uFE0F","\uD83C\uDF9B"],"","",["control_knobs"],8,43,31,0],
+		"1f39e-fe0f":[["\uD83C\uDF9E\uFE0F","\uD83C\uDF9E"],"","",["film_frames"],8,44,31,0],
+		"1f39f-fe0f":[["\uD83C\uDF9F\uFE0F","\uD83C\uDF9F"],"","",["admission_tickets"],8,45,31,0],
+		"1f3a0":[["\uD83C\uDFA0"],"","\uDBB9\uDFFC",["carousel_horse"],8,46,63,0],
+		"1f3a1":[["\uD83C\uDFA1"],"\uE124","\uDBB9\uDFFD",["ferris_wheel"],8,47,63,0],
+		"1f3a2":[["\uD83C\uDFA2"],"\uE433","\uDBB9\uDFFE",["roller_coaster"],8,48,63,0],
+		"1f3a3":[["\uD83C\uDFA3"],"","\uDBB9\uDFFF",["fishing_pole_and_fish"],8,49,63,0],
+		"1f3a4":[["\uD83C\uDFA4"],"\uE03C","\uDBBA\uDC00",["microphone"],8,50,63,0],
+		"1f3a5":[["\uD83C\uDFA5"],"\uE03D","\uDBBA\uDC01",["movie_camera"],8,51,63,0],
+		"1f3a6":[["\uD83C\uDFA6"],"\uE507","\uDBBA\uDC02",["cinema"],9,0,63,0],
+		"1f3a7":[["\uD83C\uDFA7"],"\uE30A","\uDBBA\uDC03",["headphones"],9,1,63,0],
+		"1f3a8":[["\uD83C\uDFA8"],"\uE502","\uDBBA\uDC04",["art"],9,2,63,0],
+		"1f3a9":[["\uD83C\uDFA9"],"\uE503","\uDBBA\uDC05",["tophat"],9,3,63,0],
+		"1f3aa":[["\uD83C\uDFAA"],"","\uDBBA\uDC06",["circus_tent"],9,4,63,0],
+		"1f3ab":[["\uD83C\uDFAB"],"\uE125","\uDBBA\uDC07",["ticket"],9,5,63,0],
+		"1f3ac":[["\uD83C\uDFAC"],"\uE324","\uDBBA\uDC08",["clapper"],9,6,63,0],
+		"1f3ad":[["\uD83C\uDFAD"],"","\uDBBA\uDC09",["performing_arts"],9,7,63,0],
+		"1f3ae":[["\uD83C\uDFAE"],"","\uDBBA\uDC0A",["video_game"],9,8,63,0],
+		"1f3af":[["\uD83C\uDFAF"],"\uE130","\uDBBA\uDC0C",["dart"],9,9,63,0],
+		"1f3b0":[["\uD83C\uDFB0"],"\uE133","\uDBBA\uDC0D",["slot_machine"],9,10,63,0],
+		"1f3b1":[["\uD83C\uDFB1"],"\uE42C","\uDBBA\uDC0E",["8ball"],9,11,63,0],
+		"1f3b2":[["\uD83C\uDFB2"],"","\uDBBA\uDC0F",["game_die"],9,12,63,0],
+		"1f3b3":[["\uD83C\uDFB3"],"","\uDBBA\uDC10",["bowling"],9,13,63,0],
+		"1f3b4":[["\uD83C\uDFB4"],"","\uDBBA\uDC11",["flower_playing_cards"],9,14,63,0],
+		"1f3b5":[["\uD83C\uDFB5"],"\uE03E","\uDBBA\uDC13",["musical_note"],9,15,63,0],
+		"1f3b6":[["\uD83C\uDFB6"],"\uE326","\uDBBA\uDC14",["notes"],9,16,63,0],
+		"1f3b7":[["\uD83C\uDFB7"],"\uE040","\uDBBA\uDC15",["saxophone"],9,17,63,0],
+		"1f3b8":[["\uD83C\uDFB8"],"\uE041","\uDBBA\uDC16",["guitar"],9,18,63,0],
+		"1f3b9":[["\uD83C\uDFB9"],"","\uDBBA\uDC17",["musical_keyboard"],9,19,63,0],
+		"1f3ba":[["\uD83C\uDFBA"],"\uE042","\uDBBA\uDC18",["trumpet"],9,20,63,0],
+		"1f3bb":[["\uD83C\uDFBB"],"","\uDBBA\uDC19",["violin"],9,21,63,0],
+		"1f3bc":[["\uD83C\uDFBC"],"","\uDBBA\uDC1A",["musical_score"],9,22,63,0],
+		"1f3bd":[["\uD83C\uDFBD"],"","\uDBB9\uDFD0",["running_shirt_with_sash"],9,23,63,0],
+		"1f3be":[["\uD83C\uDFBE"],"\uE015","\uDBB9\uDFD3",["tennis"],9,24,63,0],
+		"1f3bf":[["\uD83C\uDFBF"],"\uE013","\uDBB9\uDFD5",["ski"],9,25,63,0],
+		"1f3c0":[["\uD83C\uDFC0"],"\uE42A","\uDBB9\uDFD6",["basketball"],9,26,63,0],
+		"1f3c1":[["\uD83C\uDFC1"],"\uE132","\uDBB9\uDFD7",["checkered_flag"],9,27,63,0],
+		"1f3c2":[["\uD83C\uDFC2"],"","\uDBB9\uDFD8",["snowboarder"],9,28,63,0],
+		"1f3c3-200d-2640-fe0f":[["\uD83C\uDFC3\u200D\u2640\uFE0F","\uD83C\uDFC3\u200D\u2640"],"","",["woman-running"],9,34,31,0],
+		"1f3c3-200d-2642-fe0f":[["\uD83C\uDFC3\u200D\u2642\uFE0F","\uD83C\uDFC3\u200D\u2642","\uD83C\uDFC3"],"","",["man-running","runner","running"],9,40,31,0],
+		"1f3c4-200d-2640-fe0f":[["\uD83C\uDFC4\u200D\u2640\uFE0F","\uD83C\uDFC4\u200D\u2640"],"","",["woman-surfing"],10,0,31,0],
+		"1f3c4-200d-2642-fe0f":[["\uD83C\uDFC4\u200D\u2642\uFE0F","\uD83C\uDFC4\u200D\u2642","\uD83C\uDFC4"],"","",["man-surfing","surfer"],10,6,31,0],
+		"1f3c5":[["\uD83C\uDFC5"],"","",["sports_medal"],10,18,31,0],
+		"1f3c6":[["\uD83C\uDFC6"],"\uE131","\uDBB9\uDFDB",["trophy"],10,19,63,0],
+		"1f3c7":[["\uD83C\uDFC7"],"","",["horse_racing"],10,20,63,0],
+		"1f3c8":[["\uD83C\uDFC8"],"\uE42B","\uDBB9\uDFDD",["football"],10,26,63,0],
+		"1f3c9":[["\uD83C\uDFC9"],"","",["rugby_football"],10,27,63,0],
+		"1f3ca-200d-2640-fe0f":[["\uD83C\uDFCA\u200D\u2640\uFE0F","\uD83C\uDFCA\u200D\u2640"],"","",["woman-swimming"],10,28,31,0],
+		"1f3ca-200d-2642-fe0f":[["\uD83C\uDFCA\u200D\u2642\uFE0F","\uD83C\uDFCA\u200D\u2642","\uD83C\uDFCA"],"","",["man-swimming","swimmer"],10,34,31,0],
+		"1f3cb-fe0f-200d-2640-fe0f":[["\uD83C\uDFCB\uFE0F\u200D\u2640\uFE0F"],"","",["woman-lifting-weights"],10,46,15,0],
+		"1f3cb-fe0f-200d-2642-fe0f":[["\uD83C\uDFCB\uFE0F\u200D\u2642\uFE0F","\uD83C\uDFCB\uFE0F","\uD83C\uDFCB"],"","",["man-lifting-weights","weight_lifter"],11,0,15,0],
+		"1f3cc-fe0f-200d-2640-fe0f":[["\uD83C\uDFCC\uFE0F\u200D\u2640\uFE0F"],"","",["woman-golfing"],11,12,15,0],
+		"1f3cc-fe0f-200d-2642-fe0f":[["\uD83C\uDFCC\uFE0F\u200D\u2642\uFE0F","\uD83C\uDFCC\uFE0F","\uD83C\uDFCC"],"","",["man-golfing","golfer"],11,18,15,0],
+		"1f3cd-fe0f":[["\uD83C\uDFCD\uFE0F","\uD83C\uDFCD"],"","",["racing_motorcycle"],11,30,31,0],
+		"1f3ce-fe0f":[["\uD83C\uDFCE\uFE0F","\uD83C\uDFCE"],"","",["racing_car"],11,31,31,0],
+		"1f3cf":[["\uD83C\uDFCF"],"","",["cricket_bat_and_ball"],11,32,31,0],
+		"1f3d0":[["\uD83C\uDFD0"],"","",["volleyball"],11,33,31,0],
+		"1f3d1":[["\uD83C\uDFD1"],"","",["field_hockey_stick_and_ball"],11,34,31,0],
+		"1f3d2":[["\uD83C\uDFD2"],"","",["ice_hockey_stick_and_puck"],11,35,31,0],
+		"1f3d3":[["\uD83C\uDFD3"],"","",["table_tennis_paddle_and_ball"],11,36,31,0],
+		"1f3d4-fe0f":[["\uD83C\uDFD4\uFE0F","\uD83C\uDFD4"],"","",["snow_capped_mountain"],11,37,31,0],
+		"1f3d5-fe0f":[["\uD83C\uDFD5\uFE0F","\uD83C\uDFD5"],"","",["camping"],11,38,31,0],
+		"1f3d6-fe0f":[["\uD83C\uDFD6\uFE0F","\uD83C\uDFD6"],"","",["beach_with_umbrella"],11,39,31,0],
+		"1f3d7-fe0f":[["\uD83C\uDFD7\uFE0F","\uD83C\uDFD7"],"","",["building_construction"],11,40,31,0],
+		"1f3d8-fe0f":[["\uD83C\uDFD8\uFE0F","\uD83C\uDFD8"],"","",["house_buildings"],11,41,31,0],
+		"1f3d9-fe0f":[["\uD83C\uDFD9\uFE0F","\uD83C\uDFD9"],"","",["cityscape"],11,42,31,0],
+		"1f3da-fe0f":[["\uD83C\uDFDA\uFE0F","\uD83C\uDFDA"],"","",["derelict_house_building"],11,43,31,0],
+		"1f3db-fe0f":[["\uD83C\uDFDB\uFE0F","\uD83C\uDFDB"],"","",["classical_building"],11,44,31,0],
+		"1f3dc-fe0f":[["\uD83C\uDFDC\uFE0F","\uD83C\uDFDC"],"","",["desert"],11,45,31,0],
+		"1f3dd-fe0f":[["\uD83C\uDFDD\uFE0F","\uD83C\uDFDD"],"","",["desert_island"],11,46,31,0],
+		"1f3de-fe0f":[["\uD83C\uDFDE\uFE0F","\uD83C\uDFDE"],"","",["national_park"],11,47,31,0],
+		"1f3df-fe0f":[["\uD83C\uDFDF\uFE0F","\uD83C\uDFDF"],"","",["stadium"],11,48,31,0],
+		"1f3e0":[["\uD83C\uDFE0"],"\uE036","\uDBB9\uDCB0",["house"],11,49,63,0],
+		"1f3e1":[["\uD83C\uDFE1"],"","\uDBB9\uDCB1",["house_with_garden"],11,50,63,0],
+		"1f3e2":[["\uD83C\uDFE2"],"\uE038","\uDBB9\uDCB2",["office"],11,51,63,0],
+		"1f3e3":[["\uD83C\uDFE3"],"\uE153","\uDBB9\uDCB3",["post_office"],12,0,63,0],
+		"1f3e4":[["\uD83C\uDFE4"],"","",["european_post_office"],12,1,63,0],
+		"1f3e5":[["\uD83C\uDFE5"],"\uE155","\uDBB9\uDCB4",["hospital"],12,2,63,0],
+		"1f3e6":[["\uD83C\uDFE6"],"\uE14D","\uDBB9\uDCB5",["bank"],12,3,63,0],
+		"1f3e7":[["\uD83C\uDFE7"],"\uE154","\uDBB9\uDCB6",["atm"],12,4,63,0],
+		"1f3e8":[["\uD83C\uDFE8"],"\uE158","\uDBB9\uDCB7",["hotel"],12,5,63,0],
+		"1f3e9":[["\uD83C\uDFE9"],"\uE501","\uDBB9\uDCB8",["love_hotel"],12,6,63,0],
+		"1f3ea":[["\uD83C\uDFEA"],"\uE156","\uDBB9\uDCB9",["convenience_store"],12,7,63,0],
+		"1f3eb":[["\uD83C\uDFEB"],"\uE157","\uDBB9\uDCBA",["school"],12,8,63,0],
+		"1f3ec":[["\uD83C\uDFEC"],"\uE504","\uDBB9\uDCBD",["department_store"],12,9,63,0],
+		"1f3ed":[["\uD83C\uDFED"],"\uE508","\uDBB9\uDCC0",["factory"],12,10,63,0],
+		"1f3ee":[["\uD83C\uDFEE"],"","\uDBB9\uDCC2",["izakaya_lantern","lantern"],12,11,63,0],
+		"1f3ef":[["\uD83C\uDFEF"],"\uE505","\uDBB9\uDCBE",["japanese_castle"],12,12,63,0],
+		"1f3f0":[["\uD83C\uDFF0"],"\uE506","\uDBB9\uDCBF",["european_castle"],12,13,63,0],
+		"1f3f3-fe0f-200d-1f308":[["\uD83C\uDFF3\uFE0F\u200D\uD83C\uDF08","\uD83C\uDFF3\u200D\uD83C\uDF08"],"","",["rainbow-flag"],12,14,63,0],
+		"1f3f3-fe0f":[["\uD83C\uDFF3\uFE0F","\uD83C\uDFF3"],"","",["waving_white_flag"],12,15,31,0],
+		"1f3f4-e0067-e0062-e0065-e006e-e0067-e007f":[["\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F"],"","",["flag-england"],12,16,31,0],
+		"1f3f4-e0067-e0062-e0073-e0063-e0074-e007f":[["\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F"],"","",["flag-scotland"],12,17,31,0],
+		"1f3f4-e0067-e0062-e0077-e006c-e0073-e007f":[["\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC77\uDB40\uDC6C\uDB40\uDC73\uDB40\uDC7F"],"","",["flag-wales"],12,18,31,0],
+		"1f3f4":[["\uD83C\uDFF4"],"","",["waving_black_flag"],12,19,31,0],
+		"1f3f5-fe0f":[["\uD83C\uDFF5\uFE0F","\uD83C\uDFF5"],"","",["rosette"],12,20,31,0],
+		"1f3f7-fe0f":[["\uD83C\uDFF7\uFE0F","\uD83C\uDFF7"],"","",["label"],12,21,31,0],
+		"1f3f8":[["\uD83C\uDFF8"],"","",["badminton_racquet_and_shuttlecock"],12,22,31,0],
+		"1f3f9":[["\uD83C\uDFF9"],"","",["bow_and_arrow"],12,23,31,0],
+		"1f3fa":[["\uD83C\uDFFA"],"","",["amphora"],12,24,31,0],
+		"1f3fb":[["\uD83C\uDFFB"],"","",["skin-tone-2"],12,25,31,0],
+		"1f3fc":[["\uD83C\uDFFC"],"","",["skin-tone-3"],12,26,31,0],
+		"1f3fd":[["\uD83C\uDFFD"],"","",["skin-tone-4"],12,27,31,0],
+		"1f3fe":[["\uD83C\uDFFE"],"","",["skin-tone-5"],12,28,31,0],
+		"1f3ff":[["\uD83C\uDFFF"],"","",["skin-tone-6"],12,29,31,0],
+		"1f400":[["\uD83D\uDC00"],"","",["rat"],12,30,63,0],
+		"1f401":[["\uD83D\uDC01"],"","",["mouse2"],12,31,63,0],
+		"1f402":[["\uD83D\uDC02"],"","",["ox"],12,32,63,0],
+		"1f403":[["\uD83D\uDC03"],"","",["water_buffalo"],12,33,63,0],
+		"1f404":[["\uD83D\uDC04"],"","",["cow2"],12,34,63,0],
+		"1f405":[["\uD83D\uDC05"],"","",["tiger2"],12,35,63,0],
+		"1f406":[["\uD83D\uDC06"],"","",["leopard"],12,36,63,0],
+		"1f407":[["\uD83D\uDC07"],"","",["rabbit2"],12,37,63,0],
+		"1f408":[["\uD83D\uDC08"],"","",["cat2"],12,38,63,0],
+		"1f409":[["\uD83D\uDC09"],"","",["dragon"],12,39,63,0],
+		"1f40a":[["\uD83D\uDC0A"],"","",["crocodile"],12,40,63,0],
+		"1f40b":[["\uD83D\uDC0B"],"","",["whale2"],12,41,63,0],
+		"1f40c":[["\uD83D\uDC0C"],"","\uDBB8\uDDB9",["snail"],12,42,63,0],
+		"1f40d":[["\uD83D\uDC0D"],"\uE52D","\uDBB8\uDDD3",["snake"],12,43,63,0],
+		"1f40e":[["\uD83D\uDC0E"],"\uE134","\uDBB9\uDFDC",["racehorse"],12,44,63,0],
+		"1f40f":[["\uD83D\uDC0F"],"","",["ram"],12,45,63,0],
+		"1f410":[["\uD83D\uDC10"],"","",["goat"],12,46,63,0],
+		"1f411":[["\uD83D\uDC11"],"\uE529","\uDBB8\uDDCF",["sheep"],12,47,63,0],
+		"1f412":[["\uD83D\uDC12"],"\uE528","\uDBB8\uDDCE",["monkey"],12,48,63,0],
+		"1f413":[["\uD83D\uDC13"],"","",["rooster"],12,49,63,0],
+		"1f414":[["\uD83D\uDC14"],"\uE52E","\uDBB8\uDDD4",["chicken"],12,50,63,0],
+		"1f415":[["\uD83D\uDC15"],"","",["dog2"],12,51,63,0],
+		"1f416":[["\uD83D\uDC16"],"","",["pig2"],13,0,63,0],
+		"1f417":[["\uD83D\uDC17"],"\uE52F","\uDBB8\uDDD5",["boar"],13,1,63,0],
+		"1f418":[["\uD83D\uDC18"],"\uE526","\uDBB8\uDDCC",["elephant"],13,2,63,0],
+		"1f419":[["\uD83D\uDC19"],"\uE10A","\uDBB8\uDDC5",["octopus"],13,3,63,0],
+		"1f41a":[["\uD83D\uDC1A"],"\uE441","\uDBB8\uDDC6",["shell"],13,4,63,0],
+		"1f41b":[["\uD83D\uDC1B"],"\uE525","\uDBB8\uDDCB",["bug"],13,5,63,0],
+		"1f41c":[["\uD83D\uDC1C"],"","\uDBB8\uDDDA",["ant"],13,6,63,0],
+		"1f41d":[["\uD83D\uDC1D"],"","\uDBB8\uDDE1",["bee","honeybee"],13,7,63,0],
+		"1f41e":[["\uD83D\uDC1E"],"","\uDBB8\uDDE2",["beetle"],13,8,63,0],
+		"1f41f":[["\uD83D\uDC1F"],"\uE019","\uDBB8\uDDBD",["fish"],13,9,63,0],
+		"1f420":[["\uD83D\uDC20"],"\uE522","\uDBB8\uDDC9",["tropical_fish"],13,10,63,0],
+		"1f421":[["\uD83D\uDC21"],"","\uDBB8\uDDD9",["blowfish"],13,11,63,0],
+		"1f422":[["\uD83D\uDC22"],"","\uDBB8\uDDDC",["turtle"],13,12,63,0],
+		"1f423":[["\uD83D\uDC23"],"","\uDBB8\uDDDD",["hatching_chick"],13,13,63,0],
+		"1f424":[["\uD83D\uDC24"],"\uE523","\uDBB8\uDDBA",["baby_chick"],13,14,63,0],
+		"1f425":[["\uD83D\uDC25"],"","\uDBB8\uDDBB",["hatched_chick"],13,15,63,0],
+		"1f426":[["\uD83D\uDC26"],"\uE521","\uDBB8\uDDC8",["bird"],13,16,63,0],
+		"1f427":[["\uD83D\uDC27"],"\uE055","\uDBB8\uDDBC",["penguin"],13,17,63,0],
+		"1f428":[["\uD83D\uDC28"],"\uE527","\uDBB8\uDDCD",["koala"],13,18,63,0],
+		"1f429":[["\uD83D\uDC29"],"","\uDBB8\uDDD8",["poodle"],13,19,63,0],
+		"1f42a":[["\uD83D\uDC2A"],"","",["dromedary_camel"],13,20,63,0],
+		"1f42b":[["\uD83D\uDC2B"],"\uE530","\uDBB8\uDDD6",["camel"],13,21,63,0],
+		"1f42c":[["\uD83D\uDC2C"],"\uE520","\uDBB8\uDDC7",["dolphin","flipper"],13,22,63,0],
+		"1f42d":[["\uD83D\uDC2D"],"\uE053","\uDBB8\uDDC2",["mouse"],13,23,63,0],
+		"1f42e":[["\uD83D\uDC2E"],"\uE52B","\uDBB8\uDDD1",["cow"],13,24,63,0],
+		"1f42f":[["\uD83D\uDC2F"],"\uE050","\uDBB8\uDDC0",["tiger"],13,25,63,0],
+		"1f430":[["\uD83D\uDC30"],"\uE52C","\uDBB8\uDDD2",["rabbit"],13,26,63,0],
+		"1f431":[["\uD83D\uDC31"],"\uE04F","\uDBB8\uDDB8",["cat"],13,27,63,0],
+		"1f432":[["\uD83D\uDC32"],"","\uDBB8\uDDDE",["dragon_face"],13,28,63,0],
+		"1f433":[["\uD83D\uDC33"],"\uE054","\uDBB8\uDDC3",["whale"],13,29,63,0],
+		"1f434":[["\uD83D\uDC34"],"\uE01A","\uDBB8\uDDBE",["horse"],13,30,63,0],
+		"1f435":[["\uD83D\uDC35"],"\uE109","\uDBB8\uDDC4",["monkey_face"],13,31,63,0],
+		"1f436":[["\uD83D\uDC36"],"\uE052","\uDBB8\uDDB7",["dog"],13,32,63,0],
+		"1f437":[["\uD83D\uDC37"],"\uE10B","\uDBB8\uDDBF",["pig"],13,33,63,0],
+		"1f438":[["\uD83D\uDC38"],"\uE531","\uDBB8\uDDD7",["frog"],13,34,63,0],
+		"1f439":[["\uD83D\uDC39"],"\uE524","\uDBB8\uDDCA",["hamster"],13,35,63,0],
+		"1f43a":[["\uD83D\uDC3A"],"\uE52A","\uDBB8\uDDD0",["wolf"],13,36,63,0],
+		"1f43b":[["\uD83D\uDC3B"],"\uE051","\uDBB8\uDDC1",["bear"],13,37,63,0],
+		"1f43c":[["\uD83D\uDC3C"],"","\uDBB8\uDDDF",["panda_face"],13,38,63,0],
+		"1f43d":[["\uD83D\uDC3D"],"","\uDBB8\uDDE0",["pig_nose"],13,39,63,0],
+		"1f43e":[["\uD83D\uDC3E"],"","\uDBB8\uDDDB",["feet","paw_prints"],13,40,63,0],
+		"1f43f-fe0f":[["\uD83D\uDC3F\uFE0F","\uD83D\uDC3F"],"","",["chipmunk"],13,41,31,0],
+		"1f440":[["\uD83D\uDC40"],"\uE419","\uDBB8\uDD90",["eyes"],13,42,63,0],
+		"1f441-fe0f-200d-1f5e8-fe0f":[["\uD83D\uDC41\uFE0F\u200D\uD83D\uDDE8\uFE0F"],"","",["eye-in-speech-bubble"],13,43,11,0],
+		"1f441-fe0f":[["\uD83D\uDC41\uFE0F","\uD83D\uDC41"],"","",["eye"],13,44,31,0],
+		"1f442":[["\uD83D\uDC42"],"\uE41B","\uDBB8\uDD91",["ear"],13,45,63,0],
+		"1f443":[["\uD83D\uDC43"],"\uE41A","\uDBB8\uDD92",["nose"],13,51,63,0],
+		"1f444":[["\uD83D\uDC44"],"\uE41C","\uDBB8\uDD93",["lips"],14,5,63,0],
+		"1f445":[["\uD83D\uDC45"],"","\uDBB8\uDD94",["tongue"],14,6,63,0],
+		"1f446":[["\uD83D\uDC46"],"\uE22E","\uDBBA\uDF99",["point_up_2"],14,7,63,0],
+		"1f447":[["\uD83D\uDC47"],"\uE22F","\uDBBA\uDF9A",["point_down"],14,13,63,0],
+		"1f448":[["\uD83D\uDC48"],"\uE230","\uDBBA\uDF9B",["point_left"],14,19,63,0],
+		"1f449":[["\uD83D\uDC49"],"\uE231","\uDBBA\uDF9C",["point_right"],14,25,63,0],
+		"1f44a":[["\uD83D\uDC4A"],"\uE00D","\uDBBA\uDF96",["facepunch","punch"],14,31,63,0],
+		"1f44b":[["\uD83D\uDC4B"],"\uE41E","\uDBBA\uDF9D",["wave"],14,37,63,0],
+		"1f44c":[["\uD83D\uDC4C"],"\uE420","\uDBBA\uDF9F",["ok_hand"],14,43,63,0],
+		"1f44d":[["\uD83D\uDC4D"],"\uE00E","\uDBBA\uDF97",["+1","thumbsup"],14,49,63,0],
+		"1f44e":[["\uD83D\uDC4E"],"\uE421","\uDBBA\uDFA0",["-1","thumbsdown"],15,3,63,0],
+		"1f44f":[["\uD83D\uDC4F"],"\uE41F","\uDBBA\uDF9E",["clap"],15,9,63,0],
+		"1f450":[["\uD83D\uDC50"],"\uE422","\uDBBA\uDFA1",["open_hands"],15,15,63,0],
+		"1f451":[["\uD83D\uDC51"],"\uE10E","\uDBB9\uDCD1",["crown"],15,21,63,0],
+		"1f452":[["\uD83D\uDC52"],"\uE318","\uDBB9\uDCD4",["womans_hat"],15,22,63,0],
+		"1f453":[["\uD83D\uDC53"],"","\uDBB9\uDCCE",["eyeglasses"],15,23,63,0],
+		"1f454":[["\uD83D\uDC54"],"\uE302","\uDBB9\uDCD3",["necktie"],15,24,63,0],
+		"1f455":[["\uD83D\uDC55"],"\uE006","\uDBB9\uDCCF",["shirt","tshirt"],15,25,63,0],
+		"1f456":[["\uD83D\uDC56"],"","\uDBB9\uDCD0",["jeans"],15,26,63,0],
+		"1f457":[["\uD83D\uDC57"],"\uE319","\uDBB9\uDCD5",["dress"],15,27,63,0],
+		"1f458":[["\uD83D\uDC58"],"\uE321","\uDBB9\uDCD9",["kimono"],15,28,63,0],
+		"1f459":[["\uD83D\uDC59"],"\uE322","\uDBB9\uDCDA",["bikini"],15,29,63,0],
+		"1f45a":[["\uD83D\uDC5A"],"","\uDBB9\uDCDB",["womans_clothes"],15,30,63,0],
+		"1f45b":[["\uD83D\uDC5B"],"","\uDBB9\uDCDC",["purse"],15,31,63,0],
+		"1f45c":[["\uD83D\uDC5C"],"\uE323","\uDBB9\uDCF0",["handbag"],15,32,63,0],
+		"1f45d":[["\uD83D\uDC5D"],"","\uDBB9\uDCF1",["pouch"],15,33,63,0],
+		"1f45e":[["\uD83D\uDC5E"],"","\uDBB9\uDCCC",["mans_shoe","shoe"],15,34,63,0],
+		"1f45f":[["\uD83D\uDC5F"],"\uE007","\uDBB9\uDCCD",["athletic_shoe"],15,35,63,0],
+		"1f460":[["\uD83D\uDC60"],"\uE13E","\uDBB9\uDCD6",["high_heel"],15,36,63,0],
+		"1f461":[["\uD83D\uDC61"],"\uE31A","\uDBB9\uDCD7",["sandal"],15,37,63,0],
+		"1f462":[["\uD83D\uDC62"],"\uE31B","\uDBB9\uDCD8",["boot"],15,38,63,0],
+		"1f463":[["\uD83D\uDC63"],"\uE536","\uDBB9\uDD53",["footprints"],15,39,63,0],
+		"1f464":[["\uD83D\uDC64"],"","\uDBB8\uDD9A",["bust_in_silhouette"],15,40,63,0],
+		"1f465":[["\uD83D\uDC65"],"","",["busts_in_silhouette"],15,41,63,0],
+		"1f466":[["\uD83D\uDC66"],"\uE001","\uDBB8\uDD9B",["boy"],15,42,63,0],
+		"1f467":[["\uD83D\uDC67"],"\uE002","\uDBB8\uDD9C",["girl"],15,48,63,0],
+		"1f468-200d-1f33e":[["\uD83D\uDC68\u200D\uD83C\uDF3E"],"","",["male-farmer"],16,2,31,0],
+		"1f468-200d-1f373":[["\uD83D\uDC68\u200D\uD83C\uDF73"],"","",["male-cook"],16,8,31,0],
+		"1f468-200d-1f393":[["\uD83D\uDC68\u200D\uD83C\uDF93"],"","",["male-student"],16,14,31,0],
+		"1f468-200d-1f3a4":[["\uD83D\uDC68\u200D\uD83C\uDFA4"],"","",["male-singer"],16,20,31,0],
+		"1f468-200d-1f3a8":[["\uD83D\uDC68\u200D\uD83C\uDFA8"],"","",["male-artist"],16,26,31,0],
+		"1f468-200d-1f3eb":[["\uD83D\uDC68\u200D\uD83C\uDFEB"],"","",["male-teacher"],16,32,31,0],
+		"1f468-200d-1f3ed":[["\uD83D\uDC68\u200D\uD83C\uDFED"],"","",["male-factory-worker"],16,38,31,0],
+		"1f468-200d-1f466-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC66\u200D\uD83D\uDC66"],"","",["man-boy-boy"],16,44,31,0],
+		"1f468-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC66"],"","",["man-boy"],16,45,31,0],
+		"1f468-200d-1f467-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC66"],"","",["man-girl-boy"],16,46,31,0],
+		"1f468-200d-1f467-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC67"],"","",["man-girl-girl"],16,47,31,0],
+		"1f468-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC67"],"","",["man-girl"],16,48,31,0],
+		"1f468-200d-1f468-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC66"],"","",["man-man-boy"],16,49,63,0],
+		"1f468-200d-1f468-200d-1f466-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC66\u200D\uD83D\uDC66"],"","",["man-man-boy-boy"],16,50,63,0],
+		"1f468-200d-1f468-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC67"],"","",["man-man-girl"],16,51,63,0],
+		"1f468-200d-1f468-200d-1f467-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC66"],"","",["man-man-girl-boy"],17,0,63,0],
+		"1f468-200d-1f468-200d-1f467-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC67"],"","",["man-man-girl-girl"],17,1,63,0],
+		"1f468-200d-1f469-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC66","\uD83D\uDC6A"],"","",["man-woman-boy","family"],17,2,63,0],
+		"1f468-200d-1f469-200d-1f466-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC66\u200D\uD83D\uDC66"],"","",["man-woman-boy-boy"],17,3,63,0],
+		"1f468-200d-1f469-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67"],"","",["man-woman-girl"],17,4,63,0],
+		"1f468-200d-1f469-200d-1f467-200d-1f466":[["\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC66"],"","",["man-woman-girl-boy"],17,5,63,0],
+		"1f468-200d-1f469-200d-1f467-200d-1f467":[["\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC67"],"","",["man-woman-girl-girl"],17,6,63,0],
+		"1f468-200d-1f4bb":[["\uD83D\uDC68\u200D\uD83D\uDCBB"],"","",["male-technologist"],17,7,31,0],
+		"1f468-200d-1f4bc":[["\uD83D\uDC68\u200D\uD83D\uDCBC"],"","",["male-office-worker"],17,13,31,0],
+		"1f468-200d-1f527":[["\uD83D\uDC68\u200D\uD83D\uDD27"],"","",["male-mechanic"],17,19,31,0],
+		"1f468-200d-1f52c":[["\uD83D\uDC68\u200D\uD83D\uDD2C"],"","",["male-scientist"],17,25,31,0],
+		"1f468-200d-1f680":[["\uD83D\uDC68\u200D\uD83D\uDE80"],"","",["male-astronaut"],17,31,31,0],
+		"1f468-200d-1f692":[["\uD83D\uDC68\u200D\uD83D\uDE92"],"","",["male-firefighter"],17,37,31,0],
+		"1f468-200d-2695-fe0f":[["\uD83D\uDC68\u200D\u2695\uFE0F","\uD83D\uDC68\u200D\u2695"],"","",["male-doctor"],17,43,31,0],
+		"1f468-200d-2696-fe0f":[["\uD83D\uDC68\u200D\u2696\uFE0F","\uD83D\uDC68\u200D\u2696"],"","",["male-judge"],17,49,31,0],
+		"1f468-200d-2708-fe0f":[["\uD83D\uDC68\u200D\u2708\uFE0F","\uD83D\uDC68\u200D\u2708"],"","",["male-pilot"],18,3,31,0],
+		"1f468-200d-2764-fe0f-200d-1f468":[["\uD83D\uDC68\u200D\u2764\uFE0F\u200D\uD83D\uDC68","\uD83D\uDC68\u200D\u2764\u200D\uD83D\uDC68"],"","",["man-heart-man"],18,9,63,0],
+		"1f468-200d-2764-fe0f-200d-1f48b-200d-1f468":[["\uD83D\uDC68\u200D\u2764\uFE0F\u200D\uD83D\uDC8B\u200D\uD83D\uDC68","\uD83D\uDC68\u200D\u2764\u200D\uD83D\uDC8B\u200D\uD83D\uDC68"],"","",["man-kiss-man"],18,10,63,0],
+		"1f468":[["\uD83D\uDC68"],"\uE004","\uDBB8\uDD9D",["man"],18,11,63,0],
+		"1f469-200d-1f33e":[["\uD83D\uDC69\u200D\uD83C\uDF3E"],"","",["female-farmer"],18,17,31,0],
+		"1f469-200d-1f373":[["\uD83D\uDC69\u200D\uD83C\uDF73"],"","",["female-cook"],18,23,31,0],
+		"1f469-200d-1f393":[["\uD83D\uDC69\u200D\uD83C\uDF93"],"","",["female-student"],18,29,31,0],
+		"1f469-200d-1f3a4":[["\uD83D\uDC69\u200D\uD83C\uDFA4"],"","",["female-singer"],18,35,31,0],
+		"1f469-200d-1f3a8":[["\uD83D\uDC69\u200D\uD83C\uDFA8"],"","",["female-artist"],18,41,31,0],
+		"1f469-200d-1f3eb":[["\uD83D\uDC69\u200D\uD83C\uDFEB"],"","",["female-teacher"],18,47,31,0],
+		"1f469-200d-1f3ed":[["\uD83D\uDC69\u200D\uD83C\uDFED"],"","",["female-factory-worker"],19,1,31,0],
+		"1f469-200d-1f466-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC66\u200D\uD83D\uDC66"],"","",["woman-boy-boy"],19,7,31,0],
+		"1f469-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC66"],"","",["woman-boy"],19,8,31,0],
+		"1f469-200d-1f467-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC66"],"","",["woman-girl-boy"],19,9,31,0],
+		"1f469-200d-1f467-200d-1f467":[["\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC67"],"","",["woman-girl-girl"],19,10,31,0],
+		"1f469-200d-1f467":[["\uD83D\uDC69\u200D\uD83D\uDC67"],"","",["woman-girl"],19,11,31,0],
+		"1f469-200d-1f469-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC69\u200D\uD83D\uDC66"],"","",["woman-woman-boy"],19,12,63,0],
+		"1f469-200d-1f469-200d-1f466-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC69\u200D\uD83D\uDC66\u200D\uD83D\uDC66"],"","",["woman-woman-boy-boy"],19,13,63,0],
+		"1f469-200d-1f469-200d-1f467":[["\uD83D\uDC69\u200D\uD83D\uDC69\u200D\uD83D\uDC67"],"","",["woman-woman-girl"],19,14,63,0],
+		"1f469-200d-1f469-200d-1f467-200d-1f466":[["\uD83D\uDC69\u200D\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC66"],"","",["woman-woman-girl-boy"],19,15,63,0],
+		"1f469-200d-1f469-200d-1f467-200d-1f467":[["\uD83D\uDC69\u200D\uD83D\uDC69\u200D\uD83D\uDC67\u200D\uD83D\uDC67"],"","",["woman-woman-girl-girl"],19,16,63,0],
+		"1f469-200d-1f4bb":[["\uD83D\uDC69\u200D\uD83D\uDCBB"],"","",["female-technologist"],19,17,31,0],
+		"1f469-200d-1f4bc":[["\uD83D\uDC69\u200D\uD83D\uDCBC"],"","",["female-office-worker"],19,23,31,0],
+		"1f469-200d-1f527":[["\uD83D\uDC69\u200D\uD83D\uDD27"],"","",["female-mechanic"],19,29,31,0],
+		"1f469-200d-1f52c":[["\uD83D\uDC69\u200D\uD83D\uDD2C"],"","",["female-scientist"],19,35,31,0],
+		"1f469-200d-1f680":[["\uD83D\uDC69\u200D\uD83D\uDE80"],"","",["female-astronaut"],19,41,31,0],
+		"1f469-200d-1f692":[["\uD83D\uDC69\u200D\uD83D\uDE92"],"","",["female-firefighter"],19,47,31,0],
+		"1f469-200d-2695-fe0f":[["\uD83D\uDC69\u200D\u2695\uFE0F","\uD83D\uDC69\u200D\u2695"],"","",["female-doctor"],20,1,31,0],
+		"1f469-200d-2696-fe0f":[["\uD83D\uDC69\u200D\u2696\uFE0F","\uD83D\uDC69\u200D\u2696"],"","",["female-judge"],20,7,31,0],
+		"1f469-200d-2708-fe0f":[["\uD83D\uDC69\u200D\u2708\uFE0F","\uD83D\uDC69\u200D\u2708"],"","",["female-pilot"],20,13,31,0],
+		"1f469-200d-2764-fe0f-200d-1f468":[["\uD83D\uDC69\u200D\u2764\uFE0F\u200D\uD83D\uDC68","\uD83D\uDC69\u200D\u2764\u200D\uD83D\uDC68","\uD83D\uDC91"],"","",["woman-heart-man","couple_with_heart"],20,19,31,0],
+		"1f469-200d-2764-fe0f-200d-1f469":[["\uD83D\uDC69\u200D\u2764\uFE0F\u200D\uD83D\uDC69","\uD83D\uDC69\u200D\u2764\u200D\uD83D\uDC69"],"","",["woman-heart-woman"],20,20,63,0],
+		"1f469-200d-2764-fe0f-200d-1f48b-200d-1f468":[["\uD83D\uDC69\u200D\u2764\uFE0F\u200D\uD83D\uDC8B\u200D\uD83D\uDC68","\uD83D\uDC69\u200D\u2764\u200D\uD83D\uDC8B\u200D\uD83D\uDC68","\uD83D\uDC8F"],"","",["woman-kiss-man","couplekiss"],20,21,31,0],
+		"1f469-200d-2764-fe0f-200d-1f48b-200d-1f469":[["\uD83D\uDC69\u200D\u2764\uFE0F\u200D\uD83D\uDC8B\u200D\uD83D\uDC69","\uD83D\uDC69\u200D\u2764\u200D\uD83D\uDC8B\u200D\uD83D\uDC69"],"","",["woman-kiss-woman"],20,22,63,0],
+		"1f469":[["\uD83D\uDC69"],"\uE005","\uDBB8\uDD9E",["woman"],20,23,63,0],
+		"1f46b":[["\uD83D\uDC6B"],"\uE428","\uDBB8\uDDA0",["couple","man_and_woman_holding_hands"],20,30,63,0],
+		"1f46c":[["\uD83D\uDC6C"],"","",["two_men_holding_hands"],20,31,63,0],
+		"1f46d":[["\uD83D\uDC6D"],"","",["two_women_holding_hands"],20,32,63,0],
+		"1f46e-200d-2640-fe0f":[["\uD83D\uDC6E\u200D\u2640\uFE0F","\uD83D\uDC6E\u200D\u2640"],"","",["female-police-officer"],20,33,31,0],
+		"1f46e-200d-2642-fe0f":[["\uD83D\uDC6E\u200D\u2642\uFE0F","\uD83D\uDC6E\u200D\u2642","\uD83D\uDC6E"],"","",["male-police-officer","cop"],20,39,31,0],
+		"1f46f-200d-2640-fe0f":[["\uD83D\uDC6F\u200D\u2640\uFE0F","\uD83D\uDC6F\u200D\u2640","\uD83D\uDC6F"],"","",["woman-with-bunny-ears-partying","dancers"],20,51,31,0],
+		"1f46f-200d-2642-fe0f":[["\uD83D\uDC6F\u200D\u2642\uFE0F","\uD83D\uDC6F\u200D\u2642"],"","",["man-with-bunny-ears-partying"],21,0,31,0],
+		"1f470":[["\uD83D\uDC70"],"","\uDBB8\uDDA3",["bride_with_veil"],21,2,63,0],
+		"1f471-200d-2640-fe0f":[["\uD83D\uDC71\u200D\u2640\uFE0F","\uD83D\uDC71\u200D\u2640"],"","",["blond-haired-woman"],21,8,31,0],
+		"1f471-200d-2642-fe0f":[["\uD83D\uDC71\u200D\u2642\uFE0F","\uD83D\uDC71\u200D\u2642","\uD83D\uDC71"],"","",["blond-haired-man","person_with_blond_hair"],21,14,31,0],
+		"1f472":[["\uD83D\uDC72"],"\uE516","\uDBB8\uDDA5",["man_with_gua_pi_mao"],21,26,63,0],
+		"1f473-200d-2640-fe0f":[["\uD83D\uDC73\u200D\u2640\uFE0F","\uD83D\uDC73\u200D\u2640"],"","",["woman-wearing-turban"],21,32,31,0],
+		"1f473-200d-2642-fe0f":[["\uD83D\uDC73\u200D\u2642\uFE0F","\uD83D\uDC73\u200D\u2642","\uD83D\uDC73"],"","",["man-wearing-turban","man_with_turban"],21,38,31,0],
+		"1f474":[["\uD83D\uDC74"],"\uE518","\uDBB8\uDDA7",["older_man"],21,50,63,0],
+		"1f475":[["\uD83D\uDC75"],"\uE519","\uDBB8\uDDA8",["older_woman"],22,4,63,0],
+		"1f476":[["\uD83D\uDC76"],"\uE51A","\uDBB8\uDDA9",["baby"],22,10,63,0],
+		"1f477-200d-2640-fe0f":[["\uD83D\uDC77\u200D\u2640\uFE0F","\uD83D\uDC77\u200D\u2640"],"","",["female-construction-worker"],22,16,31,0],
+		"1f477-200d-2642-fe0f":[["\uD83D\uDC77\u200D\u2642\uFE0F","\uD83D\uDC77\u200D\u2642","\uD83D\uDC77"],"","",["male-construction-worker","construction_worker"],22,22,31,0],
+		"1f478":[["\uD83D\uDC78"],"\uE51C","\uDBB8\uDDAB",["princess"],22,34,63,0],
+		"1f479":[["\uD83D\uDC79"],"","\uDBB8\uDDAC",["japanese_ogre"],22,40,63,0],
+		"1f47a":[["\uD83D\uDC7A"],"","\uDBB8\uDDAD",["japanese_goblin"],22,41,63,0],
+		"1f47b":[["\uD83D\uDC7B"],"\uE11B","\uDBB8\uDDAE",["ghost"],22,42,63,0],
+		"1f47c":[["\uD83D\uDC7C"],"\uE04E","\uDBB8\uDDAF",["angel"],22,43,63,0],
+		"1f47d":[["\uD83D\uDC7D"],"\uE10C","\uDBB8\uDDB0",["alien"],22,49,63,0],
+		"1f47e":[["\uD83D\uDC7E"],"\uE12B","\uDBB8\uDDB1",["space_invader"],22,50,63,0],
+		"1f47f":[["\uD83D\uDC7F"],"\uE11A","\uDBB8\uDDB2",["imp"],22,51,63,0],
+		"1f480":[["\uD83D\uDC80"],"\uE11C","\uDBB8\uDDB3",["skull"],23,0,63,0],
+		"1f481-200d-2640-fe0f":[["\uD83D\uDC81\u200D\u2640\uFE0F","\uD83D\uDC81\u200D\u2640","\uD83D\uDC81"],"","",["woman-tipping-hand","information_desk_person"],23,1,31,0],
+		"1f481-200d-2642-fe0f":[["\uD83D\uDC81\u200D\u2642\uFE0F","\uD83D\uDC81\u200D\u2642"],"","",["man-tipping-hand"],23,7,31,0],
+		"1f482-200d-2640-fe0f":[["\uD83D\uDC82\u200D\u2640\uFE0F","\uD83D\uDC82\u200D\u2640"],"","",["female-guard"],23,19,31,0],
+		"1f482-200d-2642-fe0f":[["\uD83D\uDC82\u200D\u2642\uFE0F","\uD83D\uDC82\u200D\u2642","\uD83D\uDC82"],"","",["male-guard","guardsman"],23,25,31,0],
+		"1f483":[["\uD83D\uDC83"],"\uE51F","\uDBB8\uDDB6",["dancer"],23,37,63,0],
+		"1f484":[["\uD83D\uDC84"],"\uE31C","\uDBB8\uDD95",["lipstick"],23,43,63,0],
+		"1f485":[["\uD83D\uDC85"],"\uE31D","\uDBB8\uDD96",["nail_care"],23,44,63,0],
+		"1f486-200d-2640-fe0f":[["\uD83D\uDC86\u200D\u2640\uFE0F","\uD83D\uDC86\u200D\u2640","\uD83D\uDC86"],"","",["woman-getting-massage","massage"],23,50,31,0],
+		"1f486-200d-2642-fe0f":[["\uD83D\uDC86\u200D\u2642\uFE0F","\uD83D\uDC86\u200D\u2642"],"","",["man-getting-massage"],24,4,31,0],
+		"1f487-200d-2640-fe0f":[["\uD83D\uDC87\u200D\u2640\uFE0F","\uD83D\uDC87\u200D\u2640","\uD83D\uDC87"],"","",["woman-getting-haircut","haircut"],24,16,31,0],
+		"1f487-200d-2642-fe0f":[["\uD83D\uDC87\u200D\u2642\uFE0F","\uD83D\uDC87\u200D\u2642"],"","",["man-getting-haircut"],24,22,31,0],
+		"1f488":[["\uD83D\uDC88"],"\uE320","\uDBB8\uDD99",["barber"],24,34,63,0],
+		"1f489":[["\uD83D\uDC89"],"\uE13B","\uDBB9\uDD09",["syringe"],24,35,63,0],
+		"1f48a":[["\uD83D\uDC8A"],"\uE30F","\uDBB9\uDD0A",["pill"],24,36,63,0],
+		"1f48b":[["\uD83D\uDC8B"],"\uE003","\uDBBA\uDC23",["kiss"],24,37,63,0],
+		"1f48c":[["\uD83D\uDC8C"],"","\uDBBA\uDC24",["love_letter"],24,38,63,0],
+		"1f48d":[["\uD83D\uDC8D"],"\uE034","\uDBBA\uDC25",["ring"],24,39,63,0],
+		"1f48e":[["\uD83D\uDC8E"],"\uE035","\uDBBA\uDC26",["gem"],24,40,63,0],
+		"1f490":[["\uD83D\uDC90"],"\uE306","\uDBBA\uDC28",["bouquet"],24,42,63,0],
+		"1f492":[["\uD83D\uDC92"],"\uE43D","\uDBBA\uDC2A",["wedding"],24,44,63,0],
+		"1f493":[["\uD83D\uDC93"],"\uE327","\uDBBA\uDF0D",["heartbeat"],24,45,63,0],
+		"1f494":[["\uD83D\uDC94"],"\uE023","\uDBBA\uDF0E",["broken_heart"],24,46,63,0,"<\/3"],
+		"1f495":[["\uD83D\uDC95"],"","\uDBBA\uDF0F",["two_hearts"],24,47,63,0],
+		"1f496":[["\uD83D\uDC96"],"","\uDBBA\uDF10",["sparkling_heart"],24,48,63,0],
+		"1f497":[["\uD83D\uDC97"],"\uE328","\uDBBA\uDF11",["heartpulse"],24,49,63,0],
+		"1f498":[["\uD83D\uDC98"],"\uE329","\uDBBA\uDF12",["cupid"],24,50,63,0],
+		"1f499":[["\uD83D\uDC99"],"\uE32A","\uDBBA\uDF13",["blue_heart"],24,51,63,0,"<3"],
+		"1f49a":[["\uD83D\uDC9A"],"\uE32B","\uDBBA\uDF14",["green_heart"],25,0,63,0,"<3"],
+		"1f49b":[["\uD83D\uDC9B"],"\uE32C","\uDBBA\uDF15",["yellow_heart"],25,1,63,0,"<3"],
+		"1f49c":[["\uD83D\uDC9C"],"\uE32D","\uDBBA\uDF16",["purple_heart"],25,2,63,0,"<3"],
+		"1f49d":[["\uD83D\uDC9D"],"\uE437","\uDBBA\uDF17",["gift_heart"],25,3,63,0],
+		"1f49e":[["\uD83D\uDC9E"],"","\uDBBA\uDF18",["revolving_hearts"],25,4,63,0],
+		"1f49f":[["\uD83D\uDC9F"],"\uE204","\uDBBA\uDF19",["heart_decoration"],25,5,63,0],
+		"1f4a0":[["\uD83D\uDCA0"],"","\uDBBA\uDF55",["diamond_shape_with_a_dot_inside"],25,6,63,0],
+		"1f4a1":[["\uD83D\uDCA1"],"\uE10F","\uDBBA\uDF56",["bulb"],25,7,63,0],
+		"1f4a2":[["\uD83D\uDCA2"],"\uE334","\uDBBA\uDF57",["anger"],25,8,63,0],
+		"1f4a3":[["\uD83D\uDCA3"],"\uE311","\uDBBA\uDF58",["bomb"],25,9,63,0],
+		"1f4a4":[["\uD83D\uDCA4"],"\uE13C","\uDBBA\uDF59",["zzz"],25,10,63,0],
+		"1f4a5":[["\uD83D\uDCA5"],"","\uDBBA\uDF5A",["boom","collision"],25,11,63,0],
+		"1f4a6":[["\uD83D\uDCA6"],"\uE331","\uDBBA\uDF5B",["sweat_drops"],25,12,63,0],
+		"1f4a7":[["\uD83D\uDCA7"],"","\uDBBA\uDF5C",["droplet"],25,13,63,0],
+		"1f4a8":[["\uD83D\uDCA8"],"\uE330","\uDBBA\uDF5D",["dash"],25,14,63,0],
+		"1f4a9":[["\uD83D\uDCA9"],"\uE05A","\uDBB9\uDCF4",["hankey","poop","shit"],25,15,63,0],
+		"1f4aa":[["\uD83D\uDCAA"],"\uE14C","\uDBBA\uDF5E",["muscle"],25,16,63,0],
+		"1f4ab":[["\uD83D\uDCAB"],"","\uDBBA\uDF5F",["dizzy"],25,22,63,0],
+		"1f4ac":[["\uD83D\uDCAC"],"","\uDBB9\uDD32",["speech_balloon"],25,23,63,0],
+		"1f4ad":[["\uD83D\uDCAD"],"","",["thought_balloon"],25,24,63,0],
+		"1f4ae":[["\uD83D\uDCAE"],"","\uDBBA\uDF7A",["white_flower"],25,25,63,0],
+		"1f4af":[["\uD83D\uDCAF"],"","\uDBBA\uDF7B",["100"],25,26,63,0],
+		"1f4b0":[["\uD83D\uDCB0"],"\uE12F","\uDBB9\uDCDD",["moneybag"],25,27,63,0],
+		"1f4b1":[["\uD83D\uDCB1"],"\uE149","\uDBB9\uDCDE",["currency_exchange"],25,28,63,0],
+		"1f4b2":[["\uD83D\uDCB2"],"","\uDBB9\uDCE0",["heavy_dollar_sign"],25,29,63,0],
+		"1f4b3":[["\uD83D\uDCB3"],"","\uDBB9\uDCE1",["credit_card"],25,30,63,0],
+		"1f4b4":[["\uD83D\uDCB4"],"","\uDBB9\uDCE2",["yen"],25,31,63,0],
+		"1f4b5":[["\uD83D\uDCB5"],"","\uDBB9\uDCE3",["dollar"],25,32,63,0],
+		"1f4b6":[["\uD83D\uDCB6"],"","",["euro"],25,33,63,0],
+		"1f4b7":[["\uD83D\uDCB7"],"","",["pound"],25,34,63,0],
+		"1f4b8":[["\uD83D\uDCB8"],"","\uDBB9\uDCE4",["money_with_wings"],25,35,63,0],
+		"1f4b9":[["\uD83D\uDCB9"],"\uE14A","\uDBB9\uDCDF",["chart"],25,36,63,0],
+		"1f4ba":[["\uD83D\uDCBA"],"\uE11F","\uDBB9\uDD37",["seat"],25,37,63,0],
+		"1f4bb":[["\uD83D\uDCBB"],"\uE00C","\uDBB9\uDD38",["computer"],25,38,63,0],
+		"1f4bc":[["\uD83D\uDCBC"],"\uE11E","\uDBB9\uDD3B",["briefcase"],25,39,63,0],
+		"1f4bd":[["\uD83D\uDCBD"],"\uE316","\uDBB9\uDD3C",["minidisc"],25,40,63,0],
+		"1f4be":[["\uD83D\uDCBE"],"","\uDBB9\uDD3D",["floppy_disk"],25,41,63,0],
+		"1f4bf":[["\uD83D\uDCBF"],"\uE126","\uDBBA\uDC1D",["cd"],25,42,63,0],
+		"1f4c0":[["\uD83D\uDCC0"],"\uE127","\uDBBA\uDC1E",["dvd"],25,43,63,0],
+		"1f4c1":[["\uD83D\uDCC1"],"","\uDBB9\uDD43",["file_folder"],25,44,63,0],
+		"1f4c2":[["\uD83D\uDCC2"],"","\uDBB9\uDD44",["open_file_folder"],25,45,63,0],
+		"1f4c3":[["\uD83D\uDCC3"],"","\uDBB9\uDD40",["page_with_curl"],25,46,63,0],
+		"1f4c4":[["\uD83D\uDCC4"],"","\uDBB9\uDD41",["page_facing_up"],25,47,63,0],
+		"1f4c5":[["\uD83D\uDCC5"],"","\uDBB9\uDD42",["date"],25,48,63,0],
+		"1f4c6":[["\uD83D\uDCC6"],"","\uDBB9\uDD49",["calendar"],25,49,63,0],
+		"1f4c7":[["\uD83D\uDCC7"],"","\uDBB9\uDD4D",["card_index"],25,50,63,0],
+		"1f4c8":[["\uD83D\uDCC8"],"","\uDBB9\uDD4B",["chart_with_upwards_trend"],25,51,63,0],
+		"1f4c9":[["\uD83D\uDCC9"],"","\uDBB9\uDD4C",["chart_with_downwards_trend"],26,0,63,0],
+		"1f4ca":[["\uD83D\uDCCA"],"","\uDBB9\uDD4A",["bar_chart"],26,1,63,0],
+		"1f4cb":[["\uD83D\uDCCB"],"","\uDBB9\uDD48",["clipboard"],26,2,63,0],
+		"1f4cc":[["\uD83D\uDCCC"],"","\uDBB9\uDD4E",["pushpin"],26,3,63,0],
+		"1f4cd":[["\uD83D\uDCCD"],"","\uDBB9\uDD3F",["round_pushpin"],26,4,63,0],
+		"1f4ce":[["\uD83D\uDCCE"],"","\uDBB9\uDD3A",["paperclip"],26,5,63,0],
+		"1f4cf":[["\uD83D\uDCCF"],"","\uDBB9\uDD50",["straight_ruler"],26,6,63,0],
+		"1f4d0":[["\uD83D\uDCD0"],"","\uDBB9\uDD51",["triangular_ruler"],26,7,63,0],
+		"1f4d1":[["\uD83D\uDCD1"],"","\uDBB9\uDD52",["bookmark_tabs"],26,8,63,0],
+		"1f4d2":[["\uD83D\uDCD2"],"","\uDBB9\uDD4F",["ledger"],26,9,63,0],
+		"1f4d3":[["\uD83D\uDCD3"],"","\uDBB9\uDD45",["notebook"],26,10,63,0],
+		"1f4d4":[["\uD83D\uDCD4"],"","\uDBB9\uDD47",["notebook_with_decorative_cover"],26,11,63,0],
+		"1f4d5":[["\uD83D\uDCD5"],"","\uDBB9\uDD02",["closed_book"],26,12,63,0],
+		"1f4d6":[["\uD83D\uDCD6"],"\uE148","\uDBB9\uDD46",["book","open_book"],26,13,63,0],
+		"1f4d7":[["\uD83D\uDCD7"],"","\uDBB9\uDCFF",["green_book"],26,14,63,0],
+		"1f4d8":[["\uD83D\uDCD8"],"","\uDBB9\uDD00",["blue_book"],26,15,63,0],
+		"1f4d9":[["\uD83D\uDCD9"],"","\uDBB9\uDD01",["orange_book"],26,16,63,0],
+		"1f4da":[["\uD83D\uDCDA"],"","\uDBB9\uDD03",["books"],26,17,63,0],
+		"1f4db":[["\uD83D\uDCDB"],"","\uDBB9\uDD04",["name_badge"],26,18,63,0],
+		"1f4dc":[["\uD83D\uDCDC"],"","\uDBB9\uDCFD",["scroll"],26,19,63,0],
+		"1f4dd":[["\uD83D\uDCDD"],"\uE301","\uDBB9\uDD27",["memo","pencil"],26,20,63,0],
+		"1f4de":[["\uD83D\uDCDE"],"","\uDBB9\uDD24",["telephone_receiver"],26,21,63,0],
+		"1f4df":[["\uD83D\uDCDF"],"","\uDBB9\uDD22",["pager"],26,22,63,0],
+		"1f4e0":[["\uD83D\uDCE0"],"\uE00B","\uDBB9\uDD28",["fax"],26,23,63,0],
+		"1f4e1":[["\uD83D\uDCE1"],"\uE14B","\uDBB9\uDD31",["satellite_antenna"],26,24,63,0],
+		"1f4e2":[["\uD83D\uDCE2"],"\uE142","\uDBB9\uDD2F",["loudspeaker"],26,25,63,0],
+		"1f4e3":[["\uD83D\uDCE3"],"\uE317","\uDBB9\uDD30",["mega"],26,26,63,0],
+		"1f4e4":[["\uD83D\uDCE4"],"","\uDBB9\uDD33",["outbox_tray"],26,27,63,0],
+		"1f4e5":[["\uD83D\uDCE5"],"","\uDBB9\uDD34",["inbox_tray"],26,28,63,0],
+		"1f4e6":[["\uD83D\uDCE6"],"","\uDBB9\uDD35",["package"],26,29,63,0],
+		"1f4e7":[["\uD83D\uDCE7"],"","\uDBBA\uDF92",["e-mail"],26,30,63,0],
+		"1f4e8":[["\uD83D\uDCE8"],"","\uDBB9\uDD2A",["incoming_envelope"],26,31,63,0],
+		"1f4e9":[["\uD83D\uDCE9"],"\uE103","\uDBB9\uDD2B",["envelope_with_arrow"],26,32,63,0],
+		"1f4ea":[["\uD83D\uDCEA"],"","\uDBB9\uDD2C",["mailbox_closed"],26,33,63,0],
+		"1f4eb":[["\uD83D\uDCEB"],"\uE101","\uDBB9\uDD2D",["mailbox"],26,34,63,0],
+		"1f4ec":[["\uD83D\uDCEC"],"","",["mailbox_with_mail"],26,35,63,0],
+		"1f4ed":[["\uD83D\uDCED"],"","",["mailbox_with_no_mail"],26,36,63,0],
+		"1f4ee":[["\uD83D\uDCEE"],"\uE102","\uDBB9\uDD2E",["postbox"],26,37,63,0],
+		"1f4ef":[["\uD83D\uDCEF"],"","",["postal_horn"],26,38,63,0],
+		"1f4f0":[["\uD83D\uDCF0"],"","\uDBBA\uDC22",["newspaper"],26,39,63,0],
+		"1f4f1":[["\uD83D\uDCF1"],"\uE00A","\uDBB9\uDD25",["iphone"],26,40,63,0],
+		"1f4f2":[["\uD83D\uDCF2"],"\uE104","\uDBB9\uDD26",["calling"],26,41,63,0],
+		"1f4f3":[["\uD83D\uDCF3"],"\uE250","\uDBBA\uDC39",["vibration_mode"],26,42,63,0],
+		"1f4f4":[["\uD83D\uDCF4"],"\uE251","\uDBBA\uDC3A",["mobile_phone_off"],26,43,63,0],
+		"1f4f5":[["\uD83D\uDCF5"],"","",["no_mobile_phones"],26,44,63,0],
+		"1f4f6":[["\uD83D\uDCF6"],"\uE20B","\uDBBA\uDC38",["signal_strength"],26,45,63,0],
+		"1f4f7":[["\uD83D\uDCF7"],"\uE008","\uDBB9\uDCEF",["camera"],26,46,63,0],
+		"1f4f8":[["\uD83D\uDCF8"],"","",["camera_with_flash"],26,47,31,0],
+		"1f4f9":[["\uD83D\uDCF9"],"","\uDBB9\uDCF9",["video_camera"],26,48,63,0],
+		"1f4fa":[["\uD83D\uDCFA"],"\uE12A","\uDBBA\uDC1C",["tv"],26,49,63,0],
+		"1f4fb":[["\uD83D\uDCFB"],"\uE128","\uDBBA\uDC1F",["radio"],26,50,63,0],
+		"1f4fc":[["\uD83D\uDCFC"],"\uE129","\uDBBA\uDC20",["vhs"],26,51,63,0],
+		"1f4fd-fe0f":[["\uD83D\uDCFD\uFE0F","\uD83D\uDCFD"],"","",["film_projector"],27,0,31,0],
+		"1f4ff":[["\uD83D\uDCFF"],"","",["prayer_beads"],27,1,31,0],
+		"1f500":[["\uD83D\uDD00"],"","",["twisted_rightwards_arrows"],27,2,63,0],
+		"1f501":[["\uD83D\uDD01"],"","",["repeat"],27,3,63,0],
+		"1f502":[["\uD83D\uDD02"],"","",["repeat_one"],27,4,63,0],
+		"1f503":[["\uD83D\uDD03"],"","\uDBBA\uDF91",["arrows_clockwise"],27,5,63,0],
+		"1f504":[["\uD83D\uDD04"],"","",["arrows_counterclockwise"],27,6,63,0],
+		"1f505":[["\uD83D\uDD05"],"","",["low_brightness"],27,7,63,0],
+		"1f506":[["\uD83D\uDD06"],"","",["high_brightness"],27,8,63,0],
+		"1f507":[["\uD83D\uDD07"],"","",["mute"],27,9,63,0],
+		"1f508":[["\uD83D\uDD08"],"","",["speaker"],27,10,63,0],
+		"1f509":[["\uD83D\uDD09"],"","",["sound"],27,11,63,0],
+		"1f50a":[["\uD83D\uDD0A"],"\uE141","\uDBBA\uDC21",["loud_sound"],27,12,63,0],
+		"1f50b":[["\uD83D\uDD0B"],"","\uDBB9\uDCFC",["battery"],27,13,63,0],
+		"1f50c":[["\uD83D\uDD0C"],"","\uDBB9\uDCFE",["electric_plug"],27,14,63,0],
+		"1f50d":[["\uD83D\uDD0D"],"\uE114","\uDBBA\uDF85",["mag"],27,15,63,0],
+		"1f50e":[["\uD83D\uDD0E"],"","\uDBBA\uDF8D",["mag_right"],27,16,63,0],
+		"1f50f":[["\uD83D\uDD0F"],"","\uDBBA\uDF90",["lock_with_ink_pen"],27,17,63,0],
+		"1f510":[["\uD83D\uDD10"],"","\uDBBA\uDF8A",["closed_lock_with_key"],27,18,63,0],
+		"1f511":[["\uD83D\uDD11"],"\uE03F","\uDBBA\uDF82",["key"],27,19,63,0],
+		"1f512":[["\uD83D\uDD12"],"\uE144","\uDBBA\uDF86",["lock"],27,20,63,0],
+		"1f513":[["\uD83D\uDD13"],"\uE145","\uDBBA\uDF87",["unlock"],27,21,63,0],
+		"1f514":[["\uD83D\uDD14"],"\uE325","\uDBB9\uDCF2",["bell"],27,22,63,0],
+		"1f515":[["\uD83D\uDD15"],"","",["no_bell"],27,23,63,0],
+		"1f516":[["\uD83D\uDD16"],"","\uDBBA\uDF8F",["bookmark"],27,24,63,0],
+		"1f517":[["\uD83D\uDD17"],"","\uDBBA\uDF4B",["link"],27,25,63,0],
+		"1f518":[["\uD83D\uDD18"],"","\uDBBA\uDF8C",["radio_button"],27,26,63,0],
+		"1f519":[["\uD83D\uDD19"],"","\uDBBA\uDF8E",["back"],27,27,63,0],
+		"1f51a":[["\uD83D\uDD1A"],"","\uDBB8\uDC1A",["end"],27,28,63,0],
+		"1f51b":[["\uD83D\uDD1B"],"","\uDBB8\uDC19",["on"],27,29,63,0],
+		"1f51c":[["\uD83D\uDD1C"],"","\uDBB8\uDC18",["soon"],27,30,63,0],
+		"1f51d":[["\uD83D\uDD1D"],"\uE24C","\uDBBA\uDF42",["top"],27,31,63,0],
+		"1f51e":[["\uD83D\uDD1E"],"\uE207","\uDBBA\uDF25",["underage"],27,32,63,0],
+		"1f51f":[["\uD83D\uDD1F"],"","\uDBBA\uDC3B",["keycap_ten"],27,33,63,0],
+		"1f520":[["\uD83D\uDD20"],"","\uDBBA\uDF7C",["capital_abcd"],27,34,63,0],
+		"1f521":[["\uD83D\uDD21"],"","\uDBBA\uDF7D",["abcd"],27,35,63,0],
+		"1f522":[["\uD83D\uDD22"],"","\uDBBA\uDF7E",["1234"],27,36,63,0],
+		"1f523":[["\uD83D\uDD23"],"","\uDBBA\uDF7F",["symbols"],27,37,63,0],
+		"1f524":[["\uD83D\uDD24"],"","\uDBBA\uDF80",["abc"],27,38,63,0],
+		"1f525":[["\uD83D\uDD25"],"\uE11D","\uDBB9\uDCF6",["fire"],27,39,63,0],
+		"1f526":[["\uD83D\uDD26"],"","\uDBB9\uDCFB",["flashlight"],27,40,63,0],
+		"1f527":[["\uD83D\uDD27"],"","\uDBB9\uDCC9",["wrench"],27,41,63,0],
+		"1f528":[["\uD83D\uDD28"],"\uE116","\uDBB9\uDCCA",["hammer"],27,42,63,0],
+		"1f529":[["\uD83D\uDD29"],"","\uDBB9\uDCCB",["nut_and_bolt"],27,43,63,0],
+		"1f52a":[["\uD83D\uDD2A"],"","\uDBB9\uDCFA",["hocho","knife"],27,44,63,0],
+		"1f52b":[["\uD83D\uDD2B"],"\uE113","\uDBB9\uDCF5",["gun"],27,45,63,0],
+		"1f52c":[["\uD83D\uDD2C"],"","",["microscope"],27,46,63,0],
+		"1f52d":[["\uD83D\uDD2D"],"","",["telescope"],27,47,63,0],
+		"1f52e":[["\uD83D\uDD2E"],"","\uDBB9\uDCF7",["crystal_ball"],27,48,63,0],
+		"1f52f":[["\uD83D\uDD2F"],"\uE23E","\uDBB9\uDCF8",["six_pointed_star"],27,49,63,0],
+		"1f530":[["\uD83D\uDD30"],"\uE209","\uDBB8\uDC44",["beginner"],27,50,63,0],
+		"1f531":[["\uD83D\uDD31"],"\uE031","\uDBB9\uDCD2",["trident"],27,51,63,0],
+		"1f532":[["\uD83D\uDD32"],"\uE21A","\uDBBA\uDF64",["black_square_button"],28,0,63,0],
+		"1f533":[["\uD83D\uDD33"],"\uE21B","\uDBBA\uDF67",["white_square_button"],28,1,63,0],
+		"1f534":[["\uD83D\uDD34"],"\uE219","\uDBBA\uDF63",["red_circle"],28,2,63,0],
+		"1f535":[["\uD83D\uDD35"],"","\uDBBA\uDF64",["large_blue_circle"],28,3,63,0],
+		"1f536":[["\uD83D\uDD36"],"","\uDBBA\uDF73",["large_orange_diamond"],28,4,63,0],
+		"1f537":[["\uD83D\uDD37"],"","\uDBBA\uDF74",["large_blue_diamond"],28,5,63,0],
+		"1f538":[["\uD83D\uDD38"],"","\uDBBA\uDF75",["small_orange_diamond"],28,6,63,0],
+		"1f539":[["\uD83D\uDD39"],"","\uDBBA\uDF76",["small_blue_diamond"],28,7,63,0],
+		"1f53a":[["\uD83D\uDD3A"],"","\uDBBA\uDF78",["small_red_triangle"],28,8,63,0],
+		"1f53b":[["\uD83D\uDD3B"],"","\uDBBA\uDF79",["small_red_triangle_down"],28,9,63,0],
+		"1f53c":[["\uD83D\uDD3C"],"","\uDBBA\uDF01",["arrow_up_small"],28,10,63,0],
+		"1f53d":[["\uD83D\uDD3D"],"","\uDBBA\uDF00",["arrow_down_small"],28,11,63,0],
+		"1f549-fe0f":[["\uD83D\uDD49\uFE0F","\uD83D\uDD49"],"","",["om_symbol"],28,12,31,0],
+		"1f54a-fe0f":[["\uD83D\uDD4A\uFE0F","\uD83D\uDD4A"],"","",["dove_of_peace"],28,13,31,0],
+		"1f54b":[["\uD83D\uDD4B"],"","",["kaaba"],28,14,31,0],
+		"1f54c":[["\uD83D\uDD4C"],"","",["mosque"],28,15,31,0],
+		"1f54d":[["\uD83D\uDD4D"],"","",["synagogue"],28,16,31,0],
+		"1f54e":[["\uD83D\uDD4E"],"","",["menorah_with_nine_branches"],28,17,31,0],
+		"1f550":[["\uD83D\uDD50"],"\uE024","\uDBB8\uDC1E",["clock1"],28,18,63,0],
+		"1f551":[["\uD83D\uDD51"],"\uE025","\uDBB8\uDC1F",["clock2"],28,19,63,0],
+		"1f552":[["\uD83D\uDD52"],"\uE026","\uDBB8\uDC20",["clock3"],28,20,63,0],
+		"1f553":[["\uD83D\uDD53"],"\uE027","\uDBB8\uDC21",["clock4"],28,21,63,0],
+		"1f554":[["\uD83D\uDD54"],"\uE028","\uDBB8\uDC22",["clock5"],28,22,63,0],
+		"1f555":[["\uD83D\uDD55"],"\uE029","\uDBB8\uDC23",["clock6"],28,23,63,0],
+		"1f556":[["\uD83D\uDD56"],"\uE02A","\uDBB8\uDC24",["clock7"],28,24,63,0],
+		"1f557":[["\uD83D\uDD57"],"\uE02B","\uDBB8\uDC25",["clock8"],28,25,63,0],
+		"1f558":[["\uD83D\uDD58"],"\uE02C","\uDBB8\uDC26",["clock9"],28,26,63,0],
+		"1f559":[["\uD83D\uDD59"],"\uE02D","\uDBB8\uDC27",["clock10"],28,27,63,0],
+		"1f55a":[["\uD83D\uDD5A"],"\uE02E","\uDBB8\uDC28",["clock11"],28,28,63,0],
+		"1f55b":[["\uD83D\uDD5B"],"\uE02F","\uDBB8\uDC29",["clock12"],28,29,63,0],
+		"1f55c":[["\uD83D\uDD5C"],"","",["clock130"],28,30,63,0],
+		"1f55d":[["\uD83D\uDD5D"],"","",["clock230"],28,31,63,0],
+		"1f55e":[["\uD83D\uDD5E"],"","",["clock330"],28,32,63,0],
+		"1f55f":[["\uD83D\uDD5F"],"","",["clock430"],28,33,63,0],
+		"1f560":[["\uD83D\uDD60"],"","",["clock530"],28,34,63,0],
+		"1f561":[["\uD83D\uDD61"],"","",["clock630"],28,35,63,0],
+		"1f562":[["\uD83D\uDD62"],"","",["clock730"],28,36,63,0],
+		"1f563":[["\uD83D\uDD63"],"","",["clock830"],28,37,63,0],
+		"1f564":[["\uD83D\uDD64"],"","",["clock930"],28,38,63,0],
+		"1f565":[["\uD83D\uDD65"],"","",["clock1030"],28,39,63,0],
+		"1f566":[["\uD83D\uDD66"],"","",["clock1130"],28,40,63,0],
+		"1f567":[["\uD83D\uDD67"],"","",["clock1230"],28,41,63,0],
+		"1f56f-fe0f":[["\uD83D\uDD6F\uFE0F","\uD83D\uDD6F"],"","",["candle"],28,42,31,0],
+		"1f570-fe0f":[["\uD83D\uDD70\uFE0F","\uD83D\uDD70"],"","",["mantelpiece_clock"],28,43,31,0],
+		"1f573-fe0f":[["\uD83D\uDD73\uFE0F","\uD83D\uDD73"],"","",["hole"],28,44,31,0],
+		"1f574-fe0f":[["\uD83D\uDD74\uFE0F","\uD83D\uDD74"],"","",["man_in_business_suit_levitating"],28,45,31,0],
+		"1f575-fe0f-200d-2640-fe0f":[["\uD83D\uDD75\uFE0F\u200D\u2640\uFE0F"],"","",["female-detective"],28,51,15,0],
+		"1f575-fe0f-200d-2642-fe0f":[["\uD83D\uDD75\uFE0F\u200D\u2642\uFE0F","\uD83D\uDD75\uFE0F","\uD83D\uDD75"],"","",["male-detective","sleuth_or_spy"],29,5,15,0],
+		"1f576-fe0f":[["\uD83D\uDD76\uFE0F","\uD83D\uDD76"],"","",["dark_sunglasses"],29,17,31,0],
+		"1f577-fe0f":[["\uD83D\uDD77\uFE0F","\uD83D\uDD77"],"","",["spider"],29,18,31,0],
+		"1f578-fe0f":[["\uD83D\uDD78\uFE0F","\uD83D\uDD78"],"","",["spider_web"],29,19,31,0],
+		"1f579-fe0f":[["\uD83D\uDD79\uFE0F","\uD83D\uDD79"],"","",["joystick"],29,20,31,0],
+		"1f57a":[["\uD83D\uDD7A"],"","",["man_dancing"],29,21,31,0],
+		"1f587-fe0f":[["\uD83D\uDD87\uFE0F","\uD83D\uDD87"],"","",["linked_paperclips"],29,27,31,0],
+		"1f58a-fe0f":[["\uD83D\uDD8A\uFE0F","\uD83D\uDD8A"],"","",["lower_left_ballpoint_pen"],29,28,31,0],
+		"1f58b-fe0f":[["\uD83D\uDD8B\uFE0F","\uD83D\uDD8B"],"","",["lower_left_fountain_pen"],29,29,31,0],
+		"1f58c-fe0f":[["\uD83D\uDD8C\uFE0F","\uD83D\uDD8C"],"","",["lower_left_paintbrush"],29,30,31,0],
+		"1f58d-fe0f":[["\uD83D\uDD8D\uFE0F","\uD83D\uDD8D"],"","",["lower_left_crayon"],29,31,31,0],
+		"1f590-fe0f":[["\uD83D\uDD90\uFE0F","\uD83D\uDD90"],"","",["raised_hand_with_fingers_splayed"],29,32,31,0],
+		"1f595":[["\uD83D\uDD95"],"","",["middle_finger","reversed_hand_with_middle_finger_extended"],29,38,31,0],
+		"1f596":[["\uD83D\uDD96"],"","",["spock-hand"],29,44,31,0],
+		"1f5a4":[["\uD83D\uDDA4"],"","",["black_heart"],29,50,31,0],
+		"1f5a5-fe0f":[["\uD83D\uDDA5\uFE0F","\uD83D\uDDA5"],"","",["desktop_computer"],29,51,31,0],
+		"1f5a8-fe0f":[["\uD83D\uDDA8\uFE0F","\uD83D\uDDA8"],"","",["printer"],30,0,31,0],
+		"1f5b1-fe0f":[["\uD83D\uDDB1\uFE0F","\uD83D\uDDB1"],"","",["three_button_mouse"],30,1,31,0],
+		"1f5b2-fe0f":[["\uD83D\uDDB2\uFE0F","\uD83D\uDDB2"],"","",["trackball"],30,2,31,0],
+		"1f5bc-fe0f":[["\uD83D\uDDBC\uFE0F","\uD83D\uDDBC"],"","",["frame_with_picture"],30,3,31,0],
+		"1f5c2-fe0f":[["\uD83D\uDDC2\uFE0F","\uD83D\uDDC2"],"","",["card_index_dividers"],30,4,31,0],
+		"1f5c3-fe0f":[["\uD83D\uDDC3\uFE0F","\uD83D\uDDC3"],"","",["card_file_box"],30,5,31,0],
+		"1f5c4-fe0f":[["\uD83D\uDDC4\uFE0F","\uD83D\uDDC4"],"","",["file_cabinet"],30,6,31,0],
+		"1f5d1-fe0f":[["\uD83D\uDDD1\uFE0F","\uD83D\uDDD1"],"","",["wastebasket"],30,7,31,0],
+		"1f5d2-fe0f":[["\uD83D\uDDD2\uFE0F","\uD83D\uDDD2"],"","",["spiral_note_pad"],30,8,31,0],
+		"1f5d3-fe0f":[["\uD83D\uDDD3\uFE0F","\uD83D\uDDD3"],"","",["spiral_calendar_pad"],30,9,31,0],
+		"1f5dc-fe0f":[["\uD83D\uDDDC\uFE0F","\uD83D\uDDDC"],"","",["compression"],30,10,31,0],
+		"1f5dd-fe0f":[["\uD83D\uDDDD\uFE0F","\uD83D\uDDDD"],"","",["old_key"],30,11,31,0],
+		"1f5de-fe0f":[["\uD83D\uDDDE\uFE0F","\uD83D\uDDDE"],"","",["rolled_up_newspaper"],30,12,31,0],
+		"1f5e1-fe0f":[["\uD83D\uDDE1\uFE0F","\uD83D\uDDE1"],"","",["dagger_knife"],30,13,31,0],
+		"1f5e3-fe0f":[["\uD83D\uDDE3\uFE0F","\uD83D\uDDE3"],"","",["speaking_head_in_silhouette"],30,14,31,0],
+		"1f5e8-fe0f":[["\uD83D\uDDE8\uFE0F","\uD83D\uDDE8"],"","",["left_speech_bubble"],30,15,31,0],
+		"1f5ef-fe0f":[["\uD83D\uDDEF\uFE0F","\uD83D\uDDEF"],"","",["right_anger_bubble"],30,16,31,0],
+		"1f5f3-fe0f":[["\uD83D\uDDF3\uFE0F","\uD83D\uDDF3"],"","",["ballot_box_with_ballot"],30,17,31,0],
+		"1f5fa-fe0f":[["\uD83D\uDDFA\uFE0F","\uD83D\uDDFA"],"","",["world_map"],30,18,31,0],
+		"1f5fb":[["\uD83D\uDDFB"],"\uE03B","\uDBB9\uDCC3",["mount_fuji"],30,19,63,0],
+		"1f5fc":[["\uD83D\uDDFC"],"\uE509","\uDBB9\uDCC4",["tokyo_tower"],30,20,63,0],
+		"1f5fd":[["\uD83D\uDDFD"],"\uE51D","\uDBB9\uDCC6",["statue_of_liberty"],30,21,63,0],
+		"1f5fe":[["\uD83D\uDDFE"],"","\uDBB9\uDCC7",["japan"],30,22,63,0],
+		"1f5ff":[["\uD83D\uDDFF"],"","\uDBB9\uDCC8",["moyai"],30,23,63,0],
+		"1f600":[["\uD83D\uDE00"],"","",["grinning"],30,24,63,0,":D"],
+		"1f601":[["\uD83D\uDE01"],"\uE404","\uDBB8\uDF33",["grin"],30,25,63,0],
+		"1f602":[["\uD83D\uDE02"],"\uE412","\uDBB8\uDF34",["joy"],30,26,63,0],
+		"1f603":[["\uD83D\uDE03"],"\uE057","\uDBB8\uDF30",["smiley"],30,27,63,0,":)"],
+		"1f604":[["\uD83D\uDE04"],"\uE415","\uDBB8\uDF38",["smile"],30,28,63,0,":)"],
+		"1f605":[["\uD83D\uDE05"],"","\uDBB8\uDF31",["sweat_smile"],30,29,63,0],
+		"1f606":[["\uD83D\uDE06"],"","\uDBB8\uDF32",["laughing","satisfied"],30,30,63,0],
+		"1f607":[["\uD83D\uDE07"],"","",["innocent"],30,31,63,0],
+		"1f608":[["\uD83D\uDE08"],"","",["smiling_imp"],30,32,63,0],
+		"1f609":[["\uD83D\uDE09"],"\uE405","\uDBB8\uDF47",["wink"],30,33,63,0,";)"],
+		"1f60a":[["\uD83D\uDE0A"],"\uE056","\uDBB8\uDF35",["blush"],30,34,63,0,":)"],
+		"1f60b":[["\uD83D\uDE0B"],"","\uDBB8\uDF2B",["yum"],30,35,63,0],
+		"1f60c":[["\uD83D\uDE0C"],"\uE40A","\uDBB8\uDF3E",["relieved"],30,36,63,0],
+		"1f60d":[["\uD83D\uDE0D"],"\uE106","\uDBB8\uDF27",["heart_eyes"],30,37,63,0],
+		"1f60e":[["\uD83D\uDE0E"],"","",["sunglasses"],30,38,63,0],
+		"1f60f":[["\uD83D\uDE0F"],"\uE402","\uDBB8\uDF43",["smirk"],30,39,63,0],
+		"1f610":[["\uD83D\uDE10"],"","",["neutral_face"],30,40,63,0],
+		"1f611":[["\uD83D\uDE11"],"","",["expressionless"],30,41,63,0],
+		"1f612":[["\uD83D\uDE12"],"\uE40E","\uDBB8\uDF26",["unamused"],30,42,63,0,":("],
+		"1f613":[["\uD83D\uDE13"],"\uE108","\uDBB8\uDF44",["sweat"],30,43,63,0],
+		"1f614":[["\uD83D\uDE14"],"\uE403","\uDBB8\uDF40",["pensive"],30,44,63,0],
+		"1f615":[["\uD83D\uDE15"],"","",["confused"],30,45,63,0],
+		"1f616":[["\uD83D\uDE16"],"\uE407","\uDBB8\uDF3F",["confounded"],30,46,63,0],
+		"1f617":[["\uD83D\uDE17"],"","",["kissing"],30,47,63,0],
+		"1f618":[["\uD83D\uDE18"],"\uE418","\uDBB8\uDF2C",["kissing_heart"],30,48,63,0],
+		"1f619":[["\uD83D\uDE19"],"","",["kissing_smiling_eyes"],30,49,63,0],
+		"1f61a":[["\uD83D\uDE1A"],"\uE417","\uDBB8\uDF2D",["kissing_closed_eyes"],30,50,63,0],
+		"1f61b":[["\uD83D\uDE1B"],"","",["stuck_out_tongue"],30,51,63,0,":p"],
+		"1f61c":[["\uD83D\uDE1C"],"\uE105","\uDBB8\uDF29",["stuck_out_tongue_winking_eye"],31,0,63,0,";p"],
+		"1f61d":[["\uD83D\uDE1D"],"\uE409","\uDBB8\uDF2A",["stuck_out_tongue_closed_eyes"],31,1,63,0],
+		"1f61e":[["\uD83D\uDE1E"],"\uE058","\uDBB8\uDF23",["disappointed"],31,2,63,0,":("],
+		"1f61f":[["\uD83D\uDE1F"],"","",["worried"],31,3,63,0],
+		"1f620":[["\uD83D\uDE20"],"\uE059","\uDBB8\uDF20",["angry"],31,4,63,0],
+		"1f621":[["\uD83D\uDE21"],"\uE416","\uDBB8\uDF3D",["rage"],31,5,63,0],
+		"1f622":[["\uD83D\uDE22"],"\uE413","\uDBB8\uDF39",["cry"],31,6,63,0,":'("],
+		"1f623":[["\uD83D\uDE23"],"\uE406","\uDBB8\uDF3C",["persevere"],31,7,63,0],
+		"1f624":[["\uD83D\uDE24"],"","\uDBB8\uDF28",["triumph"],31,8,63,0],
+		"1f625":[["\uD83D\uDE25"],"\uE401","\uDBB8\uDF45",["disappointed_relieved"],31,9,63,0],
+		"1f626":[["\uD83D\uDE26"],"","",["frowning"],31,10,63,0],
+		"1f627":[["\uD83D\uDE27"],"","",["anguished"],31,11,63,0],
+		"1f628":[["\uD83D\uDE28"],"\uE40B","\uDBB8\uDF3B",["fearful"],31,12,63,0],
+		"1f629":[["\uD83D\uDE29"],"","\uDBB8\uDF21",["weary"],31,13,63,0],
+		"1f62a":[["\uD83D\uDE2A"],"\uE408","\uDBB8\uDF42",["sleepy"],31,14,63,0],
+		"1f62b":[["\uD83D\uDE2B"],"","\uDBB8\uDF46",["tired_face"],31,15,63,0],
+		"1f62c":[["\uD83D\uDE2C"],"","",["grimacing"],31,16,63,0],
+		"1f62d":[["\uD83D\uDE2D"],"\uE411","\uDBB8\uDF3A",["sob"],31,17,63,0,":'("],
+		"1f62e":[["\uD83D\uDE2E"],"","",["open_mouth"],31,18,63,0],
+		"1f62f":[["\uD83D\uDE2F"],"","",["hushed"],31,19,63,0],
+		"1f630":[["\uD83D\uDE30"],"\uE40F","\uDBB8\uDF25",["cold_sweat"],31,20,63,0],
+		"1f631":[["\uD83D\uDE31"],"\uE107","\uDBB8\uDF41",["scream"],31,21,63,0],
+		"1f632":[["\uD83D\uDE32"],"\uE410","\uDBB8\uDF22",["astonished"],31,22,63,0],
+		"1f633":[["\uD83D\uDE33"],"\uE40D","\uDBB8\uDF2F",["flushed"],31,23,63,0],
+		"1f634":[["\uD83D\uDE34"],"","",["sleeping"],31,24,63,0],
+		"1f635":[["\uD83D\uDE35"],"","\uDBB8\uDF24",["dizzy_face"],31,25,63,0],
+		"1f636":[["\uD83D\uDE36"],"","",["no_mouth"],31,26,63,0],
+		"1f637":[["\uD83D\uDE37"],"\uE40C","\uDBB8\uDF2E",["mask"],31,27,63,0],
+		"1f638":[["\uD83D\uDE38"],"","\uDBB8\uDF49",["smile_cat"],31,28,63,0],
+		"1f639":[["\uD83D\uDE39"],"","\uDBB8\uDF4A",["joy_cat"],31,29,63,0],
+		"1f63a":[["\uD83D\uDE3A"],"","\uDBB8\uDF48",["smiley_cat"],31,30,63,0],
+		"1f63b":[["\uD83D\uDE3B"],"","\uDBB8\uDF4C",["heart_eyes_cat"],31,31,63,0],
+		"1f63c":[["\uD83D\uDE3C"],"","\uDBB8\uDF4F",["smirk_cat"],31,32,63,0],
+		"1f63d":[["\uD83D\uDE3D"],"","\uDBB8\uDF4B",["kissing_cat"],31,33,63,0],
+		"1f63e":[["\uD83D\uDE3E"],"","\uDBB8\uDF4E",["pouting_cat"],31,34,63,0],
+		"1f63f":[["\uD83D\uDE3F"],"","\uDBB8\uDF4D",["crying_cat_face"],31,35,63,0],
+		"1f640":[["\uD83D\uDE40"],"","\uDBB8\uDF50",["scream_cat"],31,36,63,0],
+		"1f641":[["\uD83D\uDE41"],"","",["slightly_frowning_face"],31,37,31,0],
+		"1f642":[["\uD83D\uDE42"],"","",["slightly_smiling_face"],31,38,63,0],
+		"1f643":[["\uD83D\uDE43"],"","",["upside_down_face"],31,39,31,0],
+		"1f644":[["\uD83D\uDE44"],"","",["face_with_rolling_eyes"],31,40,31,0],
+		"1f645-200d-2640-fe0f":[["\uD83D\uDE45\u200D\u2640\uFE0F","\uD83D\uDE45\u200D\u2640","\uD83D\uDE45"],"","",["woman-gesturing-no","no_good"],31,41,31,0],
+		"1f645-200d-2642-fe0f":[["\uD83D\uDE45\u200D\u2642\uFE0F","\uD83D\uDE45\u200D\u2642"],"","",["man-gesturing-no"],31,47,31,0],
+		"1f646-200d-2640-fe0f":[["\uD83D\uDE46\u200D\u2640\uFE0F","\uD83D\uDE46\u200D\u2640","\uD83D\uDE46"],"","",["woman-gesturing-ok","ok_woman"],32,7,31,0],
+		"1f646-200d-2642-fe0f":[["\uD83D\uDE46\u200D\u2642\uFE0F","\uD83D\uDE46\u200D\u2642"],"","",["man-gesturing-ok"],32,13,31,0],
+		"1f647-200d-2640-fe0f":[["\uD83D\uDE47\u200D\u2640\uFE0F","\uD83D\uDE47\u200D\u2640"],"","",["woman-bowing"],32,25,31,0],
+		"1f647-200d-2642-fe0f":[["\uD83D\uDE47\u200D\u2642\uFE0F","\uD83D\uDE47\u200D\u2642","\uD83D\uDE47"],"","",["man-bowing","bow"],32,31,31,0],
+		"1f648":[["\uD83D\uDE48"],"","\uDBB8\uDF54",["see_no_evil"],32,43,63,0],
+		"1f649":[["\uD83D\uDE49"],"","\uDBB8\uDF56",["hear_no_evil"],32,44,63,0],
+		"1f64a":[["\uD83D\uDE4A"],"","\uDBB8\uDF55",["speak_no_evil"],32,45,63,0],
+		"1f64b-200d-2640-fe0f":[["\uD83D\uDE4B\u200D\u2640\uFE0F","\uD83D\uDE4B\u200D\u2640","\uD83D\uDE4B"],"","",["woman-raising-hand","raising_hand"],32,46,31,0],
+		"1f64b-200d-2642-fe0f":[["\uD83D\uDE4B\u200D\u2642\uFE0F","\uD83D\uDE4B\u200D\u2642"],"","",["man-raising-hand"],33,0,31,0],
+		"1f64c":[["\uD83D\uDE4C"],"\uE427","\uDBB8\uDF58",["raised_hands"],33,12,63,0],
+		"1f64d-200d-2640-fe0f":[["\uD83D\uDE4D\u200D\u2640\uFE0F","\uD83D\uDE4D\u200D\u2640","\uD83D\uDE4D"],"","",["woman-frowning","person_frowning"],33,18,31,0],
+		"1f64d-200d-2642-fe0f":[["\uD83D\uDE4D\u200D\u2642\uFE0F","\uD83D\uDE4D\u200D\u2642"],"","",["man-frowning"],33,24,31,0],
+		"1f64e-200d-2640-fe0f":[["\uD83D\uDE4E\u200D\u2640\uFE0F","\uD83D\uDE4E\u200D\u2640","\uD83D\uDE4E"],"","",["woman-pouting","person_with_pouting_face"],33,36,31,0],
+		"1f64e-200d-2642-fe0f":[["\uD83D\uDE4E\u200D\u2642\uFE0F","\uD83D\uDE4E\u200D\u2642"],"","",["man-pouting"],33,42,31,0],
+		"1f64f":[["\uD83D\uDE4F"],"\uE41D","\uDBB8\uDF5B",["pray"],34,2,63,0],
+		"1f680":[["\uD83D\uDE80"],"\uE10D","\uDBB9\uDFED",["rocket"],34,8,63,0],
+		"1f681":[["\uD83D\uDE81"],"","",["helicopter"],34,9,63,0],
+		"1f682":[["\uD83D\uDE82"],"","",["steam_locomotive"],34,10,63,0],
+		"1f683":[["\uD83D\uDE83"],"\uE01E","\uDBB9\uDFDF",["railway_car"],34,11,63,0],
+		"1f684":[["\uD83D\uDE84"],"\uE435","\uDBB9\uDFE2",["bullettrain_side"],34,12,63,0],
+		"1f685":[["\uD83D\uDE85"],"\uE01F","\uDBB9\uDFE3",["bullettrain_front"],34,13,63,0],
+		"1f686":[["\uD83D\uDE86"],"","",["train2"],34,14,63,0],
+		"1f687":[["\uD83D\uDE87"],"\uE434","\uDBB9\uDFE0",["metro"],34,15,63,0],
+		"1f688":[["\uD83D\uDE88"],"","",["light_rail"],34,16,63,0],
+		"1f689":[["\uD83D\uDE89"],"\uE039","\uDBB9\uDFEC",["station"],34,17,63,0],
+		"1f68a":[["\uD83D\uDE8A"],"","",["tram"],34,18,63,0],
+		"1f68b":[["\uD83D\uDE8B"],"","",["train"],34,19,63,0],
+		"1f68c":[["\uD83D\uDE8C"],"\uE159","\uDBB9\uDFE6",["bus"],34,20,63,0],
+		"1f68d":[["\uD83D\uDE8D"],"","",["oncoming_bus"],34,21,63,0],
+		"1f68e":[["\uD83D\uDE8E"],"","",["trolleybus"],34,22,63,0],
+		"1f68f":[["\uD83D\uDE8F"],"\uE150","\uDBB9\uDFE7",["busstop"],34,23,63,0],
+		"1f690":[["\uD83D\uDE90"],"","",["minibus"],34,24,63,0],
+		"1f691":[["\uD83D\uDE91"],"\uE431","\uDBB9\uDFF3",["ambulance"],34,25,63,0],
+		"1f692":[["\uD83D\uDE92"],"\uE430","\uDBB9\uDFF2",["fire_engine"],34,26,63,0],
+		"1f693":[["\uD83D\uDE93"],"\uE432","\uDBB9\uDFF4",["police_car"],34,27,63,0],
+		"1f694":[["\uD83D\uDE94"],"","",["oncoming_police_car"],34,28,63,0],
+		"1f695":[["\uD83D\uDE95"],"\uE15A","\uDBB9\uDFEF",["taxi"],34,29,63,0],
+		"1f696":[["\uD83D\uDE96"],"","",["oncoming_taxi"],34,30,63,0],
+		"1f697":[["\uD83D\uDE97"],"\uE01B","\uDBB9\uDFE4",["car","red_car"],34,31,63,0],
+		"1f698":[["\uD83D\uDE98"],"","",["oncoming_automobile"],34,32,63,0],
+		"1f699":[["\uD83D\uDE99"],"\uE42E","\uDBB9\uDFE5",["blue_car"],34,33,63,0],
+		"1f69a":[["\uD83D\uDE9A"],"\uE42F","\uDBB9\uDFF1",["truck"],34,34,63,0],
+		"1f69b":[["\uD83D\uDE9B"],"","",["articulated_lorry"],34,35,63,0],
+		"1f69c":[["\uD83D\uDE9C"],"","",["tractor"],34,36,63,0],
+		"1f69d":[["\uD83D\uDE9D"],"","",["monorail"],34,37,63,0],
+		"1f69e":[["\uD83D\uDE9E"],"","",["mountain_railway"],34,38,63,0],
+		"1f69f":[["\uD83D\uDE9F"],"","",["suspension_railway"],34,39,63,0],
+		"1f6a0":[["\uD83D\uDEA0"],"","",["mountain_cableway"],34,40,63,0],
+		"1f6a1":[["\uD83D\uDEA1"],"","",["aerial_tramway"],34,41,63,0],
+		"1f6a2":[["\uD83D\uDEA2"],"\uE202","\uDBB9\uDFE8",["ship"],34,42,63,0],
+		"1f6a3-200d-2640-fe0f":[["\uD83D\uDEA3\u200D\u2640\uFE0F","\uD83D\uDEA3\u200D\u2640"],"","",["woman-rowing-boat"],34,43,31,0],
+		"1f6a3-200d-2642-fe0f":[["\uD83D\uDEA3\u200D\u2642\uFE0F","\uD83D\uDEA3\u200D\u2642","\uD83D\uDEA3"],"","",["man-rowing-boat","rowboat"],34,49,31,0],
+		"1f6a4":[["\uD83D\uDEA4"],"\uE135","\uDBB9\uDFEE",["speedboat"],35,9,63,0],
+		"1f6a5":[["\uD83D\uDEA5"],"\uE14E","\uDBB9\uDFF7",["traffic_light"],35,10,63,0],
+		"1f6a6":[["\uD83D\uDEA6"],"","",["vertical_traffic_light"],35,11,63,0],
+		"1f6a7":[["\uD83D\uDEA7"],"\uE137","\uDBB9\uDFF8",["construction"],35,12,63,0],
+		"1f6a8":[["\uD83D\uDEA8"],"","\uDBB9\uDFF9",["rotating_light"],35,13,63,0],
+		"1f6a9":[["\uD83D\uDEA9"],"","\uDBBA\uDF22",["triangular_flag_on_post"],35,14,63,0],
+		"1f6aa":[["\uD83D\uDEAA"],"","\uDBB9\uDCF3",["door"],35,15,63,0],
+		"1f6ab":[["\uD83D\uDEAB"],"","\uDBBA\uDF48",["no_entry_sign"],35,16,63,0],
+		"1f6ac":[["\uD83D\uDEAC"],"\uE30E","\uDBBA\uDF1E",["smoking"],35,17,63,0],
+		"1f6ad":[["\uD83D\uDEAD"],"\uE208","\uDBBA\uDF1F",["no_smoking"],35,18,63,0],
+		"1f6ae":[["\uD83D\uDEAE"],"","",["put_litter_in_its_place"],35,19,63,0],
+		"1f6af":[["\uD83D\uDEAF"],"","",["do_not_litter"],35,20,63,0],
+		"1f6b0":[["\uD83D\uDEB0"],"","",["potable_water"],35,21,63,0],
+		"1f6b1":[["\uD83D\uDEB1"],"","",["non-potable_water"],35,22,63,0],
+		"1f6b2":[["\uD83D\uDEB2"],"\uE136","\uDBB9\uDFEB",["bike"],35,23,63,0],
+		"1f6b3":[["\uD83D\uDEB3"],"","",["no_bicycles"],35,24,63,0],
+		"1f6b4-200d-2640-fe0f":[["\uD83D\uDEB4\u200D\u2640\uFE0F","\uD83D\uDEB4\u200D\u2640"],"","",["woman-biking"],35,25,31,0],
+		"1f6b4-200d-2642-fe0f":[["\uD83D\uDEB4\u200D\u2642\uFE0F","\uD83D\uDEB4\u200D\u2642","\uD83D\uDEB4"],"","",["man-biking","bicyclist"],35,31,31,0],
+		"1f6b5-200d-2640-fe0f":[["\uD83D\uDEB5\u200D\u2640\uFE0F","\uD83D\uDEB5\u200D\u2640"],"","",["woman-mountain-biking"],35,43,31,0],
+		"1f6b5-200d-2642-fe0f":[["\uD83D\uDEB5\u200D\u2642\uFE0F","\uD83D\uDEB5\u200D\u2642","\uD83D\uDEB5"],"","",["man-mountain-biking","mountain_bicyclist"],35,49,31,0],
+		"1f6b6-200d-2640-fe0f":[["\uD83D\uDEB6\u200D\u2640\uFE0F","\uD83D\uDEB6\u200D\u2640"],"","",["woman-walking"],36,9,31,0],
+		"1f6b6-200d-2642-fe0f":[["\uD83D\uDEB6\u200D\u2642\uFE0F","\uD83D\uDEB6\u200D\u2642","\uD83D\uDEB6"],"","",["man-walking","walking"],36,15,31,0],
+		"1f6b7":[["\uD83D\uDEB7"],"","",["no_pedestrians"],36,27,63,0],
+		"1f6b8":[["\uD83D\uDEB8"],"","",["children_crossing"],36,28,63,0],
+		"1f6b9":[["\uD83D\uDEB9"],"\uE138","\uDBBA\uDF33",["mens"],36,29,63,0],
+		"1f6ba":[["\uD83D\uDEBA"],"\uE139","\uDBBA\uDF34",["womens"],36,30,63,0],
+		"1f6bb":[["\uD83D\uDEBB"],"\uE151","\uDBB9\uDD06",["restroom"],36,31,63,0],
+		"1f6bc":[["\uD83D\uDEBC"],"\uE13A","\uDBBA\uDF35",["baby_symbol"],36,32,63,0],
+		"1f6bd":[["\uD83D\uDEBD"],"\uE140","\uDBB9\uDD07",["toilet"],36,33,63,0],
+		"1f6be":[["\uD83D\uDEBE"],"\uE309","\uDBB9\uDD08",["wc"],36,34,63,0],
+		"1f6bf":[["\uD83D\uDEBF"],"","",["shower"],36,35,63,0],
+		"1f6c0":[["\uD83D\uDEC0"],"\uE13F","\uDBB9\uDD05",["bath"],36,36,63,0],
+		"1f6c1":[["\uD83D\uDEC1"],"","",["bathtub"],36,42,63,0],
+		"1f6c2":[["\uD83D\uDEC2"],"","",["passport_control"],36,43,63,0],
+		"1f6c3":[["\uD83D\uDEC3"],"","",["customs"],36,44,63,0],
+		"1f6c4":[["\uD83D\uDEC4"],"","",["baggage_claim"],36,45,63,0],
+		"1f6c5":[["\uD83D\uDEC5"],"","",["left_luggage"],36,46,63,0],
+		"1f6cb-fe0f":[["\uD83D\uDECB\uFE0F","\uD83D\uDECB"],"","",["couch_and_lamp"],36,47,31,0],
+		"1f6cc":[["\uD83D\uDECC"],"","",["sleeping_accommodation"],36,48,31,0],
+		"1f6cd-fe0f":[["\uD83D\uDECD\uFE0F","\uD83D\uDECD"],"","",["shopping_bags"],37,2,31,0],
+		"1f6ce-fe0f":[["\uD83D\uDECE\uFE0F","\uD83D\uDECE"],"","",["bellhop_bell"],37,3,31,0],
+		"1f6cf-fe0f":[["\uD83D\uDECF\uFE0F","\uD83D\uDECF"],"","",["bed"],37,4,31,0],
+		"1f6d0":[["\uD83D\uDED0"],"","",["place_of_worship"],37,5,31,0],
+		"1f6d1":[["\uD83D\uDED1"],"","",["octagonal_sign"],37,6,31,0],
+		"1f6d2":[["\uD83D\uDED2"],"","",["shopping_trolley"],37,7,31,0],
+		"1f6e0-fe0f":[["\uD83D\uDEE0\uFE0F","\uD83D\uDEE0"],"","",["hammer_and_wrench"],37,8,31,0],
+		"1f6e1-fe0f":[["\uD83D\uDEE1\uFE0F","\uD83D\uDEE1"],"","",["shield"],37,9,31,0],
+		"1f6e2-fe0f":[["\uD83D\uDEE2\uFE0F","\uD83D\uDEE2"],"","",["oil_drum"],37,10,31,0],
+		"1f6e3-fe0f":[["\uD83D\uDEE3\uFE0F","\uD83D\uDEE3"],"","",["motorway"],37,11,31,0],
+		"1f6e4-fe0f":[["\uD83D\uDEE4\uFE0F","\uD83D\uDEE4"],"","",["railway_track"],37,12,31,0],
+		"1f6e5-fe0f":[["\uD83D\uDEE5\uFE0F","\uD83D\uDEE5"],"","",["motor_boat"],37,13,31,0],
+		"1f6e9-fe0f":[["\uD83D\uDEE9\uFE0F","\uD83D\uDEE9"],"","",["small_airplane"],37,14,31,0],
+		"1f6eb":[["\uD83D\uDEEB"],"","",["airplane_departure"],37,15,31,0],
+		"1f6ec":[["\uD83D\uDEEC"],"","",["airplane_arriving"],37,16,31,0],
+		"1f6f0-fe0f":[["\uD83D\uDEF0\uFE0F","\uD83D\uDEF0"],"","",["satellite"],37,17,31,0],
+		"1f6f3-fe0f":[["\uD83D\uDEF3\uFE0F","\uD83D\uDEF3"],"","",["passenger_ship"],37,18,31,0],
+		"1f6f4":[["\uD83D\uDEF4"],"","",["scooter"],37,19,31,0],
+		"1f6f5":[["\uD83D\uDEF5"],"","",["motor_scooter"],37,20,31,0],
+		"1f6f6":[["\uD83D\uDEF6"],"","",["canoe"],37,21,31,0],
+		"1f6f7":[["\uD83D\uDEF7"],"","",["sled"],37,22,31,0],
+		"1f6f8":[["\uD83D\uDEF8"],"","",["flying_saucer"],37,23,31,0],
+		"1f910":[["\uD83E\uDD10"],"","",["zipper_mouth_face"],37,24,31,0],
+		"1f911":[["\uD83E\uDD11"],"","",["money_mouth_face"],37,25,31,0],
+		"1f912":[["\uD83E\uDD12"],"","",["face_with_thermometer"],37,26,31,0],
+		"1f913":[["\uD83E\uDD13"],"","",["nerd_face"],37,27,31,0],
+		"1f914":[["\uD83E\uDD14"],"","",["thinking_face"],37,28,31,0],
+		"1f915":[["\uD83E\uDD15"],"","",["face_with_head_bandage"],37,29,31,0],
+		"1f916":[["\uD83E\uDD16"],"","",["robot_face"],37,30,31,0],
+		"1f917":[["\uD83E\uDD17"],"","",["hugging_face"],37,31,31,0],
+		"1f918":[["\uD83E\uDD18"],"","",["the_horns","sign_of_the_horns"],37,32,31,0],
+		"1f919":[["\uD83E\uDD19"],"","",["call_me_hand"],37,38,31,0],
+		"1f91a":[["\uD83E\uDD1A"],"","",["raised_back_of_hand"],37,44,31,0],
+		"1f91b":[["\uD83E\uDD1B"],"","",["left-facing_fist"],37,50,31,0],
+		"1f91c":[["\uD83E\uDD1C"],"","",["right-facing_fist"],38,4,31,0],
+		"1f91d":[["\uD83E\uDD1D"],"","",["handshake"],38,10,31,0],
+		"1f91e":[["\uD83E\uDD1E"],"","",["crossed_fingers","hand_with_index_and_middle_fingers_crossed"],38,11,31,0],
+		"1f91f":[["\uD83E\uDD1F"],"","",["i_love_you_hand_sign"],38,17,31,0],
+		"1f920":[["\uD83E\uDD20"],"","",["face_with_cowboy_hat"],38,23,31,0],
+		"1f921":[["\uD83E\uDD21"],"","",["clown_face"],38,24,31,0],
+		"1f922":[["\uD83E\uDD22"],"","",["nauseated_face"],38,25,31,0],
+		"1f923":[["\uD83E\uDD23"],"","",["rolling_on_the_floor_laughing"],38,26,31,0],
+		"1f924":[["\uD83E\uDD24"],"","",["drooling_face"],38,27,31,0],
+		"1f925":[["\uD83E\uDD25"],"","",["lying_face"],38,28,31,0],
+		"1f926-200d-2640-fe0f":[["\uD83E\uDD26\u200D\u2640\uFE0F","\uD83E\uDD26\u200D\u2640"],"","",["woman-facepalming"],38,29,31,0],
+		"1f926-200d-2642-fe0f":[["\uD83E\uDD26\u200D\u2642\uFE0F","\uD83E\uDD26\u200D\u2642"],"","",["man-facepalming"],38,35,31,0],
+		"1f926":[["\uD83E\uDD26"],"","",["face_palm"],38,41,15,0],
+		"1f927":[["\uD83E\uDD27"],"","",["sneezing_face"],38,47,31,0],
+		"1f928":[["\uD83E\uDD28"],"","",["face_with_raised_eyebrow","face_with_one_eyebrow_raised"],38,48,31,0],
+		"1f929":[["\uD83E\uDD29"],"","",["star-struck","grinning_face_with_star_eyes"],38,49,31,0],
+		"1f92a":[["\uD83E\uDD2A"],"","",["zany_face","grinning_face_with_one_large_and_one_small_eye"],38,50,31,0],
+		"1f92b":[["\uD83E\uDD2B"],"","",["shushing_face","face_with_finger_covering_closed_lips"],38,51,31,0],
+		"1f92c":[["\uD83E\uDD2C"],"","",["face_with_symbols_on_mouth","serious_face_with_symbols_covering_mouth"],39,0,31,0],
+		"1f92d":[["\uD83E\uDD2D"],"","",["face_with_hand_over_mouth","smiling_face_with_smiling_eyes_and_hand_covering_mouth"],39,1,31,0],
+		"1f92e":[["\uD83E\uDD2E"],"","",["face_vomiting","face_with_open_mouth_vomiting"],39,2,31,0],
+		"1f92f":[["\uD83E\uDD2F"],"","",["exploding_head","shocked_face_with_exploding_head"],39,3,31,0],
+		"1f930":[["\uD83E\uDD30"],"","",["pregnant_woman"],39,4,31,0],
+		"1f931":[["\uD83E\uDD31"],"","",["breast-feeding"],39,10,31,0],
+		"1f932":[["\uD83E\uDD32"],"","",["palms_up_together"],39,16,31,0],
+		"1f933":[["\uD83E\uDD33"],"","",["selfie"],39,22,31,0],
+		"1f934":[["\uD83E\uDD34"],"","",["prince"],39,28,31,0],
+		"1f935":[["\uD83E\uDD35"],"","",["man_in_tuxedo"],39,34,31,0],
+		"1f936":[["\uD83E\uDD36"],"","",["mrs_claus","mother_christmas"],39,40,31,0],
+		"1f937-200d-2640-fe0f":[["\uD83E\uDD37\u200D\u2640\uFE0F","\uD83E\uDD37\u200D\u2640"],"","",["woman-shrugging"],39,46,31,0],
+		"1f937-200d-2642-fe0f":[["\uD83E\uDD37\u200D\u2642\uFE0F","\uD83E\uDD37\u200D\u2642"],"","",["man-shrugging"],40,0,31,0],
+		"1f937":[["\uD83E\uDD37"],"","",["shrug"],40,6,15,0],
+		"1f938-200d-2640-fe0f":[["\uD83E\uDD38\u200D\u2640\uFE0F","\uD83E\uDD38\u200D\u2640"],"","",["woman-cartwheeling"],40,12,31,0],
+		"1f938-200d-2642-fe0f":[["\uD83E\uDD38\u200D\u2642\uFE0F","\uD83E\uDD38\u200D\u2642"],"","",["man-cartwheeling"],40,18,31,0],
+		"1f938":[["\uD83E\uDD38"],"","",["person_doing_cartwheel"],40,24,15,0],
+		"1f939-200d-2640-fe0f":[["\uD83E\uDD39\u200D\u2640\uFE0F","\uD83E\uDD39\u200D\u2640"],"","",["woman-juggling"],40,30,15,0],
+		"1f939-200d-2642-fe0f":[["\uD83E\uDD39\u200D\u2642\uFE0F","\uD83E\uDD39\u200D\u2642"],"","",["man-juggling"],40,36,15,0],
+		"1f939":[["\uD83E\uDD39"],"","",["juggling"],40,42,31,0],
+		"1f93a":[["\uD83E\uDD3A"],"","",["fencer"],40,48,31,0],
+		"1f93c-200d-2640-fe0f":[["\uD83E\uDD3C\u200D\u2640\uFE0F","\uD83E\uDD3C\u200D\u2640"],"","",["woman-wrestling"],40,49,31,0],
+		"1f93c-200d-2642-fe0f":[["\uD83E\uDD3C\u200D\u2642\uFE0F","\uD83E\uDD3C\u200D\u2642"],"","",["man-wrestling"],40,50,31,0],
+		"1f93c":[["\uD83E\uDD3C"],"","",["wrestlers"],40,51,15,0],
+		"1f93d-200d-2640-fe0f":[["\uD83E\uDD3D\u200D\u2640\uFE0F","\uD83E\uDD3D\u200D\u2640"],"","",["woman-playing-water-polo"],41,0,31,0],
+		"1f93d-200d-2642-fe0f":[["\uD83E\uDD3D\u200D\u2642\uFE0F","\uD83E\uDD3D\u200D\u2642"],"","",["man-playing-water-polo"],41,6,31,0],
+		"1f93d":[["\uD83E\uDD3D"],"","",["water_polo"],41,12,15,0],
+		"1f93e-200d-2640-fe0f":[["\uD83E\uDD3E\u200D\u2640\uFE0F","\uD83E\uDD3E\u200D\u2640"],"","",["woman-playing-handball"],41,18,31,0],
+		"1f93e-200d-2642-fe0f":[["\uD83E\uDD3E\u200D\u2642\uFE0F","\uD83E\uDD3E\u200D\u2642"],"","",["man-playing-handball"],41,24,31,0],
+		"1f93e":[["\uD83E\uDD3E"],"","",["handball"],41,30,15,0],
+		"1f940":[["\uD83E\uDD40"],"","",["wilted_flower"],41,36,31,0],
+		"1f941":[["\uD83E\uDD41"],"","",["drum_with_drumsticks"],41,37,31,0],
+		"1f942":[["\uD83E\uDD42"],"","",["clinking_glasses"],41,38,31,0],
+		"1f943":[["\uD83E\uDD43"],"","",["tumbler_glass"],41,39,31,0],
+		"1f944":[["\uD83E\uDD44"],"","",["spoon"],41,40,31,0],
+		"1f945":[["\uD83E\uDD45"],"","",["goal_net"],41,41,31,0],
+		"1f947":[["\uD83E\uDD47"],"","",["first_place_medal"],41,42,31,0],
+		"1f948":[["\uD83E\uDD48"],"","",["second_place_medal"],41,43,31,0],
+		"1f949":[["\uD83E\uDD49"],"","",["third_place_medal"],41,44,31,0],
+		"1f94a":[["\uD83E\uDD4A"],"","",["boxing_glove"],41,45,31,0],
+		"1f94b":[["\uD83E\uDD4B"],"","",["martial_arts_uniform"],41,46,31,0],
+		"1f94c":[["\uD83E\uDD4C"],"","",["curling_stone"],41,47,31,0],
+		"1f950":[["\uD83E\uDD50"],"","",["croissant"],41,48,31,0],
+		"1f951":[["\uD83E\uDD51"],"","",["avocado"],41,49,31,0],
+		"1f952":[["\uD83E\uDD52"],"","",["cucumber"],41,50,31,0],
+		"1f953":[["\uD83E\uDD53"],"","",["bacon"],41,51,31,0],
+		"1f954":[["\uD83E\uDD54"],"","",["potato"],42,0,31,0],
+		"1f955":[["\uD83E\uDD55"],"","",["carrot"],42,1,31,0],
+		"1f956":[["\uD83E\uDD56"],"","",["baguette_bread"],42,2,31,0],
+		"1f957":[["\uD83E\uDD57"],"","",["green_salad"],42,3,31,0],
+		"1f958":[["\uD83E\uDD58"],"","",["shallow_pan_of_food"],42,4,31,0],
+		"1f959":[["\uD83E\uDD59"],"","",["stuffed_flatbread"],42,5,31,0],
+		"1f95a":[["\uD83E\uDD5A"],"","",["egg"],42,6,31,0],
+		"1f95b":[["\uD83E\uDD5B"],"","",["glass_of_milk"],42,7,31,0],
+		"1f95c":[["\uD83E\uDD5C"],"","",["peanuts"],42,8,31,0],
+		"1f95d":[["\uD83E\uDD5D"],"","",["kiwifruit"],42,9,31,0],
+		"1f95e":[["\uD83E\uDD5E"],"","",["pancakes"],42,10,31,0],
+		"1f95f":[["\uD83E\uDD5F"],"","",["dumpling"],42,11,31,0],
+		"1f960":[["\uD83E\uDD60"],"","",["fortune_cookie"],42,12,31,0],
+		"1f961":[["\uD83E\uDD61"],"","",["takeout_box"],42,13,31,0],
+		"1f962":[["\uD83E\uDD62"],"","",["chopsticks"],42,14,31,0],
+		"1f963":[["\uD83E\uDD63"],"","",["bowl_with_spoon"],42,15,31,0],
+		"1f964":[["\uD83E\uDD64"],"","",["cup_with_straw"],42,16,31,0],
+		"1f965":[["\uD83E\uDD65"],"","",["coconut"],42,17,31,0],
+		"1f966":[["\uD83E\uDD66"],"","",["broccoli"],42,18,31,0],
+		"1f967":[["\uD83E\uDD67"],"","",["pie"],42,19,31,0],
+		"1f968":[["\uD83E\uDD68"],"","",["pretzel"],42,20,31,0],
+		"1f969":[["\uD83E\uDD69"],"","",["cut_of_meat"],42,21,31,0],
+		"1f96a":[["\uD83E\uDD6A"],"","",["sandwich"],42,22,31,0],
+		"1f96b":[["\uD83E\uDD6B"],"","",["canned_food"],42,23,31,0],
+		"1f980":[["\uD83E\uDD80"],"","",["crab"],42,24,31,0],
+		"1f981":[["\uD83E\uDD81"],"","",["lion_face"],42,25,31,0],
+		"1f982":[["\uD83E\uDD82"],"","",["scorpion"],42,26,31,0],
+		"1f983":[["\uD83E\uDD83"],"","",["turkey"],42,27,31,0],
+		"1f984":[["\uD83E\uDD84"],"","",["unicorn_face"],42,28,31,0],
+		"1f985":[["\uD83E\uDD85"],"","",["eagle"],42,29,31,0],
+		"1f986":[["\uD83E\uDD86"],"","",["duck"],42,30,31,0],
+		"1f987":[["\uD83E\uDD87"],"","",["bat"],42,31,31,0],
+		"1f988":[["\uD83E\uDD88"],"","",["shark"],42,32,31,0],
+		"1f989":[["\uD83E\uDD89"],"","",["owl"],42,33,31,0],
+		"1f98a":[["\uD83E\uDD8A"],"","",["fox_face"],42,34,31,0],
+		"1f98b":[["\uD83E\uDD8B"],"","",["butterfly"],42,35,31,0],
+		"1f98c":[["\uD83E\uDD8C"],"","",["deer"],42,36,31,0],
+		"1f98d":[["\uD83E\uDD8D"],"","",["gorilla"],42,37,31,0],
+		"1f98e":[["\uD83E\uDD8E"],"","",["lizard"],42,38,31,0],
+		"1f98f":[["\uD83E\uDD8F"],"","",["rhinoceros"],42,39,31,0],
+		"1f990":[["\uD83E\uDD90"],"","",["shrimp"],42,40,31,0],
+		"1f991":[["\uD83E\uDD91"],"","",["squid"],42,41,31,0],
+		"1f992":[["\uD83E\uDD92"],"","",["giraffe_face"],42,42,31,0],
+		"1f993":[["\uD83E\uDD93"],"","",["zebra_face"],42,43,31,0],
+		"1f994":[["\uD83E\uDD94"],"","",["hedgehog"],42,44,31,0],
+		"1f995":[["\uD83E\uDD95"],"","",["sauropod"],42,45,31,0],
+		"1f996":[["\uD83E\uDD96"],"","",["t-rex"],42,46,31,0],
+		"1f997":[["\uD83E\uDD97"],"","",["cricket"],42,47,31,0],
+		"1f9c0":[["\uD83E\uDDC0"],"","",["cheese_wedge"],42,48,31,0],
+		"1f9d0":[["\uD83E\uDDD0"],"","",["face_with_monocle"],42,49,31,0],
+		"1f9d1":[["\uD83E\uDDD1"],"","",["adult"],42,50,31,0],
+		"1f9d2":[["\uD83E\uDDD2"],"","",["child"],43,4,31,0],
+		"1f9d3":[["\uD83E\uDDD3"],"","",["older_adult"],43,10,31,0],
+		"1f9d4":[["\uD83E\uDDD4"],"","",["bearded_person"],43,16,31,0],
+		"1f9d5":[["\uD83E\uDDD5"],"","",["person_with_headscarf"],43,22,31,0],
+		"1f9d6-200d-2640-fe0f":[["\uD83E\uDDD6\u200D\u2640\uFE0F","\uD83E\uDDD6\u200D\u2640"],"","",["woman_in_steamy_room"],43,28,31,0],
+		"1f9d6-200d-2642-fe0f":[["\uD83E\uDDD6\u200D\u2642\uFE0F","\uD83E\uDDD6\u200D\u2642","\uD83E\uDDD6"],"","",["man_in_steamy_room","person_in_steamy_room"],43,34,31,0],
+		"1f9d7-200d-2640-fe0f":[["\uD83E\uDDD7\u200D\u2640\uFE0F","\uD83E\uDDD7\u200D\u2640","\uD83E\uDDD7"],"","",["woman_climbing","person_climbing"],43,46,31,0],
+		"1f9d7-200d-2642-fe0f":[["\uD83E\uDDD7\u200D\u2642\uFE0F","\uD83E\uDDD7\u200D\u2642"],"","",["man_climbing"],44,0,31,0],
+		"1f9d8-200d-2640-fe0f":[["\uD83E\uDDD8\u200D\u2640\uFE0F","\uD83E\uDDD8\u200D\u2640","\uD83E\uDDD8"],"","",["woman_in_lotus_position","person_in_lotus_position"],44,12,31,0],
+		"1f9d8-200d-2642-fe0f":[["\uD83E\uDDD8\u200D\u2642\uFE0F","\uD83E\uDDD8\u200D\u2642"],"","",["man_in_lotus_position"],44,18,31,0],
+		"1f9d9-200d-2640-fe0f":[["\uD83E\uDDD9\u200D\u2640\uFE0F","\uD83E\uDDD9\u200D\u2640","\uD83E\uDDD9"],"","",["female_mage","mage"],44,30,31,0],
+		"1f9d9-200d-2642-fe0f":[["\uD83E\uDDD9\u200D\u2642\uFE0F","\uD83E\uDDD9\u200D\u2642"],"","",["male_mage"],44,36,31,0],
+		"1f9da-200d-2640-fe0f":[["\uD83E\uDDDA\u200D\u2640\uFE0F","\uD83E\uDDDA\u200D\u2640","\uD83E\uDDDA"],"","",["female_fairy","fairy"],44,48,31,0],
+		"1f9da-200d-2642-fe0f":[["\uD83E\uDDDA\u200D\u2642\uFE0F","\uD83E\uDDDA\u200D\u2642"],"","",["male_fairy"],45,2,31,0],
+		"1f9db-200d-2640-fe0f":[["\uD83E\uDDDB\u200D\u2640\uFE0F","\uD83E\uDDDB\u200D\u2640","\uD83E\uDDDB"],"","",["female_vampire","vampire"],45,14,31,0],
+		"1f9db-200d-2642-fe0f":[["\uD83E\uDDDB\u200D\u2642\uFE0F","\uD83E\uDDDB\u200D\u2642"],"","",["male_vampire"],45,20,31,0],
+		"1f9dc-200d-2640-fe0f":[["\uD83E\uDDDC\u200D\u2640\uFE0F","\uD83E\uDDDC\u200D\u2640"],"","",["mermaid"],45,32,31,0],
+		"1f9dc-200d-2642-fe0f":[["\uD83E\uDDDC\u200D\u2642\uFE0F","\uD83E\uDDDC\u200D\u2642","\uD83E\uDDDC"],"","",["merman","merperson"],45,38,31,0],
+		"1f9dd-200d-2640-fe0f":[["\uD83E\uDDDD\u200D\u2640\uFE0F","\uD83E\uDDDD\u200D\u2640"],"","",["female_elf"],45,50,31,0],
+		"1f9dd-200d-2642-fe0f":[["\uD83E\uDDDD\u200D\u2642\uFE0F","\uD83E\uDDDD\u200D\u2642","\uD83E\uDDDD"],"","",["male_elf","elf"],46,4,31,0],
+		"1f9de-200d-2640-fe0f":[["\uD83E\uDDDE\u200D\u2640\uFE0F","\uD83E\uDDDE\u200D\u2640"],"","",["female_genie"],46,16,31,0],
+		"1f9de-200d-2642-fe0f":[["\uD83E\uDDDE\u200D\u2642\uFE0F","\uD83E\uDDDE\u200D\u2642","\uD83E\uDDDE"],"","",["male_genie","genie"],46,17,31,0],
+		"1f9df-200d-2640-fe0f":[["\uD83E\uDDDF\u200D\u2640\uFE0F","\uD83E\uDDDF\u200D\u2640"],"","",["female_zombie"],46,19,31,0],
+		"1f9df-200d-2642-fe0f":[["\uD83E\uDDDF\u200D\u2642\uFE0F","\uD83E\uDDDF\u200D\u2642","\uD83E\uDDDF"],"","",["male_zombie","zombie"],46,20,31,0],
+		"1f9e0":[["\uD83E\uDDE0"],"","",["brain"],46,22,31,0],
+		"1f9e1":[["\uD83E\uDDE1"],"","",["orange_heart"],46,23,31,0],
+		"1f9e2":[["\uD83E\uDDE2"],"","",["billed_cap"],46,24,31,0],
+		"1f9e3":[["\uD83E\uDDE3"],"","",["scarf"],46,25,31,0],
+		"1f9e4":[["\uD83E\uDDE4"],"","",["gloves"],46,26,31,0],
+		"1f9e5":[["\uD83E\uDDE5"],"","",["coat"],46,27,31,0],
+		"1f9e6":[["\uD83E\uDDE6"],"","",["socks"],46,28,31,0],
+		"203c-fe0f":[["\u203C\uFE0F","\u203C"],"","\uDBBA\uDF06",["bangbang"],46,29,63,0],
+		"2049-fe0f":[["\u2049\uFE0F","\u2049"],"","\uDBBA\uDF05",["interrobang"],46,30,63,0],
+		"2122-fe0f":[["\u2122\uFE0F","\u2122"],"\uE537","\uDBBA\uDF2A",["tm"],46,31,63,0],
+		"2139-fe0f":[["\u2139\uFE0F","\u2139"],"","\uDBBA\uDF47",["information_source"],46,32,63,0],
+		"2194-fe0f":[["\u2194\uFE0F","\u2194"],"","\uDBBA\uDEF6",["left_right_arrow"],46,33,63,0],
+		"2195-fe0f":[["\u2195\uFE0F","\u2195"],"","\uDBBA\uDEF7",["arrow_up_down"],46,34,63,0],
+		"2196-fe0f":[["\u2196\uFE0F","\u2196"],"\uE237","\uDBBA\uDEF2",["arrow_upper_left"],46,35,63,0],
+		"2197-fe0f":[["\u2197\uFE0F","\u2197"],"\uE236","\uDBBA\uDEF0",["arrow_upper_right"],46,36,63,0],
+		"2198-fe0f":[["\u2198\uFE0F","\u2198"],"\uE238","\uDBBA\uDEF1",["arrow_lower_right"],46,37,63,0],
+		"2199-fe0f":[["\u2199\uFE0F","\u2199"],"\uE239","\uDBBA\uDEF3",["arrow_lower_left"],46,38,63,0],
+		"21a9-fe0f":[["\u21A9\uFE0F","\u21A9"],"","\uDBBA\uDF83",["leftwards_arrow_with_hook"],46,39,63,0],
+		"21aa-fe0f":[["\u21AA\uFE0F","\u21AA"],"","\uDBBA\uDF88",["arrow_right_hook"],46,40,63,0],
+		"231a":[["\u231A"],"","\uDBB8\uDC1D",["watch"],46,41,63,0],
+		"231b":[["\u231B"],"","\uDBB8\uDC1C",["hourglass"],46,42,63,0],
+		"2328-fe0f":[["\u2328\uFE0F","\u2328"],"","",["keyboard"],46,43,31,0],
+		"23cf-fe0f":[["\u23CF\uFE0F","\u23CF"],"","",["eject"],46,44,31,0],
+		"23e9":[["\u23E9"],"\uE23C","\uDBBA\uDEFE",["fast_forward"],46,45,63,0],
+		"23ea":[["\u23EA"],"\uE23D","\uDBBA\uDEFF",["rewind"],46,46,63,0],
+		"23eb":[["\u23EB"],"","\uDBBA\uDF03",["arrow_double_up"],46,47,63,0],
+		"23ec":[["\u23EC"],"","\uDBBA\uDF02",["arrow_double_down"],46,48,63,0],
+		"23ed-fe0f":[["\u23ED\uFE0F","\u23ED"],"","",["black_right_pointing_double_triangle_with_vertical_bar"],46,49,31,0],
+		"23ee-fe0f":[["\u23EE\uFE0F","\u23EE"],"","",["black_left_pointing_double_triangle_with_vertical_bar"],46,50,31,0],
+		"23ef-fe0f":[["\u23EF\uFE0F","\u23EF"],"","",["black_right_pointing_triangle_with_double_vertical_bar"],46,51,31,0],
+		"23f0":[["\u23F0"],"","\uDBB8\uDC2A",["alarm_clock"],47,0,63,0],
+		"23f1-fe0f":[["\u23F1\uFE0F","\u23F1"],"","",["stopwatch"],47,1,31,0],
+		"23f2-fe0f":[["\u23F2\uFE0F","\u23F2"],"","",["timer_clock"],47,2,31,0],
+		"23f3":[["\u23F3"],"","\uDBB8\uDC1B",["hourglass_flowing_sand"],47,3,63,0],
+		"23f8-fe0f":[["\u23F8\uFE0F","\u23F8"],"","",["double_vertical_bar"],47,4,31,0],
+		"23f9-fe0f":[["\u23F9\uFE0F","\u23F9"],"","",["black_square_for_stop"],47,5,31,0],
+		"23fa-fe0f":[["\u23FA\uFE0F","\u23FA"],"","",["black_circle_for_record"],47,6,31,0],
+		"24c2-fe0f":[["\u24C2\uFE0F","\u24C2"],"","\uDBB9\uDFE1",["m"],47,7,63,0],
+		"25aa-fe0f":[["\u25AA\uFE0F","\u25AA"],"","\uDBBA\uDF6E",["black_small_square"],47,8,63,0],
+		"25ab-fe0f":[["\u25AB\uFE0F","\u25AB"],"","\uDBBA\uDF6D",["white_small_square"],47,9,63,0],
+		"25b6-fe0f":[["\u25B6\uFE0F","\u25B6"],"\uE23A","\uDBBA\uDEFC",["arrow_forward"],47,10,63,0],
+		"25c0-fe0f":[["\u25C0\uFE0F","\u25C0"],"\uE23B","\uDBBA\uDEFD",["arrow_backward"],47,11,63,0],
+		"25fb-fe0f":[["\u25FB\uFE0F","\u25FB"],"","\uDBBA\uDF71",["white_medium_square"],47,12,63,0],
+		"25fc-fe0f":[["\u25FC\uFE0F","\u25FC"],"","\uDBBA\uDF72",["black_medium_square"],47,13,63,0],
+		"25fd":[["\u25FD"],"","\uDBBA\uDF6F",["white_medium_small_square"],47,14,63,0],
+		"25fe":[["\u25FE"],"","\uDBBA\uDF70",["black_medium_small_square"],47,15,63,0],
+		"2600-fe0f":[["\u2600\uFE0F","\u2600"],"\uE04A","\uDBB8\uDC00",["sunny"],47,16,63,0],
+		"2601-fe0f":[["\u2601\uFE0F","\u2601"],"\uE049","\uDBB8\uDC01",["cloud"],47,17,63,0],
+		"2602-fe0f":[["\u2602\uFE0F","\u2602"],"","",["umbrella"],47,18,31,0],
+		"2603-fe0f":[["\u2603\uFE0F","\u2603"],"","",["snowman"],47,19,31,0],
+		"2604-fe0f":[["\u2604\uFE0F","\u2604"],"","",["comet"],47,20,31,0],
+		"260e-fe0f":[["\u260E\uFE0F","\u260E"],"\uE009","\uDBB9\uDD23",["phone","telephone"],47,21,63,0],
+		"2611-fe0f":[["\u2611\uFE0F","\u2611"],"","\uDBBA\uDF8B",["ballot_box_with_check"],47,22,63,0],
+		"2614":[["\u2614"],"\uE04B","\uDBB8\uDC02",["umbrella_with_rain_drops"],47,23,63,0],
+		"2615":[["\u2615"],"\uE045","\uDBBA\uDD81",["coffee"],47,24,63,0],
+		"2618-fe0f":[["\u2618\uFE0F","\u2618"],"","",["shamrock"],47,25,31,0],
+		"261d-fe0f":[["\u261D\uFE0F","\u261D"],"\uE00F","\uDBBA\uDF98",["point_up"],47,26,63,0],
+		"2620-fe0f":[["\u2620\uFE0F","\u2620"],"","",["skull_and_crossbones"],47,32,31,0],
+		"2622-fe0f":[["\u2622\uFE0F","\u2622"],"","",["radioactive_sign"],47,33,31,0],
+		"2623-fe0f":[["\u2623\uFE0F","\u2623"],"","",["biohazard_sign"],47,34,31,0],
+		"2626-fe0f":[["\u2626\uFE0F","\u2626"],"","",["orthodox_cross"],47,35,31,0],
+		"262a-fe0f":[["\u262A\uFE0F","\u262A"],"","",["star_and_crescent"],47,36,31,0],
+		"262e-fe0f":[["\u262E\uFE0F","\u262E"],"","",["peace_symbol"],47,37,31,0],
+		"262f-fe0f":[["\u262F\uFE0F","\u262F"],"","",["yin_yang"],47,38,31,0],
+		"2638-fe0f":[["\u2638\uFE0F","\u2638"],"","",["wheel_of_dharma"],47,39,31,0],
+		"2639-fe0f":[["\u2639\uFE0F","\u2639"],"","",["white_frowning_face"],47,40,31,0],
+		"263a-fe0f":[["\u263A\uFE0F","\u263A"],"\uE414","\uDBB8\uDF36",["relaxed"],47,41,63,0],
+		"2640-fe0f":[["\u2640\uFE0F","\u2640"],"","",["female_sign"],47,42,30,0],
+		"2642-fe0f":[["\u2642\uFE0F","\u2642"],"","",["male_sign"],47,43,30,0],
+		"2648":[["\u2648"],"\uE23F","\uDBB8\uDC2B",["aries"],47,44,63,0],
+		"2649":[["\u2649"],"\uE240","\uDBB8\uDC2C",["taurus"],47,45,63,0],
+		"264a":[["\u264A"],"\uE241","\uDBB8\uDC2D",["gemini"],47,46,63,0],
+		"264b":[["\u264B"],"\uE242","\uDBB8\uDC2E",["cancer"],47,47,63,0],
+		"264c":[["\u264C"],"\uE243","\uDBB8\uDC2F",["leo"],47,48,63,0],
+		"264d":[["\u264D"],"\uE244","\uDBB8\uDC30",["virgo"],47,49,63,0],
+		"264e":[["\u264E"],"\uE245","\uDBB8\uDC31",["libra"],47,50,63,0],
+		"264f":[["\u264F"],"\uE246","\uDBB8\uDC32",["scorpius"],47,51,63,0],
+		"2650":[["\u2650"],"\uE247","\uDBB8\uDC33",["sagittarius"],48,0,63,0],
+		"2651":[["\u2651"],"\uE248","\uDBB8\uDC34",["capricorn"],48,1,63,0],
+		"2652":[["\u2652"],"\uE249","\uDBB8\uDC35",["aquarius"],48,2,63,0],
+		"2653":[["\u2653"],"\uE24A","\uDBB8\uDC36",["pisces"],48,3,63,0],
+		"2660-fe0f":[["\u2660\uFE0F","\u2660"],"\uE20E","\uDBBA\uDF1B",["spades"],48,4,63,0],
+		"2663-fe0f":[["\u2663\uFE0F","\u2663"],"\uE20F","\uDBBA\uDF1D",["clubs"],48,5,63,0],
+		"2665-fe0f":[["\u2665\uFE0F","\u2665"],"\uE20C","\uDBBA\uDF1A",["hearts"],48,6,63,0],
+		"2666-fe0f":[["\u2666\uFE0F","\u2666"],"\uE20D","\uDBBA\uDF1C",["diamonds"],48,7,63,0],
+		"2668-fe0f":[["\u2668\uFE0F","\u2668"],"\uE123","\uDBB9\uDFFA",["hotsprings"],48,8,63,0],
+		"267b-fe0f":[["\u267B\uFE0F","\u267B"],"","\uDBBA\uDF2C",["recycle"],48,9,63,0],
+		"267f":[["\u267F"],"\uE20A","\uDBBA\uDF20",["wheelchair"],48,10,63,0],
+		"2692-fe0f":[["\u2692\uFE0F","\u2692"],"","",["hammer_and_pick"],48,11,31,0],
+		"2693":[["\u2693"],"","\uDBB9\uDCC1",["anchor"],48,12,63,0],
+		"2694-fe0f":[["\u2694\uFE0F","\u2694"],"","",["crossed_swords"],48,13,31,0],
+		"2695-fe0f":[["\u2695\uFE0F","\u2695"],"","",["medical_symbol","staff_of_aesculapius"],48,14,30,0],
+		"2696-fe0f":[["\u2696\uFE0F","\u2696"],"","",["scales"],48,15,31,0],
+		"2697-fe0f":[["\u2697\uFE0F","\u2697"],"","",["alembic"],48,16,31,0],
+		"2699-fe0f":[["\u2699\uFE0F","\u2699"],"","",["gear"],48,17,31,0],
+		"269b-fe0f":[["\u269B\uFE0F","\u269B"],"","",["atom_symbol"],48,18,31,0],
+		"269c-fe0f":[["\u269C\uFE0F","\u269C"],"","",["fleur_de_lis"],48,19,31,0],
+		"26a0-fe0f":[["\u26A0\uFE0F","\u26A0"],"\uE252","\uDBBA\uDF23",["warning"],48,20,63,0],
+		"26a1":[["\u26A1"],"\uE13D","\uDBB8\uDC04",["zap"],48,21,63,0],
+		"26aa":[["\u26AA"],"","\uDBBA\uDF65",["white_circle"],48,22,63,0],
+		"26ab":[["\u26AB"],"","\uDBBA\uDF66",["black_circle"],48,23,63,0],
+		"26b0-fe0f":[["\u26B0\uFE0F","\u26B0"],"","",["coffin"],48,24,31,0],
+		"26b1-fe0f":[["\u26B1\uFE0F","\u26B1"],"","",["funeral_urn"],48,25,31,0],
+		"26bd":[["\u26BD"],"\uE018","\uDBB9\uDFD4",["soccer"],48,26,63,0],
+		"26be":[["\u26BE"],"\uE016","\uDBB9\uDFD1",["baseball"],48,27,63,0],
+		"26c4":[["\u26C4"],"\uE048","\uDBB8\uDC03",["snowman_without_snow"],48,28,63,0],
+		"26c5":[["\u26C5"],"","\uDBB8\uDC0F",["partly_sunny"],48,29,63,0],
+		"26c8-fe0f":[["\u26C8\uFE0F","\u26C8"],"","",["thunder_cloud_and_rain"],48,30,31,0],
+		"26ce":[["\u26CE"],"\uE24B","\uDBB8\uDC37",["ophiuchus"],48,31,63,0],
+		"26cf-fe0f":[["\u26CF\uFE0F","\u26CF"],"","",["pick"],48,32,31,0],
+		"26d1-fe0f":[["\u26D1\uFE0F","\u26D1"],"","",["helmet_with_white_cross"],48,33,31,0],
+		"26d3-fe0f":[["\u26D3\uFE0F","\u26D3"],"","",["chains"],48,34,31,0],
+		"26d4":[["\u26D4"],"","\uDBBA\uDF26",["no_entry"],48,35,63,0],
+		"26e9-fe0f":[["\u26E9\uFE0F","\u26E9"],"","",["shinto_shrine"],48,36,31,0],
+		"26ea":[["\u26EA"],"\uE037","\uDBB9\uDCBB",["church"],48,37,63,0],
+		"26f0-fe0f":[["\u26F0\uFE0F","\u26F0"],"","",["mountain"],48,38,31,0],
+		"26f1-fe0f":[["\u26F1\uFE0F","\u26F1"],"","",["umbrella_on_ground"],48,39,31,0],
+		"26f2":[["\u26F2"],"\uE121","\uDBB9\uDCBC",["fountain"],48,40,63,0],
+		"26f3":[["\u26F3"],"\uE014","\uDBB9\uDFD2",["golf"],48,41,63,0],
+		"26f4-fe0f":[["\u26F4\uFE0F","\u26F4"],"","",["ferry"],48,42,31,0],
+		"26f5":[["\u26F5"],"\uE01C","\uDBB9\uDFEA",["boat","sailboat"],48,43,63,0],
+		"26f7-fe0f":[["\u26F7\uFE0F","\u26F7"],"","",["skier"],48,44,31,0],
+		"26f8-fe0f":[["\u26F8\uFE0F","\u26F8"],"","",["ice_skate"],48,45,31,0],
+		"26f9-fe0f-200d-2640-fe0f":[["\u26F9\uFE0F\u200D\u2640\uFE0F"],"","",["woman-bouncing-ball"],48,46,15,0],
+		"26f9-fe0f-200d-2642-fe0f":[["\u26F9\uFE0F\u200D\u2642\uFE0F","\u26F9\uFE0F","\u26F9"],"","",["man-bouncing-ball","person_with_ball"],49,0,15,0],
+		"26fa":[["\u26FA"],"\uE122","\uDBB9\uDFFB",["tent"],49,12,63,0],
+		"26fd":[["\u26FD"],"\uE03A","\uDBB9\uDFF5",["fuelpump"],49,13,63,0],
+		"2702-fe0f":[["\u2702\uFE0F","\u2702"],"\uE313","\uDBB9\uDD3E",["scissors"],49,14,63,0],
+		"2705":[["\u2705"],"","\uDBBA\uDF4A",["white_check_mark"],49,15,63,0],
+		"2708-fe0f":[["\u2708\uFE0F","\u2708"],"\uE01D","\uDBB9\uDFE9",["airplane"],49,16,63,0],
+		"2709-fe0f":[["\u2709\uFE0F","\u2709"],"","\uDBB9\uDD29",["email","envelope"],49,17,63,0],
+		"270a":[["\u270A"],"\uE010","\uDBBA\uDF93",["fist"],49,18,63,0],
+		"270b":[["\u270B"],"\uE012","\uDBBA\uDF95",["hand","raised_hand"],49,24,63,0],
+		"270c-fe0f":[["\u270C\uFE0F","\u270C"],"\uE011","\uDBBA\uDF94",["v"],49,30,63,0],
+		"270d-fe0f":[["\u270D\uFE0F","\u270D"],"","",["writing_hand"],49,36,31,0],
+		"270f-fe0f":[["\u270F\uFE0F","\u270F"],"","\uDBB9\uDD39",["pencil2"],49,42,63,0],
+		"2712-fe0f":[["\u2712\uFE0F","\u2712"],"","\uDBB9\uDD36",["black_nib"],49,43,63,0],
+		"2714-fe0f":[["\u2714\uFE0F","\u2714"],"","\uDBBA\uDF49",["heavy_check_mark"],49,44,63,0],
+		"2716-fe0f":[["\u2716\uFE0F","\u2716"],"","\uDBBA\uDF53",["heavy_multiplication_x"],49,45,63,0],
+		"271d-fe0f":[["\u271D\uFE0F","\u271D"],"","",["latin_cross"],49,46,31,0],
+		"2721-fe0f":[["\u2721\uFE0F","\u2721"],"","",["star_of_david"],49,47,31,0],
+		"2728":[["\u2728"],"\uE32E","\uDBBA\uDF60",["sparkles"],49,48,63,0],
+		"2733-fe0f":[["\u2733\uFE0F","\u2733"],"\uE206","\uDBBA\uDF62",["eight_spoked_asterisk"],49,49,63,0],
+		"2734-fe0f":[["\u2734\uFE0F","\u2734"],"\uE205","\uDBBA\uDF61",["eight_pointed_black_star"],49,50,63,0],
+		"2744-fe0f":[["\u2744\uFE0F","\u2744"],"","\uDBB8\uDC0E",["snowflake"],49,51,63,0],
+		"2747-fe0f":[["\u2747\uFE0F","\u2747"],"","\uDBBA\uDF77",["sparkle"],50,0,63,0],
+		"274c":[["\u274C"],"\uE333","\uDBBA\uDF45",["x"],50,1,63,0],
+		"274e":[["\u274E"],"","\uDBBA\uDF46",["negative_squared_cross_mark"],50,2,63,0],
+		"2753":[["\u2753"],"\uE020","\uDBBA\uDF09",["question"],50,3,63,0],
+		"2754":[["\u2754"],"\uE336","\uDBBA\uDF0A",["grey_question"],50,4,63,0],
+		"2755":[["\u2755"],"\uE337","\uDBBA\uDF0B",["grey_exclamation"],50,5,63,0],
+		"2757":[["\u2757"],"\uE021","\uDBBA\uDF04",["exclamation","heavy_exclamation_mark"],50,6,63,0],
+		"2763-fe0f":[["\u2763\uFE0F","\u2763"],"","",["heavy_heart_exclamation_mark_ornament"],50,7,31,0],
+		"2764-fe0f":[["\u2764\uFE0F","\u2764"],"\uE022","\uDBBA\uDF0C",["heart"],50,8,63,0,"<3"],
+		"2795":[["\u2795"],"","\uDBBA\uDF51",["heavy_plus_sign"],50,9,63,0],
+		"2796":[["\u2796"],"","\uDBBA\uDF52",["heavy_minus_sign"],50,10,63,0],
+		"2797":[["\u2797"],"","\uDBBA\uDF54",["heavy_division_sign"],50,11,63,0],
+		"27a1-fe0f":[["\u27A1\uFE0F","\u27A1"],"\uE234","\uDBBA\uDEFA",["arrow_right"],50,12,63,0],
+		"27b0":[["\u27B0"],"","\uDBBA\uDF08",["curly_loop"],50,13,63,0],
+		"27bf":[["\u27BF"],"\uE211","\uDBBA\uDC2B",["loop"],50,14,63,0],
+		"2934-fe0f":[["\u2934\uFE0F","\u2934"],"","\uDBBA\uDEF4",["arrow_heading_up"],50,15,63,0],
+		"2935-fe0f":[["\u2935\uFE0F","\u2935"],"","\uDBBA\uDEF5",["arrow_heading_down"],50,16,63,0],
+		"2b05-fe0f":[["\u2B05\uFE0F","\u2B05"],"\uE235","\uDBBA\uDEFB",["arrow_left"],50,17,63,0],
+		"2b06-fe0f":[["\u2B06\uFE0F","\u2B06"],"\uE232","\uDBBA\uDEF8",["arrow_up"],50,18,63,0],
+		"2b07-fe0f":[["\u2B07\uFE0F","\u2B07"],"\uE233","\uDBBA\uDEF9",["arrow_down"],50,19,63,0],
+		"2b1b":[["\u2B1B"],"","\uDBBA\uDF6C",["black_large_square"],50,20,63,0],
+		"2b1c":[["\u2B1C"],"","\uDBBA\uDF6B",["white_large_square"],50,21,63,0],
+		"2b50":[["\u2B50"],"\uE32F","\uDBBA\uDF68",["star"],50,22,63,0],
+		"2b55":[["\u2B55"],"\uE332","\uDBBA\uDF44",["o"],50,23,63,0],
+		"3030-fe0f":[["\u3030\uFE0F","\u3030"],"","\uDBBA\uDF07",["wavy_dash"],50,24,63,0],
+		"303d-fe0f":[["\u303D\uFE0F","\u303D"],"\uE12C","\uDBBA\uDC1B",["part_alternation_mark"],50,25,63,0],
+		"3297-fe0f":[["\u3297\uFE0F","\u3297"],"\uE30D","\uDBBA\uDF43",["congratulations"],50,26,63,0],
+		"3299-fe0f":[["\u3299\uFE0F","\u3299"],"\uE315","\uDBBA\uDF2B",["secret"],50,27,63,0]
+	};
+	/** @private */
+	emoji.prototype.emoticons_data = {
+		":o)":"monkey_face",
+		"<\/3":"broken_heart",
+		"=)":"smiley",
+		"=-)":"smiley",
+		"C:":"smile",
+		"c:":"smile",
+		":D":"smile",
+		":-D":"smile",
+		":>":"laughing",
+		":->":"laughing",
+		";)":"wink",
+		";-)":"wink",
+		"8)":"sunglasses",
+		":|":"neutral_face",
+		":-|":"neutral_face",
+		":\\":"confused",
+		":-\\":"confused",
+		":\/":"confused",
+		":-\/":"confused",
+		":*":"kissing_heart",
+		":-*":"kissing_heart",
+		":p":"stuck_out_tongue",
+		":-p":"stuck_out_tongue",
+		":P":"stuck_out_tongue",
+		":-P":"stuck_out_tongue",
+		":b":"stuck_out_tongue",
+		":-b":"stuck_out_tongue",
+		";p":"stuck_out_tongue_winking_eye",
+		";-p":"stuck_out_tongue_winking_eye",
+		";b":"stuck_out_tongue_winking_eye",
+		";-b":"stuck_out_tongue_winking_eye",
+		";P":"stuck_out_tongue_winking_eye",
+		";-P":"stuck_out_tongue_winking_eye",
+		"):":"disappointed",
+		":(":"disappointed",
+		":-(":"disappointed",
+		">:(":"angry",
+		">:-(":"angry",
+		":'(":"cry",
+		"D:":"anguished",
+		":o":"open_mouth",
+		":-o":"open_mouth",
+		":O":"open_mouth",
+		":-O":"open_mouth",
+		":)":"slightly_smiling_face",
+		"(:":"slightly_smiling_face",
+		":-)":"slightly_smiling_face",
+		"<3":"heart"
+	};
+	/** @private */
+	emoji.prototype.variations_data = {
+		"1f385":{"1f3fb":["1f385-1f3fb",8,20,63,["\uD83C\uDF85\uD83C\uDFFB"]],"1f3fc":["1f385-1f3fc",8,21,63,["\uD83C\uDF85\uD83C\uDFFC"]],"1f3fd":["1f385-1f3fd",8,22,63,["\uD83C\uDF85\uD83C\uDFFD"]],"1f3fe":["1f385-1f3fe",8,23,63,["\uD83C\uDF85\uD83C\uDFFE"]],"1f3ff":["1f385-1f3ff",8,24,63,["\uD83C\uDF85\uD83C\uDFFF"]]},
+		"1f3c2":{"1f3fb":["1f3c2-1f3fb",9,29,63,["\uD83C\uDFC2\uD83C\uDFFB"]],"1f3fc":["1f3c2-1f3fc",9,30,63,["\uD83C\uDFC2\uD83C\uDFFC"]],"1f3fd":["1f3c2-1f3fd",9,31,63,["\uD83C\uDFC2\uD83C\uDFFD"]],"1f3fe":["1f3c2-1f3fe",9,32,63,["\uD83C\uDFC2\uD83C\uDFFE"]],"1f3ff":["1f3c2-1f3ff",9,33,63,["\uD83C\uDFC2\uD83C\uDFFF"]]},
+		"1f3c3-200d-2640-fe0f":{"1f3fb":["1f3c3-1f3fb-200d-2640-fe0f",9,35,15,["\uD83C\uDFC3\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f3c3-1f3fc-200d-2640-fe0f",9,36,15,["\uD83C\uDFC3\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f3c3-1f3fd-200d-2640-fe0f",9,37,15,["\uD83C\uDFC3\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f3c3-1f3fe-200d-2640-fe0f",9,38,15,["\uD83C\uDFC3\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f3c3-1f3ff-200d-2640-fe0f",9,39,15,["\uD83C\uDFC3\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f3c3-200d-2642-fe0f":{"1f3fb":["1f3c3-1f3fb-200d-2642-fe0f",9,41,15,["\uD83C\uDFC3\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83C\uDFC3\uD83C\uDFFB"]],"1f3fc":["1f3c3-1f3fc-200d-2642-fe0f",9,42,15,["\uD83C\uDFC3\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83C\uDFC3\uD83C\uDFFC"]],"1f3fd":["1f3c3-1f3fd-200d-2642-fe0f",9,43,15,["\uD83C\uDFC3\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83C\uDFC3\uD83C\uDFFD"]],"1f3fe":["1f3c3-1f3fe-200d-2642-fe0f",9,44,15,["\uD83C\uDFC3\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83C\uDFC3\uD83C\uDFFE"]],"1f3ff":["1f3c3-1f3ff-200d-2642-fe0f",9,45,15,["\uD83C\uDFC3\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83C\uDFC3\uD83C\uDFFF"]]},
+		"1f3c4-200d-2640-fe0f":{"1f3fb":["1f3c4-1f3fb-200d-2640-fe0f",10,1,15,["\uD83C\uDFC4\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f3c4-1f3fc-200d-2640-fe0f",10,2,15,["\uD83C\uDFC4\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f3c4-1f3fd-200d-2640-fe0f",10,3,15,["\uD83C\uDFC4\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f3c4-1f3fe-200d-2640-fe0f",10,4,15,["\uD83C\uDFC4\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f3c4-1f3ff-200d-2640-fe0f",10,5,15,["\uD83C\uDFC4\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f3c4-200d-2642-fe0f":{"1f3fb":["1f3c4-1f3fb-200d-2642-fe0f",10,7,15,["\uD83C\uDFC4\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83C\uDFC4\uD83C\uDFFB"]],"1f3fc":["1f3c4-1f3fc-200d-2642-fe0f",10,8,15,["\uD83C\uDFC4\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83C\uDFC4\uD83C\uDFFC"]],"1f3fd":["1f3c4-1f3fd-200d-2642-fe0f",10,9,15,["\uD83C\uDFC4\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83C\uDFC4\uD83C\uDFFD"]],"1f3fe":["1f3c4-1f3fe-200d-2642-fe0f",10,10,15,["\uD83C\uDFC4\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83C\uDFC4\uD83C\uDFFE"]],"1f3ff":["1f3c4-1f3ff-200d-2642-fe0f",10,11,15,["\uD83C\uDFC4\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83C\uDFC4\uD83C\uDFFF"]]},
+		"1f3c7":{"1f3fb":["1f3c7-1f3fb",10,21,63,["\uD83C\uDFC7\uD83C\uDFFB"]],"1f3fc":["1f3c7-1f3fc",10,22,63,["\uD83C\uDFC7\uD83C\uDFFC"]],"1f3fd":["1f3c7-1f3fd",10,23,63,["\uD83C\uDFC7\uD83C\uDFFD"]],"1f3fe":["1f3c7-1f3fe",10,24,63,["\uD83C\uDFC7\uD83C\uDFFE"]],"1f3ff":["1f3c7-1f3ff",10,25,63,["\uD83C\uDFC7\uD83C\uDFFF"]]},
+		"1f3ca-200d-2640-fe0f":{"1f3fb":["1f3ca-1f3fb-200d-2640-fe0f",10,29,15,["\uD83C\uDFCA\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f3ca-1f3fc-200d-2640-fe0f",10,30,15,["\uD83C\uDFCA\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f3ca-1f3fd-200d-2640-fe0f",10,31,15,["\uD83C\uDFCA\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f3ca-1f3fe-200d-2640-fe0f",10,32,15,["\uD83C\uDFCA\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f3ca-1f3ff-200d-2640-fe0f",10,33,15,["\uD83C\uDFCA\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f3ca-200d-2642-fe0f":{"1f3fb":["1f3ca-1f3fb-200d-2642-fe0f",10,35,15,["\uD83C\uDFCA\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83C\uDFCA\uD83C\uDFFB"]],"1f3fc":["1f3ca-1f3fc-200d-2642-fe0f",10,36,15,["\uD83C\uDFCA\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83C\uDFCA\uD83C\uDFFC"]],"1f3fd":["1f3ca-1f3fd-200d-2642-fe0f",10,37,15,["\uD83C\uDFCA\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83C\uDFCA\uD83C\uDFFD"]],"1f3fe":["1f3ca-1f3fe-200d-2642-fe0f",10,38,15,["\uD83C\uDFCA\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83C\uDFCA\uD83C\uDFFE"]],"1f3ff":["1f3ca-1f3ff-200d-2642-fe0f",10,39,15,["\uD83C\uDFCA\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83C\uDFCA\uD83C\uDFFF"]]},
+		"1f3cb-fe0f-200d-2640-fe0f":{"1f3fb":["1f3cb-1f3fb-200d-2640-fe0f",10,47,15,["\uD83C\uDFCB\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f3cb-1f3fc-200d-2640-fe0f",10,48,15,["\uD83C\uDFCB\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f3cb-1f3fd-200d-2640-fe0f",10,49,15,["\uD83C\uDFCB\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f3cb-1f3fe-200d-2640-fe0f",10,50,15,["\uD83C\uDFCB\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f3cb-1f3ff-200d-2640-fe0f",10,51,15,["\uD83C\uDFCB\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f3cb-fe0f-200d-2642-fe0f":{"1f3fb":["1f3cb-1f3fb-200d-2642-fe0f",11,1,15,["\uD83C\uDFCB\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83C\uDFCB\uD83C\uDFFB"]],"1f3fc":["1f3cb-1f3fc-200d-2642-fe0f",11,2,15,["\uD83C\uDFCB\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83C\uDFCB\uD83C\uDFFC"]],"1f3fd":["1f3cb-1f3fd-200d-2642-fe0f",11,3,15,["\uD83C\uDFCB\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83C\uDFCB\uD83C\uDFFD"]],"1f3fe":["1f3cb-1f3fe-200d-2642-fe0f",11,4,15,["\uD83C\uDFCB\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83C\uDFCB\uD83C\uDFFE"]],"1f3ff":["1f3cb-1f3ff-200d-2642-fe0f",11,5,15,["\uD83C\uDFCB\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83C\uDFCB\uD83C\uDFFF"]]},
+		"1f3cc-fe0f-200d-2640-fe0f":{"1f3fb":["1f3cc-1f3fb-200d-2640-fe0f",11,13,15,["\uD83C\uDFCC\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f3cc-1f3fc-200d-2640-fe0f",11,14,15,["\uD83C\uDFCC\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f3cc-1f3fd-200d-2640-fe0f",11,15,15,["\uD83C\uDFCC\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f3cc-1f3fe-200d-2640-fe0f",11,16,15,["\uD83C\uDFCC\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f3cc-1f3ff-200d-2640-fe0f",11,17,15,["\uD83C\uDFCC\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f3cc-fe0f-200d-2642-fe0f":{"1f3fb":["1f3cc-1f3fb-200d-2642-fe0f",11,19,15,["\uD83C\uDFCC\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83C\uDFCC\uD83C\uDFFB"]],"1f3fc":["1f3cc-1f3fc-200d-2642-fe0f",11,20,15,["\uD83C\uDFCC\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83C\uDFCC\uD83C\uDFFC"]],"1f3fd":["1f3cc-1f3fd-200d-2642-fe0f",11,21,15,["\uD83C\uDFCC\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83C\uDFCC\uD83C\uDFFD"]],"1f3fe":["1f3cc-1f3fe-200d-2642-fe0f",11,22,15,["\uD83C\uDFCC\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83C\uDFCC\uD83C\uDFFE"]],"1f3ff":["1f3cc-1f3ff-200d-2642-fe0f",11,23,15,["\uD83C\uDFCC\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83C\uDFCC\uD83C\uDFFF"]]},
+		"1f442":{"1f3fb":["1f442-1f3fb",13,46,63,["\uD83D\uDC42\uD83C\uDFFB"]],"1f3fc":["1f442-1f3fc",13,47,63,["\uD83D\uDC42\uD83C\uDFFC"]],"1f3fd":["1f442-1f3fd",13,48,63,["\uD83D\uDC42\uD83C\uDFFD"]],"1f3fe":["1f442-1f3fe",13,49,63,["\uD83D\uDC42\uD83C\uDFFE"]],"1f3ff":["1f442-1f3ff",13,50,63,["\uD83D\uDC42\uD83C\uDFFF"]]},
+		"1f443":{"1f3fb":["1f443-1f3fb",14,0,63,["\uD83D\uDC43\uD83C\uDFFB"]],"1f3fc":["1f443-1f3fc",14,1,63,["\uD83D\uDC43\uD83C\uDFFC"]],"1f3fd":["1f443-1f3fd",14,2,63,["\uD83D\uDC43\uD83C\uDFFD"]],"1f3fe":["1f443-1f3fe",14,3,63,["\uD83D\uDC43\uD83C\uDFFE"]],"1f3ff":["1f443-1f3ff",14,4,63,["\uD83D\uDC43\uD83C\uDFFF"]]},
+		"1f446":{"1f3fb":["1f446-1f3fb",14,8,63,["\uD83D\uDC46\uD83C\uDFFB"]],"1f3fc":["1f446-1f3fc",14,9,63,["\uD83D\uDC46\uD83C\uDFFC"]],"1f3fd":["1f446-1f3fd",14,10,63,["\uD83D\uDC46\uD83C\uDFFD"]],"1f3fe":["1f446-1f3fe",14,11,63,["\uD83D\uDC46\uD83C\uDFFE"]],"1f3ff":["1f446-1f3ff",14,12,63,["\uD83D\uDC46\uD83C\uDFFF"]]},
+		"1f447":{"1f3fb":["1f447-1f3fb",14,14,63,["\uD83D\uDC47\uD83C\uDFFB"]],"1f3fc":["1f447-1f3fc",14,15,63,["\uD83D\uDC47\uD83C\uDFFC"]],"1f3fd":["1f447-1f3fd",14,16,63,["\uD83D\uDC47\uD83C\uDFFD"]],"1f3fe":["1f447-1f3fe",14,17,63,["\uD83D\uDC47\uD83C\uDFFE"]],"1f3ff":["1f447-1f3ff",14,18,63,["\uD83D\uDC47\uD83C\uDFFF"]]},
+		"1f448":{"1f3fb":["1f448-1f3fb",14,20,63,["\uD83D\uDC48\uD83C\uDFFB"]],"1f3fc":["1f448-1f3fc",14,21,63,["\uD83D\uDC48\uD83C\uDFFC"]],"1f3fd":["1f448-1f3fd",14,22,63,["\uD83D\uDC48\uD83C\uDFFD"]],"1f3fe":["1f448-1f3fe",14,23,63,["\uD83D\uDC48\uD83C\uDFFE"]],"1f3ff":["1f448-1f3ff",14,24,63,["\uD83D\uDC48\uD83C\uDFFF"]]},
+		"1f449":{"1f3fb":["1f449-1f3fb",14,26,63,["\uD83D\uDC49\uD83C\uDFFB"]],"1f3fc":["1f449-1f3fc",14,27,63,["\uD83D\uDC49\uD83C\uDFFC"]],"1f3fd":["1f449-1f3fd",14,28,63,["\uD83D\uDC49\uD83C\uDFFD"]],"1f3fe":["1f449-1f3fe",14,29,63,["\uD83D\uDC49\uD83C\uDFFE"]],"1f3ff":["1f449-1f3ff",14,30,63,["\uD83D\uDC49\uD83C\uDFFF"]]},
+		"1f44a":{"1f3fb":["1f44a-1f3fb",14,32,63,["\uD83D\uDC4A\uD83C\uDFFB"]],"1f3fc":["1f44a-1f3fc",14,33,63,["\uD83D\uDC4A\uD83C\uDFFC"]],"1f3fd":["1f44a-1f3fd",14,34,63,["\uD83D\uDC4A\uD83C\uDFFD"]],"1f3fe":["1f44a-1f3fe",14,35,63,["\uD83D\uDC4A\uD83C\uDFFE"]],"1f3ff":["1f44a-1f3ff",14,36,63,["\uD83D\uDC4A\uD83C\uDFFF"]]},
+		"1f44b":{"1f3fb":["1f44b-1f3fb",14,38,63,["\uD83D\uDC4B\uD83C\uDFFB"]],"1f3fc":["1f44b-1f3fc",14,39,63,["\uD83D\uDC4B\uD83C\uDFFC"]],"1f3fd":["1f44b-1f3fd",14,40,63,["\uD83D\uDC4B\uD83C\uDFFD"]],"1f3fe":["1f44b-1f3fe",14,41,63,["\uD83D\uDC4B\uD83C\uDFFE"]],"1f3ff":["1f44b-1f3ff",14,42,63,["\uD83D\uDC4B\uD83C\uDFFF"]]},
+		"1f44c":{"1f3fb":["1f44c-1f3fb",14,44,63,["\uD83D\uDC4C\uD83C\uDFFB"]],"1f3fc":["1f44c-1f3fc",14,45,63,["\uD83D\uDC4C\uD83C\uDFFC"]],"1f3fd":["1f44c-1f3fd",14,46,63,["\uD83D\uDC4C\uD83C\uDFFD"]],"1f3fe":["1f44c-1f3fe",14,47,63,["\uD83D\uDC4C\uD83C\uDFFE"]],"1f3ff":["1f44c-1f3ff",14,48,63,["\uD83D\uDC4C\uD83C\uDFFF"]]},
+		"1f44d":{"1f3fb":["1f44d-1f3fb",14,50,63,["\uD83D\uDC4D\uD83C\uDFFB"]],"1f3fc":["1f44d-1f3fc",14,51,63,["\uD83D\uDC4D\uD83C\uDFFC"]],"1f3fd":["1f44d-1f3fd",15,0,63,["\uD83D\uDC4D\uD83C\uDFFD"]],"1f3fe":["1f44d-1f3fe",15,1,63,["\uD83D\uDC4D\uD83C\uDFFE"]],"1f3ff":["1f44d-1f3ff",15,2,63,["\uD83D\uDC4D\uD83C\uDFFF"]]},
+		"1f44e":{"1f3fb":["1f44e-1f3fb",15,4,63,["\uD83D\uDC4E\uD83C\uDFFB"]],"1f3fc":["1f44e-1f3fc",15,5,63,["\uD83D\uDC4E\uD83C\uDFFC"]],"1f3fd":["1f44e-1f3fd",15,6,63,["\uD83D\uDC4E\uD83C\uDFFD"]],"1f3fe":["1f44e-1f3fe",15,7,63,["\uD83D\uDC4E\uD83C\uDFFE"]],"1f3ff":["1f44e-1f3ff",15,8,63,["\uD83D\uDC4E\uD83C\uDFFF"]]},
+		"1f44f":{"1f3fb":["1f44f-1f3fb",15,10,63,["\uD83D\uDC4F\uD83C\uDFFB"]],"1f3fc":["1f44f-1f3fc",15,11,63,["\uD83D\uDC4F\uD83C\uDFFC"]],"1f3fd":["1f44f-1f3fd",15,12,63,["\uD83D\uDC4F\uD83C\uDFFD"]],"1f3fe":["1f44f-1f3fe",15,13,63,["\uD83D\uDC4F\uD83C\uDFFE"]],"1f3ff":["1f44f-1f3ff",15,14,63,["\uD83D\uDC4F\uD83C\uDFFF"]]},
+		"1f450":{"1f3fb":["1f450-1f3fb",15,16,63,["\uD83D\uDC50\uD83C\uDFFB"]],"1f3fc":["1f450-1f3fc",15,17,63,["\uD83D\uDC50\uD83C\uDFFC"]],"1f3fd":["1f450-1f3fd",15,18,63,["\uD83D\uDC50\uD83C\uDFFD"]],"1f3fe":["1f450-1f3fe",15,19,63,["\uD83D\uDC50\uD83C\uDFFE"]],"1f3ff":["1f450-1f3ff",15,20,63,["\uD83D\uDC50\uD83C\uDFFF"]]},
+		"1f466":{"1f3fb":["1f466-1f3fb",15,43,63,["\uD83D\uDC66\uD83C\uDFFB"]],"1f3fc":["1f466-1f3fc",15,44,63,["\uD83D\uDC66\uD83C\uDFFC"]],"1f3fd":["1f466-1f3fd",15,45,63,["\uD83D\uDC66\uD83C\uDFFD"]],"1f3fe":["1f466-1f3fe",15,46,63,["\uD83D\uDC66\uD83C\uDFFE"]],"1f3ff":["1f466-1f3ff",15,47,63,["\uD83D\uDC66\uD83C\uDFFF"]]},
+		"1f467":{"1f3fb":["1f467-1f3fb",15,49,63,["\uD83D\uDC67\uD83C\uDFFB"]],"1f3fc":["1f467-1f3fc",15,50,63,["\uD83D\uDC67\uD83C\uDFFC"]],"1f3fd":["1f467-1f3fd",15,51,63,["\uD83D\uDC67\uD83C\uDFFD"]],"1f3fe":["1f467-1f3fe",16,0,63,["\uD83D\uDC67\uD83C\uDFFE"]],"1f3ff":["1f467-1f3ff",16,1,63,["\uD83D\uDC67\uD83C\uDFFF"]]},
+		"1f468-200d-1f33e":{"1f3fb":["1f468-1f3fb-200d-1f33e",16,3,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDF3E"]],"1f3fc":["1f468-1f3fc-200d-1f33e",16,4,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDF3E"]],"1f3fd":["1f468-1f3fd-200d-1f33e",16,5,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDF3E"]],"1f3fe":["1f468-1f3fe-200d-1f33e",16,6,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDF3E"]],"1f3ff":["1f468-1f3ff-200d-1f33e",16,7,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDF3E"]]},
+		"1f468-200d-1f373":{"1f3fb":["1f468-1f3fb-200d-1f373",16,9,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDF73"]],"1f3fc":["1f468-1f3fc-200d-1f373",16,10,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDF73"]],"1f3fd":["1f468-1f3fd-200d-1f373",16,11,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDF73"]],"1f3fe":["1f468-1f3fe-200d-1f373",16,12,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDF73"]],"1f3ff":["1f468-1f3ff-200d-1f373",16,13,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDF73"]]},
+		"1f468-200d-1f393":{"1f3fb":["1f468-1f3fb-200d-1f393",16,15,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDF93"]],"1f3fc":["1f468-1f3fc-200d-1f393",16,16,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDF93"]],"1f3fd":["1f468-1f3fd-200d-1f393",16,17,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDF93"]],"1f3fe":["1f468-1f3fe-200d-1f393",16,18,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDF93"]],"1f3ff":["1f468-1f3ff-200d-1f393",16,19,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDF93"]]},
+		"1f468-200d-1f3a4":{"1f3fb":["1f468-1f3fb-200d-1f3a4",16,21,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDFA4"]],"1f3fc":["1f468-1f3fc-200d-1f3a4",16,22,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDFA4"]],"1f3fd":["1f468-1f3fd-200d-1f3a4",16,23,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDFA4"]],"1f3fe":["1f468-1f3fe-200d-1f3a4",16,24,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDFA4"]],"1f3ff":["1f468-1f3ff-200d-1f3a4",16,25,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDFA4"]]},
+		"1f468-200d-1f3a8":{"1f3fb":["1f468-1f3fb-200d-1f3a8",16,27,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDFA8"]],"1f3fc":["1f468-1f3fc-200d-1f3a8",16,28,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDFA8"]],"1f3fd":["1f468-1f3fd-200d-1f3a8",16,29,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDFA8"]],"1f3fe":["1f468-1f3fe-200d-1f3a8",16,30,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDFA8"]],"1f3ff":["1f468-1f3ff-200d-1f3a8",16,31,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDFA8"]]},
+		"1f468-200d-1f3eb":{"1f3fb":["1f468-1f3fb-200d-1f3eb",16,33,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDFEB"]],"1f3fc":["1f468-1f3fc-200d-1f3eb",16,34,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDFEB"]],"1f3fd":["1f468-1f3fd-200d-1f3eb",16,35,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDFEB"]],"1f3fe":["1f468-1f3fe-200d-1f3eb",16,36,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDFEB"]],"1f3ff":["1f468-1f3ff-200d-1f3eb",16,37,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDFEB"]]},
+		"1f468-200d-1f3ed":{"1f3fb":["1f468-1f3fb-200d-1f3ed",16,39,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDFED"]],"1f3fc":["1f468-1f3fc-200d-1f3ed",16,40,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83C\uDFED"]],"1f3fd":["1f468-1f3fd-200d-1f3ed",16,41,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83C\uDFED"]],"1f3fe":["1f468-1f3fe-200d-1f3ed",16,42,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83C\uDFED"]],"1f3ff":["1f468-1f3ff-200d-1f3ed",16,43,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83C\uDFED"]]},
+		"1f468-200d-1f4bb":{"1f3fb":["1f468-1f3fb-200d-1f4bb",17,8,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB"]],"1f3fc":["1f468-1f3fc-200d-1f4bb",17,9,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDCBB"]],"1f3fd":["1f468-1f3fd-200d-1f4bb",17,10,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDCBB"]],"1f3fe":["1f468-1f3fe-200d-1f4bb",17,11,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDCBB"]],"1f3ff":["1f468-1f3ff-200d-1f4bb",17,12,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDCBB"]]},
+		"1f468-200d-1f4bc":{"1f3fb":["1f468-1f3fb-200d-1f4bc",17,14,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBC"]],"1f3fc":["1f468-1f3fc-200d-1f4bc",17,15,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDCBC"]],"1f3fd":["1f468-1f3fd-200d-1f4bc",17,16,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDCBC"]],"1f3fe":["1f468-1f3fe-200d-1f4bc",17,17,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDCBC"]],"1f3ff":["1f468-1f3ff-200d-1f4bc",17,18,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDCBC"]]},
+		"1f468-200d-1f527":{"1f3fb":["1f468-1f3fb-200d-1f527",17,20,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD27"]],"1f3fc":["1f468-1f3fc-200d-1f527",17,21,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDD27"]],"1f3fd":["1f468-1f3fd-200d-1f527",17,22,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDD27"]],"1f3fe":["1f468-1f3fe-200d-1f527",17,23,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDD27"]],"1f3ff":["1f468-1f3ff-200d-1f527",17,24,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDD27"]]},
+		"1f468-200d-1f52c":{"1f3fb":["1f468-1f3fb-200d-1f52c",17,26,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDD2C"]],"1f3fc":["1f468-1f3fc-200d-1f52c",17,27,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDD2C"]],"1f3fd":["1f468-1f3fd-200d-1f52c",17,28,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDD2C"]],"1f3fe":["1f468-1f3fe-200d-1f52c",17,29,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDD2C"]],"1f3ff":["1f468-1f3ff-200d-1f52c",17,30,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDD2C"]]},
+		"1f468-200d-1f680":{"1f3fb":["1f468-1f3fb-200d-1f680",17,32,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDE80"]],"1f3fc":["1f468-1f3fc-200d-1f680",17,33,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDE80"]],"1f3fd":["1f468-1f3fd-200d-1f680",17,34,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDE80"]],"1f3fe":["1f468-1f3fe-200d-1f680",17,35,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDE80"]],"1f3ff":["1f468-1f3ff-200d-1f680",17,36,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDE80"]]},
+		"1f468-200d-1f692":{"1f3fb":["1f468-1f3fb-200d-1f692",17,38,31,["\uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDE92"]],"1f3fc":["1f468-1f3fc-200d-1f692",17,39,31,["\uD83D\uDC68\uD83C\uDFFC\u200D\uD83D\uDE92"]],"1f3fd":["1f468-1f3fd-200d-1f692",17,40,31,["\uD83D\uDC68\uD83C\uDFFD\u200D\uD83D\uDE92"]],"1f3fe":["1f468-1f3fe-200d-1f692",17,41,31,["\uD83D\uDC68\uD83C\uDFFE\u200D\uD83D\uDE92"]],"1f3ff":["1f468-1f3ff-200d-1f692",17,42,31,["\uD83D\uDC68\uD83C\uDFFF\u200D\uD83D\uDE92"]]},
+		"1f468-200d-2695-fe0f":{"1f3fb":["1f468-1f3fb-200d-2695-fe0f",17,44,15,["\uD83D\uDC68\uD83C\uDFFB\u200D\u2695\uFE0F"]],"1f3fc":["1f468-1f3fc-200d-2695-fe0f",17,45,15,["\uD83D\uDC68\uD83C\uDFFC\u200D\u2695\uFE0F"]],"1f3fd":["1f468-1f3fd-200d-2695-fe0f",17,46,15,["\uD83D\uDC68\uD83C\uDFFD\u200D\u2695\uFE0F"]],"1f3fe":["1f468-1f3fe-200d-2695-fe0f",17,47,15,["\uD83D\uDC68\uD83C\uDFFE\u200D\u2695\uFE0F"]],"1f3ff":["1f468-1f3ff-200d-2695-fe0f",17,48,15,["\uD83D\uDC68\uD83C\uDFFF\u200D\u2695\uFE0F"]]},
+		"1f468-200d-2696-fe0f":{"1f3fb":["1f468-1f3fb-200d-2696-fe0f",17,50,15,["\uD83D\uDC68\uD83C\uDFFB\u200D\u2696\uFE0F"]],"1f3fc":["1f468-1f3fc-200d-2696-fe0f",17,51,15,["\uD83D\uDC68\uD83C\uDFFC\u200D\u2696\uFE0F"]],"1f3fd":["1f468-1f3fd-200d-2696-fe0f",18,0,15,["\uD83D\uDC68\uD83C\uDFFD\u200D\u2696\uFE0F"]],"1f3fe":["1f468-1f3fe-200d-2696-fe0f",18,1,15,["\uD83D\uDC68\uD83C\uDFFE\u200D\u2696\uFE0F"]],"1f3ff":["1f468-1f3ff-200d-2696-fe0f",18,2,15,["\uD83D\uDC68\uD83C\uDFFF\u200D\u2696\uFE0F"]]},
+		"1f468-200d-2708-fe0f":{"1f3fb":["1f468-1f3fb-200d-2708-fe0f",18,4,15,["\uD83D\uDC68\uD83C\uDFFB\u200D\u2708\uFE0F"]],"1f3fc":["1f468-1f3fc-200d-2708-fe0f",18,5,15,["\uD83D\uDC68\uD83C\uDFFC\u200D\u2708\uFE0F"]],"1f3fd":["1f468-1f3fd-200d-2708-fe0f",18,6,15,["\uD83D\uDC68\uD83C\uDFFD\u200D\u2708\uFE0F"]],"1f3fe":["1f468-1f3fe-200d-2708-fe0f",18,7,15,["\uD83D\uDC68\uD83C\uDFFE\u200D\u2708\uFE0F"]],"1f3ff":["1f468-1f3ff-200d-2708-fe0f",18,8,15,["\uD83D\uDC68\uD83C\uDFFF\u200D\u2708\uFE0F"]]},
+		"1f468":{"1f3fb":["1f468-1f3fb",18,12,63,["\uD83D\uDC68\uD83C\uDFFB"]],"1f3fc":["1f468-1f3fc",18,13,63,["\uD83D\uDC68\uD83C\uDFFC"]],"1f3fd":["1f468-1f3fd",18,14,63,["\uD83D\uDC68\uD83C\uDFFD"]],"1f3fe":["1f468-1f3fe",18,15,63,["\uD83D\uDC68\uD83C\uDFFE"]],"1f3ff":["1f468-1f3ff",18,16,63,["\uD83D\uDC68\uD83C\uDFFF"]]},
+		"1f469-200d-1f33e":{"1f3fb":["1f469-1f3fb-200d-1f33e",18,18,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF3E"]],"1f3fc":["1f469-1f3fc-200d-1f33e",18,19,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDF3E"]],"1f3fd":["1f469-1f3fd-200d-1f33e",18,20,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDF3E"]],"1f3fe":["1f469-1f3fe-200d-1f33e",18,21,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDF3E"]],"1f3ff":["1f469-1f3ff-200d-1f33e",18,22,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDF3E"]]},
+		"1f469-200d-1f373":{"1f3fb":["1f469-1f3fb-200d-1f373",18,24,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF73"]],"1f3fc":["1f469-1f3fc-200d-1f373",18,25,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDF73"]],"1f3fd":["1f469-1f3fd-200d-1f373",18,26,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDF73"]],"1f3fe":["1f469-1f3fe-200d-1f373",18,27,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDF73"]],"1f3ff":["1f469-1f3ff-200d-1f373",18,28,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDF73"]]},
+		"1f469-200d-1f393":{"1f3fb":["1f469-1f3fb-200d-1f393",18,30,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93"]],"1f3fc":["1f469-1f3fc-200d-1f393",18,31,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDF93"]],"1f3fd":["1f469-1f3fd-200d-1f393",18,32,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDF93"]],"1f3fe":["1f469-1f3fe-200d-1f393",18,33,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDF93"]],"1f3ff":["1f469-1f3ff-200d-1f393",18,34,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDF93"]]},
+		"1f469-200d-1f3a4":{"1f3fb":["1f469-1f3fb-200d-1f3a4",18,36,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDFA4"]],"1f3fc":["1f469-1f3fc-200d-1f3a4",18,37,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDFA4"]],"1f3fd":["1f469-1f3fd-200d-1f3a4",18,38,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDFA4"]],"1f3fe":["1f469-1f3fe-200d-1f3a4",18,39,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDFA4"]],"1f3ff":["1f469-1f3ff-200d-1f3a4",18,40,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDFA4"]]},
+		"1f469-200d-1f3a8":{"1f3fb":["1f469-1f3fb-200d-1f3a8",18,42,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDFA8"]],"1f3fc":["1f469-1f3fc-200d-1f3a8",18,43,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDFA8"]],"1f3fd":["1f469-1f3fd-200d-1f3a8",18,44,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDFA8"]],"1f3fe":["1f469-1f3fe-200d-1f3a8",18,45,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDFA8"]],"1f3ff":["1f469-1f3ff-200d-1f3a8",18,46,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDFA8"]]},
+		"1f469-200d-1f3eb":{"1f3fb":["1f469-1f3fb-200d-1f3eb",18,48,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDFEB"]],"1f3fc":["1f469-1f3fc-200d-1f3eb",18,49,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDFEB"]],"1f3fd":["1f469-1f3fd-200d-1f3eb",18,50,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDFEB"]],"1f3fe":["1f469-1f3fe-200d-1f3eb",18,51,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDFEB"]],"1f3ff":["1f469-1f3ff-200d-1f3eb",19,0,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDFEB"]]},
+		"1f469-200d-1f3ed":{"1f3fb":["1f469-1f3fb-200d-1f3ed",19,2,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDFED"]],"1f3fc":["1f469-1f3fc-200d-1f3ed",19,3,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDFED"]],"1f3fd":["1f469-1f3fd-200d-1f3ed",19,4,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83C\uDFED"]],"1f3fe":["1f469-1f3fe-200d-1f3ed",19,5,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDFED"]],"1f3ff":["1f469-1f3ff-200d-1f3ed",19,6,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83C\uDFED"]]},
+		"1f469-200d-1f4bb":{"1f3fb":["1f469-1f3fb-200d-1f4bb",19,18,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDCBB"]],"1f3fc":["1f469-1f3fc-200d-1f4bb",19,19,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDCBB"]],"1f3fd":["1f469-1f3fd-200d-1f4bb",19,20,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDCBB"]],"1f3fe":["1f469-1f3fe-200d-1f4bb",19,21,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDCBB"]],"1f3ff":["1f469-1f3ff-200d-1f4bb",19,22,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDCBB"]]},
+		"1f469-200d-1f4bc":{"1f3fb":["1f469-1f3fb-200d-1f4bc",19,24,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDCBC"]],"1f3fc":["1f469-1f3fc-200d-1f4bc",19,25,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDCBC"]],"1f3fd":["1f469-1f3fd-200d-1f4bc",19,26,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDCBC"]],"1f3fe":["1f469-1f3fe-200d-1f4bc",19,27,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDCBC"]],"1f3ff":["1f469-1f3ff-200d-1f4bc",19,28,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDCBC"]]},
+		"1f469-200d-1f527":{"1f3fb":["1f469-1f3fb-200d-1f527",19,30,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDD27"]],"1f3fc":["1f469-1f3fc-200d-1f527",19,31,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDD27"]],"1f3fd":["1f469-1f3fd-200d-1f527",19,32,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDD27"]],"1f3fe":["1f469-1f3fe-200d-1f527",19,33,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDD27"]],"1f3ff":["1f469-1f3ff-200d-1f527",19,34,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDD27"]]},
+		"1f469-200d-1f52c":{"1f3fb":["1f469-1f3fb-200d-1f52c",19,36,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDD2C"]],"1f3fc":["1f469-1f3fc-200d-1f52c",19,37,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDD2C"]],"1f3fd":["1f469-1f3fd-200d-1f52c",19,38,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDD2C"]],"1f3fe":["1f469-1f3fe-200d-1f52c",19,39,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDD2C"]],"1f3ff":["1f469-1f3ff-200d-1f52c",19,40,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDD2C"]]},
+		"1f469-200d-1f680":{"1f3fb":["1f469-1f3fb-200d-1f680",19,42,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDE80"]],"1f3fc":["1f469-1f3fc-200d-1f680",19,43,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDE80"]],"1f3fd":["1f469-1f3fd-200d-1f680",19,44,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDE80"]],"1f3fe":["1f469-1f3fe-200d-1f680",19,45,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDE80"]],"1f3ff":["1f469-1f3ff-200d-1f680",19,46,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDE80"]]},
+		"1f469-200d-1f692":{"1f3fb":["1f469-1f3fb-200d-1f692",19,48,31,["\uD83D\uDC69\uD83C\uDFFB\u200D\uD83D\uDE92"]],"1f3fc":["1f469-1f3fc-200d-1f692",19,49,31,["\uD83D\uDC69\uD83C\uDFFC\u200D\uD83D\uDE92"]],"1f3fd":["1f469-1f3fd-200d-1f692",19,50,31,["\uD83D\uDC69\uD83C\uDFFD\u200D\uD83D\uDE92"]],"1f3fe":["1f469-1f3fe-200d-1f692",19,51,31,["\uD83D\uDC69\uD83C\uDFFE\u200D\uD83D\uDE92"]],"1f3ff":["1f469-1f3ff-200d-1f692",20,0,31,["\uD83D\uDC69\uD83C\uDFFF\u200D\uD83D\uDE92"]]},
+		"1f469-200d-2695-fe0f":{"1f3fb":["1f469-1f3fb-200d-2695-fe0f",20,2,15,["\uD83D\uDC69\uD83C\uDFFB\u200D\u2695\uFE0F"]],"1f3fc":["1f469-1f3fc-200d-2695-fe0f",20,3,15,["\uD83D\uDC69\uD83C\uDFFC\u200D\u2695\uFE0F"]],"1f3fd":["1f469-1f3fd-200d-2695-fe0f",20,4,15,["\uD83D\uDC69\uD83C\uDFFD\u200D\u2695\uFE0F"]],"1f3fe":["1f469-1f3fe-200d-2695-fe0f",20,5,15,["\uD83D\uDC69\uD83C\uDFFE\u200D\u2695\uFE0F"]],"1f3ff":["1f469-1f3ff-200d-2695-fe0f",20,6,15,["\uD83D\uDC69\uD83C\uDFFF\u200D\u2695\uFE0F"]]},
+		"1f469-200d-2696-fe0f":{"1f3fb":["1f469-1f3fb-200d-2696-fe0f",20,8,15,["\uD83D\uDC69\uD83C\uDFFB\u200D\u2696\uFE0F"]],"1f3fc":["1f469-1f3fc-200d-2696-fe0f",20,9,15,["\uD83D\uDC69\uD83C\uDFFC\u200D\u2696\uFE0F"]],"1f3fd":["1f469-1f3fd-200d-2696-fe0f",20,10,15,["\uD83D\uDC69\uD83C\uDFFD\u200D\u2696\uFE0F"]],"1f3fe":["1f469-1f3fe-200d-2696-fe0f",20,11,15,["\uD83D\uDC69\uD83C\uDFFE\u200D\u2696\uFE0F"]],"1f3ff":["1f469-1f3ff-200d-2696-fe0f",20,12,15,["\uD83D\uDC69\uD83C\uDFFF\u200D\u2696\uFE0F"]]},
+		"1f469-200d-2708-fe0f":{"1f3fb":["1f469-1f3fb-200d-2708-fe0f",20,14,15,["\uD83D\uDC69\uD83C\uDFFB\u200D\u2708\uFE0F"]],"1f3fc":["1f469-1f3fc-200d-2708-fe0f",20,15,15,["\uD83D\uDC69\uD83C\uDFFC\u200D\u2708\uFE0F"]],"1f3fd":["1f469-1f3fd-200d-2708-fe0f",20,16,15,["\uD83D\uDC69\uD83C\uDFFD\u200D\u2708\uFE0F"]],"1f3fe":["1f469-1f3fe-200d-2708-fe0f",20,17,15,["\uD83D\uDC69\uD83C\uDFFE\u200D\u2708\uFE0F"]],"1f3ff":["1f469-1f3ff-200d-2708-fe0f",20,18,15,["\uD83D\uDC69\uD83C\uDFFF\u200D\u2708\uFE0F"]]},
+		"1f469":{"1f3fb":["1f469-1f3fb",20,24,63,["\uD83D\uDC69\uD83C\uDFFB"]],"1f3fc":["1f469-1f3fc",20,25,63,["\uD83D\uDC69\uD83C\uDFFC"]],"1f3fd":["1f469-1f3fd",20,26,63,["\uD83D\uDC69\uD83C\uDFFD"]],"1f3fe":["1f469-1f3fe",20,27,63,["\uD83D\uDC69\uD83C\uDFFE"]],"1f3ff":["1f469-1f3ff",20,28,63,["\uD83D\uDC69\uD83C\uDFFF"]]},
+		"1f46e-200d-2640-fe0f":{"1f3fb":["1f46e-1f3fb-200d-2640-fe0f",20,34,15,["\uD83D\uDC6E\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f46e-1f3fc-200d-2640-fe0f",20,35,15,["\uD83D\uDC6E\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f46e-1f3fd-200d-2640-fe0f",20,36,15,["\uD83D\uDC6E\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f46e-1f3fe-200d-2640-fe0f",20,37,15,["\uD83D\uDC6E\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f46e-1f3ff-200d-2640-fe0f",20,38,15,["\uD83D\uDC6E\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f46e-200d-2642-fe0f":{"1f3fb":["1f46e-1f3fb-200d-2642-fe0f",20,40,15,["\uD83D\uDC6E\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDC6E\uD83C\uDFFB"]],"1f3fc":["1f46e-1f3fc-200d-2642-fe0f",20,41,15,["\uD83D\uDC6E\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDC6E\uD83C\uDFFC"]],"1f3fd":["1f46e-1f3fd-200d-2642-fe0f",20,42,15,["\uD83D\uDC6E\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDC6E\uD83C\uDFFD"]],"1f3fe":["1f46e-1f3fe-200d-2642-fe0f",20,43,15,["\uD83D\uDC6E\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDC6E\uD83C\uDFFE"]],"1f3ff":["1f46e-1f3ff-200d-2642-fe0f",20,44,15,["\uD83D\uDC6E\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDC6E\uD83C\uDFFF"]]},
+		"1f470":{"1f3fb":["1f470-1f3fb",21,3,63,["\uD83D\uDC70\uD83C\uDFFB"]],"1f3fc":["1f470-1f3fc",21,4,63,["\uD83D\uDC70\uD83C\uDFFC"]],"1f3fd":["1f470-1f3fd",21,5,63,["\uD83D\uDC70\uD83C\uDFFD"]],"1f3fe":["1f470-1f3fe",21,6,63,["\uD83D\uDC70\uD83C\uDFFE"]],"1f3ff":["1f470-1f3ff",21,7,63,["\uD83D\uDC70\uD83C\uDFFF"]]},
+		"1f471-200d-2640-fe0f":{"1f3fb":["1f471-1f3fb-200d-2640-fe0f",21,9,15,["\uD83D\uDC71\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f471-1f3fc-200d-2640-fe0f",21,10,15,["\uD83D\uDC71\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f471-1f3fd-200d-2640-fe0f",21,11,15,["\uD83D\uDC71\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f471-1f3fe-200d-2640-fe0f",21,12,15,["\uD83D\uDC71\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f471-1f3ff-200d-2640-fe0f",21,13,15,["\uD83D\uDC71\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f471-200d-2642-fe0f":{"1f3fb":["1f471-1f3fb-200d-2642-fe0f",21,15,15,["\uD83D\uDC71\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDC71\uD83C\uDFFB"]],"1f3fc":["1f471-1f3fc-200d-2642-fe0f",21,16,15,["\uD83D\uDC71\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDC71\uD83C\uDFFC"]],"1f3fd":["1f471-1f3fd-200d-2642-fe0f",21,17,15,["\uD83D\uDC71\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDC71\uD83C\uDFFD"]],"1f3fe":["1f471-1f3fe-200d-2642-fe0f",21,18,15,["\uD83D\uDC71\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDC71\uD83C\uDFFE"]],"1f3ff":["1f471-1f3ff-200d-2642-fe0f",21,19,15,["\uD83D\uDC71\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDC71\uD83C\uDFFF"]]},
+		"1f472":{"1f3fb":["1f472-1f3fb",21,27,63,["\uD83D\uDC72\uD83C\uDFFB"]],"1f3fc":["1f472-1f3fc",21,28,63,["\uD83D\uDC72\uD83C\uDFFC"]],"1f3fd":["1f472-1f3fd",21,29,63,["\uD83D\uDC72\uD83C\uDFFD"]],"1f3fe":["1f472-1f3fe",21,30,63,["\uD83D\uDC72\uD83C\uDFFE"]],"1f3ff":["1f472-1f3ff",21,31,63,["\uD83D\uDC72\uD83C\uDFFF"]]},
+		"1f473-200d-2640-fe0f":{"1f3fb":["1f473-1f3fb-200d-2640-fe0f",21,33,15,["\uD83D\uDC73\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f473-1f3fc-200d-2640-fe0f",21,34,15,["\uD83D\uDC73\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f473-1f3fd-200d-2640-fe0f",21,35,15,["\uD83D\uDC73\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f473-1f3fe-200d-2640-fe0f",21,36,15,["\uD83D\uDC73\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f473-1f3ff-200d-2640-fe0f",21,37,15,["\uD83D\uDC73\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f473-200d-2642-fe0f":{"1f3fb":["1f473-1f3fb-200d-2642-fe0f",21,39,15,["\uD83D\uDC73\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDC73\uD83C\uDFFB"]],"1f3fc":["1f473-1f3fc-200d-2642-fe0f",21,40,15,["\uD83D\uDC73\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDC73\uD83C\uDFFC"]],"1f3fd":["1f473-1f3fd-200d-2642-fe0f",21,41,15,["\uD83D\uDC73\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDC73\uD83C\uDFFD"]],"1f3fe":["1f473-1f3fe-200d-2642-fe0f",21,42,15,["\uD83D\uDC73\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDC73\uD83C\uDFFE"]],"1f3ff":["1f473-1f3ff-200d-2642-fe0f",21,43,15,["\uD83D\uDC73\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDC73\uD83C\uDFFF"]]},
+		"1f474":{"1f3fb":["1f474-1f3fb",21,51,63,["\uD83D\uDC74\uD83C\uDFFB"]],"1f3fc":["1f474-1f3fc",22,0,63,["\uD83D\uDC74\uD83C\uDFFC"]],"1f3fd":["1f474-1f3fd",22,1,63,["\uD83D\uDC74\uD83C\uDFFD"]],"1f3fe":["1f474-1f3fe",22,2,63,["\uD83D\uDC74\uD83C\uDFFE"]],"1f3ff":["1f474-1f3ff",22,3,63,["\uD83D\uDC74\uD83C\uDFFF"]]},
+		"1f475":{"1f3fb":["1f475-1f3fb",22,5,63,["\uD83D\uDC75\uD83C\uDFFB"]],"1f3fc":["1f475-1f3fc",22,6,63,["\uD83D\uDC75\uD83C\uDFFC"]],"1f3fd":["1f475-1f3fd",22,7,63,["\uD83D\uDC75\uD83C\uDFFD"]],"1f3fe":["1f475-1f3fe",22,8,63,["\uD83D\uDC75\uD83C\uDFFE"]],"1f3ff":["1f475-1f3ff",22,9,63,["\uD83D\uDC75\uD83C\uDFFF"]]},
+		"1f476":{"1f3fb":["1f476-1f3fb",22,11,63,["\uD83D\uDC76\uD83C\uDFFB"]],"1f3fc":["1f476-1f3fc",22,12,63,["\uD83D\uDC76\uD83C\uDFFC"]],"1f3fd":["1f476-1f3fd",22,13,63,["\uD83D\uDC76\uD83C\uDFFD"]],"1f3fe":["1f476-1f3fe",22,14,63,["\uD83D\uDC76\uD83C\uDFFE"]],"1f3ff":["1f476-1f3ff",22,15,63,["\uD83D\uDC76\uD83C\uDFFF"]]},
+		"1f477-200d-2640-fe0f":{"1f3fb":["1f477-1f3fb-200d-2640-fe0f",22,17,15,["\uD83D\uDC77\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f477-1f3fc-200d-2640-fe0f",22,18,15,["\uD83D\uDC77\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f477-1f3fd-200d-2640-fe0f",22,19,15,["\uD83D\uDC77\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f477-1f3fe-200d-2640-fe0f",22,20,15,["\uD83D\uDC77\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f477-1f3ff-200d-2640-fe0f",22,21,15,["\uD83D\uDC77\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f477-200d-2642-fe0f":{"1f3fb":["1f477-1f3fb-200d-2642-fe0f",22,23,15,["\uD83D\uDC77\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDC77\uD83C\uDFFB"]],"1f3fc":["1f477-1f3fc-200d-2642-fe0f",22,24,15,["\uD83D\uDC77\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDC77\uD83C\uDFFC"]],"1f3fd":["1f477-1f3fd-200d-2642-fe0f",22,25,15,["\uD83D\uDC77\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDC77\uD83C\uDFFD"]],"1f3fe":["1f477-1f3fe-200d-2642-fe0f",22,26,15,["\uD83D\uDC77\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDC77\uD83C\uDFFE"]],"1f3ff":["1f477-1f3ff-200d-2642-fe0f",22,27,15,["\uD83D\uDC77\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDC77\uD83C\uDFFF"]]},
+		"1f478":{"1f3fb":["1f478-1f3fb",22,35,63,["\uD83D\uDC78\uD83C\uDFFB"]],"1f3fc":["1f478-1f3fc",22,36,63,["\uD83D\uDC78\uD83C\uDFFC"]],"1f3fd":["1f478-1f3fd",22,37,63,["\uD83D\uDC78\uD83C\uDFFD"]],"1f3fe":["1f478-1f3fe",22,38,63,["\uD83D\uDC78\uD83C\uDFFE"]],"1f3ff":["1f478-1f3ff",22,39,63,["\uD83D\uDC78\uD83C\uDFFF"]]},
+		"1f47c":{"1f3fb":["1f47c-1f3fb",22,44,63,["\uD83D\uDC7C\uD83C\uDFFB"]],"1f3fc":["1f47c-1f3fc",22,45,63,["\uD83D\uDC7C\uD83C\uDFFC"]],"1f3fd":["1f47c-1f3fd",22,46,63,["\uD83D\uDC7C\uD83C\uDFFD"]],"1f3fe":["1f47c-1f3fe",22,47,63,["\uD83D\uDC7C\uD83C\uDFFE"]],"1f3ff":["1f47c-1f3ff",22,48,63,["\uD83D\uDC7C\uD83C\uDFFF"]]},
+		"1f481-200d-2640-fe0f":{"1f3fb":["1f481-1f3fb-200d-2640-fe0f",23,2,15,["\uD83D\uDC81\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDC81\uD83C\uDFFB"]],"1f3fc":["1f481-1f3fc-200d-2640-fe0f",23,3,15,["\uD83D\uDC81\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDC81\uD83C\uDFFC"]],"1f3fd":["1f481-1f3fd-200d-2640-fe0f",23,4,15,["\uD83D\uDC81\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDC81\uD83C\uDFFD"]],"1f3fe":["1f481-1f3fe-200d-2640-fe0f",23,5,15,["\uD83D\uDC81\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDC81\uD83C\uDFFE"]],"1f3ff":["1f481-1f3ff-200d-2640-fe0f",23,6,15,["\uD83D\uDC81\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDC81\uD83C\uDFFF"]]},
+		"1f481-200d-2642-fe0f":{"1f3fb":["1f481-1f3fb-200d-2642-fe0f",23,8,15,["\uD83D\uDC81\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f481-1f3fc-200d-2642-fe0f",23,9,15,["\uD83D\uDC81\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f481-1f3fd-200d-2642-fe0f",23,10,15,["\uD83D\uDC81\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f481-1f3fe-200d-2642-fe0f",23,11,15,["\uD83D\uDC81\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f481-1f3ff-200d-2642-fe0f",23,12,15,["\uD83D\uDC81\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f482-200d-2640-fe0f":{"1f3fb":["1f482-1f3fb-200d-2640-fe0f",23,20,15,["\uD83D\uDC82\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f482-1f3fc-200d-2640-fe0f",23,21,15,["\uD83D\uDC82\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f482-1f3fd-200d-2640-fe0f",23,22,15,["\uD83D\uDC82\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f482-1f3fe-200d-2640-fe0f",23,23,15,["\uD83D\uDC82\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f482-1f3ff-200d-2640-fe0f",23,24,15,["\uD83D\uDC82\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f482-200d-2642-fe0f":{"1f3fb":["1f482-1f3fb-200d-2642-fe0f",23,26,15,["\uD83D\uDC82\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDC82\uD83C\uDFFB"]],"1f3fc":["1f482-1f3fc-200d-2642-fe0f",23,27,15,["\uD83D\uDC82\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDC82\uD83C\uDFFC"]],"1f3fd":["1f482-1f3fd-200d-2642-fe0f",23,28,15,["\uD83D\uDC82\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDC82\uD83C\uDFFD"]],"1f3fe":["1f482-1f3fe-200d-2642-fe0f",23,29,15,["\uD83D\uDC82\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDC82\uD83C\uDFFE"]],"1f3ff":["1f482-1f3ff-200d-2642-fe0f",23,30,15,["\uD83D\uDC82\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDC82\uD83C\uDFFF"]]},
+		"1f483":{"1f3fb":["1f483-1f3fb",23,38,63,["\uD83D\uDC83\uD83C\uDFFB"]],"1f3fc":["1f483-1f3fc",23,39,63,["\uD83D\uDC83\uD83C\uDFFC"]],"1f3fd":["1f483-1f3fd",23,40,63,["\uD83D\uDC83\uD83C\uDFFD"]],"1f3fe":["1f483-1f3fe",23,41,63,["\uD83D\uDC83\uD83C\uDFFE"]],"1f3ff":["1f483-1f3ff",23,42,63,["\uD83D\uDC83\uD83C\uDFFF"]]},
+		"1f485":{"1f3fb":["1f485-1f3fb",23,45,63,["\uD83D\uDC85\uD83C\uDFFB"]],"1f3fc":["1f485-1f3fc",23,46,63,["\uD83D\uDC85\uD83C\uDFFC"]],"1f3fd":["1f485-1f3fd",23,47,63,["\uD83D\uDC85\uD83C\uDFFD"]],"1f3fe":["1f485-1f3fe",23,48,63,["\uD83D\uDC85\uD83C\uDFFE"]],"1f3ff":["1f485-1f3ff",23,49,63,["\uD83D\uDC85\uD83C\uDFFF"]]},
+		"1f486-200d-2640-fe0f":{"1f3fb":["1f486-1f3fb-200d-2640-fe0f",23,51,15,["\uD83D\uDC86\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDC86\uD83C\uDFFB"]],"1f3fc":["1f486-1f3fc-200d-2640-fe0f",24,0,15,["\uD83D\uDC86\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDC86\uD83C\uDFFC"]],"1f3fd":["1f486-1f3fd-200d-2640-fe0f",24,1,15,["\uD83D\uDC86\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDC86\uD83C\uDFFD"]],"1f3fe":["1f486-1f3fe-200d-2640-fe0f",24,2,15,["\uD83D\uDC86\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDC86\uD83C\uDFFE"]],"1f3ff":["1f486-1f3ff-200d-2640-fe0f",24,3,15,["\uD83D\uDC86\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDC86\uD83C\uDFFF"]]},
+		"1f486-200d-2642-fe0f":{"1f3fb":["1f486-1f3fb-200d-2642-fe0f",24,5,15,["\uD83D\uDC86\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f486-1f3fc-200d-2642-fe0f",24,6,15,["\uD83D\uDC86\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f486-1f3fd-200d-2642-fe0f",24,7,15,["\uD83D\uDC86\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f486-1f3fe-200d-2642-fe0f",24,8,15,["\uD83D\uDC86\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f486-1f3ff-200d-2642-fe0f",24,9,15,["\uD83D\uDC86\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f487-200d-2640-fe0f":{"1f3fb":["1f487-1f3fb-200d-2640-fe0f",24,17,15,["\uD83D\uDC87\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDC87\uD83C\uDFFB"]],"1f3fc":["1f487-1f3fc-200d-2640-fe0f",24,18,15,["\uD83D\uDC87\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDC87\uD83C\uDFFC"]],"1f3fd":["1f487-1f3fd-200d-2640-fe0f",24,19,15,["\uD83D\uDC87\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDC87\uD83C\uDFFD"]],"1f3fe":["1f487-1f3fe-200d-2640-fe0f",24,20,15,["\uD83D\uDC87\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDC87\uD83C\uDFFE"]],"1f3ff":["1f487-1f3ff-200d-2640-fe0f",24,21,15,["\uD83D\uDC87\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDC87\uD83C\uDFFF"]]},
+		"1f487-200d-2642-fe0f":{"1f3fb":["1f487-1f3fb-200d-2642-fe0f",24,23,15,["\uD83D\uDC87\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f487-1f3fc-200d-2642-fe0f",24,24,15,["\uD83D\uDC87\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f487-1f3fd-200d-2642-fe0f",24,25,15,["\uD83D\uDC87\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f487-1f3fe-200d-2642-fe0f",24,26,15,["\uD83D\uDC87\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f487-1f3ff-200d-2642-fe0f",24,27,15,["\uD83D\uDC87\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f4aa":{"1f3fb":["1f4aa-1f3fb",25,17,63,["\uD83D\uDCAA\uD83C\uDFFB"]],"1f3fc":["1f4aa-1f3fc",25,18,63,["\uD83D\uDCAA\uD83C\uDFFC"]],"1f3fd":["1f4aa-1f3fd",25,19,63,["\uD83D\uDCAA\uD83C\uDFFD"]],"1f3fe":["1f4aa-1f3fe",25,20,63,["\uD83D\uDCAA\uD83C\uDFFE"]],"1f3ff":["1f4aa-1f3ff",25,21,63,["\uD83D\uDCAA\uD83C\uDFFF"]]},
+		"1f574-fe0f":{"1f3fb":["1f574-1f3fb",28,46,31,["\uD83D\uDD74\uD83C\uDFFB"]],"1f3fc":["1f574-1f3fc",28,47,31,["\uD83D\uDD74\uD83C\uDFFC"]],"1f3fd":["1f574-1f3fd",28,48,31,["\uD83D\uDD74\uD83C\uDFFD"]],"1f3fe":["1f574-1f3fe",28,49,31,["\uD83D\uDD74\uD83C\uDFFE"]],"1f3ff":["1f574-1f3ff",28,50,31,["\uD83D\uDD74\uD83C\uDFFF"]]},
+		"1f575-fe0f-200d-2640-fe0f":{"1f3fb":["1f575-1f3fb-200d-2640-fe0f",29,0,15,["\uD83D\uDD75\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f575-1f3fc-200d-2640-fe0f",29,1,15,["\uD83D\uDD75\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f575-1f3fd-200d-2640-fe0f",29,2,15,["\uD83D\uDD75\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f575-1f3fe-200d-2640-fe0f",29,3,15,["\uD83D\uDD75\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f575-1f3ff-200d-2640-fe0f",29,4,15,["\uD83D\uDD75\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f575-fe0f-200d-2642-fe0f":{"1f3fb":["1f575-1f3fb-200d-2642-fe0f",29,6,15,["\uD83D\uDD75\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDD75\uD83C\uDFFB"]],"1f3fc":["1f575-1f3fc-200d-2642-fe0f",29,7,15,["\uD83D\uDD75\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDD75\uD83C\uDFFC"]],"1f3fd":["1f575-1f3fd-200d-2642-fe0f",29,8,15,["\uD83D\uDD75\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDD75\uD83C\uDFFD"]],"1f3fe":["1f575-1f3fe-200d-2642-fe0f",29,9,15,["\uD83D\uDD75\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDD75\uD83C\uDFFE"]],"1f3ff":["1f575-1f3ff-200d-2642-fe0f",29,10,15,["\uD83D\uDD75\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDD75\uD83C\uDFFF"]]},
+		"1f57a":{"1f3fb":["1f57a-1f3fb",29,22,31,["\uD83D\uDD7A\uD83C\uDFFB"]],"1f3fc":["1f57a-1f3fc",29,23,31,["\uD83D\uDD7A\uD83C\uDFFC"]],"1f3fd":["1f57a-1f3fd",29,24,31,["\uD83D\uDD7A\uD83C\uDFFD"]],"1f3fe":["1f57a-1f3fe",29,25,31,["\uD83D\uDD7A\uD83C\uDFFE"]],"1f3ff":["1f57a-1f3ff",29,26,31,["\uD83D\uDD7A\uD83C\uDFFF"]]},
+		"1f590-fe0f":{"1f3fb":["1f590-1f3fb",29,33,31,["\uD83D\uDD90\uD83C\uDFFB"]],"1f3fc":["1f590-1f3fc",29,34,31,["\uD83D\uDD90\uD83C\uDFFC"]],"1f3fd":["1f590-1f3fd",29,35,31,["\uD83D\uDD90\uD83C\uDFFD"]],"1f3fe":["1f590-1f3fe",29,36,31,["\uD83D\uDD90\uD83C\uDFFE"]],"1f3ff":["1f590-1f3ff",29,37,31,["\uD83D\uDD90\uD83C\uDFFF"]]},
+		"1f595":{"1f3fb":["1f595-1f3fb",29,39,31,["\uD83D\uDD95\uD83C\uDFFB"]],"1f3fc":["1f595-1f3fc",29,40,31,["\uD83D\uDD95\uD83C\uDFFC"]],"1f3fd":["1f595-1f3fd",29,41,31,["\uD83D\uDD95\uD83C\uDFFD"]],"1f3fe":["1f595-1f3fe",29,42,31,["\uD83D\uDD95\uD83C\uDFFE"]],"1f3ff":["1f595-1f3ff",29,43,31,["\uD83D\uDD95\uD83C\uDFFF"]]},
+		"1f596":{"1f3fb":["1f596-1f3fb",29,45,31,["\uD83D\uDD96\uD83C\uDFFB"]],"1f3fc":["1f596-1f3fc",29,46,31,["\uD83D\uDD96\uD83C\uDFFC"]],"1f3fd":["1f596-1f3fd",29,47,31,["\uD83D\uDD96\uD83C\uDFFD"]],"1f3fe":["1f596-1f3fe",29,48,31,["\uD83D\uDD96\uD83C\uDFFE"]],"1f3ff":["1f596-1f3ff",29,49,31,["\uD83D\uDD96\uD83C\uDFFF"]]},
+		"1f645-200d-2640-fe0f":{"1f3fb":["1f645-1f3fb-200d-2640-fe0f",31,42,15,["\uD83D\uDE45\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDE45\uD83C\uDFFB"]],"1f3fc":["1f645-1f3fc-200d-2640-fe0f",31,43,15,["\uD83D\uDE45\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDE45\uD83C\uDFFC"]],"1f3fd":["1f645-1f3fd-200d-2640-fe0f",31,44,15,["\uD83D\uDE45\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDE45\uD83C\uDFFD"]],"1f3fe":["1f645-1f3fe-200d-2640-fe0f",31,45,15,["\uD83D\uDE45\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDE45\uD83C\uDFFE"]],"1f3ff":["1f645-1f3ff-200d-2640-fe0f",31,46,15,["\uD83D\uDE45\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDE45\uD83C\uDFFF"]]},
+		"1f645-200d-2642-fe0f":{"1f3fb":["1f645-1f3fb-200d-2642-fe0f",31,48,15,["\uD83D\uDE45\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f645-1f3fc-200d-2642-fe0f",31,49,15,["\uD83D\uDE45\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f645-1f3fd-200d-2642-fe0f",31,50,15,["\uD83D\uDE45\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f645-1f3fe-200d-2642-fe0f",31,51,15,["\uD83D\uDE45\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f645-1f3ff-200d-2642-fe0f",32,0,15,["\uD83D\uDE45\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f646-200d-2640-fe0f":{"1f3fb":["1f646-1f3fb-200d-2640-fe0f",32,8,15,["\uD83D\uDE46\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDE46\uD83C\uDFFB"]],"1f3fc":["1f646-1f3fc-200d-2640-fe0f",32,9,15,["\uD83D\uDE46\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDE46\uD83C\uDFFC"]],"1f3fd":["1f646-1f3fd-200d-2640-fe0f",32,10,15,["\uD83D\uDE46\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDE46\uD83C\uDFFD"]],"1f3fe":["1f646-1f3fe-200d-2640-fe0f",32,11,15,["\uD83D\uDE46\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDE46\uD83C\uDFFE"]],"1f3ff":["1f646-1f3ff-200d-2640-fe0f",32,12,15,["\uD83D\uDE46\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDE46\uD83C\uDFFF"]]},
+		"1f646-200d-2642-fe0f":{"1f3fb":["1f646-1f3fb-200d-2642-fe0f",32,14,15,["\uD83D\uDE46\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f646-1f3fc-200d-2642-fe0f",32,15,15,["\uD83D\uDE46\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f646-1f3fd-200d-2642-fe0f",32,16,15,["\uD83D\uDE46\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f646-1f3fe-200d-2642-fe0f",32,17,15,["\uD83D\uDE46\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f646-1f3ff-200d-2642-fe0f",32,18,15,["\uD83D\uDE46\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f647-200d-2640-fe0f":{"1f3fb":["1f647-1f3fb-200d-2640-fe0f",32,26,15,["\uD83D\uDE47\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f647-1f3fc-200d-2640-fe0f",32,27,15,["\uD83D\uDE47\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f647-1f3fd-200d-2640-fe0f",32,28,15,["\uD83D\uDE47\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f647-1f3fe-200d-2640-fe0f",32,29,15,["\uD83D\uDE47\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f647-1f3ff-200d-2640-fe0f",32,30,15,["\uD83D\uDE47\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f647-200d-2642-fe0f":{"1f3fb":["1f647-1f3fb-200d-2642-fe0f",32,32,15,["\uD83D\uDE47\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDE47\uD83C\uDFFB"]],"1f3fc":["1f647-1f3fc-200d-2642-fe0f",32,33,15,["\uD83D\uDE47\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDE47\uD83C\uDFFC"]],"1f3fd":["1f647-1f3fd-200d-2642-fe0f",32,34,15,["\uD83D\uDE47\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDE47\uD83C\uDFFD"]],"1f3fe":["1f647-1f3fe-200d-2642-fe0f",32,35,15,["\uD83D\uDE47\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDE47\uD83C\uDFFE"]],"1f3ff":["1f647-1f3ff-200d-2642-fe0f",32,36,15,["\uD83D\uDE47\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDE47\uD83C\uDFFF"]]},
+		"1f64b-200d-2640-fe0f":{"1f3fb":["1f64b-1f3fb-200d-2640-fe0f",32,47,15,["\uD83D\uDE4B\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDE4B\uD83C\uDFFB"]],"1f3fc":["1f64b-1f3fc-200d-2640-fe0f",32,48,15,["\uD83D\uDE4B\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDE4B\uD83C\uDFFC"]],"1f3fd":["1f64b-1f3fd-200d-2640-fe0f",32,49,15,["\uD83D\uDE4B\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDE4B\uD83C\uDFFD"]],"1f3fe":["1f64b-1f3fe-200d-2640-fe0f",32,50,15,["\uD83D\uDE4B\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDE4B\uD83C\uDFFE"]],"1f3ff":["1f64b-1f3ff-200d-2640-fe0f",32,51,15,["\uD83D\uDE4B\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDE4B\uD83C\uDFFF"]]},
+		"1f64b-200d-2642-fe0f":{"1f3fb":["1f64b-1f3fb-200d-2642-fe0f",33,1,15,["\uD83D\uDE4B\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f64b-1f3fc-200d-2642-fe0f",33,2,15,["\uD83D\uDE4B\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f64b-1f3fd-200d-2642-fe0f",33,3,15,["\uD83D\uDE4B\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f64b-1f3fe-200d-2642-fe0f",33,4,15,["\uD83D\uDE4B\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f64b-1f3ff-200d-2642-fe0f",33,5,15,["\uD83D\uDE4B\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f64c":{"1f3fb":["1f64c-1f3fb",33,13,63,["\uD83D\uDE4C\uD83C\uDFFB"]],"1f3fc":["1f64c-1f3fc",33,14,63,["\uD83D\uDE4C\uD83C\uDFFC"]],"1f3fd":["1f64c-1f3fd",33,15,63,["\uD83D\uDE4C\uD83C\uDFFD"]],"1f3fe":["1f64c-1f3fe",33,16,63,["\uD83D\uDE4C\uD83C\uDFFE"]],"1f3ff":["1f64c-1f3ff",33,17,63,["\uD83D\uDE4C\uD83C\uDFFF"]]},
+		"1f64d-200d-2640-fe0f":{"1f3fb":["1f64d-1f3fb-200d-2640-fe0f",33,19,15,["\uD83D\uDE4D\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDE4D\uD83C\uDFFB"]],"1f3fc":["1f64d-1f3fc-200d-2640-fe0f",33,20,15,["\uD83D\uDE4D\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDE4D\uD83C\uDFFC"]],"1f3fd":["1f64d-1f3fd-200d-2640-fe0f",33,21,15,["\uD83D\uDE4D\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDE4D\uD83C\uDFFD"]],"1f3fe":["1f64d-1f3fe-200d-2640-fe0f",33,22,15,["\uD83D\uDE4D\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDE4D\uD83C\uDFFE"]],"1f3ff":["1f64d-1f3ff-200d-2640-fe0f",33,23,15,["\uD83D\uDE4D\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDE4D\uD83C\uDFFF"]]},
+		"1f64d-200d-2642-fe0f":{"1f3fb":["1f64d-1f3fb-200d-2642-fe0f",33,25,15,["\uD83D\uDE4D\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f64d-1f3fc-200d-2642-fe0f",33,26,15,["\uD83D\uDE4D\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f64d-1f3fd-200d-2642-fe0f",33,27,15,["\uD83D\uDE4D\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f64d-1f3fe-200d-2642-fe0f",33,28,15,["\uD83D\uDE4D\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f64d-1f3ff-200d-2642-fe0f",33,29,15,["\uD83D\uDE4D\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f64e-200d-2640-fe0f":{"1f3fb":["1f64e-1f3fb-200d-2640-fe0f",33,37,15,["\uD83D\uDE4E\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83D\uDE4E\uD83C\uDFFB"]],"1f3fc":["1f64e-1f3fc-200d-2640-fe0f",33,38,15,["\uD83D\uDE4E\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83D\uDE4E\uD83C\uDFFC"]],"1f3fd":["1f64e-1f3fd-200d-2640-fe0f",33,39,15,["\uD83D\uDE4E\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83D\uDE4E\uD83C\uDFFD"]],"1f3fe":["1f64e-1f3fe-200d-2640-fe0f",33,40,15,["\uD83D\uDE4E\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83D\uDE4E\uD83C\uDFFE"]],"1f3ff":["1f64e-1f3ff-200d-2640-fe0f",33,41,15,["\uD83D\uDE4E\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83D\uDE4E\uD83C\uDFFF"]]},
+		"1f64e-200d-2642-fe0f":{"1f3fb":["1f64e-1f3fb-200d-2642-fe0f",33,43,15,["\uD83D\uDE4E\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f64e-1f3fc-200d-2642-fe0f",33,44,15,["\uD83D\uDE4E\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f64e-1f3fd-200d-2642-fe0f",33,45,15,["\uD83D\uDE4E\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f64e-1f3fe-200d-2642-fe0f",33,46,15,["\uD83D\uDE4E\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f64e-1f3ff-200d-2642-fe0f",33,47,15,["\uD83D\uDE4E\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f64f":{"1f3fb":["1f64f-1f3fb",34,3,63,["\uD83D\uDE4F\uD83C\uDFFB"]],"1f3fc":["1f64f-1f3fc",34,4,63,["\uD83D\uDE4F\uD83C\uDFFC"]],"1f3fd":["1f64f-1f3fd",34,5,63,["\uD83D\uDE4F\uD83C\uDFFD"]],"1f3fe":["1f64f-1f3fe",34,6,63,["\uD83D\uDE4F\uD83C\uDFFE"]],"1f3ff":["1f64f-1f3ff",34,7,63,["\uD83D\uDE4F\uD83C\uDFFF"]]},
+		"1f6a3-200d-2640-fe0f":{"1f3fb":["1f6a3-1f3fb-200d-2640-fe0f",34,44,15,["\uD83D\uDEA3\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f6a3-1f3fc-200d-2640-fe0f",34,45,15,["\uD83D\uDEA3\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f6a3-1f3fd-200d-2640-fe0f",34,46,15,["\uD83D\uDEA3\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f6a3-1f3fe-200d-2640-fe0f",34,47,15,["\uD83D\uDEA3\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f6a3-1f3ff-200d-2640-fe0f",34,48,15,["\uD83D\uDEA3\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f6a3-200d-2642-fe0f":{"1f3fb":["1f6a3-1f3fb-200d-2642-fe0f",34,50,15,["\uD83D\uDEA3\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDEA3\uD83C\uDFFB"]],"1f3fc":["1f6a3-1f3fc-200d-2642-fe0f",34,51,15,["\uD83D\uDEA3\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDEA3\uD83C\uDFFC"]],"1f3fd":["1f6a3-1f3fd-200d-2642-fe0f",35,0,15,["\uD83D\uDEA3\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDEA3\uD83C\uDFFD"]],"1f3fe":["1f6a3-1f3fe-200d-2642-fe0f",35,1,15,["\uD83D\uDEA3\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDEA3\uD83C\uDFFE"]],"1f3ff":["1f6a3-1f3ff-200d-2642-fe0f",35,2,15,["\uD83D\uDEA3\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDEA3\uD83C\uDFFF"]]},
+		"1f6b4-200d-2640-fe0f":{"1f3fb":["1f6b4-1f3fb-200d-2640-fe0f",35,26,15,["\uD83D\uDEB4\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f6b4-1f3fc-200d-2640-fe0f",35,27,15,["\uD83D\uDEB4\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f6b4-1f3fd-200d-2640-fe0f",35,28,15,["\uD83D\uDEB4\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f6b4-1f3fe-200d-2640-fe0f",35,29,15,["\uD83D\uDEB4\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f6b4-1f3ff-200d-2640-fe0f",35,30,15,["\uD83D\uDEB4\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f6b4-200d-2642-fe0f":{"1f3fb":["1f6b4-1f3fb-200d-2642-fe0f",35,32,15,["\uD83D\uDEB4\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDEB4\uD83C\uDFFB"]],"1f3fc":["1f6b4-1f3fc-200d-2642-fe0f",35,33,15,["\uD83D\uDEB4\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDEB4\uD83C\uDFFC"]],"1f3fd":["1f6b4-1f3fd-200d-2642-fe0f",35,34,15,["\uD83D\uDEB4\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDEB4\uD83C\uDFFD"]],"1f3fe":["1f6b4-1f3fe-200d-2642-fe0f",35,35,15,["\uD83D\uDEB4\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDEB4\uD83C\uDFFE"]],"1f3ff":["1f6b4-1f3ff-200d-2642-fe0f",35,36,15,["\uD83D\uDEB4\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDEB4\uD83C\uDFFF"]]},
+		"1f6b5-200d-2640-fe0f":{"1f3fb":["1f6b5-1f3fb-200d-2640-fe0f",35,44,15,["\uD83D\uDEB5\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f6b5-1f3fc-200d-2640-fe0f",35,45,15,["\uD83D\uDEB5\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f6b5-1f3fd-200d-2640-fe0f",35,46,15,["\uD83D\uDEB5\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f6b5-1f3fe-200d-2640-fe0f",35,47,15,["\uD83D\uDEB5\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f6b5-1f3ff-200d-2640-fe0f",35,48,15,["\uD83D\uDEB5\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f6b5-200d-2642-fe0f":{"1f3fb":["1f6b5-1f3fb-200d-2642-fe0f",35,50,15,["\uD83D\uDEB5\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDEB5\uD83C\uDFFB"]],"1f3fc":["1f6b5-1f3fc-200d-2642-fe0f",35,51,15,["\uD83D\uDEB5\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDEB5\uD83C\uDFFC"]],"1f3fd":["1f6b5-1f3fd-200d-2642-fe0f",36,0,15,["\uD83D\uDEB5\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDEB5\uD83C\uDFFD"]],"1f3fe":["1f6b5-1f3fe-200d-2642-fe0f",36,1,15,["\uD83D\uDEB5\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDEB5\uD83C\uDFFE"]],"1f3ff":["1f6b5-1f3ff-200d-2642-fe0f",36,2,15,["\uD83D\uDEB5\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDEB5\uD83C\uDFFF"]]},
+		"1f6b6-200d-2640-fe0f":{"1f3fb":["1f6b6-1f3fb-200d-2640-fe0f",36,10,15,["\uD83D\uDEB6\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f6b6-1f3fc-200d-2640-fe0f",36,11,15,["\uD83D\uDEB6\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f6b6-1f3fd-200d-2640-fe0f",36,12,15,["\uD83D\uDEB6\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f6b6-1f3fe-200d-2640-fe0f",36,13,15,["\uD83D\uDEB6\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f6b6-1f3ff-200d-2640-fe0f",36,14,15,["\uD83D\uDEB6\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f6b6-200d-2642-fe0f":{"1f3fb":["1f6b6-1f3fb-200d-2642-fe0f",36,16,15,["\uD83D\uDEB6\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83D\uDEB6\uD83C\uDFFB"]],"1f3fc":["1f6b6-1f3fc-200d-2642-fe0f",36,17,15,["\uD83D\uDEB6\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83D\uDEB6\uD83C\uDFFC"]],"1f3fd":["1f6b6-1f3fd-200d-2642-fe0f",36,18,15,["\uD83D\uDEB6\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83D\uDEB6\uD83C\uDFFD"]],"1f3fe":["1f6b6-1f3fe-200d-2642-fe0f",36,19,15,["\uD83D\uDEB6\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83D\uDEB6\uD83C\uDFFE"]],"1f3ff":["1f6b6-1f3ff-200d-2642-fe0f",36,20,15,["\uD83D\uDEB6\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83D\uDEB6\uD83C\uDFFF"]]},
+		"1f6c0":{"1f3fb":["1f6c0-1f3fb",36,37,63,["\uD83D\uDEC0\uD83C\uDFFB"]],"1f3fc":["1f6c0-1f3fc",36,38,63,["\uD83D\uDEC0\uD83C\uDFFC"]],"1f3fd":["1f6c0-1f3fd",36,39,63,["\uD83D\uDEC0\uD83C\uDFFD"]],"1f3fe":["1f6c0-1f3fe",36,40,63,["\uD83D\uDEC0\uD83C\uDFFE"]],"1f3ff":["1f6c0-1f3ff",36,41,63,["\uD83D\uDEC0\uD83C\uDFFF"]]},
+		"1f6cc":{"1f3fb":["1f6cc-1f3fb",36,49,31,["\uD83D\uDECC\uD83C\uDFFB"]],"1f3fc":["1f6cc-1f3fc",36,50,31,["\uD83D\uDECC\uD83C\uDFFC"]],"1f3fd":["1f6cc-1f3fd",36,51,31,["\uD83D\uDECC\uD83C\uDFFD"]],"1f3fe":["1f6cc-1f3fe",37,0,31,["\uD83D\uDECC\uD83C\uDFFE"]],"1f3ff":["1f6cc-1f3ff",37,1,31,["\uD83D\uDECC\uD83C\uDFFF"]]},
+		"1f918":{"1f3fb":["1f918-1f3fb",37,33,31,["\uD83E\uDD18\uD83C\uDFFB"]],"1f3fc":["1f918-1f3fc",37,34,31,["\uD83E\uDD18\uD83C\uDFFC"]],"1f3fd":["1f918-1f3fd",37,35,31,["\uD83E\uDD18\uD83C\uDFFD"]],"1f3fe":["1f918-1f3fe",37,36,31,["\uD83E\uDD18\uD83C\uDFFE"]],"1f3ff":["1f918-1f3ff",37,37,31,["\uD83E\uDD18\uD83C\uDFFF"]]},
+		"1f919":{"1f3fb":["1f919-1f3fb",37,39,31,["\uD83E\uDD19\uD83C\uDFFB"]],"1f3fc":["1f919-1f3fc",37,40,31,["\uD83E\uDD19\uD83C\uDFFC"]],"1f3fd":["1f919-1f3fd",37,41,31,["\uD83E\uDD19\uD83C\uDFFD"]],"1f3fe":["1f919-1f3fe",37,42,31,["\uD83E\uDD19\uD83C\uDFFE"]],"1f3ff":["1f919-1f3ff",37,43,31,["\uD83E\uDD19\uD83C\uDFFF"]]},
+		"1f91a":{"1f3fb":["1f91a-1f3fb",37,45,31,["\uD83E\uDD1A\uD83C\uDFFB"]],"1f3fc":["1f91a-1f3fc",37,46,31,["\uD83E\uDD1A\uD83C\uDFFC"]],"1f3fd":["1f91a-1f3fd",37,47,31,["\uD83E\uDD1A\uD83C\uDFFD"]],"1f3fe":["1f91a-1f3fe",37,48,31,["\uD83E\uDD1A\uD83C\uDFFE"]],"1f3ff":["1f91a-1f3ff",37,49,31,["\uD83E\uDD1A\uD83C\uDFFF"]]},
+		"1f91b":{"1f3fb":["1f91b-1f3fb",37,51,31,["\uD83E\uDD1B\uD83C\uDFFB"]],"1f3fc":["1f91b-1f3fc",38,0,31,["\uD83E\uDD1B\uD83C\uDFFC"]],"1f3fd":["1f91b-1f3fd",38,1,31,["\uD83E\uDD1B\uD83C\uDFFD"]],"1f3fe":["1f91b-1f3fe",38,2,31,["\uD83E\uDD1B\uD83C\uDFFE"]],"1f3ff":["1f91b-1f3ff",38,3,31,["\uD83E\uDD1B\uD83C\uDFFF"]]},
+		"1f91c":{"1f3fb":["1f91c-1f3fb",38,5,31,["\uD83E\uDD1C\uD83C\uDFFB"]],"1f3fc":["1f91c-1f3fc",38,6,31,["\uD83E\uDD1C\uD83C\uDFFC"]],"1f3fd":["1f91c-1f3fd",38,7,31,["\uD83E\uDD1C\uD83C\uDFFD"]],"1f3fe":["1f91c-1f3fe",38,8,31,["\uD83E\uDD1C\uD83C\uDFFE"]],"1f3ff":["1f91c-1f3ff",38,9,31,["\uD83E\uDD1C\uD83C\uDFFF"]]},
+		"1f91e":{"1f3fb":["1f91e-1f3fb",38,12,31,["\uD83E\uDD1E\uD83C\uDFFB"]],"1f3fc":["1f91e-1f3fc",38,13,31,["\uD83E\uDD1E\uD83C\uDFFC"]],"1f3fd":["1f91e-1f3fd",38,14,31,["\uD83E\uDD1E\uD83C\uDFFD"]],"1f3fe":["1f91e-1f3fe",38,15,31,["\uD83E\uDD1E\uD83C\uDFFE"]],"1f3ff":["1f91e-1f3ff",38,16,31,["\uD83E\uDD1E\uD83C\uDFFF"]]},
+		"1f91f":{"1f3fb":["1f91f-1f3fb",38,18,31,["\uD83E\uDD1F\uD83C\uDFFB"]],"1f3fc":["1f91f-1f3fc",38,19,31,["\uD83E\uDD1F\uD83C\uDFFC"]],"1f3fd":["1f91f-1f3fd",38,20,31,["\uD83E\uDD1F\uD83C\uDFFD"]],"1f3fe":["1f91f-1f3fe",38,21,31,["\uD83E\uDD1F\uD83C\uDFFE"]],"1f3ff":["1f91f-1f3ff",38,22,31,["\uD83E\uDD1F\uD83C\uDFFF"]]},
+		"1f926-200d-2640-fe0f":{"1f3fb":["1f926-1f3fb-200d-2640-fe0f",38,30,15,["\uD83E\uDD26\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f926-1f3fc-200d-2640-fe0f",38,31,15,["\uD83E\uDD26\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f926-1f3fd-200d-2640-fe0f",38,32,15,["\uD83E\uDD26\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f926-1f3fe-200d-2640-fe0f",38,33,15,["\uD83E\uDD26\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f926-1f3ff-200d-2640-fe0f",38,34,15,["\uD83E\uDD26\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f926-200d-2642-fe0f":{"1f3fb":["1f926-1f3fb-200d-2642-fe0f",38,36,15,["\uD83E\uDD26\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f926-1f3fc-200d-2642-fe0f",38,37,15,["\uD83E\uDD26\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f926-1f3fd-200d-2642-fe0f",38,38,15,["\uD83E\uDD26\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f926-1f3fe-200d-2642-fe0f",38,39,15,["\uD83E\uDD26\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f926-1f3ff-200d-2642-fe0f",38,40,15,["\uD83E\uDD26\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f926":{"1f3fb":["1f926-1f3fb",38,42,15,["\uD83E\uDD26\uD83C\uDFFB"]],"1f3fc":["1f926-1f3fc",38,43,15,["\uD83E\uDD26\uD83C\uDFFC"]],"1f3fd":["1f926-1f3fd",38,44,15,["\uD83E\uDD26\uD83C\uDFFD"]],"1f3fe":["1f926-1f3fe",38,45,15,["\uD83E\uDD26\uD83C\uDFFE"]],"1f3ff":["1f926-1f3ff",38,46,15,["\uD83E\uDD26\uD83C\uDFFF"]]},
+		"1f930":{"1f3fb":["1f930-1f3fb",39,5,31,["\uD83E\uDD30\uD83C\uDFFB"]],"1f3fc":["1f930-1f3fc",39,6,31,["\uD83E\uDD30\uD83C\uDFFC"]],"1f3fd":["1f930-1f3fd",39,7,31,["\uD83E\uDD30\uD83C\uDFFD"]],"1f3fe":["1f930-1f3fe",39,8,31,["\uD83E\uDD30\uD83C\uDFFE"]],"1f3ff":["1f930-1f3ff",39,9,31,["\uD83E\uDD30\uD83C\uDFFF"]]},
+		"1f931":{"1f3fb":["1f931-1f3fb",39,11,31,["\uD83E\uDD31\uD83C\uDFFB"]],"1f3fc":["1f931-1f3fc",39,12,31,["\uD83E\uDD31\uD83C\uDFFC"]],"1f3fd":["1f931-1f3fd",39,13,31,["\uD83E\uDD31\uD83C\uDFFD"]],"1f3fe":["1f931-1f3fe",39,14,31,["\uD83E\uDD31\uD83C\uDFFE"]],"1f3ff":["1f931-1f3ff",39,15,31,["\uD83E\uDD31\uD83C\uDFFF"]]},
+		"1f932":{"1f3fb":["1f932-1f3fb",39,17,31,["\uD83E\uDD32\uD83C\uDFFB"]],"1f3fc":["1f932-1f3fc",39,18,31,["\uD83E\uDD32\uD83C\uDFFC"]],"1f3fd":["1f932-1f3fd",39,19,31,["\uD83E\uDD32\uD83C\uDFFD"]],"1f3fe":["1f932-1f3fe",39,20,31,["\uD83E\uDD32\uD83C\uDFFE"]],"1f3ff":["1f932-1f3ff",39,21,31,["\uD83E\uDD32\uD83C\uDFFF"]]},
+		"1f933":{"1f3fb":["1f933-1f3fb",39,23,31,["\uD83E\uDD33\uD83C\uDFFB"]],"1f3fc":["1f933-1f3fc",39,24,31,["\uD83E\uDD33\uD83C\uDFFC"]],"1f3fd":["1f933-1f3fd",39,25,31,["\uD83E\uDD33\uD83C\uDFFD"]],"1f3fe":["1f933-1f3fe",39,26,31,["\uD83E\uDD33\uD83C\uDFFE"]],"1f3ff":["1f933-1f3ff",39,27,31,["\uD83E\uDD33\uD83C\uDFFF"]]},
+		"1f934":{"1f3fb":["1f934-1f3fb",39,29,31,["\uD83E\uDD34\uD83C\uDFFB"]],"1f3fc":["1f934-1f3fc",39,30,31,["\uD83E\uDD34\uD83C\uDFFC"]],"1f3fd":["1f934-1f3fd",39,31,31,["\uD83E\uDD34\uD83C\uDFFD"]],"1f3fe":["1f934-1f3fe",39,32,31,["\uD83E\uDD34\uD83C\uDFFE"]],"1f3ff":["1f934-1f3ff",39,33,31,["\uD83E\uDD34\uD83C\uDFFF"]]},
+		"1f935":{"1f3fb":["1f935-1f3fb",39,35,31,["\uD83E\uDD35\uD83C\uDFFB"]],"1f3fc":["1f935-1f3fc",39,36,31,["\uD83E\uDD35\uD83C\uDFFC"]],"1f3fd":["1f935-1f3fd",39,37,31,["\uD83E\uDD35\uD83C\uDFFD"]],"1f3fe":["1f935-1f3fe",39,38,31,["\uD83E\uDD35\uD83C\uDFFE"]],"1f3ff":["1f935-1f3ff",39,39,31,["\uD83E\uDD35\uD83C\uDFFF"]]},
+		"1f936":{"1f3fb":["1f936-1f3fb",39,41,31,["\uD83E\uDD36\uD83C\uDFFB"]],"1f3fc":["1f936-1f3fc",39,42,31,["\uD83E\uDD36\uD83C\uDFFC"]],"1f3fd":["1f936-1f3fd",39,43,31,["\uD83E\uDD36\uD83C\uDFFD"]],"1f3fe":["1f936-1f3fe",39,44,31,["\uD83E\uDD36\uD83C\uDFFE"]],"1f3ff":["1f936-1f3ff",39,45,31,["\uD83E\uDD36\uD83C\uDFFF"]]},
+		"1f937-200d-2640-fe0f":{"1f3fb":["1f937-1f3fb-200d-2640-fe0f",39,47,15,["\uD83E\uDD37\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f937-1f3fc-200d-2640-fe0f",39,48,15,["\uD83E\uDD37\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f937-1f3fd-200d-2640-fe0f",39,49,15,["\uD83E\uDD37\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f937-1f3fe-200d-2640-fe0f",39,50,15,["\uD83E\uDD37\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f937-1f3ff-200d-2640-fe0f",39,51,15,["\uD83E\uDD37\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f937-200d-2642-fe0f":{"1f3fb":["1f937-1f3fb-200d-2642-fe0f",40,1,15,["\uD83E\uDD37\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f937-1f3fc-200d-2642-fe0f",40,2,15,["\uD83E\uDD37\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f937-1f3fd-200d-2642-fe0f",40,3,15,["\uD83E\uDD37\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f937-1f3fe-200d-2642-fe0f",40,4,15,["\uD83E\uDD37\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f937-1f3ff-200d-2642-fe0f",40,5,15,["\uD83E\uDD37\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f937":{"1f3fb":["1f937-1f3fb",40,7,15,["\uD83E\uDD37\uD83C\uDFFB"]],"1f3fc":["1f937-1f3fc",40,8,15,["\uD83E\uDD37\uD83C\uDFFC"]],"1f3fd":["1f937-1f3fd",40,9,15,["\uD83E\uDD37\uD83C\uDFFD"]],"1f3fe":["1f937-1f3fe",40,10,15,["\uD83E\uDD37\uD83C\uDFFE"]],"1f3ff":["1f937-1f3ff",40,11,15,["\uD83E\uDD37\uD83C\uDFFF"]]},
+		"1f938-200d-2640-fe0f":{"1f3fb":["1f938-1f3fb-200d-2640-fe0f",40,13,15,["\uD83E\uDD38\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f938-1f3fc-200d-2640-fe0f",40,14,15,["\uD83E\uDD38\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f938-1f3fd-200d-2640-fe0f",40,15,15,["\uD83E\uDD38\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f938-1f3fe-200d-2640-fe0f",40,16,15,["\uD83E\uDD38\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f938-1f3ff-200d-2640-fe0f",40,17,15,["\uD83E\uDD38\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f938-200d-2642-fe0f":{"1f3fb":["1f938-1f3fb-200d-2642-fe0f",40,19,15,["\uD83E\uDD38\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f938-1f3fc-200d-2642-fe0f",40,20,15,["\uD83E\uDD38\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f938-1f3fd-200d-2642-fe0f",40,21,15,["\uD83E\uDD38\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f938-1f3fe-200d-2642-fe0f",40,22,15,["\uD83E\uDD38\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f938-1f3ff-200d-2642-fe0f",40,23,15,["\uD83E\uDD38\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f938":{"1f3fb":["1f938-1f3fb",40,25,15,["\uD83E\uDD38\uD83C\uDFFB"]],"1f3fc":["1f938-1f3fc",40,26,15,["\uD83E\uDD38\uD83C\uDFFC"]],"1f3fd":["1f938-1f3fd",40,27,15,["\uD83E\uDD38\uD83C\uDFFD"]],"1f3fe":["1f938-1f3fe",40,28,15,["\uD83E\uDD38\uD83C\uDFFE"]],"1f3ff":["1f938-1f3ff",40,29,15,["\uD83E\uDD38\uD83C\uDFFF"]]},
+		"1f939-200d-2640-fe0f":{"1f3fb":["1f939-1f3fb-200d-2640-fe0f",40,31,15,["\uD83E\uDD39\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f939-1f3fc-200d-2640-fe0f",40,32,15,["\uD83E\uDD39\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f939-1f3fd-200d-2640-fe0f",40,33,15,["\uD83E\uDD39\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f939-1f3fe-200d-2640-fe0f",40,34,15,["\uD83E\uDD39\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f939-1f3ff-200d-2640-fe0f",40,35,15,["\uD83E\uDD39\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f939-200d-2642-fe0f":{"1f3fb":["1f939-1f3fb-200d-2642-fe0f",40,37,15,["\uD83E\uDD39\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f939-1f3fc-200d-2642-fe0f",40,38,15,["\uD83E\uDD39\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f939-1f3fd-200d-2642-fe0f",40,39,15,["\uD83E\uDD39\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f939-1f3fe-200d-2642-fe0f",40,40,15,["\uD83E\uDD39\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f939-1f3ff-200d-2642-fe0f",40,41,15,["\uD83E\uDD39\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f939":{"1f3fb":["1f939-1f3fb",40,43,31,["\uD83E\uDD39\uD83C\uDFFB"]],"1f3fc":["1f939-1f3fc",40,44,31,["\uD83E\uDD39\uD83C\uDFFC"]],"1f3fd":["1f939-1f3fd",40,45,31,["\uD83E\uDD39\uD83C\uDFFD"]],"1f3fe":["1f939-1f3fe",40,46,31,["\uD83E\uDD39\uD83C\uDFFE"]],"1f3ff":["1f939-1f3ff",40,47,31,["\uD83E\uDD39\uD83C\uDFFF"]]},
+		"1f93d-200d-2640-fe0f":{"1f3fb":["1f93d-1f3fb-200d-2640-fe0f",41,1,15,["\uD83E\uDD3D\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f93d-1f3fc-200d-2640-fe0f",41,2,15,["\uD83E\uDD3D\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f93d-1f3fd-200d-2640-fe0f",41,3,15,["\uD83E\uDD3D\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f93d-1f3fe-200d-2640-fe0f",41,4,15,["\uD83E\uDD3D\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f93d-1f3ff-200d-2640-fe0f",41,5,15,["\uD83E\uDD3D\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f93d-200d-2642-fe0f":{"1f3fb":["1f93d-1f3fb-200d-2642-fe0f",41,7,15,["\uD83E\uDD3D\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f93d-1f3fc-200d-2642-fe0f",41,8,15,["\uD83E\uDD3D\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f93d-1f3fd-200d-2642-fe0f",41,9,15,["\uD83E\uDD3D\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f93d-1f3fe-200d-2642-fe0f",41,10,15,["\uD83E\uDD3D\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f93d-1f3ff-200d-2642-fe0f",41,11,15,["\uD83E\uDD3D\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f93d":{"1f3fb":["1f93d-1f3fb",41,13,15,["\uD83E\uDD3D\uD83C\uDFFB"]],"1f3fc":["1f93d-1f3fc",41,14,15,["\uD83E\uDD3D\uD83C\uDFFC"]],"1f3fd":["1f93d-1f3fd",41,15,15,["\uD83E\uDD3D\uD83C\uDFFD"]],"1f3fe":["1f93d-1f3fe",41,16,15,["\uD83E\uDD3D\uD83C\uDFFE"]],"1f3ff":["1f93d-1f3ff",41,17,15,["\uD83E\uDD3D\uD83C\uDFFF"]]},
+		"1f93e-200d-2640-fe0f":{"1f3fb":["1f93e-1f3fb-200d-2640-fe0f",41,19,15,["\uD83E\uDD3E\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f93e-1f3fc-200d-2640-fe0f",41,20,15,["\uD83E\uDD3E\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f93e-1f3fd-200d-2640-fe0f",41,21,15,["\uD83E\uDD3E\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f93e-1f3fe-200d-2640-fe0f",41,22,15,["\uD83E\uDD3E\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f93e-1f3ff-200d-2640-fe0f",41,23,15,["\uD83E\uDD3E\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f93e-200d-2642-fe0f":{"1f3fb":["1f93e-1f3fb-200d-2642-fe0f",41,25,15,["\uD83E\uDD3E\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f93e-1f3fc-200d-2642-fe0f",41,26,15,["\uD83E\uDD3E\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f93e-1f3fd-200d-2642-fe0f",41,27,15,["\uD83E\uDD3E\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f93e-1f3fe-200d-2642-fe0f",41,28,15,["\uD83E\uDD3E\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f93e-1f3ff-200d-2642-fe0f",41,29,15,["\uD83E\uDD3E\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f93e":{"1f3fb":["1f93e-1f3fb",41,31,15,["\uD83E\uDD3E\uD83C\uDFFB"]],"1f3fc":["1f93e-1f3fc",41,32,15,["\uD83E\uDD3E\uD83C\uDFFC"]],"1f3fd":["1f93e-1f3fd",41,33,15,["\uD83E\uDD3E\uD83C\uDFFD"]],"1f3fe":["1f93e-1f3fe",41,34,15,["\uD83E\uDD3E\uD83C\uDFFE"]],"1f3ff":["1f93e-1f3ff",41,35,15,["\uD83E\uDD3E\uD83C\uDFFF"]]},
+		"1f9d1":{"1f3fb":["1f9d1-1f3fb",42,51,31,["\uD83E\uDDD1\uD83C\uDFFB"]],"1f3fc":["1f9d1-1f3fc",43,0,31,["\uD83E\uDDD1\uD83C\uDFFC"]],"1f3fd":["1f9d1-1f3fd",43,1,31,["\uD83E\uDDD1\uD83C\uDFFD"]],"1f3fe":["1f9d1-1f3fe",43,2,31,["\uD83E\uDDD1\uD83C\uDFFE"]],"1f3ff":["1f9d1-1f3ff",43,3,31,["\uD83E\uDDD1\uD83C\uDFFF"]]},
+		"1f9d2":{"1f3fb":["1f9d2-1f3fb",43,5,31,["\uD83E\uDDD2\uD83C\uDFFB"]],"1f3fc":["1f9d2-1f3fc",43,6,31,["\uD83E\uDDD2\uD83C\uDFFC"]],"1f3fd":["1f9d2-1f3fd",43,7,31,["\uD83E\uDDD2\uD83C\uDFFD"]],"1f3fe":["1f9d2-1f3fe",43,8,31,["\uD83E\uDDD2\uD83C\uDFFE"]],"1f3ff":["1f9d2-1f3ff",43,9,31,["\uD83E\uDDD2\uD83C\uDFFF"]]},
+		"1f9d3":{"1f3fb":["1f9d3-1f3fb",43,11,31,["\uD83E\uDDD3\uD83C\uDFFB"]],"1f3fc":["1f9d3-1f3fc",43,12,31,["\uD83E\uDDD3\uD83C\uDFFC"]],"1f3fd":["1f9d3-1f3fd",43,13,31,["\uD83E\uDDD3\uD83C\uDFFD"]],"1f3fe":["1f9d3-1f3fe",43,14,31,["\uD83E\uDDD3\uD83C\uDFFE"]],"1f3ff":["1f9d3-1f3ff",43,15,31,["\uD83E\uDDD3\uD83C\uDFFF"]]},
+		"1f9d4":{"1f3fb":["1f9d4-1f3fb",43,17,31,["\uD83E\uDDD4\uD83C\uDFFB"]],"1f3fc":["1f9d4-1f3fc",43,18,31,["\uD83E\uDDD4\uD83C\uDFFC"]],"1f3fd":["1f9d4-1f3fd",43,19,31,["\uD83E\uDDD4\uD83C\uDFFD"]],"1f3fe":["1f9d4-1f3fe",43,20,31,["\uD83E\uDDD4\uD83C\uDFFE"]],"1f3ff":["1f9d4-1f3ff",43,21,31,["\uD83E\uDDD4\uD83C\uDFFF"]]},
+		"1f9d5":{"1f3fb":["1f9d5-1f3fb",43,23,31,["\uD83E\uDDD5\uD83C\uDFFB"]],"1f3fc":["1f9d5-1f3fc",43,24,31,["\uD83E\uDDD5\uD83C\uDFFC"]],"1f3fd":["1f9d5-1f3fd",43,25,31,["\uD83E\uDDD5\uD83C\uDFFD"]],"1f3fe":["1f9d5-1f3fe",43,26,31,["\uD83E\uDDD5\uD83C\uDFFE"]],"1f3ff":["1f9d5-1f3ff",43,27,31,["\uD83E\uDDD5\uD83C\uDFFF"]]},
+		"1f9d6-200d-2640-fe0f":{"1f3fb":["1f9d6-1f3fb-200d-2640-fe0f",43,29,15,["\uD83E\uDDD6\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f9d6-1f3fc-200d-2640-fe0f",43,30,15,["\uD83E\uDDD6\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f9d6-1f3fd-200d-2640-fe0f",43,31,15,["\uD83E\uDDD6\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f9d6-1f3fe-200d-2640-fe0f",43,32,15,["\uD83E\uDDD6\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f9d6-1f3ff-200d-2640-fe0f",43,33,15,["\uD83E\uDDD6\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f9d6-200d-2642-fe0f":{"1f3fb":["1f9d6-1f3fb-200d-2642-fe0f",43,35,15,["\uD83E\uDDD6\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83E\uDDD6\uD83C\uDFFB"]],"1f3fc":["1f9d6-1f3fc-200d-2642-fe0f",43,36,15,["\uD83E\uDDD6\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83E\uDDD6\uD83C\uDFFC"]],"1f3fd":["1f9d6-1f3fd-200d-2642-fe0f",43,37,15,["\uD83E\uDDD6\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83E\uDDD6\uD83C\uDFFD"]],"1f3fe":["1f9d6-1f3fe-200d-2642-fe0f",43,38,15,["\uD83E\uDDD6\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83E\uDDD6\uD83C\uDFFE"]],"1f3ff":["1f9d6-1f3ff-200d-2642-fe0f",43,39,15,["\uD83E\uDDD6\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83E\uDDD6\uD83C\uDFFF"]]},
+		"1f9d7-200d-2640-fe0f":{"1f3fb":["1f9d7-1f3fb-200d-2640-fe0f",43,47,15,["\uD83E\uDDD7\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83E\uDDD7\uD83C\uDFFB"]],"1f3fc":["1f9d7-1f3fc-200d-2640-fe0f",43,48,15,["\uD83E\uDDD7\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83E\uDDD7\uD83C\uDFFC"]],"1f3fd":["1f9d7-1f3fd-200d-2640-fe0f",43,49,15,["\uD83E\uDDD7\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83E\uDDD7\uD83C\uDFFD"]],"1f3fe":["1f9d7-1f3fe-200d-2640-fe0f",43,50,15,["\uD83E\uDDD7\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83E\uDDD7\uD83C\uDFFE"]],"1f3ff":["1f9d7-1f3ff-200d-2640-fe0f",43,51,15,["\uD83E\uDDD7\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83E\uDDD7\uD83C\uDFFF"]]},
+		"1f9d7-200d-2642-fe0f":{"1f3fb":["1f9d7-1f3fb-200d-2642-fe0f",44,1,15,["\uD83E\uDDD7\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f9d7-1f3fc-200d-2642-fe0f",44,2,15,["\uD83E\uDDD7\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f9d7-1f3fd-200d-2642-fe0f",44,3,15,["\uD83E\uDDD7\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f9d7-1f3fe-200d-2642-fe0f",44,4,15,["\uD83E\uDDD7\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f9d7-1f3ff-200d-2642-fe0f",44,5,15,["\uD83E\uDDD7\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f9d8-200d-2640-fe0f":{"1f3fb":["1f9d8-1f3fb-200d-2640-fe0f",44,13,15,["\uD83E\uDDD8\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83E\uDDD8\uD83C\uDFFB"]],"1f3fc":["1f9d8-1f3fc-200d-2640-fe0f",44,14,15,["\uD83E\uDDD8\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83E\uDDD8\uD83C\uDFFC"]],"1f3fd":["1f9d8-1f3fd-200d-2640-fe0f",44,15,15,["\uD83E\uDDD8\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83E\uDDD8\uD83C\uDFFD"]],"1f3fe":["1f9d8-1f3fe-200d-2640-fe0f",44,16,15,["\uD83E\uDDD8\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83E\uDDD8\uD83C\uDFFE"]],"1f3ff":["1f9d8-1f3ff-200d-2640-fe0f",44,17,15,["\uD83E\uDDD8\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83E\uDDD8\uD83C\uDFFF"]]},
+		"1f9d8-200d-2642-fe0f":{"1f3fb":["1f9d8-1f3fb-200d-2642-fe0f",44,19,15,["\uD83E\uDDD8\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f9d8-1f3fc-200d-2642-fe0f",44,20,15,["\uD83E\uDDD8\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f9d8-1f3fd-200d-2642-fe0f",44,21,15,["\uD83E\uDDD8\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f9d8-1f3fe-200d-2642-fe0f",44,22,15,["\uD83E\uDDD8\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f9d8-1f3ff-200d-2642-fe0f",44,23,15,["\uD83E\uDDD8\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f9d9-200d-2640-fe0f":{"1f3fb":["1f9d9-1f3fb-200d-2640-fe0f",44,31,15,["\uD83E\uDDD9\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83E\uDDD9\uD83C\uDFFB"]],"1f3fc":["1f9d9-1f3fc-200d-2640-fe0f",44,32,15,["\uD83E\uDDD9\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83E\uDDD9\uD83C\uDFFC"]],"1f3fd":["1f9d9-1f3fd-200d-2640-fe0f",44,33,15,["\uD83E\uDDD9\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83E\uDDD9\uD83C\uDFFD"]],"1f3fe":["1f9d9-1f3fe-200d-2640-fe0f",44,34,15,["\uD83E\uDDD9\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83E\uDDD9\uD83C\uDFFE"]],"1f3ff":["1f9d9-1f3ff-200d-2640-fe0f",44,35,15,["\uD83E\uDDD9\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83E\uDDD9\uD83C\uDFFF"]]},
+		"1f9d9-200d-2642-fe0f":{"1f3fb":["1f9d9-1f3fb-200d-2642-fe0f",44,37,15,["\uD83E\uDDD9\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f9d9-1f3fc-200d-2642-fe0f",44,38,15,["\uD83E\uDDD9\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f9d9-1f3fd-200d-2642-fe0f",44,39,15,["\uD83E\uDDD9\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f9d9-1f3fe-200d-2642-fe0f",44,40,15,["\uD83E\uDDD9\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f9d9-1f3ff-200d-2642-fe0f",44,41,15,["\uD83E\uDDD9\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f9da-200d-2640-fe0f":{"1f3fb":["1f9da-1f3fb-200d-2640-fe0f",44,49,15,["\uD83E\uDDDA\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83E\uDDDA\uD83C\uDFFB"]],"1f3fc":["1f9da-1f3fc-200d-2640-fe0f",44,50,15,["\uD83E\uDDDA\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83E\uDDDA\uD83C\uDFFC"]],"1f3fd":["1f9da-1f3fd-200d-2640-fe0f",44,51,15,["\uD83E\uDDDA\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83E\uDDDA\uD83C\uDFFD"]],"1f3fe":["1f9da-1f3fe-200d-2640-fe0f",45,0,15,["\uD83E\uDDDA\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83E\uDDDA\uD83C\uDFFE"]],"1f3ff":["1f9da-1f3ff-200d-2640-fe0f",45,1,15,["\uD83E\uDDDA\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83E\uDDDA\uD83C\uDFFF"]]},
+		"1f9da-200d-2642-fe0f":{"1f3fb":["1f9da-1f3fb-200d-2642-fe0f",45,3,15,["\uD83E\uDDDA\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f9da-1f3fc-200d-2642-fe0f",45,4,15,["\uD83E\uDDDA\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f9da-1f3fd-200d-2642-fe0f",45,5,15,["\uD83E\uDDDA\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f9da-1f3fe-200d-2642-fe0f",45,6,15,["\uD83E\uDDDA\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f9da-1f3ff-200d-2642-fe0f",45,7,15,["\uD83E\uDDDA\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f9db-200d-2640-fe0f":{"1f3fb":["1f9db-1f3fb-200d-2640-fe0f",45,15,15,["\uD83E\uDDDB\uD83C\uDFFB\u200D\u2640\uFE0F","\uD83E\uDDDB\uD83C\uDFFB"]],"1f3fc":["1f9db-1f3fc-200d-2640-fe0f",45,16,15,["\uD83E\uDDDB\uD83C\uDFFC\u200D\u2640\uFE0F","\uD83E\uDDDB\uD83C\uDFFC"]],"1f3fd":["1f9db-1f3fd-200d-2640-fe0f",45,17,15,["\uD83E\uDDDB\uD83C\uDFFD\u200D\u2640\uFE0F","\uD83E\uDDDB\uD83C\uDFFD"]],"1f3fe":["1f9db-1f3fe-200d-2640-fe0f",45,18,15,["\uD83E\uDDDB\uD83C\uDFFE\u200D\u2640\uFE0F","\uD83E\uDDDB\uD83C\uDFFE"]],"1f3ff":["1f9db-1f3ff-200d-2640-fe0f",45,19,15,["\uD83E\uDDDB\uD83C\uDFFF\u200D\u2640\uFE0F","\uD83E\uDDDB\uD83C\uDFFF"]]},
+		"1f9db-200d-2642-fe0f":{"1f3fb":["1f9db-1f3fb-200d-2642-fe0f",45,21,15,["\uD83E\uDDDB\uD83C\uDFFB\u200D\u2642\uFE0F"]],"1f3fc":["1f9db-1f3fc-200d-2642-fe0f",45,22,15,["\uD83E\uDDDB\uD83C\uDFFC\u200D\u2642\uFE0F"]],"1f3fd":["1f9db-1f3fd-200d-2642-fe0f",45,23,15,["\uD83E\uDDDB\uD83C\uDFFD\u200D\u2642\uFE0F"]],"1f3fe":["1f9db-1f3fe-200d-2642-fe0f",45,24,15,["\uD83E\uDDDB\uD83C\uDFFE\u200D\u2642\uFE0F"]],"1f3ff":["1f9db-1f3ff-200d-2642-fe0f",45,25,15,["\uD83E\uDDDB\uD83C\uDFFF\u200D\u2642\uFE0F"]]},
+		"1f9dc-200d-2640-fe0f":{"1f3fb":["1f9dc-1f3fb-200d-2640-fe0f",45,33,15,["\uD83E\uDDDC\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f9dc-1f3fc-200d-2640-fe0f",45,34,15,["\uD83E\uDDDC\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f9dc-1f3fd-200d-2640-fe0f",45,35,15,["\uD83E\uDDDC\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f9dc-1f3fe-200d-2640-fe0f",45,36,15,["\uD83E\uDDDC\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f9dc-1f3ff-200d-2640-fe0f",45,37,15,["\uD83E\uDDDC\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f9dc-200d-2642-fe0f":{"1f3fb":["1f9dc-1f3fb-200d-2642-fe0f",45,39,15,["\uD83E\uDDDC\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83E\uDDDC\uD83C\uDFFB"]],"1f3fc":["1f9dc-1f3fc-200d-2642-fe0f",45,40,15,["\uD83E\uDDDC\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83E\uDDDC\uD83C\uDFFC"]],"1f3fd":["1f9dc-1f3fd-200d-2642-fe0f",45,41,15,["\uD83E\uDDDC\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83E\uDDDC\uD83C\uDFFD"]],"1f3fe":["1f9dc-1f3fe-200d-2642-fe0f",45,42,15,["\uD83E\uDDDC\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83E\uDDDC\uD83C\uDFFE"]],"1f3ff":["1f9dc-1f3ff-200d-2642-fe0f",45,43,15,["\uD83E\uDDDC\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83E\uDDDC\uD83C\uDFFF"]]},
+		"1f9dd-200d-2640-fe0f":{"1f3fb":["1f9dd-1f3fb-200d-2640-fe0f",45,51,15,["\uD83E\uDDDD\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["1f9dd-1f3fc-200d-2640-fe0f",46,0,15,["\uD83E\uDDDD\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["1f9dd-1f3fd-200d-2640-fe0f",46,1,15,["\uD83E\uDDDD\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["1f9dd-1f3fe-200d-2640-fe0f",46,2,15,["\uD83E\uDDDD\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["1f9dd-1f3ff-200d-2640-fe0f",46,3,15,["\uD83E\uDDDD\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"1f9dd-200d-2642-fe0f":{"1f3fb":["1f9dd-1f3fb-200d-2642-fe0f",46,5,15,["\uD83E\uDDDD\uD83C\uDFFB\u200D\u2642\uFE0F","\uD83E\uDDDD\uD83C\uDFFB"]],"1f3fc":["1f9dd-1f3fc-200d-2642-fe0f",46,6,15,["\uD83E\uDDDD\uD83C\uDFFC\u200D\u2642\uFE0F","\uD83E\uDDDD\uD83C\uDFFC"]],"1f3fd":["1f9dd-1f3fd-200d-2642-fe0f",46,7,15,["\uD83E\uDDDD\uD83C\uDFFD\u200D\u2642\uFE0F","\uD83E\uDDDD\uD83C\uDFFD"]],"1f3fe":["1f9dd-1f3fe-200d-2642-fe0f",46,8,15,["\uD83E\uDDDD\uD83C\uDFFE\u200D\u2642\uFE0F","\uD83E\uDDDD\uD83C\uDFFE"]],"1f3ff":["1f9dd-1f3ff-200d-2642-fe0f",46,9,15,["\uD83E\uDDDD\uD83C\uDFFF\u200D\u2642\uFE0F","\uD83E\uDDDD\uD83C\uDFFF"]]},
+		"261d-fe0f":{"1f3fb":["261d-1f3fb",47,27,63,["\u261D\uD83C\uDFFB"]],"1f3fc":["261d-1f3fc",47,28,63,["\u261D\uD83C\uDFFC"]],"1f3fd":["261d-1f3fd",47,29,63,["\u261D\uD83C\uDFFD"]],"1f3fe":["261d-1f3fe",47,30,63,["\u261D\uD83C\uDFFE"]],"1f3ff":["261d-1f3ff",47,31,63,["\u261D\uD83C\uDFFF"]]},
+		"26f9-fe0f-200d-2640-fe0f":{"1f3fb":["26f9-1f3fb-200d-2640-fe0f",48,47,15,["\u26F9\uD83C\uDFFB\u200D\u2640\uFE0F"]],"1f3fc":["26f9-1f3fc-200d-2640-fe0f",48,48,15,["\u26F9\uD83C\uDFFC\u200D\u2640\uFE0F"]],"1f3fd":["26f9-1f3fd-200d-2640-fe0f",48,49,15,["\u26F9\uD83C\uDFFD\u200D\u2640\uFE0F"]],"1f3fe":["26f9-1f3fe-200d-2640-fe0f",48,50,15,["\u26F9\uD83C\uDFFE\u200D\u2640\uFE0F"]],"1f3ff":["26f9-1f3ff-200d-2640-fe0f",48,51,15,["\u26F9\uD83C\uDFFF\u200D\u2640\uFE0F"]]},
+		"26f9-fe0f-200d-2642-fe0f":{"1f3fb":["26f9-1f3fb-200d-2642-fe0f",49,1,15,["\u26F9\uD83C\uDFFB\u200D\u2642\uFE0F","\u26F9\uD83C\uDFFB"]],"1f3fc":["26f9-1f3fc-200d-2642-fe0f",49,2,15,["\u26F9\uD83C\uDFFC\u200D\u2642\uFE0F","\u26F9\uD83C\uDFFC"]],"1f3fd":["26f9-1f3fd-200d-2642-fe0f",49,3,15,["\u26F9\uD83C\uDFFD\u200D\u2642\uFE0F","\u26F9\uD83C\uDFFD"]],"1f3fe":["26f9-1f3fe-200d-2642-fe0f",49,4,15,["\u26F9\uD83C\uDFFE\u200D\u2642\uFE0F","\u26F9\uD83C\uDFFE"]],"1f3ff":["26f9-1f3ff-200d-2642-fe0f",49,5,15,["\u26F9\uD83C\uDFFF\u200D\u2642\uFE0F","\u26F9\uD83C\uDFFF"]]},
+		"270a":{"1f3fb":["270a-1f3fb",49,19,63,["\u270A\uD83C\uDFFB"]],"1f3fc":["270a-1f3fc",49,20,63,["\u270A\uD83C\uDFFC"]],"1f3fd":["270a-1f3fd",49,21,63,["\u270A\uD83C\uDFFD"]],"1f3fe":["270a-1f3fe",49,22,63,["\u270A\uD83C\uDFFE"]],"1f3ff":["270a-1f3ff",49,23,63,["\u270A\uD83C\uDFFF"]]},
+		"270b":{"1f3fb":["270b-1f3fb",49,25,63,["\u270B\uD83C\uDFFB"]],"1f3fc":["270b-1f3fc",49,26,63,["\u270B\uD83C\uDFFC"]],"1f3fd":["270b-1f3fd",49,27,63,["\u270B\uD83C\uDFFD"]],"1f3fe":["270b-1f3fe",49,28,63,["\u270B\uD83C\uDFFE"]],"1f3ff":["270b-1f3ff",49,29,63,["\u270B\uD83C\uDFFF"]]},
+		"270c-fe0f":{"1f3fb":["270c-1f3fb",49,31,63,["\u270C\uD83C\uDFFB"]],"1f3fc":["270c-1f3fc",49,32,63,["\u270C\uD83C\uDFFC"]],"1f3fd":["270c-1f3fd",49,33,63,["\u270C\uD83C\uDFFD"]],"1f3fe":["270c-1f3fe",49,34,63,["\u270C\uD83C\uDFFE"]],"1f3ff":["270c-1f3ff",49,35,63,["\u270C\uD83C\uDFFF"]]},
+		"270d-fe0f":{"1f3fb":["270d-1f3fb",49,37,31,["\u270D\uD83C\uDFFB"]],"1f3fc":["270d-1f3fc",49,38,31,["\u270D\uD83C\uDFFC"]],"1f3fd":["270d-1f3fd",49,39,31,["\u270D\uD83C\uDFFD"]],"1f3fe":["270d-1f3fe",49,40,31,["\u270D\uD83C\uDFFE"]],"1f3ff":["270d-1f3ff",49,41,31,["\u270D\uD83C\uDFFF"]]}
+	};
+	/** @private */
+	emoji.prototype.obsoletes_data = {
+		"1f3c3-200d-2642-fe0f":["1f3c3",9,46,47],
+		"1f3c3-1f3fb-200d-2642-fe0f":["1f3c3-1f3fb",9,47,47],
+		"1f3c3-1f3fc-200d-2642-fe0f":["1f3c3-1f3fc",9,48,47],
+		"1f3c3-1f3fd-200d-2642-fe0f":["1f3c3-1f3fd",9,49,47],
+		"1f3c3-1f3fe-200d-2642-fe0f":["1f3c3-1f3fe",9,50,47],
+		"1f3c3-1f3ff-200d-2642-fe0f":["1f3c3-1f3ff",9,51,47],
+		"1f3c4-200d-2642-fe0f":["1f3c4",10,12,47],
+		"1f3c4-1f3fb-200d-2642-fe0f":["1f3c4-1f3fb",10,13,47],
+		"1f3c4-1f3fc-200d-2642-fe0f":["1f3c4-1f3fc",10,14,47],
+		"1f3c4-1f3fd-200d-2642-fe0f":["1f3c4-1f3fd",10,15,47],
+		"1f3c4-1f3fe-200d-2642-fe0f":["1f3c4-1f3fe",10,16,47],
+		"1f3c4-1f3ff-200d-2642-fe0f":["1f3c4-1f3ff",10,17,47],
+		"1f3ca-200d-2642-fe0f":["1f3ca",10,40,47],
+		"1f3ca-1f3fb-200d-2642-fe0f":["1f3ca-1f3fb",10,41,47],
+		"1f3ca-1f3fc-200d-2642-fe0f":["1f3ca-1f3fc",10,42,47],
+		"1f3ca-1f3fd-200d-2642-fe0f":["1f3ca-1f3fd",10,43,47],
+		"1f3ca-1f3fe-200d-2642-fe0f":["1f3ca-1f3fe",10,44,47],
+		"1f3ca-1f3ff-200d-2642-fe0f":["1f3ca-1f3ff",10,45,47],
+		"1f3cb-fe0f-200d-2642-fe0f":["1f3cb-fe0f",11,6,15],
+		"1f3cb-1f3fb-200d-2642-fe0f":["1f3cb-1f3fb",11,7,15],
+		"1f3cb-1f3fc-200d-2642-fe0f":["1f3cb-1f3fc",11,8,15],
+		"1f3cb-1f3fd-200d-2642-fe0f":["1f3cb-1f3fd",11,9,15],
+		"1f3cb-1f3fe-200d-2642-fe0f":["1f3cb-1f3fe",11,10,15],
+		"1f3cb-1f3ff-200d-2642-fe0f":["1f3cb-1f3ff",11,11,15],
+		"1f3cc-fe0f-200d-2642-fe0f":["1f3cc-fe0f",11,24,15],
+		"1f3cc-1f3fb-200d-2642-fe0f":["1f3cc-1f3fb",11,25,15],
+		"1f3cc-1f3fc-200d-2642-fe0f":["1f3cc-1f3fc",11,26,15],
+		"1f3cc-1f3fd-200d-2642-fe0f":["1f3cc-1f3fd",11,27,15],
+		"1f3cc-1f3fe-200d-2642-fe0f":["1f3cc-1f3fe",11,28,15],
+		"1f3cc-1f3ff-200d-2642-fe0f":["1f3cc-1f3ff",11,29,15],
+		"1f468-200d-1f469-200d-1f466":["1f46a",20,29,47],
+		"1f46e-200d-2642-fe0f":["1f46e",20,45,47],
+		"1f46e-1f3fb-200d-2642-fe0f":["1f46e-1f3fb",20,46,47],
+		"1f46e-1f3fc-200d-2642-fe0f":["1f46e-1f3fc",20,47,47],
+		"1f46e-1f3fd-200d-2642-fe0f":["1f46e-1f3fd",20,48,47],
+		"1f46e-1f3fe-200d-2642-fe0f":["1f46e-1f3fe",20,49,47],
+		"1f46e-1f3ff-200d-2642-fe0f":["1f46e-1f3ff",20,50,47],
+		"1f46f-200d-2640-fe0f":["1f46f",21,1,47],
+		"1f471-200d-2642-fe0f":["1f471",21,20,47],
+		"1f471-1f3fb-200d-2642-fe0f":["1f471-1f3fb",21,21,47],
+		"1f471-1f3fc-200d-2642-fe0f":["1f471-1f3fc",21,22,47],
+		"1f471-1f3fd-200d-2642-fe0f":["1f471-1f3fd",21,23,47],
+		"1f471-1f3fe-200d-2642-fe0f":["1f471-1f3fe",21,24,47],
+		"1f471-1f3ff-200d-2642-fe0f":["1f471-1f3ff",21,25,47],
+		"1f473-200d-2642-fe0f":["1f473",21,44,47],
+		"1f473-1f3fb-200d-2642-fe0f":["1f473-1f3fb",21,45,47],
+		"1f473-1f3fc-200d-2642-fe0f":["1f473-1f3fc",21,46,47],
+		"1f473-1f3fd-200d-2642-fe0f":["1f473-1f3fd",21,47,47],
+		"1f473-1f3fe-200d-2642-fe0f":["1f473-1f3fe",21,48,47],
+		"1f473-1f3ff-200d-2642-fe0f":["1f473-1f3ff",21,49,47],
+		"1f477-200d-2642-fe0f":["1f477",22,28,47],
+		"1f477-1f3fb-200d-2642-fe0f":["1f477-1f3fb",22,29,47],
+		"1f477-1f3fc-200d-2642-fe0f":["1f477-1f3fc",22,30,47],
+		"1f477-1f3fd-200d-2642-fe0f":["1f477-1f3fd",22,31,47],
+		"1f477-1f3fe-200d-2642-fe0f":["1f477-1f3fe",22,32,47],
+		"1f477-1f3ff-200d-2642-fe0f":["1f477-1f3ff",22,33,47],
+		"1f481-200d-2640-fe0f":["1f481",23,13,47],
+		"1f481-1f3fb-200d-2640-fe0f":["1f481-1f3fb",23,14,47],
+		"1f481-1f3fc-200d-2640-fe0f":["1f481-1f3fc",23,15,47],
+		"1f481-1f3fd-200d-2640-fe0f":["1f481-1f3fd",23,16,47],
+		"1f481-1f3fe-200d-2640-fe0f":["1f481-1f3fe",23,17,47],
+		"1f481-1f3ff-200d-2640-fe0f":["1f481-1f3ff",23,18,47],
+		"1f482-200d-2642-fe0f":["1f482",23,31,47],
+		"1f482-1f3fb-200d-2642-fe0f":["1f482-1f3fb",23,32,47],
+		"1f482-1f3fc-200d-2642-fe0f":["1f482-1f3fc",23,33,47],
+		"1f482-1f3fd-200d-2642-fe0f":["1f482-1f3fd",23,34,47],
+		"1f482-1f3fe-200d-2642-fe0f":["1f482-1f3fe",23,35,47],
+		"1f482-1f3ff-200d-2642-fe0f":["1f482-1f3ff",23,36,47],
+		"1f486-200d-2640-fe0f":["1f486",24,10,47],
+		"1f486-1f3fb-200d-2640-fe0f":["1f486-1f3fb",24,11,47],
+		"1f486-1f3fc-200d-2640-fe0f":["1f486-1f3fc",24,12,47],
+		"1f486-1f3fd-200d-2640-fe0f":["1f486-1f3fd",24,13,47],
+		"1f486-1f3fe-200d-2640-fe0f":["1f486-1f3fe",24,14,47],
+		"1f486-1f3ff-200d-2640-fe0f":["1f486-1f3ff",24,15,47],
+		"1f487-200d-2640-fe0f":["1f487",24,28,47],
+		"1f487-1f3fb-200d-2640-fe0f":["1f487-1f3fb",24,29,47],
+		"1f487-1f3fc-200d-2640-fe0f":["1f487-1f3fc",24,30,47],
+		"1f487-1f3fd-200d-2640-fe0f":["1f487-1f3fd",24,31,47],
+		"1f487-1f3fe-200d-2640-fe0f":["1f487-1f3fe",24,32,47],
+		"1f487-1f3ff-200d-2640-fe0f":["1f487-1f3ff",24,33,47],
+		"1f469-200d-2764-fe0f-200d-1f48b-200d-1f468":["1f48f",24,41,47],
+		"1f469-200d-2764-fe0f-200d-1f468":["1f491",24,43,47],
+		"1f575-fe0f-200d-2642-fe0f":["1f575-fe0f",29,11,15],
+		"1f575-1f3fb-200d-2642-fe0f":["1f575-1f3fb",29,12,15],
+		"1f575-1f3fc-200d-2642-fe0f":["1f575-1f3fc",29,13,15],
+		"1f575-1f3fd-200d-2642-fe0f":["1f575-1f3fd",29,14,15],
+		"1f575-1f3fe-200d-2642-fe0f":["1f575-1f3fe",29,15,15],
+		"1f575-1f3ff-200d-2642-fe0f":["1f575-1f3ff",29,16,15],
+		"1f645-200d-2640-fe0f":["1f645",32,1,47],
+		"1f645-1f3fb-200d-2640-fe0f":["1f645-1f3fb",32,2,47],
+		"1f645-1f3fc-200d-2640-fe0f":["1f645-1f3fc",32,3,47],
+		"1f645-1f3fd-200d-2640-fe0f":["1f645-1f3fd",32,4,47],
+		"1f645-1f3fe-200d-2640-fe0f":["1f645-1f3fe",32,5,47],
+		"1f645-1f3ff-200d-2640-fe0f":["1f645-1f3ff",32,6,47],
+		"1f646-200d-2640-fe0f":["1f646",32,19,47],
+		"1f646-1f3fb-200d-2640-fe0f":["1f646-1f3fb",32,20,47],
+		"1f646-1f3fc-200d-2640-fe0f":["1f646-1f3fc",32,21,47],
+		"1f646-1f3fd-200d-2640-fe0f":["1f646-1f3fd",32,22,47],
+		"1f646-1f3fe-200d-2640-fe0f":["1f646-1f3fe",32,23,47],
+		"1f646-1f3ff-200d-2640-fe0f":["1f646-1f3ff",32,24,47],
+		"1f647-200d-2642-fe0f":["1f647",32,37,47],
+		"1f647-1f3fb-200d-2642-fe0f":["1f647-1f3fb",32,38,47],
+		"1f647-1f3fc-200d-2642-fe0f":["1f647-1f3fc",32,39,47],
+		"1f647-1f3fd-200d-2642-fe0f":["1f647-1f3fd",32,40,47],
+		"1f647-1f3fe-200d-2642-fe0f":["1f647-1f3fe",32,41,47],
+		"1f647-1f3ff-200d-2642-fe0f":["1f647-1f3ff",32,42,47],
+		"1f64b-200d-2640-fe0f":["1f64b",33,6,47],
+		"1f64b-1f3fb-200d-2640-fe0f":["1f64b-1f3fb",33,7,47],
+		"1f64b-1f3fc-200d-2640-fe0f":["1f64b-1f3fc",33,8,47],
+		"1f64b-1f3fd-200d-2640-fe0f":["1f64b-1f3fd",33,9,47],
+		"1f64b-1f3fe-200d-2640-fe0f":["1f64b-1f3fe",33,10,47],
+		"1f64b-1f3ff-200d-2640-fe0f":["1f64b-1f3ff",33,11,47],
+		"1f64d-200d-2640-fe0f":["1f64d",33,30,47],
+		"1f64d-1f3fb-200d-2640-fe0f":["1f64d-1f3fb",33,31,47],
+		"1f64d-1f3fc-200d-2640-fe0f":["1f64d-1f3fc",33,32,47],
+		"1f64d-1f3fd-200d-2640-fe0f":["1f64d-1f3fd",33,33,47],
+		"1f64d-1f3fe-200d-2640-fe0f":["1f64d-1f3fe",33,34,47],
+		"1f64d-1f3ff-200d-2640-fe0f":["1f64d-1f3ff",33,35,47],
+		"1f64e-200d-2640-fe0f":["1f64e",33,48,47],
+		"1f64e-1f3fb-200d-2640-fe0f":["1f64e-1f3fb",33,49,47],
+		"1f64e-1f3fc-200d-2640-fe0f":["1f64e-1f3fc",33,50,47],
+		"1f64e-1f3fd-200d-2640-fe0f":["1f64e-1f3fd",33,51,47],
+		"1f64e-1f3fe-200d-2640-fe0f":["1f64e-1f3fe",34,0,47],
+		"1f64e-1f3ff-200d-2640-fe0f":["1f64e-1f3ff",34,1,47],
+		"1f6a3-200d-2642-fe0f":["1f6a3",35,3,47],
+		"1f6a3-1f3fb-200d-2642-fe0f":["1f6a3-1f3fb",35,4,15],
+		"1f6a3-1f3fc-200d-2642-fe0f":["1f6a3-1f3fc",35,5,15],
+		"1f6a3-1f3fd-200d-2642-fe0f":["1f6a3-1f3fd",35,6,15],
+		"1f6a3-1f3fe-200d-2642-fe0f":["1f6a3-1f3fe",35,7,15],
+		"1f6a3-1f3ff-200d-2642-fe0f":["1f6a3-1f3ff",35,8,15],
+		"1f6b4-200d-2642-fe0f":["1f6b4",35,37,47],
+		"1f6b4-1f3fb-200d-2642-fe0f":["1f6b4-1f3fb",35,38,47],
+		"1f6b4-1f3fc-200d-2642-fe0f":["1f6b4-1f3fc",35,39,47],
+		"1f6b4-1f3fd-200d-2642-fe0f":["1f6b4-1f3fd",35,40,47],
+		"1f6b4-1f3fe-200d-2642-fe0f":["1f6b4-1f3fe",35,41,47],
+		"1f6b4-1f3ff-200d-2642-fe0f":["1f6b4-1f3ff",35,42,47],
+		"1f6b5-200d-2642-fe0f":["1f6b5",36,3,47],
+		"1f6b5-1f3fb-200d-2642-fe0f":["1f6b5-1f3fb",36,4,47],
+		"1f6b5-1f3fc-200d-2642-fe0f":["1f6b5-1f3fc",36,5,47],
+		"1f6b5-1f3fd-200d-2642-fe0f":["1f6b5-1f3fd",36,6,47],
+		"1f6b5-1f3fe-200d-2642-fe0f":["1f6b5-1f3fe",36,7,47],
+		"1f6b5-1f3ff-200d-2642-fe0f":["1f6b5-1f3ff",36,8,47],
+		"1f6b6-200d-2642-fe0f":["1f6b6",36,21,47],
+		"1f6b6-1f3fb-200d-2642-fe0f":["1f6b6-1f3fb",36,22,47],
+		"1f6b6-1f3fc-200d-2642-fe0f":["1f6b6-1f3fc",36,23,47],
+		"1f6b6-1f3fd-200d-2642-fe0f":["1f6b6-1f3fd",36,24,47],
+		"1f6b6-1f3fe-200d-2642-fe0f":["1f6b6-1f3fe",36,25,47],
+		"1f6b6-1f3ff-200d-2642-fe0f":["1f6b6-1f3ff",36,26,47],
+		"1f9d6-200d-2642-fe0f":["1f9d6",43,40,31],
+		"1f9d6-1f3fb-200d-2642-fe0f":["1f9d6-1f3fb",43,41,31],
+		"1f9d6-1f3fc-200d-2642-fe0f":["1f9d6-1f3fc",43,42,31],
+		"1f9d6-1f3fd-200d-2642-fe0f":["1f9d6-1f3fd",43,43,31],
+		"1f9d6-1f3fe-200d-2642-fe0f":["1f9d6-1f3fe",43,44,31],
+		"1f9d6-1f3ff-200d-2642-fe0f":["1f9d6-1f3ff",43,45,31],
+		"1f9d7-200d-2640-fe0f":["1f9d7",44,6,31],
+		"1f9d7-1f3fb-200d-2640-fe0f":["1f9d7-1f3fb",44,7,31],
+		"1f9d7-1f3fc-200d-2640-fe0f":["1f9d7-1f3fc",44,8,31],
+		"1f9d7-1f3fd-200d-2640-fe0f":["1f9d7-1f3fd",44,9,31],
+		"1f9d7-1f3fe-200d-2640-fe0f":["1f9d7-1f3fe",44,10,31],
+		"1f9d7-1f3ff-200d-2640-fe0f":["1f9d7-1f3ff",44,11,31],
+		"1f9d8-200d-2640-fe0f":["1f9d8",44,24,31],
+		"1f9d8-1f3fb-200d-2640-fe0f":["1f9d8-1f3fb",44,25,31],
+		"1f9d8-1f3fc-200d-2640-fe0f":["1f9d8-1f3fc",44,26,31],
+		"1f9d8-1f3fd-200d-2640-fe0f":["1f9d8-1f3fd",44,27,31],
+		"1f9d8-1f3fe-200d-2640-fe0f":["1f9d8-1f3fe",44,28,31],
+		"1f9d8-1f3ff-200d-2640-fe0f":["1f9d8-1f3ff",44,29,31],
+		"1f9d9-200d-2640-fe0f":["1f9d9",44,42,31],
+		"1f9d9-1f3fb-200d-2640-fe0f":["1f9d9-1f3fb",44,43,31],
+		"1f9d9-1f3fc-200d-2640-fe0f":["1f9d9-1f3fc",44,44,31],
+		"1f9d9-1f3fd-200d-2640-fe0f":["1f9d9-1f3fd",44,45,31],
+		"1f9d9-1f3fe-200d-2640-fe0f":["1f9d9-1f3fe",44,46,31],
+		"1f9d9-1f3ff-200d-2640-fe0f":["1f9d9-1f3ff",44,47,31],
+		"1f9da-200d-2640-fe0f":["1f9da",45,8,31],
+		"1f9da-1f3fb-200d-2640-fe0f":["1f9da-1f3fb",45,9,15],
+		"1f9da-1f3fc-200d-2640-fe0f":["1f9da-1f3fc",45,10,15],
+		"1f9da-1f3fd-200d-2640-fe0f":["1f9da-1f3fd",45,11,15],
+		"1f9da-1f3fe-200d-2640-fe0f":["1f9da-1f3fe",45,12,15],
+		"1f9da-1f3ff-200d-2640-fe0f":["1f9da-1f3ff",45,13,15],
+		"1f9db-200d-2640-fe0f":["1f9db",45,26,31],
+		"1f9db-1f3fb-200d-2640-fe0f":["1f9db-1f3fb",45,27,15],
+		"1f9db-1f3fc-200d-2640-fe0f":["1f9db-1f3fc",45,28,15],
+		"1f9db-1f3fd-200d-2640-fe0f":["1f9db-1f3fd",45,29,15],
+		"1f9db-1f3fe-200d-2640-fe0f":["1f9db-1f3fe",45,30,15],
+		"1f9db-1f3ff-200d-2640-fe0f":["1f9db-1f3ff",45,31,15],
+		"1f9dc-200d-2642-fe0f":["1f9dc",45,44,31],
+		"1f9dc-1f3fb-200d-2642-fe0f":["1f9dc-1f3fb",45,45,31],
+		"1f9dc-1f3fc-200d-2642-fe0f":["1f9dc-1f3fc",45,46,31],
+		"1f9dc-1f3fd-200d-2642-fe0f":["1f9dc-1f3fd",45,47,31],
+		"1f9dc-1f3fe-200d-2642-fe0f":["1f9dc-1f3fe",45,48,31],
+		"1f9dc-1f3ff-200d-2642-fe0f":["1f9dc-1f3ff",45,49,31],
+		"1f9dd-200d-2642-fe0f":["1f9dd",46,10,31],
+		"1f9dd-1f3fb-200d-2642-fe0f":["1f9dd-1f3fb",46,11,31],
+		"1f9dd-1f3fc-200d-2642-fe0f":["1f9dd-1f3fc",46,12,31],
+		"1f9dd-1f3fd-200d-2642-fe0f":["1f9dd-1f3fd",46,13,31],
+		"1f9dd-1f3fe-200d-2642-fe0f":["1f9dd-1f3fe",46,14,31],
+		"1f9dd-1f3ff-200d-2642-fe0f":["1f9dd-1f3ff",46,15,31],
+		"1f9de-200d-2642-fe0f":["1f9de",46,18,31],
+		"1f9df-200d-2642-fe0f":["1f9df",46,21,31],
+		"26f9-fe0f-200d-2642-fe0f":["26f9-fe0f",49,6,15],
+		"26f9-1f3fb-200d-2642-fe0f":["26f9-1f3fb",49,7,15],
+		"26f9-1f3fc-200d-2642-fe0f":["26f9-1f3fc",49,8,15],
+		"26f9-1f3fd-200d-2642-fe0f":["26f9-1f3fd",49,9,15],
+		"26f9-1f3fe-200d-2642-fe0f":["26f9-1f3fe",49,10,15],
+		"26f9-1f3ff-200d-2642-fe0f":["26f9-1f3ff",49,11,15]
+	};
+
+
+	// export
+	if (true){
+		if ( true && module.exports){
+			exports = module.exports = emoji;
+		}
+		exports.EmojiConvertor = emoji;
+	}else {}
+
+}).call(function(){
+	return this || (typeof window !== 'undefined' ? window : global);
+}());
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/emoji-picker-react/dist/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/emoji-picker-react/dist/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,n){ true?module.exports=n(__webpack_require__(/*! react */ "./node_modules/react/index.js"),__webpack_require__(/*! throttle-debounce */ "./node_modules/throttle-debounce/index.js")):undefined}("undefined"!=typeof self?self:this,function(e,n){return function(e){function n(f){if(o[f])return o[f].exports;var t=o[f]={i:f,l:!1,exports:{}};return e[f].call(t.exports,t,t.exports,n),t.l=!0,t.exports}var o={};return n.m=e,n.c=o,n.d=function(e,o,f){n.o(e,o)||Object.defineProperty(e,o,{configurable:!1,enumerable:!0,get:f})},n.n=function(e){var o=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(o,"a",o),o},n.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=60)}([function(e,n){var o=e.exports={version:"2.5.7"};"number"==typeof __e&&(__e=o)},function(e,n,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.skinTones=n.keywords=n.modifiers=n.categories=n.emojis=void 0;var f=o(110);n.emojis=f.emojis,n.categories=f.categories,n.modifiers=f.modifiers,n.keywords=f.keywords,n.skinTones=f.skinTones},function(e,n){function o(e,n){var o=e[1]||"",t=e[3];if(!t)return o;if(n&&"function"==typeof btoa){var c=f(t);return[o].concat(t.sources.map(function(e){return"/*# sourceURL="+t.sourceRoot+e+" */"})).concat([c]).join("\n")}return[o].join("\n")}function f(e){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(e))))+" */"}e.exports=function(e){var n=[];return n.toString=function(){return this.map(function(n){var f=o(n,e);return n[2]?"@media "+n[2]+"{"+f+"}":f}).join("")},n.i=function(e,o){"string"==typeof e&&(e=[[null,e,""]]);for(var f={},t=0;t<this.length;t++){var c=this[t][0];"number"==typeof c&&(f[c]=!0)}for(t=0;t<e.length;t++){var r=e[t];"number"==typeof r[0]&&f[r[0]]||(o&&!r[2]?r[2]=o:o&&(r[2]="("+r[2]+") and ("+o+")"),n.push(r))}},n}},function(e,n,o){function f(e,n){for(var o=0;o<e.length;o++){var f=e[o],t=g[f.id];if(t){t.refs++;for(var c=0;c<t.parts.length;c++)t.parts[c](f.parts[c]);for(;c<f.parts.length;c++)t.parts.push(s(f.parts[c],n))}else{for(var r=[],c=0;c<f.parts.length;c++)r.push(s(f.parts[c],n));g[f.id]={id:f.id,refs:1,parts:r}}}}function t(e,n){for(var o=[],f={},t=0;t<e.length;t++){var c=e[t],r=n.base?c[0]+n.base:c[0],a=c[1],i=c[2],u=c[3],s={css:a,media:i,sourceMap:u};f[r]?f[r].parts.push(s):o.push(f[r]={id:r,parts:[s]})}return o}function c(e,n){var o=m(e.insertInto);if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");var f=v[v.length-1];if("top"===e.insertAt)f?f.nextSibling?o.insertBefore(n,f.nextSibling):o.appendChild(n):o.insertBefore(n,o.firstChild),v.push(n);else if("bottom"===e.insertAt)o.appendChild(n);else{if("object"!=typeof e.insertAt||!e.insertAt.before)throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");var t=m(e.insertInto+" "+e.insertAt.before);o.insertBefore(n,t)}}function r(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e);var n=v.indexOf(e);n>=0&&v.splice(n,1)}function a(e){var n=document.createElement("style");return e.attrs.type="text/css",u(n,e.attrs),c(e,n),n}function i(e){var n=document.createElement("link");return e.attrs.type="text/css",e.attrs.rel="stylesheet",u(n,e.attrs),c(e,n),n}function u(e,n){Object.keys(n).forEach(function(o){e.setAttribute(o,n[o])})}function s(e,n){var o,f,t,c;if(n.transform&&e.css){if(!(c=n.transform(e.css)))return function(){};e.css=c}if(n.singleton){var u=_++;o=b||(b=a(n)),f=l.bind(null,o,u,!1),t=l.bind(null,o,u,!0)}else e.sourceMap&&"function"==typeof URL&&"function"==typeof URL.createObjectURL&&"function"==typeof URL.revokeObjectURL&&"function"==typeof Blob&&"function"==typeof btoa?(o=i(n),f=p.bind(null,o,n),t=function(){r(o),o.href&&URL.revokeObjectURL(o.href)}):(o=a(n),f=d.bind(null,o),t=function(){r(o)});return f(e),function(n){if(n){if(n.css===e.css&&n.media===e.media&&n.sourceMap===e.sourceMap)return;f(e=n)}else t()}}function l(e,n,o,f){var t=o?"":f.css;if(e.styleSheet)e.styleSheet.cssText=k(n,t);else{var c=document.createTextNode(t),r=e.childNodes;r[n]&&e.removeChild(r[n]),r.length?e.insertBefore(c,r[n]):e.appendChild(c)}}function d(e,n){var o=n.css,f=n.media;if(f&&e.setAttribute("media",f),e.styleSheet)e.styleSheet.cssText=o;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(o))}}function p(e,n,o){var f=o.css,t=o.sourceMap,c=void 0===n.convertToAbsoluteUrls&&t;(n.convertToAbsoluteUrls||c)&&(f=y(f)),t&&(f+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(t))))+" */");var r=new Blob([f],{type:"text/css"}),a=e.href;e.href=URL.createObjectURL(r),a&&URL.revokeObjectURL(a)}var g={},h=function(e){var n;return function(){return void 0===n&&(n=e.apply(this,arguments)),n}}(function(){return window&&document&&document.all&&!window.atob}),m=function(e){var n={};return function(o){if(void 0===n[o]){var f=e.call(this,o);if(f instanceof window.HTMLIFrameElement)try{f=f.contentDocument.head}catch(e){f=null}n[o]=f}return n[o]}}(function(e){return document.querySelector(e)}),b=null,_=0,v=[],y=o(113);e.exports=function(e,n){if("undefined"!=typeof DEBUG&&DEBUG&&"object"!=typeof document)throw new Error("The style-loader cannot be used in a non-browser environment");n=n||{},n.attrs="object"==typeof n.attrs?n.attrs:{},n.singleton||"boolean"==typeof n.singleton||(n.singleton=h()),n.insertInto||(n.insertInto="head"),n.insertAt||(n.insertAt="bottom");var o=t(e,n);return f(o,n),function(e){for(var c=[],r=0;r<o.length;r++){var a=o[r],i=g[a.id];i.refs--,c.push(i)}if(e){f(t(e,n),n)}for(var r=0;r<c.length;r++){var i=c[r];if(0===i.refs){for(var u=0;u<i.parts.length;u++)i.parts[u]();delete g[i.id]}}}};var k=function(){var e=[];return function(n,o){return e[n]=o,e.filter(Boolean).join("\n")}}()},function(n,o){n.exports=e},function(e,n,o){if(true){var f="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,t=function(e){return"object"==typeof e&&null!==e&&e.$$typeof===f};e.exports=o(105)(t,!0)}else {}},function(e,n,o){var f=o(7),t=o(0),c=o(45),r=o(11),a=o(10),i=function(e,n,o){var u,s,l,d=e&i.F,p=e&i.G,g=e&i.S,h=e&i.P,m=e&i.B,b=e&i.W,_=p?t:t[n]||(t[n]={}),v=_.prototype,y=p?f:g?f[n]:(f[n]||{}).prototype;p&&(o=n);for(u in o)(s=!d&&y&&void 0!==y[u])&&a(_,u)||(l=s?y[u]:o[u],_[u]=p&&"function"!=typeof y[u]?o[u]:m&&s?c(l,f):b&&y[u]==l?function(e){var n=function(n,o,f){if(this instanceof e){switch(arguments.length){case 0:return new e;case 1:return new e(n);case 2:return new e(n,o)}return new e(n,o,f)}return e.apply(this,arguments)};return n.prototype=e.prototype,n}(l):h&&"function"==typeof l?c(Function.call,l):l,h&&((_.virtual||(_.virtual={}))[u]=l,e&i.R&&v&&!v[u]&&r(v,u,l)))};i.F=1,i.G=2,i.S=4,i.P=8,i.B=16,i.W=32,i.U=64,i.R=128,e.exports=i},function(e,n){var o=e.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=o)},function(e,n,o){var f=o(18),t=o(46),c=o(30),r=Object.defineProperty;n.f=o(9)?Object.defineProperty:function(e,n,o){if(f(e),n=c(n,!0),f(o),t)try{return r(e,n,o)}catch(e){}if("get"in o||"set"in o)throw TypeError("Accessors not supported!");return"value"in o&&(e[n]=o.value),e}},function(e,n,o){e.exports=!o(13)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(e,n){var o={}.hasOwnProperty;e.exports=function(e,n){return o.call(e,n)}},function(e,n,o){var f=o(8),t=o(25);e.exports=o(9)?function(e,n,o){return f.f(e,n,t(1,o))}:function(e,n,o){return e[n]=o,e}},function(e,n){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},function(e,n){e.exports=function(e){try{return!!e()}catch(e){return!0}}},function(e,n,o){var f=o(49),t=o(31);e.exports=function(e){return f(t(e))}},function(e,n,o){e.exports={default:o(70),__esModule:!0}},function(e,n,o){var f=o(34)("wks"),t=o(27),c=o(7).Symbol,r="function"==typeof c;(e.exports=function(e){return f[e]||(f[e]=r&&c[e]||(r?c:t)("Symbol."+e))}).store=f},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0}),n.KEYWORDS_SINGLE=n.ALL_KEYWORDS=n.DEFAULT_IMAGE_RESOLUTION=n.DEFAULT_CDN_PATH=n.FILTER_UPDATE_DEBOUNCE=n.HIDE_SCROLL_DEBOUNCE=n.OPEN_DIVERSITIES_TIMEOUT=n.MIN_SCROLLBAR_HEIGHT_PADDED=void 0;var t=o(15),c=f(t),r=o(1),a=o(120),i=f(a),u=o(121);(function(e){if(e&&e.__esModule)return e;var n={};if(null!=e)for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&(n[o]=e[o]);n.default=e})(u),n.MIN_SCROLLBAR_HEIGHT_PADDED=15,n.OPEN_DIVERSITIES_TIMEOUT=1e3,n.HIDE_SCROLL_DEBOUNCE=550,n.FILTER_UPDATE_DEBOUNCE=200,n.DEFAULT_CDN_PATH="https://cdn.jsdelivr.net/emojione/assets/3.0/png",n.DEFAULT_IMAGE_RESOLUTION="32",n.ALL_KEYWORDS=(0,c.default)(r.keywords),n.KEYWORDS_SINGLE=i.default},function(e,n,o){var f=o(12);e.exports=function(e){if(!f(e))throw TypeError(e+" is not an object!");return e}},function(e,n,o){var f=o(48),t=o(35);e.exports=Object.keys||function(e){return f(e,t)}},function(e,n,o){e.exports={default:o(72),__esModule:!0}},function(e,n,o){"use strict";n.__esModule=!0,n.default=function(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}},function(e,n,o){"use strict";n.__esModule=!0;var f=o(74),t=function(e){return e&&e.__esModule?e:{default:e}}(f);n.default=function(){function e(e,n){for(var o=0;o<n.length;o++){var f=n[o];f.enumerable=f.enumerable||!1,f.configurable=!0,"value"in f&&(f.writable=!0),(0,t.default)(e,f.key,f)}}return function(n,o,f){return o&&e(n.prototype,o),f&&e(n,f),n}}()},function(e,n,o){"use strict";n.__esModule=!0;var f=o(53),t=function(e){return e&&e.__esModule?e:{default:e}}(f);n.default=function(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!==(void 0===n?"undefined":(0,t.default)(n))&&"function"!=typeof n?e:n}},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}n.__esModule=!0;var t=o(98),c=f(t),r=o(102),a=f(r),i=o(53),u=f(i);n.default=function(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+(void 0===n?"undefined":(0,u.default)(n)));e.prototype=(0,a.default)(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(c.default?(0,c.default)(e,n):e.__proto__=n)}},function(e,n){e.exports=function(e,n){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:n}}},function(e,n){e.exports=!0},function(e,n){var o=0,f=Math.random();e.exports=function(e){return"Symbol(".concat(void 0===e?"":e,")_",(++o+f).toString(36))}},function(e,n){n.f={}.propertyIsEnumerable},function(e,n,o){var f=o(31);e.exports=function(e){return Object(f(e))}},function(e,n,o){var f=o(12);e.exports=function(e,n){if(!f(e))return e;var o,t;if(n&&"function"==typeof(o=e.toString)&&!f(t=o.call(e)))return t;if("function"==typeof(o=e.valueOf)&&!f(t=o.call(e)))return t;if(!n&&"function"==typeof(o=e.toString)&&!f(t=o.call(e)))return t;throw TypeError("Can't convert object to primitive value")}},function(e,n){e.exports=function(e){if(void 0==e)throw TypeError("Can't call method on  "+e);return e}},function(e,n){var o=Math.ceil,f=Math.floor;e.exports=function(e){return isNaN(e=+e)?0:(e>0?f:o)(e)}},function(e,n,o){var f=o(34)("keys"),t=o(27);e.exports=function(e){return f[e]||(f[e]=t(e))}},function(e,n,o){var f=o(0),t=o(7),c=t["__core-js_shared__"]||(t["__core-js_shared__"]={});(e.exports=function(e,n){return c[e]||(c[e]=void 0!==n?n:{})})("versions",[]).push({version:f.version,mode:o(26)?"pure":"global",copyright:"© 2018 Denis Pushkarev (zloirock.ru)"})},function(e,n){e.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(e,n){n.f=Object.getOwnPropertySymbols},function(e,n){e.exports={}},function(e,n,o){var f=o(18),t=o(82),c=o(35),r=o(33)("IE_PROTO"),a=function(){},i=function(){var e,n=o(47)("iframe"),f=c.length;for(n.style.display="none",o(83).appendChild(n),n.src="javascript:",e=n.contentWindow.document,e.open(),e.write("<script>document.F=Object<\/script>"),e.close(),i=e.F;f--;)delete i.prototype[c[f]];return i()};e.exports=Object.create||function(e,n){var o;return null!==e?(a.prototype=f(e),o=new a,a.prototype=null,o[r]=e):o=i(),void 0===n?o:t(o,n)}},function(e,n,o){var f=o(8).f,t=o(10),c=o(16)("toStringTag");e.exports=function(e,n,o){e&&!t(e=o?e:e.prototype,c)&&f(e,c,{configurable:!0,value:n})}},function(e,n,o){n.f=o(16)},function(e,n,o){var f=o(7),t=o(0),c=o(26),r=o(40),a=o(8).f;e.exports=function(e){var n=t.Symbol||(t.Symbol=c?{}:f.Symbol||{});"_"==e.charAt(0)||e in n||a(n,e,{value:r.f(e)})}},function(e,n,o){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,n,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default=function(e){if(e){var n={name:e.n,unified:e.u,order:e.o,category:f.categories[e.c].name};return e.d&&(n.diversities=e.d),n}};var f=o(1)},function(e,n,o){e.exports={default:o(63),__esModule:!0}},function(e,n,o){var f=o(65);e.exports=function(e,n,o){if(f(e),void 0===n)return e;switch(o){case 1:return function(o){return e.call(n,o)};case 2:return function(o,f){return e.call(n,o,f)};case 3:return function(o,f,t){return e.call(n,o,f,t)}}return function(){return e.apply(n,arguments)}}},function(e,n,o){e.exports=!o(9)&&!o(13)(function(){return 7!=Object.defineProperty(o(47)("div"),"a",{get:function(){return 7}}).a})},function(e,n,o){var f=o(12),t=o(7).document,c=f(t)&&f(t.createElement);e.exports=function(e){return c?t.createElement(e):{}}},function(e,n,o){var f=o(10),t=o(14),c=o(67)(!1),r=o(33)("IE_PROTO");e.exports=function(e,n){var o,a=t(e),i=0,u=[];for(o in a)o!=r&&f(a,o)&&u.push(o);for(;n.length>i;)f(a,o=n[i++])&&(~c(u,o)||u.push(o));return u}},function(e,n,o){var f=o(50);e.exports=Object("z").propertyIsEnumerable(0)?Object:function(e){return"String"==f(e)?e.split(""):Object(e)}},function(e,n){var o={}.toString;e.exports=function(e){return o.call(e).slice(8,-1)}},function(e,n,o){var f=o(6),t=o(0),c=o(13);e.exports=function(e,n){var o=(t.Object||{})[e]||Object[e],r={};r[e]=n(o),f(f.S+f.F*c(function(){o(1)}),"Object",r)}},function(e,n,o){var f=o(10),t=o(29),c=o(33)("IE_PROTO"),r=Object.prototype;e.exports=Object.getPrototypeOf||function(e){return e=t(e),f(e,c)?e[c]:"function"==typeof e.constructor&&e instanceof e.constructor?e.constructor.prototype:e instanceof Object?r:null}},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}n.__esModule=!0;var t=o(77),c=f(t),r=o(88),a=f(r),i="function"==typeof a.default&&"symbol"==typeof c.default?function(e){return typeof e}:function(e){return e&&"function"==typeof a.default&&e.constructor===a.default&&e!==a.default.prototype?"symbol":typeof e};n.default="function"==typeof a.default&&"symbol"===i(c.default)?function(e){return void 0===e?"undefined":i(e)}:function(e){return e&&"function"==typeof a.default&&e.constructor===a.default&&e!==a.default.prototype?"symbol":void 0===e?"undefined":i(e)}},function(e,n,o){"use strict";var f=o(26),t=o(6),c=o(55),r=o(11),a=o(37),i=o(81),u=o(39),s=o(52),l=o(16)("iterator"),d=!([].keys&&"next"in[].keys()),p=function(){return this};e.exports=function(e,n,o,g,h,m,b){i(o,n,g);var _,v,y,k=function(e){if(!d&&e in C)return C[e];switch(e){case"keys":case"values":return function(){return new o(this,e)}}return function(){return new o(this,e)}},w=n+" Iterator",x="values"==h,j=!1,C=e.prototype,E=C[l]||C["@@iterator"]||h&&C[h],M=E||k(h),S=h?x?k("entries"):M:void 0,O="Array"==n?C.entries||E:E;if(O&&(y=s(O.call(new e)))!==Object.prototype&&y.next&&(u(y,w,!0),f||"function"==typeof y[l]||r(y,l,p)),x&&E&&"values"!==E.name&&(j=!0,M=function(){return E.call(this)}),f&&!b||!d&&!j&&C[l]||r(C,l,M),a[n]=M,a[w]=p,h)if(_={values:x?M:k("values"),keys:m?M:k("keys"),entries:S},b)for(v in _)v in C||c(C,v,_[v]);else t(t.P+t.F*(d||j),n,_);return _}},function(e,n,o){e.exports=o(11)},function(e,n,o){var f=o(48),t=o(35).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(e){return f(e,t)}},function(e,n,o){var f=o(28),t=o(25),c=o(14),r=o(30),a=o(10),i=o(46),u=Object.getOwnPropertyDescriptor;n.f=o(9)?u:function(e,n){if(e=c(e),n=r(n,!0),i)try{return u(e,n)}catch(e){}if(a(e,n))return t(!f.f.call(e,n),e[n])}},function(e,o){e.exports=n},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0}),n.unifiedWithModifier=n.bgImage=void 0;var t=o(119),c=f(t),r=o(123),a=f(r);n.bgImage=c.default,n.unifiedWithModifier=a.default},function(e,n,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var f=o(61),t=function(e){return e&&e.__esModule?e:{default:e}}(f);n.default=t.default},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var t=o(62),c=f(t),r=o(15),a=f(r),i=o(44),u=f(i),s=o(20),l=f(s),d=o(21),p=f(d),g=o(22),h=f(g),m=o(23),b=f(m),_=o(24),v=f(_),y=o(4),k=f(y),w=o(5),x=f(w),j=o(109),C=f(j),E=o(1),M=o(114),S=f(M),O=o(117),z=f(O),P=o(150),T=f(P);o(158);var D=function(e){function n(e){(0,p.default)(this,n);var o=(0,b.default)(this,(n.__proto__||(0,l.default)(n)).call(this,e));return o.state={filter:null,modifier:null,activeModifier:null,seenCategories:{0:!0},seenInSearch:{},modifiersSpread:!1},o.transformed=[],o.pickerClassNames=["emoji-picker","",""],o.onCategoryClick=o.onCategoryClick.bind(o),o.onEmojiClick=o.onEmojiClick.bind(o),o.onSearch=o.onSearch.bind(o),o.onModifierClick=o.onModifierClick.bind(o),o.suppressModifiers=o.suppressModifiers.bind(o),o.setSeenCategory=o.setSeenCategory.bind(o),o.openDiversitiesMenu=o.openDiversitiesMenu.bind(o),o.closeDiversitiesMenu=o.closeDiversitiesMenu.bind(o),o.setActiveCategory=o.setActiveCategory.bind(o),o.setSeenInSearch=o.setSeenInSearch.bind(o),o}return(0,v.default)(n,e),(0,h.default)(n,[{key:"getChildContext",value:function(){var e=this.props,n=e.assetPath,o=e.emojiResolution,f=e.disableDiversityPicker,t=e.customCategoryNames,c=this.state.activeModifier,r=this.openDiversitiesMenu;return{onEmojiClick:this.onEmojiClick,parent:this,assetPath:n,activeModifier:c,emojiResolution:o,openDiversitiesMenu:r,disableDiversityPicker:f,customCategoryNames:t}}},{key:"componentDidMount",value:function(){this.setActiveCategory({index:0})}},{key:"setPickerClassname",value:function(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";this.pickerClassNames[e]=n,this._picker.setAttribute("class",this.pickerClassNames.join(" "))}},{key:"setActiveCategory",value:function(e){var n=e.index;if(E.categories[n]&&!this.state.filter){var o="number"==typeof n;n!==this.state.activeCategory&&(o||(n=0),this.setPickerClassname(1,E.categories[n].name),this.setState({activeCategory:n}))}}},{key:"unsetActiveCategory",value:function(){this.setPickerClassname(1)}},{key:"setSeenCategory",value:function(e,n){var o=(0,u.default)({},this.state.seenCategories,n);o[e]=!0,(0,a.default)(this.state.seenCategories).length!==(0,a.default)(o).length&&this.setState({seenCategories:o})}},{key:"setSeenInSearch",value:function(e){var n=(0,c.default)({},this.state.seenInSearch),o=0;for(var f in e)this.state.seenCategories[f]||this.state.seenInSearch[f]||e.hasOwnProperty(f)&&(o++,n[f]=!0);o&&this.setState({seenInSearch:n})}},{key:"onCategoryClick",value:function(e,n){e&&e.preventDefault(),this.setState({delayedCategory:n}),this.setSeenCategory(n),this._wrapperSection.scrollToCategoryByIndex(n)}},{key:"onSearch",value:function(e){var n=this;this.setState({filter:e},function(){if(n._wrapperSection.scrollTop(),!e)return n.setActiveCategory(0);n._wrapperSection.onScroll(),n.unsetActiveCategory()})}},{key:"onModifierClick",value:function(e,n){if(e.preventDefault(),!this.state.modifiersSpread)return this._picker.addEventListener("mousedown",this.suppressModifiers),this.setState({modifiersSpread:!0});n===this.state.activeModifier&&(n=null),this.setPickerClassname(2,n),this.setState({activeModifier:n,modifiersSpread:!1})}},{key:"suppressModifiers",value:function(e){this.state.modifiersSpread&&(this._picker.removeEventListener("mousedown",this.suppressModifiers),e&&e.target.classList.contains("st")||this.setState({modifiersSpread:!1}))}},{key:"openDiversitiesMenu",value:function(e){this._picker.addEventListener("mousedown",this.closeDiversitiesMenu),this.setState({diversityPicker:e})}},{key:"closeDiversitiesMenu",value:function(e){if(this.state.diversityPicker){e&&(e.target.classList.contains("diversity-picker")||e.target.parentElement.classList.contains("diversity-picker"))||(this._picker.removeEventListener("mousedown",this.closeDiversitiesMenu),this.setState({diversityPicker:null}))}}},{key:"onEmojiClick",value:function(e,n,o){var f=this;o.preventDefault();var t=E.modifiers.filter(function(n){return e.indexOf(n)>-1});if(t.length){var c=n.name+"::"+E.skinTones[t[0]];return this.props.onEmojiClick(e,(0,u.default)({},n,{name:c||n.name}),o)}if(this.state.activeModifier&&n.hasOwnProperty("diversities")){var r=n.diversities.filter(function(e){return e.indexOf(f.state.activeModifier)>-1});if(r.length){var a=n.name+"::"+E.skinTones[this.state.activeModifier];return this.props.onEmojiClick(r[0],(0,u.default)({},n,{name:a||n.name}),o)}}return this.props.onEmojiClick(e,n,o)}},{key:"render",value:function(){var e=this,n=this.props.preload,o=(0,u.default)({},this.state.seenCategories,this.state.seenInSearch);return k.default.createElement("aside",{className:this.pickerClassNames.join(" "),ref:function(n){return e._picker=n}},k.default.createElement(S.default,{onClick:this.onCategoryClick}),k.default.createElement("div",{className:"bar-wrapper"},k.default.createElement(C.default,{onModifierClick:this.onModifierClick,activeModifier:this.state.activeModifier,spread:this.state.modifiersSpread}),k.default.createElement(T.default,{onChange:this.onSearch})),k.default.createElement(z.default,{filter:this.state.filter,diversityPicker:this.state.diversityPicker,closeDiversitiesMenu:this.closeDiversitiesMenu,visibleCategories:o,modifiersSpread:this.state.modifiersSpread,ref:function(n){return e._wrapperSection=n},setSeenCategory:this.setSeenCategory,suppressModifiers:this.suppressModifiers,setActiveCategory:this.setActiveCategory,setSeenInSearch:this.setSeenInSearch,activeCategory:this.state.activeCategory,delayedCategory:this.state.delayedCategory,preload:n}))}}]),n}(y.Component);D.propTypes={onEmojiClick:x.default.func.isRequired,assetPath:x.default.string,emojiResolution:x.default.number,preload:x.default.bool,customCategoryNames:x.default.object,disableDiversityPicker:x.default.bool},D.childContextTypes={customCategoryNames:x.default.object,onEmojiClick:x.default.func,parent:x.default.instanceOf(D),assetPath:x.default.string,activeModifier:x.default.string,emojiResolution:x.default.number,openDiversitiesMenu:x.default.func,disableDiversityPicker:x.default.bool},n.default=D},function(e,n,o){"use strict";n.__esModule=!0;var f=o(44),t=function(e){return e&&e.__esModule?e:{default:e}}(f);n.default=t.default||function(e){for(var n=1;n<arguments.length;n++){var o=arguments[n];for(var f in o)Object.prototype.hasOwnProperty.call(o,f)&&(e[f]=o[f])}return e}},function(e,n,o){o(64),e.exports=o(0).Object.assign},function(e,n,o){var f=o(6);f(f.S+f.F,"Object",{assign:o(66)})},function(e,n){e.exports=function(e){if("function"!=typeof e)throw TypeError(e+" is not a function!");return e}},function(e,n,o){"use strict";var f=o(19),t=o(36),c=o(28),r=o(29),a=o(49),i=Object.assign;e.exports=!i||o(13)(function(){var e={},n={},o=Symbol(),f="abcdefghijklmnopqrst";return e[o]=7,f.split("").forEach(function(e){n[e]=e}),7!=i({},e)[o]||Object.keys(i({},n)).join("")!=f})?function(e,n){for(var o=r(e),i=arguments.length,u=1,s=t.f,l=c.f;i>u;)for(var d,p=a(arguments[u++]),g=s?f(p).concat(s(p)):f(p),h=g.length,m=0;h>m;)l.call(p,d=g[m++])&&(o[d]=p[d]);return o}:i},function(e,n,o){var f=o(14),t=o(68),c=o(69);e.exports=function(e){return function(n,o,r){var a,i=f(n),u=t(i.length),s=c(r,u);if(e&&o!=o){for(;u>s;)if((a=i[s++])!=a)return!0}else for(;u>s;s++)if((e||s in i)&&i[s]===o)return e||s||0;return!e&&-1}}},function(e,n,o){var f=o(32),t=Math.min;e.exports=function(e){return e>0?t(f(e),9007199254740991):0}},function(e,n,o){var f=o(32),t=Math.max,c=Math.min;e.exports=function(e,n){return e=f(e),e<0?t(e+n,0):c(e,n)}},function(e,n,o){o(71),e.exports=o(0).Object.keys},function(e,n,o){var f=o(29),t=o(19);o(51)("keys",function(){return function(e){return t(f(e))}})},function(e,n,o){o(73),e.exports=o(0).Object.getPrototypeOf},function(e,n,o){var f=o(29),t=o(52);o(51)("getPrototypeOf",function(){return function(e){return t(f(e))}})},function(e,n,o){e.exports={default:o(75),__esModule:!0}},function(e,n,o){o(76);var f=o(0).Object;e.exports=function(e,n,o){return f.defineProperty(e,n,o)}},function(e,n,o){var f=o(6);f(f.S+f.F*!o(9),"Object",{defineProperty:o(8).f})},function(e,n,o){e.exports={default:o(78),__esModule:!0}},function(e,n,o){o(79),o(84),e.exports=o(40).f("iterator")},function(e,n,o){"use strict";var f=o(80)(!0);o(54)(String,"String",function(e){this._t=String(e),this._i=0},function(){var e,n=this._t,o=this._i;return o>=n.length?{value:void 0,done:!0}:(e=f(n,o),this._i+=e.length,{value:e,done:!1})})},function(e,n,o){var f=o(32),t=o(31);e.exports=function(e){return function(n,o){var c,r,a=String(t(n)),i=f(o),u=a.length;return i<0||i>=u?e?"":void 0:(c=a.charCodeAt(i),c<55296||c>56319||i+1===u||(r=a.charCodeAt(i+1))<56320||r>57343?e?a.charAt(i):c:e?a.slice(i,i+2):r-56320+(c-55296<<10)+65536)}}},function(e,n,o){"use strict";var f=o(38),t=o(25),c=o(39),r={};o(11)(r,o(16)("iterator"),function(){return this}),e.exports=function(e,n,o){e.prototype=f(r,{next:t(1,o)}),c(e,n+" Iterator")}},function(e,n,o){var f=o(8),t=o(18),c=o(19);e.exports=o(9)?Object.defineProperties:function(e,n){t(e);for(var o,r=c(n),a=r.length,i=0;a>i;)f.f(e,o=r[i++],n[o]);return e}},function(e,n,o){var f=o(7).document;e.exports=f&&f.documentElement},function(e,n,o){o(85);for(var f=o(7),t=o(11),c=o(37),r=o(16)("toStringTag"),a="CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,TextTrackList,TouchList".split(","),i=0;i<a.length;i++){var u=a[i],s=f[u],l=s&&s.prototype;l&&!l[r]&&t(l,r,u),c[u]=c.Array}},function(e,n,o){"use strict";var f=o(86),t=o(87),c=o(37),r=o(14);e.exports=o(54)(Array,"Array",function(e,n){this._t=r(e),this._i=0,this._k=n},function(){var e=this._t,n=this._k,o=this._i++;return!e||o>=e.length?(this._t=void 0,t(1)):"keys"==n?t(0,o):"values"==n?t(0,e[o]):t(0,[o,e[o]])},"values"),c.Arguments=c.Array,f("keys"),f("values"),f("entries")},function(e,n){e.exports=function(){}},function(e,n){e.exports=function(e,n){return{value:n,done:!!e}}},function(e,n,o){e.exports={default:o(89),__esModule:!0}},function(e,n,o){o(90),o(95),o(96),o(97),e.exports=o(0).Symbol},function(e,n,o){"use strict";var f=o(7),t=o(10),c=o(9),r=o(6),a=o(55),i=o(91).KEY,u=o(13),s=o(34),l=o(39),d=o(27),p=o(16),g=o(40),h=o(41),m=o(92),b=o(93),_=o(18),v=o(12),y=o(14),k=o(30),w=o(25),x=o(38),j=o(94),C=o(57),E=o(8),M=o(19),S=C.f,O=E.f,z=j.f,P=f.Symbol,T=f.JSON,D=T&&T.stringify,I=p("_hidden"),N=p("toPrimitive"),L={}.propertyIsEnumerable,A=s("symbol-registry"),R=s("symbols"),q=s("op-symbols"),U=Object.prototype,H="function"==typeof P,B=f.QObject,V=!B||!B.prototype||!B.prototype.findChild,F=c&&u(function(){return 7!=x(O({},"a",{get:function(){return O(this,"a",{value:7}).a}})).a})?function(e,n,o){var f=S(U,n);f&&delete U[n],O(e,n,o),f&&e!==U&&O(U,n,f)}:O,W=function(e){var n=R[e]=x(P.prototype);return n._k=e,n},G=H&&"symbol"==typeof P.iterator?function(e){return"symbol"==typeof e}:function(e){return e instanceof P},Y=function(e,n,o){return e===U&&Y(q,n,o),_(e),n=k(n,!0),_(o),t(R,n)?(o.enumerable?(t(e,I)&&e[I][n]&&(e[I][n]=!1),o=x(o,{enumerable:w(0,!1)})):(t(e,I)||O(e,I,w(1,{})),e[I][n]=!0),F(e,n,o)):O(e,n,o)},K=function(e,n){_(e);for(var o,f=m(n=y(n)),t=0,c=f.length;c>t;)Y(e,o=f[t++],n[o]);return e},J=function(e,n){return void 0===n?x(e):K(x(e),n)},$=function(e){var n=L.call(this,e=k(e,!0));return!(this===U&&t(R,e)&&!t(q,e))&&(!(n||!t(this,e)||!t(R,e)||t(this,I)&&this[I][e])||n)},X=function(e,n){if(e=y(e),n=k(n,!0),e!==U||!t(R,n)||t(q,n)){var o=S(e,n);return!o||!t(R,n)||t(e,I)&&e[I][n]||(o.enumerable=!0),o}},Q=function(e){for(var n,o=z(y(e)),f=[],c=0;o.length>c;)t(R,n=o[c++])||n==I||n==i||f.push(n);return f},Z=function(e){for(var n,o=e===U,f=z(o?q:y(e)),c=[],r=0;f.length>r;)!t(R,n=f[r++])||o&&!t(U,n)||c.push(R[n]);return c};H||(P=function(){if(this instanceof P)throw TypeError("Symbol is not a constructor!");var e=d(arguments.length>0?arguments[0]:void 0),n=function(o){this===U&&n.call(q,o),t(this,I)&&t(this[I],e)&&(this[I][e]=!1),F(this,e,w(1,o))};return c&&V&&F(U,e,{configurable:!0,set:n}),W(e)},a(P.prototype,"toString",function(){return this._k}),C.f=X,E.f=Y,o(56).f=j.f=Q,o(28).f=$,o(36).f=Z,c&&!o(26)&&a(U,"propertyIsEnumerable",$,!0),g.f=function(e){return W(p(e))}),r(r.G+r.W+r.F*!H,{Symbol:P});for(var ee="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),ne=0;ee.length>ne;)p(ee[ne++]);for(var oe=M(p.store),fe=0;oe.length>fe;)h(oe[fe++]);r(r.S+r.F*!H,"Symbol",{for:function(e){return t(A,e+="")?A[e]:A[e]=P(e)},keyFor:function(e){if(!G(e))throw TypeError(e+" is not a symbol!");for(var n in A)if(A[n]===e)return n},useSetter:function(){V=!0},useSimple:function(){V=!1}}),r(r.S+r.F*!H,"Object",{create:J,defineProperty:Y,defineProperties:K,getOwnPropertyDescriptor:X,getOwnPropertyNames:Q,getOwnPropertySymbols:Z}),T&&r(r.S+r.F*(!H||u(function(){var e=P();return"[null]"!=D([e])||"{}"!=D({a:e})||"{}"!=D(Object(e))})),"JSON",{stringify:function(e){for(var n,o,f=[e],t=1;arguments.length>t;)f.push(arguments[t++]);if(o=n=f[1],(v(n)||void 0!==e)&&!G(e))return b(n)||(n=function(e,n){if("function"==typeof o&&(n=o.call(this,e,n)),!G(n))return n}),f[1]=n,D.apply(T,f)}}),P.prototype[N]||o(11)(P.prototype,N,P.prototype.valueOf),l(P,"Symbol"),l(Math,"Math",!0),l(f.JSON,"JSON",!0)},function(e,n,o){var f=o(27)("meta"),t=o(12),c=o(10),r=o(8).f,a=0,i=Object.isExtensible||function(){return!0},u=!o(13)(function(){return i(Object.preventExtensions({}))}),s=function(e){r(e,f,{value:{i:"O"+ ++a,w:{}}})},l=function(e,n){if(!t(e))return"symbol"==typeof e?e:("string"==typeof e?"S":"P")+e;if(!c(e,f)){if(!i(e))return"F";if(!n)return"E";s(e)}return e[f].i},d=function(e,n){if(!c(e,f)){if(!i(e))return!0;if(!n)return!1;s(e)}return e[f].w},p=function(e){return u&&g.NEED&&i(e)&&!c(e,f)&&s(e),e},g=e.exports={KEY:f,NEED:!1,fastKey:l,getWeak:d,onFreeze:p}},function(e,n,o){var f=o(19),t=o(36),c=o(28);e.exports=function(e){var n=f(e),o=t.f;if(o)for(var r,a=o(e),i=c.f,u=0;a.length>u;)i.call(e,r=a[u++])&&n.push(r);return n}},function(e,n,o){var f=o(50);e.exports=Array.isArray||function(e){return"Array"==f(e)}},function(e,n,o){var f=o(14),t=o(56).f,c={}.toString,r="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],a=function(e){try{return t(e)}catch(e){return r.slice()}};e.exports.f=function(e){return r&&"[object Window]"==c.call(e)?a(e):t(f(e))}},function(e,n){},function(e,n,o){o(41)("asyncIterator")},function(e,n,o){o(41)("observable")},function(e,n,o){e.exports={default:o(99),__esModule:!0}},function(e,n,o){o(100),e.exports=o(0).Object.setPrototypeOf},function(e,n,o){var f=o(6);f(f.S,"Object",{setPrototypeOf:o(101).set})},function(e,n,o){var f=o(12),t=o(18),c=function(e,n){if(t(e),!f(n)&&null!==n)throw TypeError(n+": can't set as prototype!")};e.exports={set:Object.setPrototypeOf||("__proto__"in{}?function(e,n,f){try{f=o(45)(Function.call,o(57).f(Object.prototype,"__proto__").set,2),f(e,[]),n=!(e instanceof Array)}catch(e){n=!0}return function(e,o){return c(e,o),n?e.__proto__=o:f(e,o),e}}({},!1):void 0),check:c}},function(e,n,o){e.exports={default:o(103),__esModule:!0}},function(e,n,o){o(104);var f=o(0).Object;e.exports=function(e,n){return f.create(e,n)}},function(e,n,o){var f=o(6);f(f.S,"Object",{create:o(38)})},function(e,n,o){"use strict";function f(){return null}var t=o(106),c=o(42),r=o(107),a=function(){}; true&&(a=function(e){var n="Warning: "+e;"undefined"!=typeof console&&console.error(n);try{throw new Error(n)}catch(e){}}),e.exports=function(e,n){function o(e){var n=e&&(C&&e[C]||e[E]);if("function"==typeof n)return n}function i(e,n){return e===n?0!==e||1/e==1/n:e!==e&&n!==n}function u(e){this.message=e,this.stack=""}function s(e){function o(o,r,i,s,l,d,p){if(s=s||M,d=d||i,p!==c){if(n){var g=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");throw g.name="Invariant Violation",g}if( true&&"undefined"!=typeof console){var h=s+":"+i;!f[h]&&t<3&&(a("You are manually calling a React.PropTypes validation function for the `"+d+"` prop on `"+s+"`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."),f[h]=!0,t++)}}return null==r[i]?o?new u(null===r[i]?"The "+l+" `"+d+"` is marked as required in `"+s+"`, but its value is `null`.":"The "+l+" `"+d+"` is marked as required in `"+s+"`, but its value is `undefined`."):null:e(r,i,s,l,d)}if(true)var f={},t=0;var r=o.bind(null,!1);return r.isRequired=o.bind(null,!0),r}function l(e){function n(n,o,f,t,c,r){var a=n[o];if(k(a)!==e)return new u("Invalid "+t+" `"+c+"` of type `"+w(a)+"` supplied to `"+f+"`, expected `"+e+"`.");return null}return s(n)}function d(e){function n(n,o,f,t,r){if("function"!=typeof e)return new u("Property `"+r+"` of component `"+f+"` has invalid PropType notation inside arrayOf.");var a=n[o];if(!Array.isArray(a)){return new u("Invalid "+t+" `"+r+"` of type `"+k(a)+"` supplied to `"+f+"`, expected an array.")}for(var i=0;i<a.length;i++){var s=e(a,i,f,t,r+"["+i+"]",c);if(s instanceof Error)return s}return null}return s(n)}function p(e){function n(n,o,f,t,c){if(!(n[o]instanceof e)){var r=e.name||M;return new u("Invalid "+t+" `"+c+"` of type `"+j(n[o])+"` supplied to `"+f+"`, expected instance of `"+r+"`.")}return null}return s(n)}function g(e){function n(n,o,f,t,c){for(var r=n[o],a=0;a<e.length;a++)if(i(r,e[a]))return null;return new u("Invalid "+t+" `"+c+"` of value `"+r+"` supplied to `"+f+"`, expected one of "+JSON.stringify(e)+".")}return Array.isArray(e)?s(n):( true&&a("Invalid argument supplied to oneOf, expected an instance of array."),f)}function h(e){function n(n,o,f,t,r){if("function"!=typeof e)return new u("Property `"+r+"` of component `"+f+"` has invalid PropType notation inside objectOf.");var a=n[o],i=k(a);if("object"!==i)return new u("Invalid "+t+" `"+r+"` of type `"+i+"` supplied to `"+f+"`, expected an object.");for(var s in a)if(a.hasOwnProperty(s)){var l=e(a,s,f,t,r+"."+s,c);if(l instanceof Error)return l}return null}return s(n)}function m(e){function n(n,o,f,t,r){for(var a=0;a<e.length;a++){if(null==(0,e[a])(n,o,f,t,r,c))return null}return new u("Invalid "+t+" `"+r+"` supplied to `"+f+"`.")}if(!Array.isArray(e))return true&&a("Invalid argument supplied to oneOfType, expected an instance of array."),f;for(var o=0;o<e.length;o++){var t=e[o];if("function"!=typeof t)return a("Invalid argument supplied to oneOfType. Expected an array of check functions, but received "+x(t)+" at index "+o+"."),f}return s(n)}function b(e){function n(n,o,f,t,r){var a=n[o],i=k(a);if("object"!==i)return new u("Invalid "+t+" `"+r+"` of type `"+i+"` supplied to `"+f+"`, expected `object`.");for(var s in e){var l=e[s];if(l){var d=l(a,s,f,t,r+"."+s,c);if(d)return d}}return null}return s(n)}function _(e){function n(n,o,f,r,a){var i=n[o],s=k(i);if("object"!==s)return new u("Invalid "+r+" `"+a+"` of type `"+s+"` supplied to `"+f+"`, expected `object`.");var l=t({},n[o],e);for(var d in l){var p=e[d];if(!p)return new u("Invalid "+r+" `"+a+"` key `"+d+"` supplied to `"+f+"`.\nBad object: "+JSON.stringify(n[o],null,"  ")+"\nValid keys: "+JSON.stringify(Object.keys(e),null,"  "));var g=p(i,d,f,r,a+"."+d,c);if(g)return g}return null}return s(n)}function v(n){switch(typeof n){case"number":case"string":case"undefined":return!0;case"boolean":return!n;case"object":if(Array.isArray(n))return n.every(v);if(null===n||e(n))return!0;var f=o(n);if(!f)return!1;var t,c=f.call(n);if(f!==n.entries){for(;!(t=c.next()).done;)if(!v(t.value))return!1}else for(;!(t=c.next()).done;){var r=t.value;if(r&&!v(r[1]))return!1}return!0;default:return!1}}function y(e,n){return"symbol"===e||("Symbol"===n["@@toStringTag"]||"function"==typeof Symbol&&n instanceof Symbol)}function k(e){var n=typeof e;return Array.isArray(e)?"array":e instanceof RegExp?"object":y(n,e)?"symbol":n}function w(e){if(void 0===e||null===e)return""+e;var n=k(e);if("object"===n){if(e instanceof Date)return"date";if(e instanceof RegExp)return"regexp"}return n}function x(e){var n=w(e);switch(n){case"array":case"object":return"an "+n;case"boolean":case"date":case"regexp":return"a "+n;default:return n}}function j(e){return e.constructor&&e.constructor.name?e.constructor.name:M}var C="function"==typeof Symbol&&Symbol.iterator,E="@@iterator",M="<<anonymous>>",S={array:l("array"),bool:l("boolean"),func:l("function"),number:l("number"),object:l("object"),string:l("string"),symbol:l("symbol"),any:function(){return s(f)}(),arrayOf:d,element:function(){function n(n,o,f,t,c){var r=n[o];if(!e(r)){return new u("Invalid "+t+" `"+c+"` of type `"+k(r)+"` supplied to `"+f+"`, expected a single ReactElement.")}return null}return s(n)}(),instanceOf:p,node:function(){function e(e,n,o,f,t){return v(e[n])?null:new u("Invalid "+f+" `"+t+"` supplied to `"+o+"`, expected a ReactNode.")}return s(e)}(),objectOf:h,oneOf:g,oneOfType:m,shape:b,exact:_};return u.prototype=Error.prototype,S.checkPropTypes=r,S.PropTypes=S,S}},function(e,n,o){"use strict";function f(e){if(null===e||void 0===e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+var t=Object.getOwnPropertySymbols,c=Object.prototype.hasOwnProperty,r=Object.prototype.propertyIsEnumerable;e.exports=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var n={},o=0;o<10;o++)n["_"+String.fromCharCode(o)]=o;if("0123456789"!==Object.getOwnPropertyNames(n).map(function(e){return n[e]}).join(""))return!1;var f={};return"abcdefghijklmnopqrst".split("").forEach(function(e){f[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},f)).join("")}catch(e){return!1}}()?Object.assign:function(e,n){for(var o,a,i=f(e),u=1;u<arguments.length;u++){o=Object(arguments[u]);for(var s in o)c.call(o,s)&&(i[s]=o[s]);if(t){a=t(o);for(var l=0;l<a.length;l++)r.call(o,a[l])&&(i[a[l]]=o[a[l]])}}return i}},function(e,n,o){"use strict";function f(e,n,o,f,a){if(true)for(var i in e)if(e.hasOwnProperty(i)){var u;try{if("function"!=typeof e[i]){var s=Error((f||"React class")+": "+o+" type `"+i+"` is invalid; it must be a function, usually from the `prop-types` package, but received `"+typeof e[i]+"`.");throw s.name="Invariant Violation",s}u=e[i](n,i,f,o,null,c)}catch(e){u=e}if(!u||u instanceof Error||t((f||"React class")+": type specification of "+o+" `"+i+"` is invalid; the type checker function must return `null` or an `Error` but returned a "+typeof u+". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."),u instanceof Error&&!(u.message in r)){r[u.message]=!0;var l=a?a():"";t("Failed "+o+" type: "+u.message+(null!=l?l:""))}}}var t=function(){};if(true){var c=o(42),r={};t=function(e){var n="Warning: "+e;"undefined"!=typeof console&&console.error(n);try{throw new Error(n)}catch(e){}}}e.exports=f},function(e,n,o){"use strict";function f(){}var t=o(42);e.exports=function(){function e(e,n,o,f,c,r){if(r!==t){var a=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw a.name="Invariant Violation",a}}function n(){return e}e.isRequired=e;var o={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:n,element:e,instanceOf:n,node:e,objectOf:n,oneOf:n,oneOfType:n,shape:n,exact:n};return o.checkPropTypes=f,o.PropTypes=o,o}},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}function t(e){var n=e.onModifierClick,o=e.activeModifier,f=e.spread,t=f?" spread":"";return r.default.createElement("ul",{className:"skin-tones"+t},u.modifiers.map(function(e,t){var c=e===s,a=o===e||!o&&c,i=a?" selected":"",u=(c?"":"m")+e+i,l={};return f&&(l.transform=a?"translateX("+20*-t+"px) scale(1.5)":"translateX("+20*-t+"px)"),r.default.createElement("li",{className:u,style:l,key:e},r.default.createElement("a",{className:"st",onClick:function(o){return n(o,e)}}))}))}Object.defineProperty(n,"__esModule",{value:!0});var c=o(4),r=f(c),a=o(5),i=f(a),u=o(1);o(111);var s="neutral";t.propTypes={onModifierClick:i.default.func.isRequired,activeModifier:i.default.string,spread:i.default.bool},n.default=t},function(e,n){e.exports={emojis:{0:{n:"copyright",u:"00a9",o:197,c:7},1:{n:"registered",u:"00ae",o:198,c:7},2:{n:"bangbang",u:"203c",o:89,c:7},3:{n:"interrobang",u:"2049",o:90,c:7},4:{n:"tm",u:"2122",o:196,c:7},5:{n:"information_source",u:"2139",o:130,c:7},6:{n:"left_right_arrow",u:"2194",o:178,c:7},7:{n:"arrow_up_down",u:"2195",o:177,c:7},8:{n:"arrow_upper_left",u:"2196",o:176,c:7},9:{n:"arrow_upper_right",u:"2197",o:173,c:7},10:{n:"arrow_lower_right",u:"2198",o:174,c:7},11:{n:"arrow_lower_left",u:"2199",o:175,c:7},12:{n:"leftwards_arrow_with_hook",u:"21a9",o:180,c:7},13:{n:"arrow_right_hook",u:"21aa",o:179,c:7},14:{n:"watch",u:"231a",o:1,c:4},15:{n:"hourglass",u:"231b",o:36,c:4},16:{n:"keyboard",u:"2328",o:5,c:4},17:{n:"eject",u:"23cf",o:158,c:7},18:{n:"fast_forward",u:"23e9",o:162,c:7},19:{n:"rewind",u:"23ea",o:163,c:7},20:{n:"arrow_double_up",u:"23eb",o:164,c:7},21:{n:"arrow_double_down",u:"23ec",o:165,c:7},22:{n:"black_right_pointing_double_triangle_with_vertical_bar",u:"23ed",o:160,c:7},23:{n:"black_left_pointing_double_triangle_with_vertical_bar",u:"23ee",o:161,c:7},24:{n:"black_right_pointing_triangle_with_double_vertical_bar",u:"23ef",o:156,c:7},25:{n:"alarm_clock",u:"23f0",o:34,c:4},26:{n:"stopwatch",u:"23f1",o:32,c:4},27:{n:"timer_clock",u:"23f2",o:33,c:4},28:{n:"hourglass_flowing_sand",u:"23f3",o:37,c:4},29:{n:"double_vertical_bar",u:"23f8",o:155,c:7},30:{n:"black_square_for_stop",u:"23f9",o:157,c:7},31:{n:"black_circle_for_record",u:"23fa",o:159,c:7},32:{n:"m",u:"24c2",o:108,c:7},33:{n:"black_small_square",u:"25aa",o:222,c:7},34:{n:"white_small_square",u:"25ab",o:223,c:7},35:{n:"arrow_forward",u:"25b6",o:154,c:7},36:{n:"arrow_backward",u:"25c0",o:166,c:7},37:{n:"white_medium_square",u:"25fb",o:227,c:7},38:{n:"black_medium_square",u:"25fc",o:226,c:7},39:{n:"white_medium_small_square",u:"25fd",o:225,c:7},40:{n:"black_medium_small_square",u:"25fe",o:224,c:7},41:{n:"sunny",u:"2600",o:138,c:2},42:{n:"cloud",u:"2601",o:144,c:2},43:{n:"umbrella",u:"2602",o:293,c:0},44:{n:"snowman",u:"2603",o:149,c:2},45:{n:"comet",u:"2604",o:137,c:2},46:{n:"phone",u:"260e",o:24,c:4},47:{n:"ballot_box_with_check",u:"2611",o:208,c:7},48:{n:"umbrella_with_rain_drops",u:"2614",o:159,c:2},49:{n:"coffee",u:"2615",o:73,c:1},50:{n:"shamrock",u:"2618",o:96,c:2},51:{n:"point_up",u:"261d",o:116,c:0,d:["261d-1f3fb","261d-1f3fc","261d-1f3fd","261d-1f3fe","261d-1f3ff"]},52:{n:"skull_and_crossbones",u:"2620",o:83,c:0},53:{n:"radioactive_sign",u:"2622",o:44,c:7},54:{n:"biohazard_sign",u:"2623",o:45,c:7},55:{n:"orthodox_cross",u:"2626",o:26,c:7},56:{n:"star_and_crescent",u:"262a",o:19,c:7},57:{n:"peace_symbol",u:"262e",o:17,c:7},58:{n:"yin_yang",u:"262f",o:25,c:7},59:{n:"wheel_of_dharma",u:"2638",o:21,c:7},60:{n:"white_frowning_face",u:"2639",o:38,c:0},61:{n:"relaxed",u:"263a",o:9,c:0},64:{n:"aries",u:"2648",o:29,c:7},65:{n:"taurus",u:"2649",o:30,c:7},66:{n:"gemini",u:"264a",o:31,c:7},67:{n:"cancer",u:"264b",o:32,c:7},68:{n:"leo",u:"264c",o:33,c:7},69:{n:"virgo",u:"264d",o:34,c:7},70:{n:"libra",u:"264e",o:35,c:7},71:{n:"scorpius",u:"264f",o:36,c:7},72:{n:"sagittarius",u:"2650",o:37,c:7},73:{n:"capricorn",u:"2651",o:38,c:7},74:{n:"aquarius",u:"2652",o:39,c:7},75:{n:"pisces",u:"2653",o:40,c:7},76:{n:"spades",u:"2660",o:243,c:7},77:{n:"clubs",u:"2663",o:244,c:7},78:{n:"hearts",u:"2665",o:245,c:7},79:{n:"diamonds",u:"2666",o:246,c:7},80:{n:"hotsprings",u:"2668",o:77,c:7},81:{n:"recycle",u:"267b",o:99,c:7},82:{n:"wheelchair",u:"267f",o:113,c:7},83:{n:"hammer_and_pick",u:"2692",o:57,c:4},84:{n:"anchor",u:"2693",o:53,c:5},85:{n:"crossed_swords",u:"2694",o:67,c:4},87:{n:"scales",u:"2696",o:54,c:4},88:{n:"alembic",u:"2697",o:76,c:4},89:{n:"gear",u:"2699",o:61,c:4},90:{n:"atom_symbol",u:"269b",o:42,c:7},91:{n:"fleur_de_lis",u:"269c",o:97,c:7},92:{n:"warning",u:"26a0",o:94,c:7},93:{n:"zap",u:"26a1",o:134,c:2},94:{n:"white_circle",u:"26aa",o:210,c:7},95:{n:"black_circle",u:"26ab",o:211,c:7},96:{n:"coffin",u:"26b0",o:70,c:4},97:{n:"funeral_urn",u:"26b1",o:71,c:4},98:{n:"soccer",u:"26bd",o:1,c:3},99:{n:"baseball",u:"26be",o:4,c:3},100:{n:"snowman_without_snow",u:"26c4",o:150,c:2},101:{n:"partly_sunny",u:"26c5",o:140,c:2},102:{n:"thunder_cloud_and_rain",u:"26c8",o:146,c:2},103:{n:"ophiuchus",u:"26ce",o:28,c:7},104:{n:"pick",u:"26cf",o:59,c:4},105:{n:"helmet_with_white_cross",u:"26d1",o:284,c:0},106:{n:"chains",u:"26d3",o:62,c:4},107:{n:"no_entry",u:"26d4",o:72,c:7},108:{n:"shinto_shrine",u:"26e9",o:104,c:5},109:{n:"church",u:"26ea",o:100,c:5},110:{n:"mountain",u:"26f0",o:73,c:5},111:{n:"umbrella_on_ground",u:"26f1",o:70,c:5},112:{n:"fountain",u:"26f2",o:62,c:5},113:{n:"golf",u:"26f3",o:15,c:3},114:{n:"ferry",u:"26f4",o:51,c:5},115:{n:"boat",u:"26f5",o:47,c:5},116:{n:"skier",u:"26f7",o:22,c:3},117:{n:"ice_skate",u:"26f8",o:20,c:3},118:{n:"person_with_ball",u:"26f9",o:34,c:3,d:["26f9-1f3fb","26f9-1f3fc","26f9-1f3fd","26f9-1f3fe","26f9-1f3ff"]},119:{n:"tent",u:"26fa",o:79,c:5},120:{n:"fuelpump",u:"26fd",o:55,c:5},121:{n:"scissors",u:"2702",o:160,c:4},122:{n:"white_check_mark",u:"2705",o:100,c:7},123:{n:"airplane",u:"2708",o:40,c:5},124:{n:"email",u:"2709",o:107,c:4},125:{n:"fist",u:"270a",o:105,c:0,d:["270a-1f3fb","270a-1f3fc","270a-1f3fd","270a-1f3fe","270a-1f3ff"]},126:{n:"hand",u:"270b",o:117,c:0,d:["270b-1f3fb","270b-1f3fc","270b-1f3fd","270b-1f3fe","270b-1f3ff"]},127:{n:"v",u:"270c",o:109,c:0,d:["270c-1f3fb","270c-1f3fc","270c-1f3fd","270c-1f3fe","270c-1f3ff"]},128:{n:"writing_hand",u:"270d",o:125,c:0,d:["270d-1f3fb","270d-1f3fc","270d-1f3fd","270d-1f3fe","270d-1f3ff"]},129:{n:"pencil2",u:"270f",o:167,c:4},130:{n:"black_nib",u:"2712",o:163,c:4},131:{n:"heavy_check_mark",u:"2714",o:207,c:7},132:{n:"heavy_multiplication_x",u:"2716",o:193,c:7},133:{n:"latin_cross",u:"271d",o:18,c:7},134:{n:"star_of_david",u:"2721",o:22,c:7},135:{n:"sparkles",u:"2728",o:133,c:2},136:{n:"eight_spoked_asterisk",u:"2733",o:104,c:7},137:{n:"eight_pointed_black_star",u:"2734",o:53,c:7},138:{n:"snowflake",u:"2744",o:151,c:2},139:{n:"sparkle",u:"2747",o:103,c:7},140:{n:"x",u:"274c",o:69,c:7},141:{n:"negative_squared_cross_mark",u:"274e",o:105,c:7},142:{n:"question",u:"2753",o:87,c:7},143:{n:"grey_question",u:"2754",o:88,c:7},144:{n:"grey_exclamation",u:"2755",o:86,c:7},145:{n:"exclamation",u:"2757",o:85,c:7},146:{n:"heavy_heart_exclamation_mark_ornament",u:"2763",o:8,c:7},147:{n:"heart",u:"2764",o:1,c:7},148:{n:"heavy_plus_sign",u:"2795",o:190,c:7},149:{n:"heavy_minus_sign",u:"2796",o:191,c:7},150:{n:"heavy_division_sign",u:"2797",o:192,c:7},151:{n:"arrow_right",u:"27a1",o:169,c:7},152:{n:"curly_loop",u:"27b0",o:200,c:7},153:{n:"loop",u:"27bf",o:201,c:7},154:{n:"arrow_heading_up",u:"2934",o:181,c:7},155:{n:"arrow_heading_down",u:"2935",o:182,c:7},156:{n:"arrow_left",u:"2b05",o:170,c:7},157:{n:"arrow_up",u:"2b06",o:171,c:7},158:{n:"arrow_down",u:"2b07",o:172,c:7},159:{n:"black_large_square",u:"2b1b",o:228,c:7},160:{n:"white_large_square",u:"2b1c",o:229,c:7},161:{n:"star",u:"2b50",o:131,c:2},162:{n:"o",u:"2b55",o:70,c:7},163:{n:"wavy_dash",u:"3030",o:199,c:7},164:{n:"part_alternation_mark",u:"303d",o:93,c:7},165:{n:"congratulations",u:"3297",o:58,c:7},166:{n:"secret",u:"3299",o:57,c:7},167:{n:"mahjong",u:"1f004",o:249,c:7},168:{n:"black_joker",u:"1f0cf",o:247,c:7},169:{n:"a",u:"1f170",o:63,c:7},170:{n:"b",u:"1f171",o:64,c:7},171:{n:"o2",u:"1f17e",o:67,c:7},172:{n:"parking",u:"1f17f",o:114,c:7},173:{n:"ab",u:"1f18e",o:65,c:7},174:{n:"cl",u:"1f191",o:66,c:7},175:{n:"cool",u:"1f192",o:137,c:7},176:{n:"free",u:"1f193",o:139,c:7},177:{n:"id",u:"1f194",o:41,c:7},178:{n:"new",u:"1f195",o:138,c:7},179:{n:"ng",u:"1f196",o:134,c:7},180:{n:"ok",u:"1f197",o:135,c:7},181:{n:"sos",u:"1f198",o:68,c:7},182:{n:"up",u:"1f199",o:136,c:7},183:{n:"vs",u:"1f19a",o:54,c:7},184:{n:"koko",u:"1f201",o:128,c:7},185:{n:"sa",u:"1f202",o:116,c:7},186:{n:"u7121",u:"1f21a",o:49,c:7},187:{n:"u6307",u:"1f22f",o:101,c:7},188:{n:"u7981",u:"1f232",o:62,c:7},189:{n:"u7a7a",u:"1f233",o:115,c:7},190:{n:"u5408",u:"1f234",o:59,c:7},191:{n:"u6e80",u:"1f235",o:60,c:7},192:{n:"u6709",u:"1f236",o:48,c:7},193:{n:"u6708",u:"1f237",o:52,c:7},194:{n:"u7533",u:"1f238",o:50,c:7},195:{n:"u5272",u:"1f239",o:61,c:7},196:{n:"u55b6",u:"1f23a",o:51,c:7},197:{n:"ideograph_advantage",u:"1f250",o:56,c:7},198:{n:"accept",u:"1f251",o:43,c:7},199:{n:"cyclone",u:"1f300",o:109,c:7},200:{n:"foggy",u:"1f301",o:119,c:5},201:{n:"closed_umbrella",u:"1f302",o:292,c:0},202:{n:"night_with_stars",u:"1f303",o:116,c:5},203:{n:"sunrise_over_mountains",u:"1f304",o:109,c:5},204:{n:"sunrise",u:"1f305",o:108,c:5},205:{n:"city_sunset",u:"1f306",o:114,c:5},206:{n:"city_sunrise",u:"1f307",o:113,c:5},207:{n:"rainbow",u:"1f308",o:143,c:2},208:{n:"bridge_at_night",u:"1f309",o:118,c:5},209:{n:"ocean",u:"1f30a",o:156,c:2},210:{n:"volcano",u:"1f30b",o:76,c:5},211:{n:"milky_way",u:"1f30c",o:117,c:5},212:{n:"earth_africa",u:"1f30d",o:114,c:2},213:{n:"earth_americas",u:"1f30e",o:113,c:2},214:{n:"earth_asia",u:"1f30f",o:115,c:2},215:{n:"globe_with_meridians",u:"1f310",o:106,c:7},216:{n:"new_moon",u:"1f311",o:120,c:2},217:{n:"waxing_crescent_moon",u:"1f312",o:121,c:2},218:{n:"first_quarter_moon",u:"1f313",o:122,c:2},219:{n:"moon",u:"1f314",o:123,c:2},220:{n:"full_moon",u:"1f315",o:116,c:2},221:{n:"waning_gibbous_moon",u:"1f316",o:117,c:2},222:{n:"last_quarter_moon",u:"1f317",o:118,c:2},223:{n:"waning_crescent_moon",u:"1f318",o:119,c:2},224:{n:"crescent_moon",u:"1f319",o:129,c:2},225:{n:"new_moon_with_face",u:"1f31a",o:124,c:2},226:{n:"first_quarter_moon_with_face",u:"1f31b",o:127,c:2},227:{n:"last_quarter_moon_with_face",u:"1f31c",o:128,c:2},228:{n:"full_moon_with_face",u:"1f31d",o:125,c:2},229:{n:"sun_with_face",u:"1f31e",o:126,c:2},230:{n:"star2",u:"1f31f",o:132,c:2},231:{n:"stars",u:"1f320",o:110,c:5},232:{n:"thermometer",u:"1f321",o:82,c:4},233:{n:"mostly_sunny",u:"1f324",o:139,c:2},234:{n:"barely_sunny",u:"1f325",o:141,c:2},235:{n:"partly_sunny_rain",u:"1f326",o:142,c:2},236:{n:"rain_cloud",u:"1f327",o:145,c:2},237:{n:"snow_cloud",u:"1f328",o:148,c:2},238:{n:"lightning",u:"1f329",o:147,c:2},239:{n:"tornado",u:"1f32a",o:154,c:2},240:{n:"fog",u:"1f32b",o:155,c:2},241:{n:"wind_blowing_face",u:"1f32c",o:152,c:2},242:{n:"hotdog",u:"1f32d",o:39,c:1},243:{n:"taco",u:"1f32e",o:43,c:1},244:{n:"burrito",u:"1f32f",o:44,c:1},245:{n:"chestnut",u:"1f330",o:24,c:1},246:{n:"seedling",u:"1f331",o:94,c:2},247:{n:"evergreen_tree",u:"1f332",o:91,c:2},248:{n:"deciduous_tree",u:"1f333",o:92,c:2},249:{n:"palm_tree",u:"1f334",o:93,c:2},250:{n:"cactus",u:"1f335",o:89,c:2},251:{n:"hot_pepper",u:"1f336",o:21,c:1},252:{n:"tulip",u:"1f337",o:106,c:2},253:{n:"cherry_blossom",u:"1f338",o:111,c:2},254:{n:"rose",u:"1f339",o:107,c:2},255:{n:"hibiscus",u:"1f33a",o:112,c:2},256:{n:"sunflower",u:"1f33b",o:109,c:2},257:{n:"blossom",u:"1f33c",o:110,c:2},258:{n:"corn",u:"1f33d",o:20,c:1},259:{n:"ear_of_rice",u:"1f33e",o:104,c:2},260:{n:"herb",u:"1f33f",o:95,c:2},261:{n:"four_leaf_clover",u:"1f340",o:97,c:2},262:{n:"maple_leaf",u:"1f341",o:102,c:2},263:{n:"fallen_leaf",u:"1f342",o:101,c:2},264:{n:"leaves",u:"1f343",o:100,c:2},265:{n:"mushroom",u:"1f344",o:103,c:2},266:{n:"tomato",u:"1f345",o:16,c:1},267:{n:"eggplant",u:"1f346",o:17,c:1},268:{n:"grapes",u:"1f347",o:8,c:1},269:{n:"melon",u:"1f348",o:10,c:1},270:{n:"watermelon",u:"1f349",o:7,c:1},271:{n:"tangerine",u:"1f34a",o:4,c:1},272:{n:"lemon",u:"1f34b",o:5,c:1},273:{n:"banana",u:"1f34c",o:6,c:1},274:{n:"pineapple",u:"1f34d",o:13,c:1},275:{n:"apple",u:"1f34e",o:2,c:1},276:{n:"green_apple",u:"1f34f",o:1,c:1},277:{n:"pear",u:"1f350",o:3,c:1},278:{n:"peach",u:"1f351",o:12,c:1},279:{n:"cherries",u:"1f352",o:11,c:1},280:{n:"strawberry",u:"1f353",o:9,c:1},281:{n:"hamburger",u:"1f354",o:40,c:1},282:{n:"pizza",u:"1f355",o:38,c:1},283:{n:"meat_on_bone",u:"1f356",o:37,c:1},284:{n:"poultry_leg",u:"1f357",o:36,c:1},285:{n:"rice_cracker",u:"1f358",o:56,c:1},286:{n:"rice_ball",u:"1f359",o:55,c:1},287:{n:"rice",u:"1f35a",o:54,c:1},288:{n:"curry",u:"1f35b",o:53,c:1},289:{n:"ramen",u:"1f35c",o:48,c:1},290:{n:"spaghetti",u:"1f35d",o:47,c:1},291:{n:"bread",u:"1f35e",o:28,c:1},292:{n:"fries",u:"1f35f",o:41,c:1},293:{n:"sweet_potato",u:"1f360",o:23,c:1},294:{n:"dango",u:"1f361",o:58,c:1},295:{n:"oden",u:"1f362",o:57,c:1},296:{n:"sushi",u:"1f363",o:51,c:1},297:{n:"fried_shrimp",u:"1f364",o:35,c:1},298:{n:"fish_cake",u:"1f365",o:50,c:1},299:{n:"icecream",u:"1f366",o:61,c:1},300:{n:"shaved_ice",u:"1f367",o:59,c:1},301:{n:"ice_cream",u:"1f368",o:60,c:1},302:{n:"doughnut",u:"1f369",o:69,c:1},303:{n:"cookie",u:"1f36a",o:70,c:1},304:{n:"chocolate_bar",u:"1f36b",o:67,c:1},305:{n:"candy",u:"1f36c",o:66,c:1},306:{n:"lollipop",u:"1f36d",o:65,c:1},307:{n:"custard",u:"1f36e",o:64,c:1},308:{n:"honey_pot",u:"1f36f",o:26,c:1},309:{n:"cake",u:"1f370",o:62,c:1},310:{n:"bento",u:"1f371",o:52,c:1},311:{n:"stew",u:"1f372",o:49,c:1},312:{n:"fried_egg",u:"1f373",o:32,c:1},313:{n:"fork_and_knife",u:"1f374",o:85,c:1},314:{n:"tea",u:"1f375",o:74,c:1},315:{n:"sake",u:"1f376",o:75,c:1},316:{n:"wine_glass",u:"1f377",o:79,c:1},317:{n:"cocktail",u:"1f378",o:81,c:1},318:{n:"tropical_drink",u:"1f379",o:82,c:1},319:{n:"beer",u:"1f37a",o:76,c:1},320:{n:"beers",u:"1f37b",o:77,c:1},321:{n:"baby_bottle",u:"1f37c",o:72,c:1},322:{n:"knife_fork_plate",u:"1f37d",o:86,c:1},323:{n:"champagne",u:"1f37e",o:83,c:1},324:{n:"popcorn",u:"1f37f",o:68,c:1},325:{n:"ribbon",u:"1f380",o:101,c:4},326:{n:"gift",u:"1f381",o:98,c:4},327:{n:"birthday",u:"1f382",o:63,c:1},328:{n:"jack_o_lantern",u:"1f383",o:87,c:0},329:{n:"christmas_tree",u:"1f384",o:90,c:2},330:{n:"santa",u:"1f385",o:194,c:0,d:["1f385-1f3fb","1f385-1f3fc","1f385-1f3fd","1f385-1f3fe","1f385-1f3ff"]},331:{n:"fireworks",u:"1f386",o:112,c:5},332:{n:"sparkler",u:"1f387",o:111,c:5},333:{n:"balloon",u:"1f388",o:99,c:4},334:{n:"tada",u:"1f389",o:103,c:4},335:{n:"confetti_ball",u:"1f38a",o:102,c:4},336:{n:"tanabata_tree",u:"1f38b",o:99,c:2},337:{n:"crossed_flags",u:"1f38c",o:118,c:6},338:{n:"bamboo",u:"1f38d",o:98,c:2},339:{n:"dolls",u:"1f38e",o:104,c:4},340:{n:"flags",u:"1f38f",o:100,c:4},341:{n:"wind_chime",u:"1f390",o:106,c:4},342:{n:"rice_scene",u:"1f391",o:106,c:5},343:{n:"school_satchel",u:"1f392",o:285,c:0},344:{n:"mortar_board",u:"1f393",o:282,c:0},345:{n:"medal",u:"1f396",o:56,c:3},346:{n:"reminder_ribbon",u:"1f397",o:62,c:3},347:{n:"studio_microphone",u:"1f399",o:29,c:4},348:{n:"level_slider",u:"1f39a",o:30,c:4},349:{n:"control_knobs",u:"1f39b",o:31,c:4},350:{n:"film_frames",u:"1f39e",o:22,c:4},351:{n:"admission_tickets",u:"1f39f",o:64,c:3},352:{n:"carousel_horse",u:"1f3a0",o:69,c:5},353:{n:"ferris_wheel",u:"1f3a1",o:67,c:5},354:{n:"roller_coaster",u:"1f3a2",o:68,c:5},355:{n:"fishing_pole_and_fish",u:"1f3a3",o:17,c:3},356:{n:"microphone",u:"1f3a4",o:72,c:3},357:{n:"movie_camera",u:"1f3a5",o:20,c:4},358:{n:"cinema",u:"1f3a6",o:126,c:7},359:{n:"headphones",u:"1f3a7",o:73,c:3},360:{n:"art",u:"1f3a8",o:70,c:3},361:{n:"tophat",u:"1f3a9",o:281,c:0},362:{n:"circus_tent",u:"1f3aa",o:65,c:3},363:{n:"ticket",u:"1f3ab",o:63,c:3},364:{n:"clapper",u:"1f3ac",o:71,c:3},365:{n:"performing_arts",u:"1f3ad",o:69,c:3},366:{n:"video_game",u:"1f3ae",o:84,c:3},367:{n:"dart",u:"1f3af",o:82,c:3},368:{n:"slot_machine",u:"1f3b0",o:85,c:3},369:{n:"8ball",u:"1f3b1",o:8,c:3},370:{n:"game_die",u:"1f3b2",o:81,c:3},371:{n:"bowling",u:"1f3b3",o:83,c:3},372:{n:"flower_playing_cards",u:"1f3b4",o:248,c:7},373:{n:"musical_note",u:"1f3b5",o:188,c:7},374:{n:"notes",u:"1f3b6",o:189,c:7},375:{n:"saxophone",u:"1f3b7",o:77,c:3},376:{n:"guitar",u:"1f3b8",o:79,c:3},377:{n:"musical_keyboard",u:"1f3b9",o:75,c:3},378:{n:"trumpet",u:"1f3ba",o:78,c:3},379:{n:"violin",u:"1f3bb",o:80,c:3},380:{n:"musical_score",u:"1f3bc",o:74,c:3},381:{n:"running_shirt_with_sash",u:"1f3bd",o:54,c:3},382:{n:"tennis",u:"1f3be",o:5,c:3},383:{n:"ski",u:"1f3bf",o:21,c:3},384:{n:"basketball",u:"1f3c0",o:2,c:3},385:{n:"checkered_flag",u:"1f3c1",o:3,c:6},386:{n:"snowboarder",u:"1f3c2",o:23,c:3},387:{n:"runner",u:"1f3c3",o:233,c:0,d:["1f3c3-1f3fb","1f3c3-1f3fc","1f3c3-1f3fd","1f3c3-1f3fe","1f3c3-1f3ff"]},388:{n:"surfer",u:"1f3c4",o:41,c:3,d:["1f3c4-1f3fb","1f3c4-1f3fc","1f3c4-1f3fd","1f3c4-1f3fe","1f3c4-1f3ff"]},389:{n:"sports_medal",u:"1f3c5",o:55,c:3},390:{n:"trophy",u:"1f3c6",o:60,c:3},391:{n:"horse_racing",u:"1f3c7",o:49,c:3,d:["1f3c7-1f3fb","1f3c7-1f3fc","1f3c7-1f3fd","1f3c7-1f3fe","1f3c7-1f3ff"]},392:{n:"football",u:"1f3c8",o:3,c:3},393:{n:"rugby_football",u:"1f3c9",o:7,c:3},394:{n:"swimmer",u:"1f3ca",o:43,c:3,d:["1f3ca-1f3fb","1f3ca-1f3fc","1f3ca-1f3fd","1f3ca-1f3fe","1f3ca-1f3ff"]},395:{n:"weight_lifter",u:"1f3cb",o:25,c:3,d:["1f3cb-1f3fb","1f3cb-1f3fc","1f3cb-1f3fd","1f3cb-1f3fe","1f3cb-1f3ff"]},396:{n:"golfer",u:"1f3cc",o:39,c:3},397:{n:"racing_motorcycle",u:"1f3cd",o:17,c:5},398:{n:"racing_car",u:"1f3ce",o:6,c:5},399:{n:"cricket_bat_and_ball",u:"1f3cf",o:14,c:3},400:{n:"volleyball",u:"1f3d0",o:6,c:3},401:{n:"field_hockey_stick_and_ball",u:"1f3d1",o:13,c:3},402:{n:"ice_hockey_stick_and_puck",u:"1f3d2",o:12,c:3},403:{n:"table_tennis_paddle_and_ball",u:"1f3d3",o:9,c:3},404:{n:"snow_capped_mountain",u:"1f3d4",o:74,c:5},405:{n:"camping",u:"1f3d5",o:78,c:5},406:{n:"beach_with_umbrella",u:"1f3d6",o:71,c:5},407:{n:"building_construction",u:"1f3d7",o:82,c:5},408:{n:"house_buildings",u:"1f3d8",o:86,c:5},409:{n:"cityscape",u:"1f3d9",o:115,c:5},410:{n:"derelict_house_building",u:"1f3da",o:87,c:5},411:{n:"classical_building",u:"1f3db",o:99,c:5},412:{n:"desert",u:"1f3dc",o:77,c:5},413:{n:"desert_island",u:"1f3dd",o:72,c:5},414:{n:"national_park",u:"1f3de",o:107,c:5},415:{n:"stadium",u:"1f3df",o:66,c:5},416:{n:"house",u:"1f3e0",o:84,c:5},417:{n:"house_with_garden",u:"1f3e1",o:85,c:5},418:{n:"office",u:"1f3e2",o:88,c:5},419:{n:"post_office",u:"1f3e3",o:90,c:5},420:{n:"european_post_office",u:"1f3e4",o:91,c:5},421:{n:"hospital",u:"1f3e5",o:92,c:5},422:{n:"bank",u:"1f3e6",o:93,c:5},423:{n:"atm",u:"1f3e7",o:111,c:7},424:{n:"hotel",u:"1f3e8",o:94,c:5},425:{n:"love_hotel",u:"1f3e9",o:97,c:5},426:{n:"convenience_store",u:"1f3ea",o:95,c:5},427:{n:"school",u:"1f3eb",o:96,c:5},428:{n:"department_store",u:"1f3ec",o:89,c:5},429:{n:"factory",u:"1f3ed",o:83,c:5},430:{n:"izakaya_lantern",u:"1f3ee",o:105,c:4},431:{n:"japanese_castle",u:"1f3ef",o:65,c:5},432:{n:"european_castle",u:"1f3f0",o:64,c:5},433:{n:"waving_white_flag",u:"1f3f3",o:1,c:6},434:{n:"waving_black_flag",u:"1f3f4",o:2,c:6},435:{n:"rosette",u:"1f3f5",o:61,c:3},436:{n:"label",u:"1f3f7",o:115,c:4},437:{n:"badminton_racquet_and_shuttlecock",u:"1f3f8",o:10,c:3},438:{n:"bow_and_arrow",u:"1f3f9",o:16,c:3},439:{n:"amphora",u:"1f3fa",o:72,c:4},445:{n:"rat",u:"1f400",o:84,c:2},446:{n:"mouse2",u:"1f401",o:83,c:2},447:{n:"ox",u:"1f402",o:63,c:2},448:{n:"water_buffalo",u:"1f403",o:62,c:2},449:{n:"cow2",u:"1f404",o:64,c:2},450:{n:"tiger2",u:"1f405",o:61,c:2},451:{n:"leopard",u:"1f406",o:60,c:2},452:{n:"rabbit2",u:"1f407",o:82,c:2},453:{n:"cat2",u:"1f408",o:78,c:2},454:{n:"dragon",u:"1f409",o:87,c:2},455:{n:"crocodile",u:"1f40a",o:59,c:2},456:{n:"whale2",u:"1f40b",o:58,c:2},457:{n:"snail",u:"1f40c",o:38,c:2},458:{n:"snake",u:"1f40d",o:45,c:2},459:{n:"racehorse",u:"1f40e",o:71,c:2},460:{n:"ram",u:"1f40f",o:74,c:2},461:{n:"goat",u:"1f410",o:73,c:2},462:{n:"sheep",u:"1f411",o:75,c:2},463:{n:"monkey",u:"1f412",o:20,c:2},464:{n:"rooster",u:"1f413",o:79,c:2},465:{n:"chicken",u:"1f414",o:21,c:2},466:{n:"dog2",u:"1f415",o:76,c:2},467:{n:"pig2",u:"1f416",o:72,c:2},468:{n:"boar",u:"1f417",o:32,c:2},469:{n:"elephant",u:"1f418",o:68,c:2},470:{n:"octopus",u:"1f419",o:50,c:2},471:{n:"shell",u:"1f41a",o:39,c:2},472:{n:"bug",u:"1f41b",o:36,c:2},473:{n:"ant",u:"1f41c",o:41,c:2},474:{n:"bee",u:"1f41d",o:35,c:2},475:{n:"beetle",u:"1f41e",o:40,c:2},476:{n:"fish",u:"1f41f",o:53,c:2},477:{n:"tropical_fish",u:"1f420",o:52,c:2},478:{n:"blowfish",u:"1f421",o:54,c:2},479:{n:"turtle",u:"1f422",o:44,c:2},480:{n:"hatching_chick",u:"1f423",o:25,c:2},481:{n:"baby_chick",u:"1f424",o:24,c:2},482:{n:"hatched_chick",u:"1f425",o:26,c:2},483:{n:"bird",u:"1f426",o:23,c:2},484:{n:"penguin",u:"1f427",o:22,c:2},485:{n:"koala",u:"1f428",o:9,c:2},486:{n:"poodle",u:"1f429",o:77,c:2},487:{n:"dromedary_camel",u:"1f42a",o:66,c:2},488:{n:"camel",u:"1f42b",o:67,c:2},489:{n:"dolphin",u:"1f42c",o:55,c:2},490:{n:"mouse",u:"1f42d",o:3,c:2},491:{n:"cow",u:"1f42e",o:12,c:2},492:{n:"tiger",u:"1f42f",o:10,c:2},493:{n:"rabbit",u:"1f430",o:5,c:2},494:{n:"cat",u:"1f431",o:2,c:2},495:{n:"dragon_face",u:"1f432",o:88,c:2},496:{n:"whale",u:"1f433",o:57,c:2},497:{n:"horse",u:"1f434",o:33,c:2},498:{n:"monkey_face",u:"1f435",o:16,c:2},499:{n:"dog",u:"1f436",o:1,c:2},500:{n:"pig",u:"1f437",o:13,c:2},501:{n:"frog",u:"1f438",o:15,c:2},502:{n:"hamster",u:"1f439",o:4,c:2},503:{n:"wolf",u:"1f43a",o:31,c:2},504:{n:"bear",u:"1f43b",o:7,c:2},505:{n:"panda_face",u:"1f43c",o:8,c:2},506:{n:"pig_nose",u:"1f43d",o:14,c:2},507:{n:"feet",u:"1f43e",o:86,c:2},508:{n:"chipmunk",u:"1f43f",o:85,c:2},509:{n:"eyes",u:"1f440",o:137,c:0},510:{n:"eye",u:"1f441",o:136,c:0},511:{n:"ear",u:"1f442",o:133,c:0,d:["1f442-1f3fb","1f442-1f3fc","1f442-1f3fd","1f442-1f3fe","1f442-1f3ff"]},512:{n:"nose",u:"1f443",o:134,c:0,d:["1f443-1f3fb","1f443-1f3fc","1f443-1f3fd","1f443-1f3fe","1f443-1f3ff"]},513:{n:"lips",u:"1f444",o:131,c:0},514:{n:"tongue",u:"1f445",o:132,c:0},515:{n:"point_up_2",u:"1f446",o:114,c:0,d:["1f446-1f3fb","1f446-1f3fc","1f446-1f3fd","1f446-1f3fe","1f446-1f3ff"]},516:{n:"point_down",u:"1f447",o:115,c:0,d:["1f447-1f3fb","1f447-1f3fc","1f447-1f3fd","1f447-1f3fe","1f447-1f3ff"]},517:{n:"point_left",u:"1f448",o:112,c:0,d:["1f448-1f3fb","1f448-1f3fc","1f448-1f3fd","1f448-1f3fe","1f448-1f3ff"]},518:{n:"point_right",u:"1f449",o:113,c:0,d:["1f449-1f3fb","1f449-1f3fc","1f449-1f3fd","1f449-1f3fe","1f449-1f3ff"]},519:{n:"facepunch",u:"1f44a",o:104,c:0,d:["1f44a-1f3fb","1f44a-1f3fc","1f44a-1f3fd","1f44a-1f3fe","1f44a-1f3ff"]},520:{n:"wave",u:"1f44b",o:121,c:0,d:["1f44b-1f3fb","1f44b-1f3fc","1f44b-1f3fd","1f44b-1f3fe","1f44b-1f3ff"]},521:{n:"ok_hand",u:"1f44c",o:111,c:0,d:["1f44c-1f3fb","1f44c-1f3fc","1f44c-1f3fd","1f44c-1f3fe","1f44c-1f3ff"]},522:{n:"+1",u:"1f44d",o:102,c:0,d:["1f44d-1f3fb","1f44d-1f3fc","1f44d-1f3fd","1f44d-1f3fe","1f44d-1f3ff"]},523:{n:"-1",u:"1f44e",o:103,c:0,d:["1f44e-1f3fb","1f44e-1f3fc","1f44e-1f3fd","1f44e-1f3fe","1f44e-1f3ff"]},524:{n:"clap",u:"1f44f",o:99,c:0,d:["1f44f-1f3fb","1f44f-1f3fc","1f44f-1f3fd","1f44f-1f3fe","1f44f-1f3ff"]},525:{n:"open_hands",u:"1f450",o:97,c:0,d:["1f450-1f3fb","1f450-1f3fc","1f450-1f3fd","1f450-1f3fe","1f450-1f3ff"]},526:{n:"crown",u:"1f451",o:283,c:0},527:{n:"womans_hat",u:"1f452",o:280,c:0},528:{n:"eyeglasses",u:"1f453",o:290,c:0},529:{n:"necktie",u:"1f454",o:271,c:0},530:{n:"shirt",u:"1f455",o:269,c:0},531:{n:"jeans",u:"1f456",o:270,c:0},532:{n:"dress",u:"1f457",o:272,c:0},533:{n:"kimono",u:"1f458",o:274,c:0},534:{n:"bikini",u:"1f459",o:273,c:0},535:{n:"womans_clothes",u:"1f45a",o:268,c:0},536:{n:"purse",u:"1f45b",o:287,c:0},537:{n:"handbag",u:"1f45c",o:288,c:0},538:{n:"pouch",u:"1f45d",o:286,c:0},539:{n:"mans_shoe",u:"1f45e",o:278,c:0},540:{n:"athletic_shoe",u:"1f45f",o:279,c:0},541:{n:"high_heel",u:"1f460",o:275,c:0},542:{n:"sandal",u:"1f461",o:276,c:0},543:{n:"boot",u:"1f462",o:277,c:0},544:{n:"footprints",u:"1f463",o:135,c:0},545:{n:"bust_in_silhouette",u:"1f464",o:139,c:0},546:{n:"busts_in_silhouette",u:"1f465",o:140,c:0},547:{n:"boy",u:"1f466",o:142,c:0,d:["1f466-1f3fb","1f466-1f3fc","1f466-1f3fd","1f466-1f3fe","1f466-1f3ff"]},548:{n:"girl",u:"1f467",o:143,c:0,d:["1f467-1f3fb","1f467-1f3fc","1f467-1f3fd","1f467-1f3fe","1f467-1f3ff"]},549:{n:"man",u:"1f468",o:144,c:0,d:["1f468-1f3fb","1f468-1f3fc","1f468-1f3fd","1f468-1f3fe","1f468-1f3ff"]},550:{n:"woman",u:"1f469",o:145,c:0,d:["1f469-1f3fb","1f469-1f3fc","1f469-1f3fd","1f469-1f3fe","1f469-1f3ff"]},551:{n:"family",u:"1f46a",o:243,c:0},552:{n:"couple",u:"1f46b",o:234,c:0},553:{n:"two_men_holding_hands",u:"1f46c",o:236,c:0},554:{n:"two_women_holding_hands",u:"1f46d",o:235,c:0},555:{n:"cop",u:"1f46e",o:154,c:0,d:["1f46e-1f3fb","1f46e-1f3fc","1f46e-1f3fd","1f46e-1f3fe","1f46e-1f3ff"]},556:{n:"dancers",u:"1f46f",o:228,c:0},557:{n:"bride_with_veil",u:"1f470",o:197,c:0,d:["1f470-1f3fb","1f470-1f3fc","1f470-1f3fd","1f470-1f3fe","1f470-1f3ff"]},558:{n:"person_with_blond_hair",u:"1f471",o:147,c:0,d:["1f471-1f3fb","1f471-1f3fc","1f471-1f3fd","1f471-1f3fe","1f471-1f3ff"]},559:{n:"man_with_gua_pi_mao",u:"1f472",o:150,c:0,d:["1f472-1f3fb","1f472-1f3fc","1f472-1f3fd","1f472-1f3fe","1f472-1f3ff"]},560:{n:"man_with_turban",u:"1f473",o:152,c:0,d:["1f473-1f3fb","1f473-1f3fc","1f473-1f3fd","1f473-1f3fe","1f473-1f3ff"]},561:{n:"older_man",u:"1f474",o:148,c:0,d:["1f474-1f3fb","1f474-1f3fc","1f474-1f3fd","1f474-1f3fe","1f474-1f3ff"]},562:{n:"older_woman",u:"1f475",o:149,c:0,d:["1f475-1f3fb","1f475-1f3fc","1f475-1f3fd","1f475-1f3fe","1f475-1f3ff"]},563:{n:"baby",u:"1f476",o:141,c:0,d:["1f476-1f3fb","1f476-1f3fc","1f476-1f3fd","1f476-1f3fe","1f476-1f3ff"]},564:{n:"construction_worker",u:"1f477",o:156,c:0,d:["1f477-1f3fb","1f477-1f3fc","1f477-1f3fd","1f477-1f3fe","1f477-1f3ff"]},565:{n:"princess",u:"1f478",o:195,c:0,d:["1f478-1f3fb","1f478-1f3fc","1f478-1f3fd","1f478-1f3fe","1f478-1f3ff"]},566:{n:"japanese_ogre",u:"1f479",o:78,c:0},567:{n:"japanese_goblin",u:"1f47a",o:79,c:0},568:{n:"ghost",u:"1f47b",o:81,c:0},569:{n:"angel",u:"1f47c",o:199,c:0,d:["1f47c-1f3fb","1f47c-1f3fc","1f47c-1f3fd","1f47c-1f3fe","1f47c-1f3ff"]},570:{n:"alien",u:"1f47d",o:84,c:0},571:{n:"space_invader",u:"1f47e",o:85,c:0},572:{n:"imp",u:"1f47f",o:77,c:0},573:{n:"skull",u:"1f480",o:82,c:0},574:{n:"information_desk_person",u:"1f481",o:203,c:0,d:["1f481-1f3fb","1f481-1f3fc","1f481-1f3fd","1f481-1f3fe","1f481-1f3ff"]},575:{n:"guardsman",u:"1f482",o:158,c:0,d:["1f482-1f3fb","1f482-1f3fc","1f482-1f3fd","1f482-1f3fe","1f482-1f3ff"]},576:{n:"dancer",u:"1f483",o:226,c:0,d:["1f483-1f3fb","1f483-1f3fc","1f483-1f3fd","1f483-1f3fe","1f483-1f3ff"]},577:{n:"lipstick",u:"1f484",o:129,c:0},578:{n:"nail_care",u:"1f485",o:127,c:0,d:["1f485-1f3fb","1f485-1f3fc","1f485-1f3fd","1f485-1f3fe","1f485-1f3ff"]},579:{n:"massage",u:"1f486",o:223,c:0,d:["1f486-1f3fb","1f486-1f3fc","1f486-1f3fd","1f486-1f3fe","1f486-1f3ff"]},580:{n:"haircut",u:"1f487",o:221,c:0,d:["1f487-1f3fb","1f487-1f3fc","1f487-1f3fd","1f487-1f3fe","1f487-1f3ff"]},581:{n:"barber",u:"1f488",o:75,c:4},582:{n:"syringe",u:"1f489",o:81,c:4},583:{n:"pill",u:"1f48a",o:80,c:4},584:{n:"kiss",u:"1f48b",o:130,c:0},585:{n:"love_letter",u:"1f48c",o:111,c:4},586:{n:"ring",u:"1f48d",o:128,c:0},587:{n:"gem",u:"1f48e",o:53,c:4},588:{n:"couplekiss",u:"1f48f",o:240,c:0},589:{n:"bouquet",u:"1f490",o:105,c:2},590:{n:"couple_with_heart",u:"1f491",o:237,c:0},591:{n:"wedding",u:"1f492",o:98,c:5},592:{n:"heartbeat",u:"1f493",o:11,c:7},593:{n:"broken_heart",u:"1f494",o:7,c:7},594:{n:"two_hearts",u:"1f495",o:9,c:7},595:{n:"sparkling_heart",u:"1f496",o:13,c:7},596:{n:"heartpulse",u:"1f497",o:12,c:7},597:{n:"cupid",u:"1f498",o:14,c:7},598:{n:"blue_heart",u:"1f499",o:4,c:7},599:{n:"green_heart",u:"1f49a",o:3,c:7},600:{n:"yellow_heart",u:"1f49b",o:2,c:7},601:{n:"purple_heart",u:"1f49c",o:5,c:7},602:{n:"gift_heart",u:"1f49d",o:15,c:7},603:{n:"revolving_hearts",u:"1f49e",o:10,c:7},604:{n:"heart_decoration",u:"1f49f",o:16,c:7},605:{n:"diamond_shape_with_a_dot_inside",u:"1f4a0",o:107,c:7},606:{n:"bulb",u:"1f4a1",o:41,c:4},607:{n:"anger",u:"1f4a2",o:76,c:7},608:{n:"bomb",u:"1f4a3",o:64,c:4},609:{n:"zzz",u:"1f4a4",o:110,c:7},610:{n:"boom",u:"1f4a5",o:136,c:2},611:{n:"sweat_drops",u:"1f4a6",o:158,c:2},612:{n:"droplet",u:"1f4a7",o:157,c:2},613:{n:"dash",u:"1f4a8",o:153,c:2},614:{n:"hankey",u:"1f4a9",o:80,c:0},615:{n:"muscle",u:"1f4aa",o:123,c:0,d:["1f4aa-1f3fb","1f4aa-1f3fc","1f4aa-1f3fd","1f4aa-1f3fe","1f4aa-1f3ff"]},616:{n:"dizzy",u:"1f4ab",o:130,c:2},617:{n:"speech_balloon",u:"1f4ac",o:239,c:7},618:{n:"thought_balloon",u:"1f4ad",o:241,c:7},619:{n:"white_flower",u:"1f4ae",o:55,c:7},620:{n:"100",u:"1f4af",o:75,c:7},621:{n:"moneybag",u:"1f4b0",o:51,c:4},622:{n:"currency_exchange",u:"1f4b1",o:195,c:7},623:{n:"heavy_dollar_sign",u:"1f4b2",o:194,c:7},624:{n:"credit_card",u:"1f4b3",o:52,c:4},625:{n:"yen",u:"1f4b4",o:48,c:4},626:{n:"dollar",u:"1f4b5",o:47,c:4},627:{n:"euro",u:"1f4b6",o:49,c:4},628:{n:"pound",u:"1f4b7",o:50,c:4},629:{n:"money_with_wings",u:"1f4b8",o:46,c:4},630:{n:"chart",u:"1f4b9",o:102,c:7},631:{n:"seat",u:"1f4ba",o:45,c:5},632:{n:"computer",u:"1f4bb",o:4,c:4},633:{n:"briefcase",u:"1f4bc",o:289,c:0},634:{n:"minidisc",u:"1f4bd",o:12,c:4},635:{n:"floppy_disk",u:"1f4be",o:13,c:4},636:{n:"cd",u:"1f4bf",o:14,c:4},637:{n:"dvd",u:"1f4c0",o:15,c:4},638:{n:"file_folder",u:"1f4c1",o:138,c:4},639:{n:"open_file_folder",u:"1f4c2",o:139,c:4},640:{n:"page_with_curl",u:"1f4c3",o:123,c:4},641:{n:"page_facing_up",u:"1f4c4",o:124,c:4},642:{n:"date",u:"1f4c5",o:132,c:4},643:{n:"calendar",u:"1f4c6",o:131,c:4},644:{n:"card_index",u:"1f4c7",o:133,c:4},645:{n:"chart_with_upwards_trend",u:"1f4c8",o:127,c:4},646:{n:"chart_with_downwards_trend",u:"1f4c9",o:128,c:4},647:{n:"bar_chart",u:"1f4ca",o:126,c:4},648:{n:"clipboard",u:"1f4cb",o:137,c:4},649:{n:"pushpin",u:"1f4cc",o:158,c:4},650:{n:"round_pushpin",u:"1f4cd",o:159,c:4},651:{n:"paperclip",u:"1f4ce",o:154,c:4},652:{n:"straight_ruler",u:"1f4cf",o:157,c:4},653:{n:"triangular_ruler",u:"1f4d0",o:156,c:4},654:{n:"bookmark_tabs",u:"1f4d1",o:125,c:4},655:{n:"ledger",u:"1f4d2",o:145,c:4},656:{n:"notebook",u:"1f4d3",o:143,c:4},657:{n:"notebook_with_decorative_cover",u:"1f4d4",o:144,c:4},658:{n:"closed_book",u:"1f4d5",o:146,c:4},659:{n:"book",u:"1f4d6",o:151,c:4},660:{n:"green_book",u:"1f4d7",o:147,c:4},661:{n:"blue_book",u:"1f4d8",o:148,c:4},662:{n:"orange_book",u:"1f4d9",o:149,c:4},663:{n:"books",u:"1f4da",o:150,c:4},664:{n:"name_badge",u:"1f4db",o:73,c:7},665:{n:"scroll",u:"1f4dc",o:122,c:4},666:{n:"memo",u:"1f4dd",o:166,c:4},667:{n:"telephone_receiver",u:"1f4de",o:23,c:4},668:{n:"pager",u:"1f4df",o:25,c:4},669:{n:"fax",u:"1f4e0",o:26,c:4},670:{n:"satellite_antenna",u:"1f4e1",o:38,c:4},671:{n:"loudspeaker",u:"1f4e2",o:237,c:7},672:{n:"mega",u:"1f4e3",o:236,c:7},673:{n:"outbox_tray",u:"1f4e4",o:113,c:4},674:{n:"inbox_tray",u:"1f4e5",o:112,c:4},675:{n:"package",u:"1f4e6",o:114,c:4},676:{n:"e-mail",u:"1f4e7",o:110,c:4},677:{n:"incoming_envelope",u:"1f4e8",o:109,c:4},678:{n:"envelope_with_arrow",u:"1f4e9",o:108,c:4},679:{n:"mailbox_closed",u:"1f4ea",o:116,c:4},680:{n:"mailbox",u:"1f4eb",o:117,c:4},681:{n:"mailbox_with_mail",u:"1f4ec",o:118,c:4},682:{n:"mailbox_with_no_mail",u:"1f4ed",o:119,c:4},683:{n:"postbox",u:"1f4ee",o:120,c:4},684:{n:"postal_horn",u:"1f4ef",o:121,c:4},685:{n:"newspaper",u:"1f4f0",o:142,c:4},686:{n:"iphone",u:"1f4f1",o:2,c:4},687:{n:"calling",u:"1f4f2",o:3,c:4},688:{n:"vibration_mode",u:"1f4f3",o:47,c:7},689:{n:"mobile_phone_off",u:"1f4f4",o:46,c:7},690:{n:"no_mobile_phones",u:"1f4f5",o:83,c:7},691:{n:"signal_strength",u:"1f4f6",o:127,c:7},692:{n:"camera",u:"1f4f7",o:17,c:4},693:{n:"camera_with_flash",u:"1f4f8",o:18,c:4},694:{n:"video_camera",u:"1f4f9",o:19,c:4},695:{n:"tv",u:"1f4fa",o:27,c:4},696:{n:"radio",u:"1f4fb",o:28,c:4},697:{n:"vhs",u:"1f4fc",o:16,c:4},698:{n:"film_projector",u:"1f4fd",o:21,c:4},699:{n:"prayer_beads",u:"1f4ff",o:74,c:4},700:{n:"twisted_rightwards_arrows",u:"1f500",o:183,c:7},701:{n:"repeat",u:"1f501",o:184,c:7},702:{n:"repeat_one",u:"1f502",o:185,c:7},703:{n:"arrows_clockwise",u:"1f503",o:187,c:7},704:{n:"arrows_counterclockwise",u:"1f504",o:186,c:7},705:{n:"low_brightness",u:"1f505",o:91,c:7},706:{n:"high_brightness",u:"1f506",o:92,c:7},707:{n:"mute",u:"1f507",o:231,c:7},708:{n:"speaker",u:"1f508",o:230,c:7},709:{n:"sound",u:"1f509",o:232,c:7},710:{n:"loud_sound",u:"1f50a",o:233,c:7},711:{n:"battery",u:"1f50b",o:39,c:4},712:{n:"electric_plug",u:"1f50c",o:40,c:4},713:{n:"mag",u:"1f50d",o:168,c:4},714:{n:"mag_right",u:"1f50e",o:169,c:4},715:{n:"lock_with_ink_pen",u:"1f50f",o:170,c:4},716:{n:"closed_lock_with_key",u:"1f510",o:171,c:4},717:{n:"key",u:"1f511",o:89,c:4},718:{n:"lock",u:"1f512",o:172,c:4},719:{n:"unlock",u:"1f513",o:173,c:4},720:{n:"bell",u:"1f514",o:234,c:7},721:{n:"no_bell",u:"1f515",o:235,c:7},722:{n:"bookmark",u:"1f516",o:152,c:4},723:{n:"link",u:"1f517",o:153,c:4},724:{n:"radio_button",u:"1f518",o:209,c:7},725:{n:"back",u:"1f519",o:203,c:7},726:{n:"end",u:"1f51a",o:202,c:7},727:{n:"on",u:"1f51b",o:204,c:7},728:{n:"soon",u:"1f51c",o:206,c:7},729:{n:"top",u:"1f51d",o:205,c:7},730:{n:"underage",u:"1f51e",o:82,c:7},731:{n:"keycap_ten",u:"1f51f",o:150,c:7},732:{n:"capital_abcd",u:"1f520",o:133,c:7},733:{n:"abcd",u:"1f521",o:132,c:7},734:{n:"1234",u:"1f522",o:151,c:7},735:{n:"symbols",u:"1f523",o:129,c:7},736:{n:"abc",u:"1f524",o:131,c:7},737:{n:"fire",u:"1f525",o:135,c:2},738:{n:"flashlight",u:"1f526",o:42,c:4},739:{n:"wrench",u:"1f527",o:55,c:4},740:{n:"hammer",u:"1f528",o:56,c:4},741:{n:"nut_and_bolt",u:"1f529",o:60,c:4},742:{n:"hocho",u:"1f52a",o:65,c:4},743:{n:"gun",u:"1f52b",o:63,c:4},744:{n:"microscope",u:"1f52c",o:78,c:4},745:{n:"telescope",u:"1f52d",o:77,c:4},746:{n:"crystal_ball",u:"1f52e",o:73,c:4},747:{n:"six_pointed_star",u:"1f52f",o:23,c:7},748:{n:"beginner",u:"1f530",o:98,c:7},749:{n:"trident",u:"1f531",o:96,c:7},750:{n:"black_square_button",u:"1f532",o:221,c:7},751:{n:"white_square_button",u:"1f533",o:220,c:7},752:{n:"red_circle",u:"1f534",o:212,c:7},753:{n:"large_blue_circle",u:"1f535",o:213,c:7},754:{n:"large_orange_diamond",u:"1f536",o:218,c:7},755:{n:"large_blue_diamond",u:"1f537",o:219,c:7},756:{n:"small_orange_diamond",u:"1f538",o:216,c:7},757:{n:"small_blue_diamond",u:"1f539",o:217,c:7},758:{n:"small_red_triangle",u:"1f53a",o:214,c:7},759:{n:"small_red_triangle_down",u:"1f53b",o:215,c:7},760:{n:"arrow_up_small",u:"1f53c",o:167,c:7},761:{n:"arrow_down_small",u:"1f53d",o:168,c:7},762:{n:"om_symbol",u:"1f549",o:20,c:7},763:{n:"dove_of_peace",u:"1f54a",o:81,c:2},764:{n:"kaaba",u:"1f54b",o:103,c:5},765:{n:"mosque",u:"1f54c",o:101,c:5},766:{n:"synagogue",u:"1f54d",o:102,c:5},767:{n:"menorah_with_nine_branches",u:"1f54e",o:24,c:7},768:{n:"clock1",u:"1f550",o:250,c:7},769:{n:"clock2",u:"1f551",o:251,c:7},770:{n:"clock3",u:"1f552",o:252,c:7},771:{n:"clock4",u:"1f553",o:253,c:7},772:{n:"clock5",u:"1f554",o:254,c:7},773:{n:"clock6",u:"1f555",o:255,c:7},774:{n:"clock7",u:"1f556",o:256,c:7},775:{n:"clock8",u:"1f557",o:257,c:7},776:{n:"clock9",u:"1f558",o:258,c:7},777:{n:"clock10",u:"1f559",o:259,c:7},778:{n:"clock11",u:"1f55a",o:260,c:7},779:{n:"clock12",u:"1f55b",o:261,c:7},780:{n:"clock130",u:"1f55c",o:262,c:7},781:{n:"clock230",u:"1f55d",o:263,c:7},782:{n:"clock330",u:"1f55e",o:264,c:7},783:{n:"clock430",u:"1f55f",o:265,c:7},784:{n:"clock530",u:"1f560",o:266,c:7},785:{n:"clock630",u:"1f561",o:267,c:7},786:{n:"clock730",u:"1f562",o:268,c:7},787:{n:"clock830",u:"1f563",o:269,c:7},788:{n:"clock930",u:"1f564",o:270,c:7},789:{n:"clock1030",u:"1f565",o:271,c:7},790:{n:"clock1130",u:"1f566",o:272,c:7},791:{n:"clock1230",u:"1f567",o:273,c:7},792:{n:"candle",u:"1f56f",o:43,c:4},793:{n:"mantelpiece_clock",u:"1f570",o:35,c:4},794:{n:"hole",u:"1f573",o:79,c:4},795:{n:"man_in_business_suit_levitating",u:"1f574",o:225,c:0},796:{n:"sleuth_or_spy",u:"1f575",o:160,c:0,d:["1f575-1f3fb","1f575-1f3fc","1f575-1f3fd","1f575-1f3fe","1f575-1f3ff"]},797:{n:"dark_sunglasses",u:"1f576",o:291,c:0},798:{n:"spider",u:"1f577",o:42,c:2},799:{n:"spider_web",u:"1f578",o:43,c:2},800:{n:"joystick",u:"1f579",o:10,c:4},801:{n:"man_dancing",u:"1f57a",o:227,c:0,d:["1f57a-1f3fb","1f57a-1f3fc","1f57a-1f3fd","1f57a-1f3fe","1f57a-1f3ff"]},802:{n:"linked_paperclips",u:"1f587",o:155,c:4},803:{n:"lower_left_ballpoint_pen",u:"1f58a",o:161,c:4},804:{n:"lower_left_fountain_pen",u:"1f58b",o:162,c:4},805:{n:"lower_left_paintbrush",u:"1f58c",o:164,c:4},806:{n:"lower_left_crayon",u:"1f58d",o:165,c:4},807:{n:"raised_hand_with_fingers_splayed",u:"1f590",o:119,c:0,d:["1f590-1f3fb","1f590-1f3fc","1f590-1f3fd","1f590-1f3fe","1f590-1f3ff"]},808:{n:"middle_finger",u:"1f595",o:124,c:0,d:["1f595-1f3fb","1f595-1f3fc","1f595-1f3fd","1f595-1f3fe","1f595-1f3ff"]},809:{n:"spock-hand",u:"1f596",o:120,c:0,d:["1f596-1f3fb","1f596-1f3fc","1f596-1f3fd","1f596-1f3fe","1f596-1f3ff"]},810:{n:"black_heart",u:"1f5a4",o:6,c:7},811:{n:"desktop_computer",u:"1f5a5",o:6,c:4},812:{n:"printer",u:"1f5a8",o:7,c:4},813:{n:"three_button_mouse",u:"1f5b1",o:8,c:4},814:{n:"trackball",u:"1f5b2",o:9,c:4},815:{n:"frame_with_picture",u:"1f5bc",o:95,c:4},816:{n:"card_index_dividers",u:"1f5c2",o:140,c:4},817:{n:"card_file_box",u:"1f5c3",o:134,c:4},818:{n:"file_cabinet",u:"1f5c4",o:136,c:4},819:{n:"wastebasket",u:"1f5d1",o:44,c:4},820:{n:"spiral_note_pad",u:"1f5d2",o:129,c:4},821:{n:"spiral_calendar_pad",u:"1f5d3",o:130,c:4},822:{n:"compression",u:"1f5dc",o:11,c:4},823:{n:"old_key",u:"1f5dd",o:90,c:4},824:{n:"rolled_up_newspaper",u:"1f5de",o:141,c:4},825:{n:"dagger_knife",u:"1f5e1",o:66,c:4},826:{n:"speaking_head_in_silhouette",u:"1f5e3",o:138,c:0},827:{n:"left_speech_bubble",u:"1f5e8",o:240,c:7},828:{n:"right_anger_bubble",u:"1f5ef",o:242,c:7},829:{n:"ballot_box_with_ballot",u:"1f5f3",o:135,c:4},830:{n:"world_map",u:"1f5fa",o:59,c:5},831:{n:"mount_fuji",u:"1f5fb",o:75,c:5},832:{n:"tokyo_tower",u:"1f5fc",o:63,c:5},833:{n:"statue_of_liberty",u:"1f5fd",o:61,c:5},834:{n:"japan",u:"1f5fe",o:105,c:5},835:{n:"moyai",u:"1f5ff",o:60,c:5},836:{n:"grinning",u:"1f600",o:1,c:0},837:{n:"grin",u:"1f601",o:4,c:0},838:{n:"joy",u:"1f602",o:7,c:0},839:{n:"smiley",u:"1f603",o:2,c:0},840:{n:"smile",u:"1f604",o:3,c:0},841:{n:"sweat_smile",u:"1f605",o:6,c:0},842:{n:"laughing",u:"1f606",o:5,c:0},843:{n:"innocent",u:"1f607",o:11,c:0},844:{n:"smiling_imp",u:"1f608",o:76,c:0},845:{n:"wink",u:"1f609",o:14,c:0},846:{n:"blush",u:"1f60a",o:10,c:0},847:{n:"yum",u:"1f60b",o:21,c:0},848:{n:"relieved",u:"1f60c",o:15,c:0},849:{n:"heart_eyes",u:"1f60d",o:16,c:0},850:{n:"sunglasses",u:"1f60e",o:28,c:0},851:{n:"smirk",u:"1f60f",o:31,c:0},852:{n:"neutral_face",u:"1f610",o:47,c:0},853:{n:"expressionless",u:"1f611",o:48,c:0},854:{n:"unamused",u:"1f612",o:32,c:0},855:{n:"sweat",u:"1f613",o:63,c:0},856:{n:"pensive",u:"1f614",o:34,c:0},857:{n:"confused",u:"1f615",o:36,c:0},858:{n:"confounded",u:"1f616",o:40,c:0},859:{n:"kissing",u:"1f617",o:18,c:0},860:{n:"kissing_heart",u:"1f618",o:17,c:0},861:{n:"kissing_smiling_eyes",u:"1f619",o:19,c:0},862:{n:"kissing_closed_eyes",u:"1f61a",o:20,c:0},863:{n:"stuck_out_tongue",u:"1f61b",o:24,c:0},864:{n:"stuck_out_tongue_winking_eye",u:"1f61c",o:22,c:0},865:{n:"stuck_out_tongue_closed_eyes",u:"1f61d",o:23,c:0},866:{n:"disappointed",u:"1f61e",o:33,c:0},867:{n:"worried",u:"1f61f",o:35,c:0},868:{n:"angry",u:"1f620",o:44,c:0},869:{n:"rage",u:"1f621",o:45,c:0},870:{n:"cry",u:"1f622",o:59,c:0},871:{n:"persevere",u:"1f623",o:39,c:0},872:{n:"triumph",u:"1f624",o:43,c:0},873:{n:"disappointed_relieved",u:"1f625",o:60,c:0},874:{n:"frowning",u:"1f626",o:50,c:0},875:{n:"anguished",u:"1f627",o:51,c:0},876:{n:"fearful",u:"1f628",o:57,c:0},877:{n:"weary",u:"1f629",o:42,c:0},878:{n:"sleepy",u:"1f62a",o:64,c:0},879:{n:"tired_face",u:"1f62b",o:41,c:0},880:{n:"grimacing",u:"1f62c",o:69,c:0},881:{n:"sob",u:"1f62d",o:62,c:0},882:{n:"open_mouth",u:"1f62e",o:52,c:0},883:{n:"hushed",u:"1f62f",o:49,c:0},884:{n:"cold_sweat",u:"1f630",o:58,c:0},885:{n:"scream",u:"1f631",o:56,c:0},886:{n:"astonished",u:"1f632",o:53,c:0},887:{n:"flushed",u:"1f633",o:55,c:0},888:{n:"sleeping",u:"1f634",o:65,c:0},889:{n:"dizzy_face",u:"1f635",o:54,c:0},890:{n:"no_mouth",u:"1f636",o:46,c:0},891:{n:"mask",u:"1f637",o:73,c:0},892:{n:"smile_cat",u:"1f638",o:89,c:0},893:{n:"joy_cat",u:"1f639",o:90,c:0},894:{n:"smiley_cat",u:"1f63a",o:88,c:0},895:{n:"heart_eyes_cat",u:"1f63b",o:91,c:0},896:{n:"smirk_cat",u:"1f63c",o:92,c:0},897:{n:"kissing_cat",u:"1f63d",o:93,c:0},898:{n:"pouting_cat",u:"1f63e",o:96,c:0},899:{n:"crying_cat_face",u:"1f63f",o:95,c:0},900:{n:"scream_cat",u:"1f640",o:94,c:0},901:{n:"slightly_frowning_face",u:"1f641",o:37,c:0},902:{n:"slightly_smiling_face",u:"1f642",o:12,c:0},903:{n:"upside_down_face",u:"1f643",o:13,c:0},904:{n:"face_with_rolling_eyes",u:"1f644",o:66,c:0},905:{n:"no_good",u:"1f645",o:205,c:0,d:["1f645-1f3fb","1f645-1f3fc","1f645-1f3fd","1f645-1f3fe","1f645-1f3ff"]},906:{n:"ok_woman",u:"1f646",o:207,c:0,d:["1f646-1f3fb","1f646-1f3fc","1f646-1f3fd","1f646-1f3fe","1f646-1f3ff"]},907:{n:"bow",u:"1f647",o:202,c:0,d:["1f647-1f3fb","1f647-1f3fc","1f647-1f3fd","1f647-1f3fe","1f647-1f3ff"]},908:{n:"see_no_evil",u:"1f648",o:17,c:2},909:{n:"hear_no_evil",u:"1f649",o:18,c:2},910:{n:"speak_no_evil",u:"1f64a",o:19,c:2},911:{n:"raising_hand",u:"1f64b",o:209,c:0,d:["1f64b-1f3fb","1f64b-1f3fc","1f64b-1f3fd","1f64b-1f3fe","1f64b-1f3ff"]},912:{n:"raised_hands",u:"1f64c",o:98,c:0,d:["1f64c-1f3fb","1f64c-1f3fc","1f64c-1f3fd","1f64c-1f3fe","1f64c-1f3ff"]},913:{n:"person_frowning",u:"1f64d",o:219,c:0,d:["1f64d-1f3fb","1f64d-1f3fc","1f64d-1f3fd","1f64d-1f3fe","1f64d-1f3ff"]},914:{n:"person_with_pouting_face",u:"1f64e",o:217,c:0,d:["1f64e-1f3fb","1f64e-1f3fc","1f64e-1f3fd","1f64e-1f3fe","1f64e-1f3ff"]},915:{n:"pray",u:"1f64f",o:100,c:0,d:["1f64f-1f3fb","1f64f-1f3fc","1f64f-1f3fd","1f64f-1f3fe","1f64f-1f3ff"]},916:{n:"rocket",u:"1f680",o:43,c:5},917:{n:"helicopter",u:"1f681",o:38,c:5},918:{n:"steam_locomotive",u:"1f682",o:33,c:5},919:{n:"railway_car",u:"1f683",o:26,c:5},920:{n:"bullettrain_side",u:"1f684",o:30,c:5},921:{n:"bullettrain_front",u:"1f685",o:31,c:5},922:{n:"train2",u:"1f686",o:34,c:5},923:{n:"metro",u:"1f687",o:35,c:5},924:{n:"light_rail",u:"1f688",o:32,c:5},925:{n:"station",u:"1f689",o:37,c:5},926:{n:"tram",u:"1f68a",o:36,c:5},927:{n:"train",u:"1f68b",o:27,c:5},928:{n:"bus",u:"1f68c",o:4,c:5},929:{n:"oncoming_bus",u:"1f68d",o:20,c:5},930:{n:"trolleybus",u:"1f68e",o:5,c:5},931:{n:"busstop",u:"1f68f",o:56,c:5},932:{n:"minibus",u:"1f690",o:10,c:5},933:{n:"ambulance",u:"1f691",o:8,c:5},934:{n:"fire_engine",u:"1f692",o:9,c:5},935:{n:"police_car",u:"1f693",o:7,c:5},936:{n:"oncoming_police_car",u:"1f694",o:19,c:5},937:{n:"taxi",u:"1f695",o:2,c:5},938:{n:"oncoming_taxi",u:"1f696",o:22,c:5},939:{n:"car",u:"1f697",o:1,c:5},940:{n:"oncoming_automobile",u:"1f698",o:21,c:5},941:{n:"blue_car",u:"1f699",o:3,c:5},942:{n:"truck",u:"1f69a",o:11,c:5},943:{n:"articulated_lorry",u:"1f69b",o:12,c:5},944:{n:"tractor",u:"1f69c",o:13,c:5},945:{n:"monorail",u:"1f69d",o:29,c:5},946:{n:"mountain_railway",u:"1f69e",o:28,c:5},947:{n:"suspension_railway",u:"1f69f",o:25,c:5},948:{n:"mountain_cableway",u:"1f6a0",o:24,c:5},949:{n:"aerial_tramway",u:"1f6a1",o:23,c:5},950:{n:"ship",u:"1f6a2",o:52,c:5},951:{n:"rowboat",u:"1f6a3",o:48,c:3,d:["1f6a3-1f3fb","1f6a3-1f3fc","1f6a3-1f3fd","1f6a3-1f3fe","1f6a3-1f3ff"]},952:{n:"speedboat",u:"1f6a4",o:49,c:5},953:{n:"traffic_light",u:"1f6a5",o:58,c:5},954:{n:"vertical_traffic_light",u:"1f6a6",o:57,c:5},955:{n:"construction",u:"1f6a7",o:54,c:5},956:{n:"rotating_light",u:"1f6a8",o:18,c:5},957:{n:"triangular_flag_on_post",u:"1f6a9",o:4,c:6},958:{n:"door",u:"1f6aa",o:91,c:4},959:{n:"no_entry_sign",u:"1f6ab",o:74,c:7},960:{n:"smoking",u:"1f6ac",o:69,c:4},961:{n:"no_smoking",u:"1f6ad",o:84,c:7},962:{n:"put_litter_in_its_place",u:"1f6ae",o:125,c:7},963:{n:"do_not_litter",u:"1f6af",o:79,c:7},964:{n:"potable_water",u:"1f6b0",o:84,c:4},965:{n:"non-potable_water",u:"1f6b1",o:81,c:7},966:{n:"bike",u:"1f6b2",o:15,c:5},967:{n:"no_bicycles",u:"1f6b3",o:80,c:7},968:{n:"bicyclist",u:"1f6b4",o:51,c:3,d:["1f6b4-1f3fb","1f6b4-1f3fc","1f6b4-1f3fd","1f6b4-1f3fe","1f6b4-1f3ff"]},969:{n:"mountain_bicyclist",u:"1f6b5",o:53,c:3,d:["1f6b5-1f3fb","1f6b5-1f3fc","1f6b5-1f3fd","1f6b5-1f3fe","1f6b5-1f3ff"]},970:{n:"walking",u:"1f6b6",o:231,c:0,d:["1f6b6-1f3fb","1f6b6-1f3fc","1f6b6-1f3fd","1f6b6-1f3fe","1f6b6-1f3ff"]},971:{n:"no_pedestrians",u:"1f6b7",o:78,c:7},972:{n:"children_crossing",u:"1f6b8",o:95,c:7},973:{n:"mens",u:"1f6b9",o:121,c:7},974:{n:"womens",u:"1f6ba",o:122,c:7},975:{n:"restroom",u:"1f6bb",o:124,c:7},976:{n:"baby_symbol",u:"1f6bc",o:123,c:7},977:{n:"toilet",u:"1f6bd",o:83,c:4},978:{n:"wc",u:"1f6be",o:112,c:7},979:{n:"shower",u:"1f6bf",o:85,c:4},980:{n:"bath",u:"1f6c0",o:87,c:4,d:["1f6c0-1f3fb","1f6c0-1f3fc","1f6c0-1f3fd","1f6c0-1f3fe","1f6c0-1f3ff"]},981:{n:"bathtub",u:"1f6c1",o:86,c:4},982:{n:"passport_control",u:"1f6c2",o:117,c:7},983:{n:"customs",u:"1f6c3",o:118,c:7},984:{n:"baggage_claim",u:"1f6c4",o:119,c:7},985:{n:"left_luggage",u:"1f6c5",o:120,c:7},986:{n:"couch_and_lamp",u:"1f6cb",o:92,c:4},987:{n:"sleeping_accommodation",u:"1f6cc",o:94,c:4},988:{n:"shopping_bags",u:"1f6cd",o:96,c:4},989:{n:"bellhop_bell",u:"1f6ce",o:88,c:4},990:{n:"bed",u:"1f6cf",o:93,c:4},991:{n:"place_of_worship",u:"1f6d0",o:27,c:7},992:{n:"octagonal_sign",u:"1f6d1",o:71,c:7},993:{n:"shopping_trolley",u:"1f6d2",o:97,c:4},994:{n:"hammer_and_wrench",u:"1f6e0",o:58,c:4},995:{n:"shield",u:"1f6e1",o:68,c:4},996:{n:"oil_drum",u:"1f6e2",o:45,c:4},997:{n:"motorway",u:"1f6e3",o:81,c:5},998:{n:"railway_track",u:"1f6e4",o:80,c:5},999:{n:"motor_boat",u:"1f6e5",o:48,c:5},1000:{n:"small_airplane",u:"1f6e9",o:39,c:5},1001:{n:"airplane_departure",u:"1f6eb",o:41,c:5},1002:{n:"airplane_arriving",u:"1f6ec",o:42,c:5},1003:{n:"satellite",u:"1f6f0",o:44,c:5},1004:{n:"passenger_ship",u:"1f6f3",o:50,c:5},1005:{n:"scooter",u:"1f6f4",o:14,c:5},1006:{n:"motor_scooter",u:"1f6f5",o:16,c:5},1007:{n:"canoe",u:"1f6f6",o:46,c:5},1008:{n:"zipper_mouth_face",u:"1f910",o:70,c:0},1009:{n:"money_mouth_face",u:"1f911",o:25,c:0},1010:{n:"face_with_thermometer",u:"1f912",o:74,c:0},1011:{n:"nerd_face",u:"1f913",o:27,c:0},1012:{n:"thinking_face",u:"1f914",o:67,c:0},1013:{n:"face_with_head_bandage",u:"1f915",o:75,c:0},1014:{n:"robot_face",u:"1f916",o:86,c:0},1015:{n:"hugging_face",u:"1f917",o:26,c:0},1016:{n:"the_horns",u:"1f918",o:110,c:0,d:["1f918-1f3fb","1f918-1f3fc","1f918-1f3fd","1f918-1f3fe","1f918-1f3ff"]},1017:{n:"call_me_hand",u:"1f919",o:122,c:0,d:["1f919-1f3fb","1f919-1f3fc","1f919-1f3fd","1f919-1f3fe","1f919-1f3ff"]},1018:{n:"raised_back_of_hand",u:"1f91a",o:118,c:0,d:["1f91a-1f3fb","1f91a-1f3fc","1f91a-1f3fd","1f91a-1f3fe","1f91a-1f3ff"]},1019:{n:"left-facing_fist",u:"1f91b",o:106,c:0,d:["1f91b-1f3fb","1f91b-1f3fc","1f91b-1f3fd","1f91b-1f3fe","1f91b-1f3ff"]},1020:{n:"right-facing_fist",u:"1f91c",o:107,c:0,d:["1f91c-1f3fb","1f91c-1f3fc","1f91c-1f3fd","1f91c-1f3fe","1f91c-1f3ff"]},1021:{n:"handshake",u:"1f91d",o:101,c:0},1022:{n:"hand_with_index_and_middle_fingers_crossed",u:"1f91e",o:108,c:0,d:["1f91e-1f3fb","1f91e-1f3fc","1f91e-1f3fd","1f91e-1f3fe","1f91e-1f3ff"]},1023:{n:"face_with_cowboy_hat",u:"1f920",o:30,c:0},1024:{n:"clown_face",u:"1f921",o:29,c:0},1025:{n:"nauseated_face",u:"1f922",o:71,c:0},1026:{n:"rolling_on_the_floor_laughing",u:"1f923",o:8,c:0},1027:{n:"drooling_face",u:"1f924",o:61,c:0},1028:{n:"lying_face",u:"1f925",o:68,c:0},1029:{n:"face_palm",u:"1f926",o:211,c:0,d:["1f926-1f3fb","1f926-1f3fc","1f926-1f3fd","1f926-1f3fe","1f926-1f3ff"]},1030:{n:"sneezing_face",u:"1f927",o:72,c:0},1031:{n:"pregnant_woman",u:"1f930",o:200,c:0,d:["1f930-1f3fb","1f930-1f3fc","1f930-1f3fd","1f930-1f3fe","1f930-1f3ff"]},1032:{n:"selfie",u:"1f933",o:126,c:0,d:["1f933-1f3fb","1f933-1f3fc","1f933-1f3fd","1f933-1f3fe","1f933-1f3ff"]},1033:{n:"prince",u:"1f934",o:196,c:0,d:["1f934-1f3fb","1f934-1f3fc","1f934-1f3fd","1f934-1f3fe","1f934-1f3ff"]},1034:{n:"man_in_tuxedo",u:"1f935",o:198,c:0,d:["1f935-1f3fb","1f935-1f3fc","1f935-1f3fd","1f935-1f3fe","1f935-1f3ff"]},1035:{n:"mother_christmas",u:"1f936",o:193,c:0,d:["1f936-1f3fb","1f936-1f3fc","1f936-1f3fd","1f936-1f3fe","1f936-1f3ff"]},1036:{n:"shrug",u:"1f937",o:214,c:0,d:["1f937-1f3fb","1f937-1f3fc","1f937-1f3fd","1f937-1f3fe","1f937-1f3ff"]},1037:{n:"person_doing_cartwheel",u:"1f938",o:30,c:3,d:["1f938-1f3fb","1f938-1f3fc","1f938-1f3fd","1f938-1f3fe","1f938-1f3ff"]},1038:{n:"juggling",u:"1f939",o:66,c:3,d:["1f939-1f3fb","1f939-1f3fc","1f939-1f3fd","1f939-1f3fe","1f939-1f3ff"]},1039:{n:"fencer",u:"1f93a",o:26,c:3},1040:{n:"wrestlers",u:"1f93c",o:27,c:3},1041:{n:"water_polo",u:"1f93d",o:44,c:3,d:["1f93d-1f3fb","1f93d-1f3fc","1f93d-1f3fd","1f93d-1f3fe","1f93d-1f3ff"]},1042:{n:"handball",u:"1f93e",o:35,c:3,d:["1f93e-1f3fb","1f93e-1f3fc","1f93e-1f3fd","1f93e-1f3fe","1f93e-1f3ff"]},1043:{n:"wilted_flower",u:"1f940",o:108,c:2},1044:{n:"drum_with_drumsticks",u:"1f941",o:76,c:3},1045:{n:"clinking_glasses",u:"1f942",o:78,c:1},1046:{n:"tumbler_glass",u:"1f943",o:80,c:1},1047:{n:"spoon",u:"1f944",o:84,c:1},1048:{n:"goal_net",u:"1f945",o:11,c:3},1049:{n:"first_place_medal",u:"1f947",o:57,c:3},1050:{n:"second_place_medal",u:"1f948",o:58,c:3},1051:{n:"third_place_medal",u:"1f949",o:59,c:3},1052:{n:"boxing_glove",u:"1f94a",o:18,c:3},1053:{n:"martial_arts_uniform",u:"1f94b",o:19,c:3},1054:{n:"croissant",u:"1f950",o:27,c:1},1055:{n:"avocado",u:"1f951",o:15,c:1},1056:{n:"cucumber",u:"1f952",o:18,c:1},1057:{n:"bacon",u:"1f953",o:33,c:1},1058:{n:"potato",u:"1f954",o:22,c:1},1059:{n:"carrot",u:"1f955",o:19,c:1},1060:{n:"baguette_bread",u:"1f956",o:29,c:1},1061:{n:"green_salad",u:"1f957",o:45,c:1},1062:{n:"shallow_pan_of_food",u:"1f958",o:46,c:1},1063:{n:"stuffed_flatbread",u:"1f959",o:42,c:1},1064:{n:"egg",u:"1f95a",o:31,c:1},1065:{n:"glass_of_milk",u:"1f95b",o:71,c:1},1066:{n:"peanuts",u:"1f95c",o:25,c:1},1067:{n:"kiwifruit",u:"1f95d",o:14,c:1},1068:{n:"pancakes",u:"1f95e",o:34,c:1},1069:{n:"crab",u:"1f980",o:48,c:2},1070:{n:"lion_face",u:"1f981",o:11,c:2},1071:{n:"scorpion",u:"1f982",o:47,c:2},1072:{n:"turkey",u:"1f983",o:80,c:2},1073:{n:"unicorn_face",u:"1f984",o:34,c:2},1074:{n:"eagle",u:"1f985",o:28,c:2},1075:{n:"duck",u:"1f986",o:27,c:2},1076:{n:"bat",u:"1f987",o:30,c:2},1077:{n:"shark",u:"1f988",o:56,c:2},1078:{n:"owl",u:"1f989",o:29,c:2},1079:{n:"fox_face",u:"1f98a",o:6,c:2},1080:{n:"butterfly",u:"1f98b",o:37,c:2},1081:{n:"deer",u:"1f98c",o:65,c:2},1082:{n:"gorilla",u:"1f98d",o:70,c:2},1083:{n:"lizard",u:"1f98e",o:46,c:2},1084:{n:"rhinoceros",u:"1f98f",o:69,c:2},1085:{n:"shrimp",u:"1f990",o:51,c:2},1086:{n:"squid",u:"1f991",o:49,c:2},1087:{n:"cheese_wedge",u:"1f9c0",o:30,c:1},1088:{n:"hash",u:"0023-20e3",o:152,c:7},1090:{n:"zero",u:"0030-20e3",o:140,c:7},1091:{n:"one",u:"0031-20e3",o:141,c:7},1092:{n:"two",u:"0032-20e3",o:142,c:7},1093:{n:"three",u:"0033-20e3",o:143,c:7},1094:{n:"four",u:"0034-20e3",o:144,c:7},1095:{n:"five",u:"0035-20e3",o:145,c:7},1096:{n:"six",u:"0036-20e3",o:146,c:7},1097:{n:"seven",u:"0037-20e3",o:147,c:7},1098:{n:"eight",u:"0038-20e3",o:148,c:7},1099:{n:"nine",u:"0039-20e3",o:149,c:7},1100:{n:"flag-ac",u:"1f1e6-1f1e8",o:254,c:6},1101:{n:"flag-ad",u:"1f1e6-1f1e9",o:11,c:6},1102:{n:"flag-ae",u:"1f1e6-1f1ea",o:239,c:6},1103:{n:"flag-af",u:"1f1e6-1f1eb",o:6,c:6},1104:{n:"flag-ag",u:"1f1e6-1f1ec",o:15,c:6},1105:{n:"flag-ai",u:"1f1e6-1f1ee",o:13,c:6},1106:{n:"flag-al",u:"1f1e6-1f1f1",o:8,c:6},1107:{n:"flag-am",u:"1f1e6-1f1f2",o:17,c:6},1108:{n:"flag-ao",u:"1f1e6-1f1f4",o:12,c:6},1109:{n:"flag-aq",u:"1f1e6-1f1f6",o:14,c:6},1110:{n:"flag-ar",u:"1f1e6-1f1f7",o:16,c:6},1111:{n:"flag-as",u:"1f1e6-1f1f8",o:10,c:6},1112:{n:"flag-at",u:"1f1e6-1f1f9",o:20,c:6},1113:{n:"flag-au",u:"1f1e6-1f1fa",o:19,c:6},1114:{n:"flag-aw",u:"1f1e6-1f1fc",o:18,c:6},1115:{n:"flag-ax",u:"1f1e6-1f1fd",o:7,c:6},1116:{n:"flag-az",u:"1f1e6-1f1ff",o:21,c:6},1117:{n:"flag-ba",u:"1f1e7-1f1e6",o:34,c:6},1118:{n:"flag-bb",u:"1f1e7-1f1e7",o:25,c:6},1119:{n:"flag-bd",u:"1f1e7-1f1e9",o:24,c:6},1120:{n:"flag-be",u:"1f1e7-1f1ea",o:27,c:6},1121:{n:"flag-bf",u:"1f1e7-1f1eb",o:41,c:6},1122:{n:"flag-bg",u:"1f1e7-1f1ec",o:40,c:6},1123:{n:"flag-bh",u:"1f1e7-1f1ed",o:23,c:6},1124:{n:"flag-bi",u:"1f1e7-1f1ee",o:42,c:6},1125:{n:"flag-bj",u:"1f1e7-1f1ef",o:29,c:6},1126:{n:"flag-bl",u:"1f1e7-1f1f1",o:191,c:6},1127:{n:"flag-bm",u:"1f1e7-1f1f2",o:30,c:6},1128:{n:"flag-bn",u:"1f1e7-1f1f3",o:39,c:6},1129:{n:"flag-bo",u:"1f1e7-1f1f4",o:32,c:6},1130:{n:"flag-bq",u:"1f1e7-1f1f6",o:33,c:6},1131:{n:"flag-br",u:"1f1e7-1f1f7",o:36,c:6},1132:{n:"flag-bs",u:"1f1e7-1f1f8",o:22,c:6},1133:{n:"flag-bt",u:"1f1e7-1f1f9",o:31,c:6},1134:{n:"flag-bv",u:"1f1e7-1f1fb",o:255,c:6},1135:{n:"flag-bw",u:"1f1e7-1f1fc",o:35,c:6},1136:{n:"flag-by",u:"1f1e7-1f1fe",o:26,c:6},1137:{n:"flag-bz",u:"1f1e7-1f1ff",o:28,c:6},1138:{n:"flag-ca",u:"1f1e8-1f1e6",o:46,c:6},1139:{n:"flag-cc",u:"1f1e8-1f1e8",o:54,c:6},1140:{n:"flag-cd",u:"1f1e8-1f1e9",o:58,c:6},1141:{n:"flag-cf",u:"1f1e8-1f1eb",o:49,c:6},1142:{n:"flag-cg",u:"1f1e8-1f1ec",o:57,c:6},1143:{n:"flag-ch",u:"1f1e8-1f1ed",o:221,c:6},1144:{n:"flag-ci",u:"1f1e8-1f1ee",o:61,c:6},1145:{n:"flag-ck",u:"1f1e8-1f1f0",o:59,c:6},1146:{n:"flag-cl",u:"1f1e8-1f1f1",o:51,c:6},1147:{n:"flag-cm",u:"1f1e8-1f1f2",o:45,c:6},1148:{n:"flag-cn",u:"1f1e8-1f1f3",o:52,c:6},1149:{n:"flag-co",u:"1f1e8-1f1f4",o:55,c:6},1150:{n:"flag-cp",u:"1f1e8-1f1f5",o:256,c:6},1151:{n:"flag-cr",u:"1f1e8-1f1f7",o:60,c:6},1152:{n:"flag-cu",u:"1f1e8-1f1fa",o:63,c:6},1153:{n:"flag-cv",u:"1f1e8-1f1fb",o:43,c:6},1154:{n:"flag-cw",u:"1f1e8-1f1fc",o:64,c:6},1155:{n:"flag-cx",u:"1f1e8-1f1fd",o:53,c:6},1156:{n:"flag-cy",u:"1f1e8-1f1fe",o:65,c:6},1157:{n:"flag-cz",u:"1f1e8-1f1ff",o:66,c:6},1158:{n:"flag-de",u:"1f1e9-1f1ea",o:90,c:6},1159:{n:"flag-dg",u:"1f1e9-1f1ec",o:257,c:6},1160:{n:"flag-dj",u:"1f1e9-1f1ef",o:68,c:6},1161:{n:"flag-dk",u:"1f1e9-1f1f0",o:67,c:6},1162:{n:"flag-dm",u:"1f1e9-1f1f2",o:69,c:6},1163:{n:"flag-do",u:"1f1e9-1f1f4",o:70,c:6},1164:{n:"flag-dz",u:"1f1e9-1f1ff",o:9,c:6},1165:{n:"flag-ea",u:"1f1ea-1f1e6",o:258,c:6},1166:{n:"flag-ec",u:"1f1ea-1f1e8",o:71,c:6},1167:{n:"flag-ee",u:"1f1ea-1f1ea",o:76,c:6},1168:{n:"flag-eg",u:"1f1ea-1f1ec",o:72,c:6},1169:{n:"flag-eh",u:"1f1ea-1f1ed",o:250,c:6},1170:{n:"flag-er",u:"1f1ea-1f1f7",o:75,c:6},1171:{n:"flag-es",u:"1f1ea-1f1f8",o:215,c:6},1172:{n:"flag-et",u:"1f1ea-1f1f9",o:77,c:6},1173:{n:"flag-eu",u:"1f1ea-1f1fa",o:78,c:6},1174:{n:"flag-fi",u:"1f1eb-1f1ee",o:82,c:6},1175:{n:"flag-fj",u:"1f1eb-1f1ef",o:81,c:6},1176:{n:"flag-fk",u:"1f1eb-1f1f0",o:79,c:6},1177:{n:"flag-fm",u:"1f1eb-1f1f2",o:150,c:6},1178:{n:"flag-fo",u:"1f1eb-1f1f4",o:80,c:6},1179:{n:"flag-fr",u:"1f1eb-1f1f7",o:83,c:6},1180:{n:"flag-ga",u:"1f1ec-1f1e6",o:87,c:6},1181:{n:"flag-gb",u:"1f1ec-1f1e7",o:240,c:6},1182:{n:"flag-gd",u:"1f1ec-1f1e9",o:95,c:6},1183:{n:"flag-ge",u:"1f1ec-1f1ea",o:89,c:6},1184:{n:"flag-gf",u:"1f1ec-1f1eb",o:84,c:6},1185:{n:"flag-gg",u:"1f1ec-1f1ec",o:99,c:6},1186:{n:"flag-gh",u:"1f1ec-1f1ed",o:91,c:6},1187:{n:"flag-gi",u:"1f1ec-1f1ee",o:92,c:6},1188:{n:"flag-gl",u:"1f1ec-1f1f1",o:94,c:6},1189:{n:"flag-gm",u:"1f1ec-1f1f2",o:88,c:6},1190:{n:"flag-gn",u:"1f1ec-1f1f3",o:100,c:6},1191:{n:"flag-gp",u:"1f1ec-1f1f5",o:96,c:6},1192:{n:"flag-gq",u:"1f1ec-1f1f6",o:74,c:6},1193:{n:"flag-gr",u:"1f1ec-1f1f7",o:93,c:6},1194:{n:"flag-gs",u:"1f1ec-1f1f8",o:212,c:6},1195:{n:"flag-gt",u:"1f1ec-1f1f9",o:98,c:6},1196:{n:"flag-gu",u:"1f1ec-1f1fa",o:97,c:6},1197:{n:"flag-gw",u:"1f1ec-1f1fc",o:101,c:6},1198:{n:"flag-gy",u:"1f1ec-1f1fe",o:102,c:6},1199:{n:"flag-hk",u:"1f1ed-1f1f0",o:105,c:6},1200:{n:"flag-hm",u:"1f1ed-1f1f2",o:259,c:6},1201:{n:"flag-hn",u:"1f1ed-1f1f3",o:104,c:6},1202:{n:"flag-hr",u:"1f1ed-1f1f7",o:62,c:6},1203:{n:"flag-ht",u:"1f1ed-1f1f9",o:103,c:6},1204:{n:"flag-hu",u:"1f1ed-1f1fa",o:106,c:6},1205:{n:"flag-ic",u:"1f1ee-1f1e8",o:47,c:6},1206:{n:"flag-id",u:"1f1ee-1f1e9",o:109,c:6},1207:{n:"flag-ie",u:"1f1ee-1f1ea",o:112,c:6},1208:{n:"flag-il",u:"1f1ee-1f1f1",o:114,c:6},1209:{n:"flag-im",u:"1f1ee-1f1f2",o:113,c:6},1210:{n:"flag-in",u:"1f1ee-1f1f3",o:108,c:6},1211:{n:"flag-io",u:"1f1ee-1f1f4",o:37,c:6},1212:{n:"flag-iq",u:"1f1ee-1f1f6",o:111,c:6},1213:{n:"flag-ir",u:"1f1ee-1f1f7",o:110,c:6},1214:{n:"flag-is",u:"1f1ee-1f1f8",o:107,c:6},1215:{n:"flag-it",u:"1f1ee-1f1f9",o:115,c:6},1216:{n:"flag-je",u:"1f1ef-1f1ea",o:119,c:6},1217:{n:"flag-jm",u:"1f1ef-1f1f2",o:116,c:6},1218:{n:"flag-jo",u:"1f1ef-1f1f4",o:120,c:6},1219:{n:"flag-jp",u:"1f1ef-1f1f5",o:117,c:6},1220:{n:"flag-ke",u:"1f1f0-1f1ea",o:122,c:6},1221:{n:"flag-kg",u:"1f1f0-1f1ec",o:126,c:6},1222:{n:"flag-kh",u:"1f1f0-1f1ed",o:44,c:6},1223:{n:"flag-ki",u:"1f1f0-1f1ee",o:123,c:6},1224:{n:"flag-km",u:"1f1f0-1f1f2",o:56,c:6},1225:{n:"flag-kn",u:"1f1f0-1f1f3",o:193,c:6},1226:{n:"flag-kp",u:"1f1f0-1f1f5",o:171,c:6},1227:{n:"flag-kr",u:"1f1f0-1f1f7",o:213,c:6},1228:{n:"flag-kw",u:"1f1f0-1f1fc",o:125,c:6},1229:{n:"flag-ky",u:"1f1f0-1f1fe",o:48,c:6},1230:{n:"flag-kz",u:"1f1f0-1f1ff",o:121,c:6},1231:{n:"flag-la",u:"1f1f1-1f1e6",o:127,c:6},1232:{n:"flag-lb",u:"1f1f1-1f1e7",o:129,c:6},1233:{n:"flag-lc",u:"1f1f1-1f1e8",o:194,c:6},1234:{n:"flag-li",u:"1f1f1-1f1ee",o:133,c:6},1235:{n:"flag-lk",u:"1f1f1-1f1f0",o:216,c:6},1236:{n:"flag-lr",u:"1f1f1-1f1f7",o:131,c:6},1237:{n:"flag-ls",u:"1f1f1-1f1f8",o:130,c:6},1238:{n:"flag-lt",u:"1f1f1-1f1f9",o:134,c:6},1239:{n:"flag-lu",u:"1f1f1-1f1fa",o:135,c:6},1240:{n:"flag-lv",u:"1f1f1-1f1fb",o:128,c:6},1241:{n:"flag-ly",u:"1f1f1-1f1fe",o:132,c:6},1242:{n:"flag-ma",u:"1f1f2-1f1e6",o:156,c:6},1243:{n:"flag-mc",u:"1f1f2-1f1e8",o:152,c:6},1244:{n:"flag-md",u:"1f1f2-1f1e9",o:151,c:6},1245:{n:"flag-me",u:"1f1f2-1f1ea",o:154,c:6},1246:{n:"flag-mf",u:"1f1f2-1f1eb",o:260,c:6},1247:{n:"flag-mg",u:"1f1f2-1f1ec",o:138,c:6},1248:{n:"flag-mh",u:"1f1f2-1f1ed",o:144,c:6},1249:{n:"flag-mk",u:"1f1f2-1f1f0",o:137,c:6},1250:{n:"flag-ml",u:"1f1f2-1f1f1",o:142,c:6},1251:{n:"flag-mm",u:"1f1f2-1f1f2",o:158,c:6},1252:{n:"flag-mn",u:"1f1f2-1f1f3",o:153,c:6},1253:{n:"flag-mo",u:"1f1f2-1f1f4",o:136,c:6},1254:{n:"flag-mp",u:"1f1f2-1f1f5",o:170,c:6},1255:{n:"flag-mq",u:"1f1f2-1f1f6",o:145,c:6},1256:{n:"flag-mr",u:"1f1f2-1f1f7",o:146,c:6},1257:{n:"flag-ms",u:"1f1f2-1f1f8",o:155,c:6},1258:{n:"flag-mt",u:"1f1f2-1f1f9",o:143,c:6},1259:{n:"flag-mu",u:"1f1f2-1f1fa",o:147,c:6},1260:{n:"flag-mv",u:"1f1f2-1f1fb",o:141,c:6},1261:{n:"flag-mw",u:"1f1f2-1f1fc",o:139,c:6},1262:{n:"flag-mx",u:"1f1f2-1f1fd",o:149,c:6},1263:{n:"flag-my",u:"1f1f2-1f1fe",o:140,c:6},1264:{n:"flag-mz",u:"1f1f2-1f1ff",o:157,c:6},1265:{n:"flag-na",u:"1f1f3-1f1e6",o:159,c:6},1266:{n:"flag-nc",u:"1f1f3-1f1e8",o:163,c:6},1267:{n:"flag-ne",u:"1f1f3-1f1ea",o:166,c:6},1268:{n:"flag-nf",u:"1f1f3-1f1eb",o:169,c:6},1269:{n:"flag-ng",u:"1f1f3-1f1ec",o:167,c:6},1270:{n:"flag-ni",u:"1f1f3-1f1ee",o:165,c:6},1271:{n:"flag-nl",u:"1f1f3-1f1f1",o:162,c:6},1272:{n:"flag-no",u:"1f1f3-1f1f4",o:172,c:6},1273:{n:"flag-np",u:"1f1f3-1f1f5",o:161,c:6},1274:{n:"flag-nr",u:"1f1f3-1f1f7",o:160,c:6},1275:{n:"flag-nu",u:"1f1f3-1f1fa",o:168,c:6},1276:{n:"flag-nz",u:"1f1f3-1f1ff",o:164,c:6},1277:{n:"flag-om",u:"1f1f4-1f1f2",o:173,c:6},1278:{n:"flag-pa",u:"1f1f5-1f1e6",o:177,c:6},1279:{n:"flag-pe",u:"1f1f5-1f1ea",o:180,c:6},1280:{n:"flag-pf",u:"1f1f5-1f1eb",o:85,c:6},1281:{n:"flag-pg",u:"1f1f5-1f1ec",o:178,c:6},1282:{n:"flag-ph",u:"1f1f5-1f1ed",o:181,c:6},1283:{n:"flag-pk",u:"1f1f5-1f1f0",o:174,c:6},1284:{n:"flag-pl",u:"1f1f5-1f1f1",o:183,c:6},1285:{n:"flag-pm",u:"1f1f5-1f1f2",o:195,c:6},1286:{n:"flag-pn",u:"1f1f5-1f1f3",o:182,c:6},1287:{n:"flag-pr",u:"1f1f5-1f1f7",o:185,c:6},1288:{n:"flag-ps",u:"1f1f5-1f1f8",o:176,c:6},1289:{n:"flag-pt",u:"1f1f5-1f1f9",o:184,c:6},1290:{n:"flag-pw",u:"1f1f5-1f1fc",o:175,c:6},1291:{n:"flag-py",u:"1f1f5-1f1fe",o:179,c:6},1292:{n:"flag-qa",u:"1f1f6-1f1e6",o:186,c:6},1293:{n:"flag-re",u:"1f1f7-1f1ea",o:187,c:6},1294:{n:"flag-ro",u:"1f1f7-1f1f4",o:188,c:6},1295:{n:"flag-rs",u:"1f1f7-1f1f8",o:202,c:6},1296:{n:"flag-ru",u:"1f1f7-1f1fa",o:189,c:6},1297:{n:"flag-rw",u:"1f1f7-1f1fc",o:190,c:6},1298:{n:"flag-sa",u:"1f1f8-1f1e6",o:200,c:6},1299:{n:"flag-sb",u:"1f1f8-1f1e7",o:209,c:6},1300:{n:"flag-sc",u:"1f1f8-1f1e8",o:203,c:6},1301:{n:"flag-sd",u:"1f1f8-1f1e9",o:217,c:6},1302:{n:"flag-se",u:"1f1f8-1f1ea",o:220,c:6},1303:{n:"flag-sg",u:"1f1f8-1f1ec",o:205,c:6},1304:{n:"flag-sh",u:"1f1f8-1f1ed",o:192,c:6},1305:{n:"flag-si",u:"1f1f8-1f1ee",o:208,c:6},1306:{n:"flag-sj",u:"1f1f8-1f1ef",o:261,c:6},1307:{n:"flag-sk",u:"1f1f8-1f1f0",o:207,c:6},1308:{n:"flag-sl",u:"1f1f8-1f1f1",o:204,c:6},1309:{n:"flag-sm",u:"1f1f8-1f1f2",o:198,c:6},1310:{n:"flag-sn",u:"1f1f8-1f1f3",o:201,c:6},1311:{n:"flag-so",u:"1f1f8-1f1f4",o:210,c:6},1312:{n:"flag-sr",u:"1f1f8-1f1f7",o:218,c:6},1313:{n:"flag-ss",u:"1f1f8-1f1f8",o:214,c:6},1314:{n:"flag-st",u:"1f1f8-1f1f9",o:199,c:6},1315:{n:"flag-sv",u:"1f1f8-1f1fb",o:73,c:6},1316:{n:"flag-sx",u:"1f1f8-1f1fd",o:206,c:6},1317:{n:"flag-sy",u:"1f1f8-1f1fe",o:222,c:6},1318:{n:"flag-sz",u:"1f1f8-1f1ff",o:219,c:6},1319:{n:"flag-ta",u:"1f1f9-1f1e6",o:262,c:6},1320:{n:"flag-tc",u:"1f1f9-1f1e8",o:235,c:6},1321:{n:"flag-td",u:"1f1f9-1f1e9",o:50,c:6},1322:{n:"flag-tf",u:"1f1f9-1f1eb",o:86,c:6},1323:{n:"flag-tg",u:"1f1f9-1f1ec",o:228,c:6},1324:{n:"flag-th",u:"1f1f9-1f1ed",o:226,c:6},1325:{n:"flag-tj",u:"1f1f9-1f1ef",o:224,c:6},1326:{n:"flag-tk",u:"1f1f9-1f1f0",o:229,c:6},1327:{n:"flag-tl",u:"1f1f9-1f1f1",o:227,c:6},1328:{n:"flag-tm",u:"1f1f9-1f1f2",o:234,c:6},1329:{n:"flag-tn",u:"1f1f9-1f1f3",o:232,c:6},1330:{n:"flag-to",u:"1f1f9-1f1f4",o:230,c:6},1331:{n:"flag-tr",u:"1f1f9-1f1f7",o:233,c:6},1332:{n:"flag-tt",u:"1f1f9-1f1f9",o:231,c:6},1333:{n:"flag-tv",u:"1f1f9-1f1fb",o:236,c:6},1334:{n:"flag-tw",u:"1f1f9-1f1fc",o:223,c:6},1335:{n:"flag-tz",u:"1f1f9-1f1ff",o:225,c:6},1336:{n:"flag-ua",u:"1f1fa-1f1e6",o:238,c:6},1337:{n:"flag-ug",u:"1f1fa-1f1ec",o:237,c:6},1338:{n:"flag-um",u:"1f1fa-1f1f2",o:263,c:6},1340:{n:"flag-us",u:"1f1fa-1f1f8",o:241,c:6},1341:{n:"flag-uy",u:"1f1fa-1f1fe",o:243,c:6},1342:{n:"flag-uz",u:"1f1fa-1f1ff",o:244,c:6},1343:{n:"flag-va",u:"1f1fb-1f1e6",o:246,c:6},1344:{n:"flag-vc",u:"1f1fb-1f1e8",o:196,c:6},1345:{n:"flag-ve",u:"1f1fb-1f1ea",o:247,c:6},1346:{n:"flag-vg",u:"1f1fb-1f1ec",o:38,c:6},1347:{n:"flag-vi",u:"1f1fb-1f1ee",o:242,c:6},1348:{n:"flag-vn",u:"1f1fb-1f1f3",o:248,c:6},1349:{n:"flag-vu",u:"1f1fb-1f1fa",o:245,c:6},1350:{n:"flag-wf",u:"1f1fc-1f1eb",o:249,c:6},1351:{n:"flag-ws",u:"1f1fc-1f1f8",o:197,c:6},1352:{n:"flag-xk",u:"1f1fd-1f1f0",o:124,c:6},1353:{n:"flag-ye",u:"1f1fe-1f1ea",o:251,c:6},1354:{n:"flag-yt",u:"1f1fe-1f1f9",o:148,c:6},1355:{n:"flag-za",u:"1f1ff-1f1e6",o:211,c:6},1356:{n:"flag-zm",u:"1f1ff-1f1f2",o:252,c:6},1357:{n:"flag-zw",u:"1f1ff-1f1fc",o:253,c:6}},categories:[{name:"people",members:[43,51,52,60,61,105,125,126,127,128,201,328,330,343,344,361,387,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,584,586,588,590,614,615,633,795,796,797,801,807,808,809,826,836,837,838,839,840,841,842,843,844,845,846,847,848,849,850,851,852,853,854,855,856,857,858,859,860,861,862,863,864,865,866,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,894,895,896,897,898,899,900,901,902,903,904,905,906,907,911,912,913,914,915,970,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036]},{name:"foods",members:[49,242,243,244,245,251,258,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,327,1045,1046,1047,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1087]},{name:"nature",members:[41,42,44,45,48,50,93,100,101,102,135,138,161,207,209,212,213,214,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,233,234,235,236,237,238,239,240,241,246,247,248,249,250,252,253,254,255,256,257,259,260,261,262,263,264,265,329,336,338,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,589,610,611,612,613,616,737,763,798,799,908,909,910,1043,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086]},{name:"activity",members:[98,99,113,116,117,118,345,346,351,355,356,359,360,362,363,364,365,366,367,368,369,370,371,375,376,377,378,379,380,381,382,383,384,386,388,389,390,391,392,393,394,395,396,399,400,401,402,403,435,437,438,951,968,969,1037,1038,1039,1040,1041,1042,1044,1048,1049,1050,1051,1052,1053]},{name:"objects",members:[14,15,16,25,26,27,28,46,83,85,87,88,89,96,97,104,106,121,124,129,130,232,325,326,333,334,335,339,340,341,347,348,349,350,357,430,436,439,581,582,583,585,587,606,608,621,624,625,626,627,628,629,632,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,649,650,651,652,653,654,655,656,657,658,659,660,661,662,663,665,666,667,668,669,670,673,674,675,676,677,678,679,680,681,682,683,684,685,686,687,692,693,694,695,696,697,698,699,711,712,713,714,715,716,717,718,719,722,723,738,739,740,741,742,743,744,745,746,792,793,794,800,802,803,804,805,806,811,812,813,814,815,816,817,818,819,820,821,822,823,824,825,829,958,960,964,977,979,980,981,986,987,988,989,990,993,994,995,996]},{name:"places",members:[84,108,109,110,111,112,114,115,119,120,123,200,202,203,204,205,206,208,210,211,231,331,332,342,352,353,354,397,398,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,424,425,426,427,428,429,431,432,591,631,764,765,766,830,831,832,833,834,835,916,917,918,919,920,921,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,952,953,954,955,956,966,997,998,999,1e3,1001,1002,1003,1004,1005,1006,1007]},{name:"flags",members:[337,385,433,434,957,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357]},{name:"symbols",members:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,17,18,19,20,21,22,23,24,29,30,31,32,33,34,35,36,37,38,39,40,47,53,54,55,56,57,58,59,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,90,91,92,94,95,103,107,122,131,132,133,134,136,137,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,215,358,372,373,374,423,592,593,594,595,596,597,598,599,600,601,602,603,604,605,607,609,617,618,619,620,622,623,630,664,671,672,688,689,690,691,700,701,702,703,704,705,706,707,708,709,710,720,721,724,725,726,727,728,729,730,731,732,733,734,735,736,747,748,749,750,751,752,753,754,755,756,757,758,759,760,761,762,767,768,769,770,771,772,773,774,775,776,777,778,779,780,781,782,783,784,785,786,787,788,789,790,791,810,827,828,959,961,962,963,965,967,971,972,973,974,975,976,978,982,983,984,985,991,992,1088,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099]}],keywords:{0:[1090],1:[523,1091],2:[515,1092],3:[1093],4:[1094],5:[1095],6:[1096],7:[1097],8:[1098],9:[1099],100:[620],1234:[734],5272:[195],5408:[190],6307:[187],6708:[193],6709:[192],7121:[186],7533:[194],7981:[188],copyright:[0],sign:[0,1,4,53,54,92,93,148,149,150,519,520,521,522,523,524,525,623,625,626,627,628,630,955,959,992,1016],symbols:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,17,18,19,20,21,22,23,24,29,30,31,32,33,34,35,36,37,38,39,40,47,53,54,55,56,57,58,59,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,90,91,92,94,95,103,107,122,131,132,133,134,136,137,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,215,358,372,373,374,423,592,593,594,595,596,597,598,599,600,601,602,603,604,605,607,609,617,618,619,620,622,623,630,664,671,672,688,689,690,691,700,701,702,703,704,705,706,707,708,709,710,720,721,724,725,726,727,728,729,730,731,732,733,734,735,736,747,748,749,750,751,752,753,754,755,756,757,758,759,760,761,762,767,768,769,770,771,772,773,774,775,776,777,778,779,780,781,782,783,784,785,786,787,788,789,790,791,810,827,828,959,961,962,963,965,967,971,972,973,974,975,976,978,982,983,984,985,991,992,1088,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099],registered:[1],double:[2,18,19,20,21,22,23,24,29,153],exclamation:[2,3,144,145,146,182,727],mark:[2,3,4,122,131,140,141,142,143,144,145,146,164,182,584,727],bangbang:[2],question:[3,142,143],interrobang:[3],trade:[4],tm:[4,1328],information:[5,574],source:[5],left:[6,8,11,19,23,36,156,517,687,713,727,803,804,805,806,827,985,1019],right:[6,9,10,13,18,22,24,35,151,518,714,727,828,1020],arrow:[6,7,8,9,10,11,12,13,20,21,35,36,151,154,155,156,157,158,438,597,678,687,725,726,727,728,729,760,761],up:[7,20,51,154,157,182,515,522,641,758,760,824],down:[7,21,155,158,516,523,759,761,903],north:[8,9],west:[8,11],upper:[8,9],east:[9,10],south:[10,11],lower:[10,11,803,804,805,806],leftwards:[12,156,701,702,725,726],with:[12,13,22,23,24,28,41,47,48,105,118,182,202,215,225,226,227,228,229,233,235,236,237,238,239,298,322,323,381,406,417,556,557,558,559,560,590,597,602,605,625,626,627,628,629,630,640,645,646,657,678,679,680,681,682,687,691,693,702,707,709,710,715,716,721,725,726,727,728,729,747,767,807,808,809,815,829,837,838,839,840,841,842,843,844,846,849,850,855,861,862,863,864,865,872,874,882,884,891,892,893,894,895,896,897,904,905,906,914,915,921,1010,1013,1022,1023,1044],hook:[12,13],rightwards:[13,151,154,155,687,700,701,702,728],watch:[14],objects:[14,15,16,25,26,27,28,46,83,85,87,88,89,96,97,104,106,121,124,129,130,232,325,326,333,334,335,339,340,341,347,348,349,350,357,430,436,439,581,582,583,585,587,606,608,621,624,625,626,627,628,629,632,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,649,650,651,652,653,654,655,656,657,658,659,660,661,662,663,665,666,667,668,669,670,673,674,675,676,677,678,679,680,681,682,683,684,685,686,687,692,693,694,695,696,697,698,699,711,712,713,714,715,716,717,718,719,722,723,738,739,740,741,742,743,744,745,746,792,793,794,800,802,803,804,805,806,811,812,813,814,815,816,817,818,819,820,821,822,823,824,825,829,958,960,964,977,979,980,981,986,987,988,989,990,993,994,995,996],hourglass:[15,28],keyboard:[16,377],eject:[17],symbol:[17,57,81,82,90,145,216,217,218,219,220,221,222,223,607,609,610,611,613,616,620,676,705,706,723,730,732,733,734,735,736,748,762,960,961,962,963,964,965,973,974,976,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],black:[18,19,20,21,22,23,24,30,31,33,35,36,38,40,41,46,76,77,78,79,81,95,121,130,137,142,147,151,156,157,158,159,168,434,750,810],pointing:[18,19,20,21,22,23,24,35,36,51,154,155,515,516,517,518,713,714,758,759,760,761],triangle:[18,19,20,21,22,23,24,35,36,758,759,760,761],fast:[18],forward:[18,35],rewind:[19],vertical:[22,23,24,29,954],bar:[22,23,24,29,304,647],alarm:[25],clock:[25,27,768,769,770,771,772,773,774,775,776,777,778,779,780,781,782,783,784,785,786,787,788,789,790,791,793],stopwatch:[26],timer:[27],flowing:[28],sand:[28],square:[30,33,34,37,38,39,40,159,160,750,751],for:[30,31,732,733,734,735,736,748],stop:[30,931],circle:[31,94,95,162,701,702,703,704,752,753],record:[31],circled:[32,165,166,197,198,702],latin:[32,133,169,170,171,172,732,733,736],capital:[32,169,170,171,172,732],letter:[32,169,170,171,172,585],m:[32],small:[33,34,39,40,233,733,756,757,758,759,760,761,1e3],white:[34,37,39,51,60,61,94,105,122,143,144,160,161,233,234,235,433,515,516,517,518,619,751],backward:[36],medium:[37,38,39,40,94,95,161],sun:[41,101,229,233,234,235],rays:[41],nature:[41,42,44,45,48,50,93,100,101,102,135,138,161,207,209,212,213,214,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,233,234,235,236,237,238,239,240,241,246,247,248,249,250,252,253,254,255,256,257,259,260,261,262,263,264,265,329,336,338,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,589,610,611,612,613,616,737,763,798,799,908,909,910,1043,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086],sunny:[41,101,233,234,235],cloud:[42,101,102,233,234,235,236,237,238,239],umbrella:[43,48,111,201,406],people:[43,51,52,60,61,105,125,126,127,128,201,328,330,343,344,361,387,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,584,586,588,590,614,615,633,795,796,797,801,807,808,809,826,836,837,838,839,840,841,842,843,844,845,846,847,848,849,850,851,852,853,854,855,856,857,858,859,860,861,862,863,864,865,866,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,894,895,896,897,898,899,900,901,902,903,904,905,906,907,911,912,913,914,915,970,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036],snowman:[44,100],comet:[45],telephone:[46,667],phone:[46,686,687,689],ballot:[47,829],box:[47,310,817,829],check:[47,122,131],rain:[48,102,235,236],drops:[48,611],hot:[49,80,242,251],beverage:[49],foods:[49,242,243,244,245,251,258,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,327,1045,1046,1047,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1087],coffee:[49],shamrock:[50],index:[51,515,516,517,518,644,816,1022],point:[51,515,516,517,518],skull:[52,573],and:[52,56,83,102,288,313,315,322,355,382,383,384,399,401,402,403,437,438,552,630,701,702,703,704,741,809,840,841,842,864,865,884,986,994,1022],crossbones:[52],radioactive:[53],biohazard:[54],orthodox:[55],cross:[55,105,133,140,141],star:[56,134,137,161,230,231,747],crescent:[56,217,223,224],peace:[57,763],yin:[58],yang:[58],wheel:[59,353],of:[59,134,258,259,282,311,614,763,833,834,838,872,893,991,1016,1018,1062,1065],dharma:[59],frowning:[60,874,901,913],face:[60,61,225,226,227,228,229,241,490,491,492,493,494,495,497,498,499,500,501,502,503,504,505,579,768,769,770,771,772,773,774,775,776,777,778,779,780,781,782,783,784,785,786,787,788,789,790,791,836,837,838,839,840,841,842,843,844,845,846,847,848,849,850,851,852,853,854,855,856,857,858,859,860,861,862,863,864,865,866,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,894,895,896,897,898,899,900,901,902,903,904,905,906,914,1008,1009,1010,1011,1012,1013,1014,1015,1023,1024,1025,1027,1028,1029,1030,1070,1073,1079],smiling:[61,837,839,840,841,842,843,844,846,849,850,861,892,894,895,902],relaxed:[61],aries:[64],taurus:[65],gemini:[66],cancer:[67],leo:[68],virgo:[69],libra:[70],scorpius:[71],sagittarius:[72],capricorn:[73],aquarius:[74],pisces:[75],spade:[76],suit:[76,77,78,79,795],spades:[76],club:[77],clubs:[77],heart:[78,146,147,590,592,593,595,596,597,598,599,600,601,602,604,810,849,860,895],hearts:[78,594,603],diamond:[79,605,754,755,756,757],diamonds:[79],springs:[80],hotsprings:[80],universal:[81],recycling:[81],recycle:[81],wheelchair:[82],hammer:[83,740,994],pick:[83,104],anchor:[84],places:[84,108,109,110,111,112,114,115,119,120,123,200,202,203,204,205,206,208,210,211,231,331,332,342,352,353,354,397,398,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,424,425,426,427,428,429,431,432,591,631,764,765,766,830,831,832,833,834,835,916,917,918,919,920,921,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,952,953,954,955,956,966,997,998,999,1e3,1001,1002,1003,1004,1005,1006,1007],crossed:[85,337,1022],swords:[85],scales:[87],alembic:[88],gear:[89],atom:[90],fleur:[91],de:[91,1158],lis:[91],warning:[92],high:[93,541,706,920,921],voltage:[93],zap:[93],coffin:[96],funeral:[97],urn:[97],soccer:[98],ball:[98,118,286,335,382,399,401,403,746],activity:[98,99,113,116,117,118,345,346,351,355,356,359,360,362,363,364,365,366,367,368,369,370,371,375,376,377,378,379,380,381,382,383,384,386,388,389,390,391,392,393,394,395,396,399,400,401,402,403,435,437,438,951,968,969,1037,1038,1039,1040,1041,1042,1044,1048,1049,1050,1051,1052,1053],baseball:[99],without:[100,314,890],snow:[100,237,404],behind:[101,234,235],partly:[101,235],thunder:[102],ophiuchus:[103],helmet:[105],chains:[106],no:[107,682,690,721,730,890,905,908,909,910,959,961,967,971,1272],entry:[107,959],shinto:[108],shrine:[108],church:[109],mountain:[110,404,946,948,969],on:[111,283,727,957,1026],ground:[111],fountain:[112,804],flag:[113,385,433,434,679,680,681,682,957,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],in:[113,264,545,546,795,826,885,912,962,1034,1210],hole:[113,794],golf:[113],ferry:[114],sailboat:[115],boat:[115,999],skier:[116],ice:[117,299,300,301,402],skate:[117],person:[118,558,574,907,911,912,913,914,915,1037],tent:[119,362],fuel:[120],pump:[120],fuelpump:[120],scissors:[121],heavy:[122,131,132,145,146,147,148,149,150,162,623],airplane:[123,1e3,1001,1002],envelope:[124,677,678],email:[124],raised:[125,126,680,681,807,809,912,1018],fist:[125,1019,1020],hand:[126,127,128,519,520,521,807,808,809,911,1017,1018,1022],victory:[127],v:[127],writing:[128],pencil:[129,666],pencil2:[129],nib:[130],multiplication:[132],x:[132,140],david:[134],sparkles:[135],eight:[136,137,775,787,1098],spoked:[136],asterisk:[136],pointed:[137,747],snowflake:[138],sparkle:[139],negative:[141,169,170,171,172,173],squared:[141,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196],ornament:[142,143,144,146],grey:[143,144],plus:[148],minus:[149],division:[150],curly:[152,153],loop:[152,153],then:[154,155],curving:[154,155],upwards:[154,157,630,645,703,704,729],heading:[154,155],downwards:[155,158,646,678,703,704],large:[159,160,162,752,753,754,755],o:[162,171,328],wavy:[163],dash:[163,613],part:[164,809],alternation:[164],ideograph:[165,166,186,187,188,189,190,191,192,193,194,195,196,197,198],congratulation:[165],congratulations:[165],secret:[166],mahjong:[167],tile:[167],red:[167,275,752,758,759,760,761,939],dragon:[167,454,495],playing:[168,372],card:[168,624,644,816,817],joker:[168],a:[169,605,860],b:[170],o2:[171],p:[172],parking:[172],ab:[173],cl:[174,1146],cool:[175],free:[176],id:[177,1206],new:[178,216,225],ng:[179,1269],ok:[180,521,906],sos:[181],vs:[183],katakana:[184,185],koko:[184],sa:[185,1298],cjk:[186,187,188,189,190,191,192,193,194,195,196],unified:[186,187,188,189,190,191,192,193,194,195,196],u7121:[186],u6307:[187],u7981:[188],"7a7a":[189],u7a7a:[189],u5408:[190],"6e80":[191],u6e80:[191],u6709:[192],u6708:[193],u7533:[194],u5272:[195],"55b6":[196],u55b6:[196],advantage:[197],accept:[198],cyclone:[199],foggy:[200],closed:[201,658,679,680,716,842,862,865,897],night:[202,208],stars:[202,231],sunrise:[203,204,206],over:[203,206],mountains:[203],cityscape:[205,409],at:[205,208,687,1112],dusk:[205],city:[205,206],sunset:[205,206],buildings:[206,408],rainbow:[207],bridge:[208],water:[209,448,964,965,978,1041],wave:[209,520,709],ocean:[209],volcano:[210],milky:[211],way:[211],earth:[212,213,214],globe:[212,213,214,215],europe:[212],africa:[212],americas:[213],asia:[214],australia:[214],meridians:[215],moon:[216,217,218,219,220,221,222,223,224,225,226,227,228,342],waxing:[217,219],first:[218,226,1049],quarter:[218,222,226,227],gibbous:[219,221],full:[220,228],waning:[221,223],last:[222,227],glowing:[230],star2:[230],shooting:[231],thermometer:[232,1010],mostly:[233],barely:[234],lightning:[238],tornado:[239],fog:[240],wind:[241,264,341],blowing:[241],dog:[242,466,499],hotdog:[242],taco:[243],burrito:[244],chestnut:[245],seedling:[246],evergreen:[247],tree:[247,248,249,329,336],deciduous:[248],palm:[249,1029],cactus:[250],pepper:[251],tulip:[252],cherry:[253],blossom:[253,257],rose:[254],hibiscus:[255],sunflower:[256],ear:[258,259,511],maize:[258],corn:[258],rice:[259,285,286,287,288,342],herb:[260],four:[261,771,783,1094],leaf:[261,262,263,264],clover:[261],maple:[262],fallen:[263],fluttering:[264],leaves:[264],mushroom:[265],tomato:[266],aubergine:[267],eggplant:[267],grapes:[268],melon:[269],watermelon:[270],tangerine:[271],lemon:[272],banana:[273],pineapple:[274],apple:[275,276],green:[276,599,660,1061],pear:[277],peach:[278],cherries:[279],strawberry:[280],hamburger:[281],slice:[282],pizza:[282],meat:[283],bone:[283],poultry:[284],leg:[284],cracker:[285],cooked:[287],curry:[288],steaming:[289],bowl:[289],ramen:[289],spaghetti:[290],bread:[291,1060],french:[292],fries:[292],roasted:[293],sweet:[293],potato:[293,1058],dango:[294],oden:[295],sushi:[296],fried:[297,312],shrimp:[297,1085],fish:[298,355,476,477],cake:[298,309,327],swirl:[298],design:[298],soft:[299],cream:[299,301],icecream:[299],shaved:[300],doughnut:[302],cookie:[303],chocolate:[304],candy:[305],lollipop:[306],custard:[307],honey:[308],pot:[308,311],shortcake:[309],bento:[310],food:[311,847,1062],stew:[311],cooking:[312],egg:[312,1064],fork:[313,322],knife:[313,322,742,825],teacup:[314],handle:[314],tea:[314],sake:[315],bottle:[315,321,323],cup:[315],wine:[316],glass:[316,317,713,714,1046,1065],cocktail:[317],tropical:[318,477],drink:[318],beer:[319,320],mug:[319],clinking:[320,1045],mugs:[320],beers:[320],baby:[321,481,482,563,569,976],plate:[322],popping:[323],cork:[323],champagne:[323],popcorn:[324],ribbon:[325,346,602],wrapped:[326],present:[326],gift:[326,602],birthday:[327],jack:[328],lantern:[328,430],christmas:[329,330,1035],father:[330],santa:[330],fireworks:[331],firework:[332],sparkler:[332],balloon:[333,617,618],party:[334],popper:[334],tada:[334],confetti:[335],tanabata:[336],flags:[337,340,385,433,434,957,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],pine:[338],decoration:[338,604],bamboo:[338],japanese:[339,419,431,566,567,748],dolls:[339],carp:[340],streamer:[340],chime:[341],viewing:[342],ceremony:[342],scene:[342],school:[343,427],satchel:[343],graduation:[344],cap:[344],mortar:[344],board:[344,364],military:[345],medal:[345,389,1049,1050,1051],reminder:[346],studio:[347],microphone:[347,356],level:[348],slider:[348],control:[349,982],knobs:[349],film:[350,698],frames:[350],admission:[351],tickets:[351],carousel:[352],horse:[352,391,459,497],ferris:[353],roller:[354],coaster:[354],fishing:[355],pole:[355,581],movie:[357],camera:[357,692,693,694],cinema:[358],headphone:[359],headphones:[359],artist:[360],palette:[360],art:[360],top:[361,729],hat:[361,527,1023],tophat:[361],circus:[362],ticket:[363],clapper:[364],performing:[365],arts:[365,1053],video:[366,694],game:[366,370],direct:[367],hit:[367],dart:[367],slot:[368],machine:[368,423,669],billiards:[369],"8ball":[369],die:[370],bowling:[371],flower:[372,619,1043],cards:[372],musical:[373,374,377,380],note:[373,820],multiple:[374],notes:[374],saxophone:[375],guitar:[376],trumpet:[378],violin:[379],score:[380],running:[381,387],shirt:[381,530],sash:[381],tennis:[382,403],racquet:[382,437],ski:[383],boot:[383,543],basketball:[384],hoop:[384],chequered:[385],checkered:[385],snowboarder:[386],runner:[387],surfer:[388],sports:[389],trophy:[390],racing:[391,397,398],american:[392],football:[392,393],rugby:[393],swimmer:[394],weight:[395],lifter:[395],golfer:[396],motorcycle:[397],car:[398,919,927,935,936,939,941],cricket:[399],bat:[399,1076],volleyball:[400],field:[401],hockey:[401,402],stick:[401,402],puck:[402],table:[403],paddle:[403],capped:[404],camping:[405],beach:[406],building:[407,410,411,416,418],construction:[407,564,955],house:[408,410,416,417],derelict:[410],classical:[411],desert:[412,413],island:[413],national:[414],park:[414],stadium:[415],garden:[417],office:[418,419,420],post:[419,420,957],european:[420,432],hospital:[421],bank:[422],automated:[423],teller:[423],atm:[423],hotel:[424,425],love:[425,585],convenience:[426],store:[426,428],department:[428],factory:[429],izakaya:[430],castle:[431,432],waving:[433,434,520],rosette:[435],label:[436],badminton:[437],shuttlecock:[437],bow:[438,907],amphora:[439],rat:[445],mouse:[446,490,813],mouse2:[446],ox:[447],buffalo:[448],cow:[449,491],cow2:[449],tiger:[450,492],tiger2:[450],leopard:[451],rabbit:[452,493],rabbit2:[452],cat:[453,494,892,893,894,895,896,897,898,899,900],cat2:[453],crocodile:[455],whale:[456,496],whale2:[456],snail:[457],snake:[458],racehorse:[459],ram:[460],goat:[461],sheep:[462],monkey:[463,498,908,909,910],rooster:[464],chicken:[465],dog2:[466],pig:[467,500,506],pig2:[467],boar:[468],elephant:[469],octopus:[470],spiral:[471,820,821],shell:[471],bug:[472],ant:[473],honeybee:[474],bee:[474],lady:[475],beetle:[475],blowfish:[478],turtle:[479],hatching:[480],chick:[480,481,482],front:[482,921],facing:[482,641,1019,1020],hatched:[482],bird:[483],penguin:[484],koala:[485],poodle:[486],dromedary:[487],camel:[487,488],bactrian:[488],dolphin:[489],flipper:[489],spouting:[496],frog:[501],hamster:[502],wolf:[503],bear:[504],panda:[505],nose:[506,512,921],paw:[507],prints:[507],feet:[507],chipmunk:[508],eyes:[509,837,840,842,846,849,861,862,865,892,895,897,904],eye:[510,864],mouth:[513,839,840,841,842,874,882,884,890,894,1008,1009],lips:[513],tongue:[514,863,864,865],backhand:[515,516,517,518],fisted:[519],facepunch:[519],punch:[519],thumbs:[522,523],"+1":[522],thumbsup:[522],"":[523],thumbsdown:[523],clapping:[524],hands:[524,525,552,553,554,912,915],clap:[524],open:[525,639,659,681,682,701,702,703,704,719,839,840,841,842,874,882,884,894],crown:[526],womans:[527,535,542,543],eyeglasses:[528],necktie:[529],t:[530],tshirt:[530],jeans:[531],dress:[532],kimono:[533],bikini:[534],clothes:[535],purse:[536],handbag:[537],pouch:[538],mans:[539],shoe:[539,540,541],athletic:[540],heeled:[541],heel:[541],sandal:[542],boots:[543],footprints:[544],bust:[545],silhouette:[545,546,826,834],busts:[546],boy:[547,551],girl:[548],man:[549,551,552,559,560,561,795,801,1034],woman:[550,551,552,556,562,906,1031],family:[551],holding:[552,553,554],couple:[552,590],two:[553,554,594,769,781,1092],men:[553],women:[554],police:[555,935,936,956],officer:[555],cop:[555],bunny:[556],ears:[556],dancers:[556],bride:[557],veil:[557],blond:[558],hair:[558],gua:[559],pi:[559],mao:[559],turban:[560],older:[561,562],worker:[564],princess:[565],ogre:[566],goblin:[567],ghost:[568],angel:[569],extraterrestrial:[570],alien:[570,571],monster:[571],space:[571],invader:[571],imp:[572,844],desk:[574],guardsman:[575],dancer:[576],lipstick:[577],nail:[578],polish:[578],care:[578],massage:[579],haircut:[580],barber:[581],syringe:[582],pill:[583],kiss:[584,588,860],ring:[586,809],gem:[587],stone:[587],couplekiss:[588],bouquet:[589],wedding:[591],beating:[592],heartbeat:[592],broken:[593],sparkling:[595],growing:[596],heartpulse:[596],cupid:[597],blue:[598,661,753,755,757,941],yellow:[600],purple:[601],revolving:[603,956],shape:[605],dot:[605,747],inside:[605],electric:[606,712,738],light:[606,924,953,954,956],bulb:[606],anger:[607,828],bomb:[608],sleeping:[609,888,987],zzz:[609],collision:[610],boom:[610],splashing:[611],sweat:[611,841,855,884],droplet:[612],pile:[614],poo:[614],hankey:[614],poop:[614],shit:[614],flexed:[615],biceps:[615],muscle:[615],dizzy:[616,889],speech:[617,827],thought:[618],hundred:[620],points:[620],money:[621,629,1009],bag:[621],moneybag:[621],currency:[622],exchange:[622],dollar:[623,626],credit:[624],banknote:[625,626,627,628],yen:[625,630],euro:[627],pound:[628],wings:[629],chart:[630,645,646,647],trend:[630,645,646],seat:[631],personal:[632],computer:[632,811],briefcase:[633],minidisc:[634],floppy:[635],disk:[635],optical:[636],disc:[636],cd:[636,1140],dvd:[637],file:[638,639,817,818],folder:[638,639],page:[640,641],curl:[640],calendar:[642,643,821],date:[642],tear:[643],off:[643,689],clipboard:[648],pushpin:[649,650],round:[650],paperclip:[651],straight:[652],ruler:[652,653],triangular:[653,957],bookmark:[654,722],tabs:[654],ledger:[655],notebook:[656,657],decorative:[657],cover:[657],book:[658,659,660,661,662],orange:[662,754,756],books:[663],name:[664],badge:[664],scroll:[665],memo:[666],receiver:[667],pager:[668],fax:[669],satellite:[670,1003],antenna:[670,691],public:[671],address:[671],loudspeaker:[671],cheering:[672],megaphone:[672],mega:[672],outbox:[673],tray:[673,674],inbox:[674],package:[675],e:[676],mail:[676,681,682],incoming:[677],above:[678,725,726,727,728,729],mailbox:[679,680,681,682],lowered:[679,682],postbox:[683],postal:[684],horn:[684],newspaper:[685,824],mobile:[686,687,689,690],iphone:[686],calling:[687],vibration:[688],mode:[688],phones:[690],bars:[691],signal:[691],strength:[691],flash:[693],television:[695],tv:[695,1333],radio:[696,724],videocassette:[697],vhs:[697],projector:[698],prayer:[699],beads:[699],twisted:[700],arrows:[700,701,702,703,704],clockwise:[701,702,703],repeat:[701,702],one:[702,709,730,768,780,911,1091],overlay:[702],anticlockwise:[704],counterclockwise:[704],low:[705],brightness:[705,706],speaker:[707,708,709,710],cancellation:[707,721],stroke:[707,721],mute:[707],sound:[709,710],three:[710,770,782,813,1093],waves:[710],loud:[710],battery:[711],plug:[712],magnifying:[713,714],mag:[713,714],lock:[715,716,718,719],ink:[715],pen:[715,803,804],key:[716,717,823,1088],unlock:[719],bell:[720,721,989],link:[723],button:[724,750,751,813],back:[725,1018],end:[726],soon:[728],under:[730],eighteen:[730],underage:[730],keycap:[731,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099],ten:[731,777,789],input:[732,733,734,735,736],letters:[732,733,736,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],abcd:[732,733],numbers:[734],abc:[736],fire:[737,934],torch:[738],flashlight:[738],wrench:[739,994],nut:[741],bolt:[741],hocho:[742],pistol:[743],gun:[743],microscope:[744],telescope:[745],crystal:[746],six:[747,773,785,1096],middle:[747,808,809,1022],beginner:[748],trident:[749],emblem:[749],om:[762,1277],dove:[763],kaaba:[764],mosque:[765],synagogue:[766],menorah:[767],nine:[767,776,788,1099],branches:[767],oclock:[768,769,770,771,772,773,774,775,776,777,778,779],clock1:[768],clock2:[769],clock3:[770],clock4:[771],five:[772,784,1095],clock5:[772],clock6:[773],seven:[774,786,1097],clock7:[774],clock8:[775],clock9:[776],clock10:[777],eleven:[778,790],clock11:[778],twelve:[779,791],clock12:[779],thirty:[780,781,782,783,784,785,786,787,788,789,790,791],clock130:[780],clock230:[781],clock330:[782],clock430:[783],clock530:[784],clock630:[785],clock730:[786],clock830:[787],clock930:[788],clock1030:[789],clock1130:[790],clock1230:[791],candle:[792],mantelpiece:[793],business:[795],levitating:[795],sleuth:[796],or:[796],spy:[796],dark:[797],sunglasses:[797,850],spider:[798,799],web:[799],joystick:[800],dancing:[801],linked:[802],paperclips:[802],ballpoint:[803],paintbrush:[805],crayon:[806],fingers:[807,809,1022],splayed:[807],reversed:[808],finger:[808],extended:[808],between:[809],spock:[809],desktop:[811],printer:[812],trackball:[814],frame:[815],picture:[815],dividers:[816],cabinet:[818],wastebasket:[819],pad:[820,821],compression:[822],old:[823],rolled:[824],dagger:[825],speaking:[826],head:[826,1013],bubble:[827,828],world:[830],map:[830],mount:[831],fuji:[831],tokyo:[832],tower:[832],statue:[833],liberty:[833],japan:[834],moyai:[835],grinning:[836,837,892],grin:[837],tears:[838,893],joy:[838,893],smiley:[839,894],smile:[840,841,892,896],cold:[841,855,884],tightly:[842,865],laughing:[842,1026],satisfied:[842],halo:[843],innocent:[843],horns:[844,1016],winking:[845,864],wink:[845],blush:[846],savouring:[847],delicious:[847],yum:[847],relieved:[848,873],shaped:[849,895],smirking:[851],smirk:[851,896],neutral:[852],expressionless:[853],unamused:[854],pensive:[856],confused:[857],confounded:[858],kissing:[859,860,861,862,897],throwing:[860],stuck:[863,864,865],out:[863,864,865],disappointed:[866,873],worried:[867],angry:[868],pouting:[869,898,914],rage:[869],crying:[870,881,899],cry:[870],persevering:[871],persevere:[871],look:[872],triumph:[872],but:[873],anguished:[875],fearful:[876],weary:[877,900],sleepy:[878],tired:[879],grimacing:[880],loudly:[881],sob:[881],hushed:[883],screaming:[885],fear:[885],scream:[885,900],astonished:[886],flushed:[887],medical:[891],mask:[891],wry:[896],slightly:[901,902],upside:[903],rolling:[904,1026],good:[905],gesture:[905,906],bowing:[907],deeply:[907],see:[908],evil:[908,909,910],hear:[909],speak:[910],happy:[911],raising:[911,912],both:[912],celebration:[912],folded:[915],pray:[915],rocket:[916],helicopter:[917],steam:[918],locomotive:[918],railway:[919,946,947,998],speed:[920,921],train:[920,921,922,927],bullettrain:[920,921],side:[920],bullet:[921],train2:[922],metro:[923],rail:[924],station:[925],tram:[926,927],bus:[928,929,931],oncoming:[929,936,938,940],trolleybus:[930],busstop:[931],minibus:[932],ambulance:[933],engine:[934],taxi:[937,938],automobile:[939,940],recreational:[941],vehicle:[941],delivery:[942],truck:[942],articulated:[943],lorry:[943],tractor:[944],monorail:[945],suspension:[947],cableway:[948],aerial:[949],tramway:[949],ship:[950,1004],rowboat:[951],speedboat:[952],horizontal:[953],traffic:[953,954],cars:[956],rotating:[956],door:[958],smoking:[960,961],put:[962],litter:[962,963],its:[962],place:[962,991,1049,1050,1051],do:[963,1163],not:[963],potable:[964,965],non:[965],bicycle:[966],bike:[966],bicycles:[967],bicyclist:[968,969],pedestrian:[970],walking:[970],pedestrians:[971],children:[972],crossing:[972],mens:[973],womens:[974],restroom:[975],toilet:[977],closet:[978],wc:[978],shower:[979],bath:[980],bathtub:[981],passport:[982],customs:[983],baggage:[984],claim:[984],luggage:[985],couch:[986],lamp:[986],accommodation:[987],shopping:[988,993],bags:[988],bellhop:[989],bed:[990],worship:[991],octagonal:[992],trolley:[993],shield:[995],oil:[996],drum:[996,1044],motorway:[997],track:[998],motor:[999,1006],departure:[1001],arriving:[1002],passenger:[1004],scooter:[1005,1006],canoe:[1007],zipper:[1008],nerd:[1011],thinking:[1012],bandage:[1013],robot:[1014],hugging:[1015],the:[1016,1026],call:[1017],me:[1017,1245],handshake:[1021],cowboy:[1023],clown:[1024],nauseated:[1025],floor:[1026],drooling:[1027],lying:[1028],sneezing:[1030],pregnant:[1031],selfie:[1032],prince:[1033],tuxedo:[1034],mother:[1035],shrug:[1036],doing:[1037],cartwheel:[1037],juggling:[1038],fencer:[1039],wrestlers:[1040],polo:[1041],handball:[1042],wilted:[1043],drumsticks:[1044],glasses:[1045],tumbler:[1046],spoon:[1047],goal:[1048],net:[1048],second:[1050],third:[1051],boxing:[1052],glove:[1052],martial:[1053],uniform:[1053],croissant:[1054],avocado:[1055],cucumber:[1056],bacon:[1057],carrot:[1059],baguette:[1060],salad:[1061],shallow:[1062],pan:[1062],stuffed:[1063],flatbread:[1063],milk:[1065],peanuts:[1066],kiwifruit:[1067],pancakes:[1068],crab:[1069],lion:[1070],scorpion:[1071],turkey:[1072],unicorn:[1073],eagle:[1074],duck:[1075],shark:[1077],owl:[1078],fox:[1079],butterfly:[1080],deer:[1081],gorilla:[1082],lizard:[1083],rhinoceros:[1084],squid:[1086],cheese:[1087],wedge:[1087],hash:[1088],zero:[1090],regional:[1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],indicator:[1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357],ac:[1100],ad:[1101],ae:[1102],af:[1103],ag:[1104],ai:[1105],al:[1106],am:[1107],ao:[1108],aq:[1109],ar:[1110],as:[1111],au:[1113],aw:[1114],ax:[1115],az:[1116],ba:[1117],bb:[1118],bd:[1119],be:[1120],bf:[1121],bg:[1122],bh:[1123],bi:[1124],bj:[1125],bl:[1126],bm:[1127],bn:[1128],bo:[1129],bq:[1130],br:[1131],bs:[1132],bt:[1133],bv:[1134],bw:[1135],by:[1136],bz:[1137],ca:[1138],cc:[1139],cf:[1141],cg:[1142],ch:[1143],ci:[1144],ck:[1145],cm:[1147],cn:[1148],co:[1149],cp:[1150],cr:[1151],cu:[1152],cv:[1153],cw:[1154],cx:[1155],cy:[1156],cz:[1157],dg:[1159],dj:[1160],dk:[1161],dm:[1162],dz:[1164],ea:[1165],ec:[1166],ee:[1167],eg:[1168],eh:[1169],er:[1170],es:[1171],et:[1172],eu:[1173],fi:[1174],fj:[1175],fk:[1176],fm:[1177],fo:[1178],fr:[1179],ga:[1180],gb:[1181],uk:[1181],gd:[1182],ge:[1183],gf:[1184],gg:[1185],gh:[1186],gi:[1187],gl:[1188],gm:[1189],gn:[1190],gp:[1191],gq:[1192],gr:[1193],gs:[1194],gt:[1195],gu:[1196],gw:[1197],gy:[1198],hk:[1199],hm:[1200],hn:[1201],hr:[1202],ht:[1203],hu:[1204],ic:[1205],ie:[1207],il:[1208],im:[1209],io:[1211],iq:[1212],ir:[1213],is:[1214],it:[1215],je:[1216],jm:[1217],jo:[1218],jp:[1219],ke:[1220],kg:[1221],kh:[1222],ki:[1223],km:[1224],kn:[1225],kp:[1226],kr:[1227],kw:[1228],ky:[1229],kz:[1230],la:[1231],lb:[1232],lc:[1233],li:[1234],lk:[1235],lr:[1236],ls:[1237],lt:[1238],lu:[1239],lv:[1240],ly:[1241],ma:[1242],mc:[1243],md:[1244],mf:[1246],mg:[1247],mh:[1248],mk:[1249],ml:[1250],mm:[1251],mn:[1252],mo:[1253],mp:[1254],mq:[1255],mr:[1256],ms:[1257],mt:[1258],mu:[1259],mv:[1260],mw:[1261],mx:[1262],my:[1263],mz:[1264],na:[1265],nc:[1266],ne:[1267],nf:[1268],ni:[1270],nl:[1271],np:[1273],nr:[1274],nu:[1275],nz:[1276],pa:[1278],pe:[1279],pf:[1280],pg:[1281],ph:[1282],pk:[1283],pl:[1284],pm:[1285],pn:[1286],pr:[1287],ps:[1288],pt:[1289],pw:[1290],py:[1291],qa:[1292],re:[1293],ro:[1294],rs:[1295],ru:[1296],rw:[1297],sb:[1299],sc:[1300],sd:[1301],se:[1302],sg:[1303],sh:[1304],si:[1305],sj:[1306],sk:[1307],sl:[1308],sm:[1309],sn:[1310],so:[1311],sr:[1312],ss:[1313],st:[1314],sv:[1315],sx:[1316],sy:[1317],sz:[1318],ta:[1319],tc:[1320],td:[1321],tf:[1322],tg:[1323],th:[1324],tj:[1325],tk:[1326],tl:[1327],tn:[1329],to:[1330],tr:[1331],tt:[1332],tw:[1334],tz:[1335],ua:[1336],ug:[1337],um:[1338],us:[1340],uy:[1341],uz:[1342],va:[1343],vc:[1344],ve:[1345],vg:[1346],vi:[1347],vn:[1348],vu:[1349],wf:[1350],ws:[1351],xk:[1352],ye:[1353],yt:[1354],za:[1355],zm:[1356],zw:[1357]},modifiers:["neutral","1f3fb","1f3fc","1f3fd","1f3fe","1f3ff"],skinTones:{"1f3fb":"skin-tone-2","1f3fc":"skin-tone-3","1f3fd":"skin-tone-4","1f3fe":"skin-tone-5","1f3ff":"skin-tone-6"}}},function(e,n,o){var f=o(112);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker ul.skin-tones {\n  position: absolute;\n  right: 0; }\n  .emoji-picker ul.skin-tones.spread li {\n    opacity: 1; }\n  .emoji-picker ul.skin-tones li {\n    position: absolute;\n    top: 16px;\n    right: 20px;\n    z-index: 3;\n    padding: 1px;\n    border-radius: 3px;\n    opacity: 0;\n    transition: transform .4s, opacity .3s; }\n    .emoji-picker ul.skin-tones li.selected {\n      opacity: 1;\n      transform: scale(1.5); }\n    .emoji-picker ul.skin-tones li.neutral a {\n      background-color: #ffe082; }\n    .emoji-picker ul.skin-tones li.m1f3fb a {\n      background-color: #ffe0b2; }\n    .emoji-picker ul.skin-tones li.m1f3fc a {\n      background-color: #ffccbc; }\n    .emoji-picker ul.skin-tones li.m1f3fe a {\n      background-color: #795548; }\n    .emoji-picker ul.skin-tones li.m1f3ff a {\n      background-color: #5d4037; }\n    .emoji-picker ul.skin-tones li.m1f3fd a {\n      background-color: #ca7e55; }\n    .emoji-picker ul.skin-tones li a {\n      display: block;\n      height: 10px;\n      width: 10px;\n      border-radius: 2px; }\n      .emoji-picker ul.skin-tones li a img {\n        z-index: 2;\n        height: 10px;\n        width: 10px; }\n",""])},function(e,n){e.exports=function(e){var n="undefined"!=typeof window&&window.location;if(!n)throw new Error("fixUrls requires window.location");if(!e||"string"!=typeof e)return e;var o=n.protocol+"//"+n.host,f=o+n.pathname.replace(/\/[^\/]*$/,"/");return e.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi,function(e,n){var t=n.trim().replace(/^"(.*)"$/,function(e,n){return n}).replace(/^'(.*)'$/,function(e,n){return n});if(/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(t))return e;var c;return c=0===t.indexOf("//")?t:0===t.indexOf("/")?o+t:f+t.replace(/^\.\//,""),"url("+JSON.stringify(c)+")"})}},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}function t(e){var n=e.onClick;return r.default.createElement("nav",null,u.categories.map(function(e,o){return r.default.createElement("a",{className:e.name,key:o,onClick:function(e){return n(e,o)}},r.default.createElement("i",null),r.default.createElement("span",{className:"hidden"},e.name))}))}Object.defineProperty(n,"__esModule",{value:!0});var c=o(4),r=f(c),a=o(5),i=f(a),u=o(1);o(115),t.propTypes={onClick:i.default.func.isRequired},n.default=t},function(e,n,o){var f=o(116);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker nav ~ .bar-wrapper {\n  margin-top: 45px;\n  border-top: 1px solid #eeeeee; }\n\n.emoji-picker nav {\n  flex-direction: row;\n  min-height: 45px;\n  background-color: #ffffff;\n  display: flex;\n  justify-content: space-between;\n  position: absolute;\n  z-index: 1;\n  box-sizing: border-box;\n  left: 10px;\n  right: 10px; }\n  .emoji-picker nav a {\n    position: relative;\n    transition: filter .2s; }\n    .emoji-picker nav a:hover:after {\n      opacity: 1;\n      background-color: #a5d6a7; }\n    .emoji-picker nav a:hover i {\n      opacity: 1; }\n    .emoji-picker nav a i {\n      content: '';\n      display: block;\n      height: 45px;\n      width: 20px;\n      background-size: 18px auto;\n      background-position: 50% 50%;\n      background-repeat: no-repeat;\n      opacity: .4;\n      transition: opacity .3s;\n      transition-delay: .2s; }\n    .emoji-picker nav a.people i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 33 33'%3E%3Cpath d='M16.5 33C7.402 33 0 25.598 0 16.5S7.402 0 16.5 0 33 7.402 33 16.5 25.598 33 16.5 33zm0-32C7.953 1 1 7.953 1 16.5S7.953 32 16.5 32 32 25.047 32 16.5 25.047 1 16.5 1z'/%3E%3Cpath d='M16.5 33a16.38 16.38 0 0 1-9.549-3.06.5.5 0 1 1 .116-.876c4.146-1.535 4.815-2.781 4.815-5.169 0-.631-.142-.838-.398-1.214-.339-.494-.803-1.171-1.129-2.939-.048-.254-.089-.274-.316-.384-.606-.292-1.163-.712-1.309-2.628 0-.928.32-1.441.585-1.708-.058-.33-.153-.899-.242-1.519-.453-2.777-.473-6.178 3.433-7.759 3.404-1.38 6.121-.626 6.974.273.604.019 2.162.177 3.246 1.438 1.668 1.94 1.137 6.363.955 7.562.266.261.589.767.589 1.675-.146 1.954-.703 2.375-1.31 2.666-.228.11-.269.129-.316.384-.326 1.768-.789 2.445-1.128 2.939-.257.375-.398.583-.398 1.214 0 2.388.669 3.634 4.815 5.169a.498.498 0 0 1 .116.876A16.38 16.38 0 0 1 16.5 33zm-8.183-3.349C10.779 31.191 13.589 32 16.5 32s5.721-.809 8.183-2.349c-3.474-1.426-4.565-2.864-4.565-5.755 0-.941.278-1.348.573-1.779.304-.444.682-.996.971-2.556.139-.754.576-.964.865-1.103.311-.149.631-.303.744-1.803-.001-.764-.344-.972-.358-.98a.533.533 0 0 1-.264-.537c.248-1.329.656-5.474-.681-7.031-.913-1.062-2.352-1.091-2.626-1.08-.046-.004-.091-.005-.134-.016-.13-.033-.35-.146-.417-.262-.272-.466-2.641-1.403-5.91-.08-3.231 1.308-3.238 4.112-2.819 6.682.138.957.289 1.784.29 1.788a.5.5 0 0 1-.283.544c.003 0-.339.209-.339 1.008.112 1.461.433 1.616.743 1.765.289.139.727.349.866 1.103.288 1.56.666 2.112.97 2.556.296.431.574.838.574 1.779 0 2.894-1.091 4.332-4.566 5.757z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.foods i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M337.502 61.244c-46.267-19.341-98.094-21.573-145.933-6.282-5.497 1.758-8.528 7.638-6.772 13.134 1.758 5.497 7.64 8.528 13.134 6.772 43.115-13.782 89.819-11.772 131.51 5.657 1.317.55 2.682.811 4.026.811 4.087 0 7.969-2.415 9.644-6.422 2.228-5.324-.284-11.445-5.609-13.67zM368.323 77.252a11.31 11.31 0 0 0-.375-.239c-4.925-3.009-11.356-1.458-14.364 3.467-2.984 4.884-1.483 11.249 3.346 14.29a10.398 10.398 0 0 0 5.587 1.626c3.377 0 6.69-1.633 8.704-4.654 3.201-4.801 1.904-11.289-2.898-14.49zM447.293 161.884c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.349-1.02 7.389-3.06l14.629-14.629c4.081-4.081 4.081-10.698.001-14.778zM83.999 214.617c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.349-1.02 7.39-3.06l14.629-14.629c4.081-4.082 4.081-10.698 0-14.778zM115.508 100.235c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.348-1.02 7.39-3.06l14.629-14.629c4.081-4.081 4.081-10.698 0-14.778zM386.754 116.24h-20.688c-5.771 0-10.449 4.678-10.449 10.449s4.678 10.449 10.449 10.449h20.688c5.771 0 10.449-4.678 10.449-10.449s-4.678-10.449-10.449-10.449zM151.326 161.908l-14.618-14.618c-4.081-4.08-10.698-4.081-14.778 0s-4.08 10.698 0 14.778l14.618 14.618a10.413 10.413 0 0 0 7.388 3.06c2.674 0 5.349-1.02 7.39-3.06 4.081-4.081 4.081-10.698 0-14.778zM411.753 229.241l-14.618-14.617c-4.08-4.081-10.696-4.08-14.777 0s-4.08 10.697 0 14.777l14.618 14.617c2.041 2.041 4.715 3.06 7.388 3.06s5.348-1.021 7.388-3.06c4.083-4.08 4.082-10.696.001-14.777zM318.326 126.607l-14.617-14.617c-4.081-4.08-10.698-4.081-14.778 0s-4.08 10.698 0 14.778l14.617 14.617a10.414 10.414 0 0 0 7.388 3.061 10.42 10.42 0 0 0 7.39-3.061c4.08-4.081 4.08-10.698 0-14.778zM195.194 97.387c-3.904-4.25-10.515-4.528-14.763-.622l-15.22 13.989c-4.249 3.905-4.527 10.515-.622 14.763a10.42 10.42 0 0 0 7.696 3.378c2.528 0 5.063-.911 7.068-2.756l15.22-13.989c4.248-3.905 4.526-10.515.621-14.763zM256.153 145.241H255.865c-5.762 0-10.437 4.665-10.449 10.429-.011 5.771 4.658 10.457 10.429 10.469H256.134c5.762 0 10.438-4.664 10.449-10.429.01-5.771-4.659-10.458-10.43-10.469z'/%3E%3Cpath d='M437.019 74.981C388.668 26.628 324.38 0 256 0S123.332 26.628 74.981 74.981C26.629 123.333 0 187.62 0 256c0 68.38 26.628 132.668 74.981 181.019C123.333 485.371 187.62 512 256 512c68.38 0 132.668-26.628 181.019-74.981C485.371 388.667 512 324.38 512 256s-26.628-132.668-74.981-181.019zM256 491.102c-94.256 0-175.718-55.763-213.173-136.024 6.781-.56 13.126-3.458 18.112-8.35 5.756-5.647 9.057-13.495 9.057-21.531v-9.364c0-7.449 6.027-13.624 13.435-13.767 3.561-.079 6.976 1.322 9.617 3.913 2.77 2.718 4.359 6.484 4.359 10.332v23.709c0 18.754 15.222 34.302 33.932 34.66.221.004.442.006.664.006 8.973 0 17.47-3.499 23.989-9.895 6.751-6.623 10.623-15.826 10.623-25.25v-18.215c20.172 27.524 52.723 45.432 89.384 45.432 52.209 0 96.09-36.312 107.73-85.007a10.027 10.027 0 0 1 2.18 6.23v25.773c0 19.673 15.968 35.984 35.596 36.361.233.004.464.006.696.006 9.409 0 18.321-3.671 25.161-10.38 7.086-6.951 11.149-16.61 11.149-26.5v-24.856c0-2.83 1.17-5.6 3.21-7.602 1.927-1.889 4.429-2.882 6.986-2.854 5.403.104 9.8 4.612 9.8 10.05v2.721c0 14.409 10.071 26.69 23.526 30.04C453.848 418.996 363.189 491.102 256 491.102zm223.405-200.399v-2.721c0-16.741-13.591-30.624-30.297-30.944-8.235-.159-16.057 2.978-22.022 8.829-6.021 5.906-9.473 14.113-9.473 22.52v24.856c0 4.314-1.782 8.536-4.886 11.582-2.97 2.912-6.846 4.462-10.82 4.397-8.326-.16-15.099-7.098-15.099-15.468v-25.773c0-13.154-8.392-24.538-20.091-28.971.027-1.001.043-2.004.043-3.011 0-46.06-29.007-87.788-72.182-103.836-5.411-2.01-11.425.745-13.434 6.154-2.01 5.409.745 11.424 6.154 13.434 35.027 13.021 58.562 46.877 58.562 84.248 0 49.549-40.312 89.861-89.861 89.861-49.549 0-89.861-40.312-89.861-89.861 0-37.372 23.535-71.228 58.565-84.246 5.409-2.01 8.164-8.026 6.154-13.434s-8.022-8.165-13.434-6.154C174.248 168.21 145.239 209.938 145.239 256a110.22 110.22 0 0 0 7.085 38.971 30.145 30.145 0 0 0-6.607 18.808v25.763c0 3.848-1.589 7.614-4.359 10.332-2.642 2.591-6.036 3.973-9.617 3.913-7.407-.142-13.434-6.317-13.434-13.766v-23.709c0-9.424-3.872-18.627-10.623-25.251-6.681-6.554-15.435-10.081-24.652-9.889-18.71.358-33.932 15.907-33.932 34.66v9.364c0 2.461-1.019 4.871-2.794 6.613-1.668 1.635-3.808 2.506-6.034 2.47-3.374-.065-6.387-2.139-7.733-5.21-7.543-23.011-11.64-47.569-11.64-73.07C20.898 126.365 126.365 20.898 256 20.898S491.102 126.365 491.102 256c0 15.182-1.464 30.026-4.227 44.414-4.281-1.138-7.47-5.083-7.47-9.711z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.nature i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 470'%3E%3Cpath d='M401.17 68.83C356.784 24.444 297.771 0 235 0S113.216 24.444 68.83 68.83 0 172.229 0 235s24.444 121.784 68.83 166.17S172.229 470 235 470s121.784-24.444 166.17-68.83S470 297.771 470 235s-24.444-121.784-68.83-166.17zM235 455c-121.309 0-220-98.691-220-220S113.691 15 235 15s220 98.691 220 220-98.691 220-220 220z'/%3E%3Cpath d='M382.5 173.979c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM322.5 135.459c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM117.5 173.979c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM436.826 253.173a7.5 7.5 0 0 0-5.443-2.6c-12.664-.4-24.343-7.548-32.041-19.608a7.5 7.5 0 0 0-12.643-.001c-7.974 12.489-20.074 19.652-33.2 19.652-13.089 0-25.177-7.164-33.162-19.656a7.502 7.502 0 0 0-12.635-.004c-8 12.494-20.098 19.66-33.192 19.66-13.098 0-25.189-7.164-33.175-19.656a7.5 7.5 0 0 0-12.64.004c-7.974 12.489-20.069 19.652-33.187 19.652-13.098 0-25.19-7.164-33.176-19.656a7.502 7.502 0 0 0-12.635-.004c-8 12.494-20.098 19.66-33.191 19.66-13.099 0-25.19-7.164-33.175-19.655a7.5 7.5 0 0 0-12.64.004c-7.699 12.061-19.389 19.207-32.07 19.608a7.494 7.494 0 0 0-5.443 2.6 7.497 7.497 0 0 0-1.769 5.767c5.786 49.506 29.545 95.215 66.901 128.706C135.964 421.407 184.509 440 235 440c45.241 0 88.17-14.518 124.145-41.982a7.498 7.498 0 0 0 1.41-10.512 7.496 7.496 0 0 0-10.512-1.41C316.705 411.547 276.924 425 235 425c-93.882 0-173.276-68.424-187.68-160.366 11.265-2.217 21.561-8.215 29.707-17.284 10.49 11.584 24.673 18.267 39.476 18.267 14.808 0 29.002-6.691 39.505-18.291 10.493 11.6 24.685 18.291 39.498 18.291 14.828 0 29.022-6.689 39.511-18.284 10.493 11.595 24.682 18.284 39.491 18.284 14.808 0 29.002-6.691 39.505-18.291 10.493 11.6 24.679 18.291 39.485 18.291 14.826 0 29.018-6.681 39.505-18.264 8.14 9.065 18.422 15.061 29.671 17.278-6.044 38.177-24.008 74.246-51.068 102.269a7.5 7.5 0 1 0 10.791 10.419c31.08-32.185 51.038-74.226 56.198-118.38a7.495 7.495 0 0 0-1.769-5.766z'/%3E%3Cpath d='M289.513 310.616c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-10zM358.49 280.616h-10c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5zM111.503 280.616c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-10zM235 191.25c30.327 0 55-24.673 55-55s-24.673-55-55-55-55 24.673-55 55 24.673 55 55 55zm0-95c22.056 0 40 17.944 40 40s-17.944 40-40 40-40-17.944-40-40 17.944-40 40-40z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.activity i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 0C14.355 0 0 14.355 0 32s14.355 32 32 32 32-14.355 32-32S49.645 0 32 0zm29.624 36.731l-3.885-6.439 2.681-7.88a29.867 29.867 0 0 1 1.204 14.319zm-7.558 15.567a.994.994 0 0 0-.408-.02L43.98 53.83a.993.993 0 0 0-.123-.345l-5.502-9.17 8.896-13.7h8.428a.992.992 0 0 0 .105.312l5.236 8.678a29.956 29.956 0 0 1-6.954 12.693zm-10.085 3.557l7.688-1.232a29.958 29.958 0 0 1-11.706 6.296l4.018-5.064zM12.65 9.1a29.858 29.858 0 0 1 18.628-7.082.982.982 0 0 0 .24.376l5.525 5.214-2.185 8.156-14.237 5.465c-.052-.042-.093-.094-.154-.126l-8.87-4.701L12.65 9.1zm25.736-2.976l-4.283-4.042a29.763 29.763 0 0 1 10.989 2.931l-6.706 1.111zM21.93 38.737l-.816-15.554L35.655 17.6l9.803 12.106-8.483 13.063-15.045-4.032zm37.375-19.141c-.031.054-.072.098-.093.159l-3.015 8.86h-9.048L36.882 15.937l2.113-7.887 8.27-1.371a.979.979 0 0 0 .453-.218 30.2 30.2 0 0 1 11.587 13.135zm-48.994-8.289l-.802 5.561-5.349 3.975a30.035 30.035 0 0 1 6.151-9.536zm-7.255 12.82c.044-.023.09-.037.131-.068l7.737-5.751 8.158 4.323.888 16.936c.002.025.013.048.016.073l-7.71 7.629c-.066.065-.105.145-.149.222L4.734 44.32c-.028-.012-.057-.009-.085-.018A29.822 29.822 0 0 1 2 32c0-2.725.372-5.362 1.056-7.873zm3.022 22.945l5.415 2.322 4.141 7.729a30.222 30.222 0 0 1-9.556-10.051zm12.759 11.879c-.019-.064-.025-.131-.058-.192l-5.317-9.924c.076-.043.155-.08.22-.145l8.027-7.942 14.507 3.888 5.927 9.879c.05.083.11.154.178.217l-5.449 6.867c-1.587.26-3.213.401-4.872.401-4.72 0-9.186-1.099-13.163-3.049z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.objects i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58.153 58.153'%3E%3Cpath d='M40.076 29.153h-7.142a3.995 3.995 0 0 0-2.858-2.858V16.153a1 1 0 1 0-2 0v10.142c-1.72.447-3 1.999-3 3.858 0 2.206 1.794 4 4 4 1.858 0 3.411-1.28 3.858-3h7.142a1 1 0 1 0 0-2zm-11 3c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z'/%3E%3Cpath d='M50.188 9.764l4.096 4.096a1 1 0 0 0 1.414 0c3.167-3.166 3.167-8.319 0-11.485s-8.319-3.166-11.485 0a.997.997 0 0 0 0 1.414l4.561 4.561-1.699 1.699c-4.78-4.284-11.089-6.896-17.998-6.896s-13.218 2.612-17.998 6.896l-1.7-1.699 4.561-4.561a.997.997 0 0 0 0-1.414c-3.166-3.166-8.318-3.166-11.485 0s-3.167 8.319 0 11.485a1 1 0 0 0 1.414 0l4.096-4.096 1.676 1.676c-4.679 4.857-7.565 11.453-7.565 18.713 0 9.898 5.357 18.564 13.321 23.265l-3.028 3.028a.999.999 0 1 0 1.414 1.414l3.45-3.45c3.578 1.754 7.597 2.743 11.843 2.743s8.265-.989 11.843-2.743l3.45 3.45a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-3.028-3.028c7.964-4.701 13.321-13.367 13.321-23.265 0-7.26-2.886-13.856-7.565-18.713l1.677-1.676zm4.095-5.975c2.146 2.146 2.362 5.502.649 7.893L46.391 3.14a6.13 6.13 0 0 1 7.892.649zM3.22 11.681c-1.713-2.39-1.497-5.746.649-7.892s5.502-2.361 7.892-.649L3.22 11.681zm25.856 43.472c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.214 25-25 25z'/%3E%3Cpath d='M29.076 10.032a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1zM29.076 50.032a1 1 0 0 0-1 1v1a1 1 0 1 0 2 0v-1a1 1 0 0 0-1-1zM50.076 31.032h1a1 1 0 1 0 0-2h-1a1 1 0 1 0 0 2zM8.076 29.032h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2zM43.926 13.768l-.707.707a.999.999 0 1 0 1.414 1.414l.707-.707a.999.999 0 1 0-1.414-1.414zM13.52 44.174l-.707.707a.999.999 0 1 0 1.414 1.414l.707-.707a.999.999 0 1 0-1.414-1.414zM44.633 44.174a.999.999 0 1 0-1.414 1.414l.707.707a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-.707-.707zM14.227 13.768a.999.999 0 1 0-1.414 1.414l.707.707a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-.707-.707z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.places i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 470'%3E%3Cpath d='M401.17 68.83C356.784 24.444 297.771 0 235 0S113.216 24.444 68.83 68.83C24.444 113.215 0 172.229 0 235s24.444 121.785 68.83 166.17C113.216 445.556 172.229 470 235 470s121.784-24.444 166.17-68.83C445.556 356.785 470 297.771 470 235s-24.444-121.785-68.83-166.17zM235 455c-121.309 0-220-98.691-220-220S113.691 15 235 15s220 98.691 220 220-98.691 220-220 220z'/%3E%3Ccircle cx='235' cy='97.5' r='7.5'/%3E%3Cpath d='M437.56 242.365a7.501 7.501 0 0 0-5.467-2.365h-26.046v-22.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5V240H372.5v-52.5a7.5 7.5 0 0 0-3.525-6.36L292.5 133.343V97.5A7.5 7.5 0 0 0 285 90h-13.253C268.262 72.905 253.109 60 235 60s-33.262 12.905-36.747 30H185a7.5 7.5 0 0 0-7.5 7.5V130h-25v-22.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5V130H105a7.5 7.5 0 0 0-7.5 7.5v102.499l-59.593-.01a7.504 7.504 0 0 0-7.487 7.969c3.523 56.171 29.666 105.984 69.187 140.798.281.291.587.556.911.799 23.389 20.362 51.39 35.496 82.128 43.638.307.102.622.184.946.246A204.258 204.258 0 0 0 235 440c17.409 0 34.679-2.229 51.386-6.558a7.297 7.297 0 0 0 1.002-.262 203.842 203.842 0 0 0 50.574-20.966c30.222-17.629 55.631-42.86 73.479-72.965a7.5 7.5 0 0 0-12.902-7.65 189.49 189.49 0 0 1-26.039 34.299V255h51.438a188.457 188.457 0 0 1-12.616 50.728 7.499 7.499 0 0 0 4.156 9.758 7.498 7.498 0 0 0 9.758-4.157 203.511 203.511 0 0 0 14.342-63.359 7.499 7.499 0 0 0-2.018-5.605zM192.5 175h85v215h-85V175zm0-70H205a7.5 7.5 0 0 0 7.5-7.5c0-12.407 10.094-22.5 22.5-22.5s22.5 10.093 22.5 22.5a7.5 7.5 0 0 0 7.5 7.5h12.5v55h-85v-55zM46.059 254.99l51.441.009V307.5c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5V145h65v245H175c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h2.5v11.078c-24.056-7.668-46.091-20.018-65-35.997V337.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v28.458c-28.127-29.492-46.937-68.033-51.441-110.968zM192.5 420.179V405h85v15.106A187.644 187.644 0 0 1 235 425a189.427 189.427 0 0 1-42.5-4.821zm100-4.235V405h2.5c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-2.5V151.032l65 40.625v188.307a191.989 191.989 0 0 1-65 35.98z'/%3E%3Cpath d='M325 320a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 280a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 240a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 200a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM145 345a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 305a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 265a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 185a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 225a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM235 350a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 310a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 270a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 230a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 190a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM215 145h40c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-40c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.flags i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 502 502'%3E%3Cpath d='M428.484 73.516C381.076 26.108 318.044 0 251 0S120.924 26.108 73.516 73.516 0 183.956 0 251s26.108 130.076 73.516 177.484S183.956 502 251 502s130.076-26.108 177.484-73.516C475.892 381.076 502 318.044 502 251s-26.108-130.076-73.516-177.484zM283.829 39h58.868c58.354 25.338 104.274 74.079 125.849 134.317h-41.725a21.139 21.139 0 0 0-19.587 13.087 21.139 21.139 0 0 0 4.595 23.104l3.3 3.3c4.638 4.637 4.638 12.184 0 16.821a11.42 11.42 0 0 1-8.13 3.368 11.422 11.422 0 0 1-8.13-3.368l-7.969-7.969c-13.135-13.135-30.599-20.369-49.175-20.369h-6.397v-8.036c0-19.265-7.502-37.376-21.124-50.999l-9.952-9.952c-10.216-10.216-23.799-15.843-38.247-15.843h-19.931c-7.721 0-14.98 3.007-20.439 8.466l-5.17 5.169c-5.459 5.459-8.466 12.718-8.466 20.439a4.736 4.736 0 0 1-4.73 4.73h-8.66v-12.154c0-8.648 3.368-16.78 9.483-22.895l5.849-5.849c5.244-5.243 8.131-12.214 8.131-19.629V92.71c0-.394.32-.713.713-.713H320.5c12.407 0 22.5-10.093 22.5-22.5S332.907 47 320.5 47h-36.671c-2.206 0-4-1.794-4-4s1.794-4 4-4zm74.893 252.437l-5.452 5.484a155.066 155.066 0 0 0-22.913 29.41l-9.918 16.5-12.403 20.492a48.673 48.673 0 0 0-7.036 25.21v.615a.857.857 0 0 1-.856.856h-.004a8.78 8.78 0 0 1-6.247-2.586 8.776 8.776 0 0 1-2.589-6.25c0-12.58-4.899-24.407-13.794-33.303l-4.591-4.591c-6.947-6.947-10.773-16.183-10.773-26.007v-29.475c0-14.806-12.045-26.851-26.852-26.851H231.8c-8.349 0-15.142-6.792-15.142-15.142v-15.343c0-9.034 7.35-16.384 16.384-16.384h79.886l24.099 24.1c6.003 6.003 9.309 13.984 9.309 22.473v11.464c0 8.56 5.082 15.955 12.386 19.328zM20 251c0-9.444.583-18.752 1.69-27.902h30.619c10.153 0 19.698 3.954 26.876 11.133l8.781 8.78c7.527 7.527 17.534 11.672 28.179 11.672 5.65 0 10.962 2.2 14.957 6.195l.193.193c7.233 7.233 11.217 16.851 11.217 27.081v17.886c0 13.63-5.308 26.444-14.945 36.082l-19.15 19.15c-13.442 13.443-21.939 30.512-24.58 49.002C44.303 368.799 20 312.684 20 251zm231 231c-56.288 0-107.93-20.247-148.049-53.827v-5.423c0-17.881 6.963-34.693 19.607-47.337l19.15-19.15c13.415-13.416 20.803-31.252 20.803-50.224v-17.886c0-15.573-6.064-30.213-17.075-41.224l-.193-.192c-7.772-7.772-18.106-12.053-29.099-12.053a19.72 19.72 0 0 1-14.036-5.814l-8.781-8.781c-10.957-10.956-25.524-16.99-41.019-16.99h-27.3C47.126 98.635 140.047 20 251 20c7.743 0 15.396.39 22.946 1.138-8.316 3.774-14.117 12.151-14.117 21.862 0 13.234 10.766 24 24 24H320.5c1.378 0 2.5 1.122 2.5 2.5s-1.122 2.5-2.5 2.5h-97.713c-11.421 0-20.713 9.292-20.713 20.713v2.028a7.706 7.706 0 0 1-2.273 5.486l-5.85 5.85c-9.893 9.893-15.341 23.047-15.341 37.037v13.574c0 10.245 8.334 18.58 18.579 18.58h10.081c13.636 0 24.73-11.094 24.73-24.73 0-2.379.926-4.615 2.608-6.297l5.169-5.169c.203-.203.414-.393.632-.574.167.195.334.389.518.574l19.932 19.932c-3.833 3.911-3.813 10.186.068 14.068 1.953 1.953 4.512 2.929 7.071 2.929s5.119-.976 7.071-2.929l7-7c3.905-3.905 3.905-10.237 0-14.143l-15.45-15.45c8.875.156 17.197 3.677 23.489 9.97l9.953 9.952c9.844 9.844 15.266 22.934 15.266 36.856v.817H233.04c-20.062 0-36.384 16.322-36.384 36.384V245.8c0 19.377 15.765 35.142 35.142 35.142h3.493a6.86 6.86 0 0 1 6.852 6.851v29.475c0 15.167 5.906 29.425 16.63 40.15l4.591 4.591c5.118 5.118 7.937 11.923 7.937 19.161 0 7.705 3.001 14.948 8.451 20.396 5.446 5.443 12.685 8.44 20.384 8.44h.015C311.648 410 321 400.644 321 389.149v-.614a28.68 28.68 0 0 1 4.146-14.854l12.409-20.502a.226.226 0 0 1 .016-.026l9.928-16.517a135.064 135.064 0 0 1 19.955-25.613l11.147-11.213c4.428-4.455 5.731-11.08 3.319-16.879s-8.029-9.546-14.31-9.546a1.274 1.274 0 0 1-1.273-1.273v-11.464c0-13.832-5.386-26.835-15.167-36.616l-2.215-2.215c10.49 1.524 20.173 6.357 27.804 13.988l7.969 7.969c6.141 6.141 14.207 9.211 22.272 9.211s16.132-3.07 22.272-9.211c6.024-6.024 9.341-14.033 9.341-22.553 0-8.519-3.317-16.528-9.341-22.553l-3.3-3.3c-.198-.198-.567-.567-.26-1.308.307-.741.829-.741 1.109-.741h47.888C479.468 211.761 482 231.09 482 251c0 127.374-103.626 231-231 231z'/%3E%3Cpath d='M184 85c5.523 0 10-4.477 10-10V54.494c0-5.523-4.477-10-10-10s-10 4.477-10 10V75c0 5.523 4.477 10 10 10zM450.39 314.63c-5.176-1.93-10.935.702-12.863 5.877C408.652 397.961 333.692 450 251 450c-5.523 0-10 4.477-10 10s4.477 10 10 10c45.543 0 89.207-13.849 126.272-40.048 36.24-25.617 63.556-61.046 78.995-102.458 1.929-5.175-.702-10.934-5.877-12.864zM202.433 444.034a198.232 198.232 0 0 1-28.554-9.526c-5.092-2.144-10.954.249-13.096 5.339-2.142 5.09.249 10.954 5.339 13.096a218.202 218.202 0 0 0 31.445 10.491c.817.205 1.635.303 2.44.303 4.478 0 8.554-3.03 9.692-7.57 1.344-5.358-1.909-10.79-7.266-12.133z'/%3E%3C/svg%3E\"); }\n    .emoji-picker nav a.symbols i {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 490.4 490.4'%3E%3Cpath d='M229 381.2c4.4 4.4 10.1 6.8 16.3 6.8 6.2 0 12-2.4 16.3-6.8l96.3-96.3c15.7-15.7 24.4-36.6 24.4-58.7 0-22.2-8.6-43.1-24.3-58.8-15.7-15.7-36.6-24.3-58.7-24.3-20 0-38.9 7-54 19.9-15.1-13-34.1-20-54.1-20-22.2 0-43 8.6-58.7 24.3s-24.3 36.6-24.3 58.8 8.7 43 24.4 58.7l96.4 96.4zm-79.3-196.7c11.1-11.1 25.7-17.1 41.4-17.1s30.4 6.1 41.5 17.2l4 4c4.8 4.8 12.5 4.8 17.3 0l3.9-3.9c11.1-11.1 25.8-17.2 41.5-17.2 15.6 0 30.3 6.1 41.4 17.2 11.1 11.1 17.2 25.8 17.1 41.4 0 15.7-6.1 30.4-17.2 41.5l-95.3 95.3-95.5-95.5c-11.1-11.1-17.2-25.8-17.2-41.4 0-15.7 6.1-30.4 17.1-41.5z'/%3E%3Cpath d='M245.2 490.4c135.2 0 245.2-110 245.2-245.2S380.4 0 245.2 0 0 110 0 245.2s110 245.2 245.2 245.2zm0-465.9c121.7 0 220.7 99 220.7 220.7s-99 220.7-220.7 220.7-220.7-99-220.7-220.7 99-220.7 220.7-220.7z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker nav a:after {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  left: 0;\n  height: 2px;\n  border-radius: 5px;\n  background-color: #90caf9;\n  opacity: 0;\n  transition-delay: 1s;\n  transition: opacity .4s, background .2s; }\n\n.emoji-picker.people nav .people i {\n  opacity: 1; }\n\n.emoji-picker.people nav .people:after {\n  opacity: 1; }\n\n.emoji-picker.foods nav .foods i {\n  opacity: 1; }\n\n.emoji-picker.foods nav .foods:after {\n  opacity: 1; }\n\n.emoji-picker.nature nav .nature i {\n  opacity: 1; }\n\n.emoji-picker.nature nav .nature:after {\n  opacity: 1; }\n\n.emoji-picker.activity nav .activity i {\n  opacity: 1; }\n\n.emoji-picker.activity nav .activity:after {\n  opacity: 1; }\n\n.emoji-picker.objects nav .objects i {\n  opacity: 1; }\n\n.emoji-picker.objects nav .objects:after {\n  opacity: 1; }\n\n.emoji-picker.places nav .places i {\n  opacity: 1; }\n\n.emoji-picker.places nav .places:after {\n  opacity: 1; }\n\n.emoji-picker.flags nav .flags i {\n  opacity: 1; }\n\n.emoji-picker.flags nav .flags:after {\n  opacity: 1; }\n\n.emoji-picker.symbols nav .symbols i {\n  opacity: 1; }\n\n.emoji-picker.symbols nav .symbols:after {\n  opacity: 1; }\n",""])},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var t=o(15),c=f(t),r=o(20),a=f(r),i=o(21),u=f(i),s=o(22),l=f(s),d=o(23),p=f(d),g=o(24),h=f(g),m=o(4),b=f(m),_=o(5),v=f(_),y=o(58),k=o(118),w=f(k),x=o(126),j=f(x);o(135);var C=o(137),E=o(17),M=(0,C.isFirefoxOnMac)(),S=function(e){function n(e){(0,u.default)(this,n);var o=(0,p.default)(this,(n.__proto__||(0,a.default)(n)).call(this,e));return o.onScroll=(0,y.throttle)(16,o.onScroll.bind(o)),o.hideScrollIndicator=(0,y.debounce)(E.HIDE_SCROLL_DEBOUNCE,o.hideScrollIndicator.bind(o)),o._emojiName=null,o}return(0,h.default)(n,e),(0,l.default)(n,[{key:"componentDidMount",value:function(){this.headerHeight=this._list.querySelector(".category-name").clientHeight,this.scrollbarWidth=(0,C.getScrollbarWidth)(),this.hideNativeScrollbar();var e=(0,C.getOffsets)(this._list);this.offsets=e.offsets,this.scrollHeight=e.scrollHeight,this.listHeight=e.listHeight,this.listWidth=e.listWidth,this._categories=this._list.children}},{key:"componentDidUpdate",value:function(){var e=(0,C.getOffsets)(this._list);this.offsets=e.offsets,this.scrollHeight=e.scrollHeight}},{key:"onScroll",value:function(){var e=this._list.scrollTop,n=this.props.activeCategory,o=this._categories[n];M||this.scrollHeight<=this.listHeight||((0,C.adjustScrollbar)(this.scrollHeight,e,this.listHeight,this._scroller),this.hideScrollIndicator(),this._scroller.classList.add("shown")),this.props.suppressModifiers(),this.props.closeDiversitiesMenu(),this.proximity=(0,C.getProximity)(this.offsets,e,this.listHeight,this.headerHeight);var f=this.proximity,t=f.proximityIndex,c=f.activeCategory,r=f.inViewPort;if(this.props.filter)return this.props.setSeenInSearch(r),this.transformed=(0,C.clearTransform)(this.transformed);if(this.props.setSeenCategory(c,r),"number"!=typeof t)return c!==n&&this.props.setActiveCategory({index:c}),this.transformed=(0,C.clearTransform)(this.transformed);var a=-(e-this.offsets[t]),i=o.firstElementChild,u=0===t,s=t===n,l=(0,C.hitAnotherCategory)({distance:a,currentIsActive:s,currentIsFirst:u});this.props.delayedCategory===t||"next"===l?this.props.setActiveCategory({index:t}):"prev"===l&&this.props.setActiveCategory({index:n-1}),s||(this.transformed=(0,C.clearTransform)(this.transformed,n),i.setAttribute("style",(0,C.headerTransform)(a,this.headerHeight)),this.transformed.push({index:n,element:i}))}},{key:"hideScrollIndicator",value:function(){this._scroller.classList.remove("shown")}},{key:"hideNativeScrollbar",value:function(){if(!M&&this.scrollbarWidth>0)return this._list.style.width=this._list.offsetWidth+this.scrollbarWidth+"px"}},{key:"scrollToCategoryByIndex",value:function(e){this._list.scrollTop=this.offsets[e]}},{key:"scrollTop",value:function(){this._list.scrollTop=0}},{key:"render",value:function(){var e=this,n=this.props,o=n.filter,f=n.diversityPicker,t=n.closeDiversitiesMenu,r=n.visibleCategories,a=n.modifiersSpread,i=n.preload,u=this.context,s=u.assetPath,l=u.onEmojiClick,d=u.emojiResolution,p=u.disableDiversityPicker,g="wrapper"+(o&&0===(0,c.default)(o).length?" no-results icn-magnifier":"");return b.default.createElement("section",{className:g},b.default.createElement(w.default,{index:f,assetPath:s,emojiResolution:d,onEmojiClick:l,close:t,disable:p}),b.default.createElement("div",{className:"scroller",ref:function(n){return e._scroller=n}},b.default.createElement("div",null)),b.default.createElement("span",{className:"emoji-name",ref:function(n){return e._emojiName=n}}),b.default.createElement(j.default,{filter:o,onScroll:this.onScroll,seenCategories:r,modifiersSpread:a,preload:i,_emojiName:this._emojiName,ref:function(n){return e._list=n?n._list:null}}))}}]),n}(m.Component);n.default=S,S.propTypes={filter:v.default.object,diversityPicker:v.default.number,closeDiversitiesMenu:v.default.func,suppressModifiers:v.default.func,setSeenCategory:v.default.func,setSeenInSearch:v.default.func,setActiveCategory:v.default.func,visibleCategories:v.default.object,modifiersSpread:v.default.bool,activeCategory:v.default.number,delayedCategory:v.default.number,preload:v.default.bool},S.contextTypes={onEmojiClick:v.default.func,parent:v.default.any,assetPath:v.default.string,activeModifier:v.default.string,emojiResolution:v.default.number,disableDiversityPicker:v.default.bool}},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}function t(e){function n(e,n){c(e,s,n),setTimeout(a,500)}var o=e.index,f=e.assetPath,t=e.emojiResolution,c=e.onEmojiClick,a=e.close;if(e.disable)return null;var i="diversity-picker"+(o?" shown":""),s=(0,l.default)(u.emojis[o]),p=null;return s&&s.diversities&&(p=[s.unified].concat(s.diversities)),r.default.createElement("div",{className:i},p&&p.map(function(e){var o=(0,d.bgImage)({unified:e,assetPath:f,emojiResolution:t});return r.default.createElement("a",{key:e,style:o,className:"emoji",onClick:function(o){return n(e,o)}})}))}Object.defineProperty(n,"__esModule",{value:!0});var c=o(4),r=f(c),a=o(5),i=f(a),u=o(1),s=o(43),l=f(s),d=o(59);o(124),t.propTypes={index:i.default.number,assetPath:i.default.string,emojiResolution:i.default.number,onEmojiClick:i.default.func.isRequired,close:i.default.func.isRequired,disable:i.default.bool},n.default=t},function(e,n,o){"use strict";function f(e){var n=e.unified,o=e.assetPath,f=e.emojiResolution;return void 0===o&&(o=t.DEFAULT_CDN_PATH),o+=f?"/"+f:"/"+t.DEFAULT_IMAGE_RESOLUTION,{backgroundImage:"url("+o+"/"+n+".png)"}}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f;var t=o(17)},function(e,n,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var f=o(1),t={};for(var c in f.keywords)for(var r=0;r<c.length;r++)t[c[r]]=t[c[r]]||[],-1===t[c[r]].indexOf(c)&&t[c[r]].push(c);n.default=t},function(e,n,o){var f=o(122);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n",""])},function(e,n,o){"use strict";function f(e,n){if(n&&e.hasOwnProperty("diversities")){var o=e.unified+"-"+n;if(e.diversities.indexOf(o)>-1)return o}return e.unified}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){var f=o(125);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .diversity-picker {\n  background-color: #fafafa;\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row-reverse;\n  position: absolute;\n  z-index: 3;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 30px;\n  transform: translateY(-30px);\n  opacity: .6;\n  transition: .2s opacity, .2s transform; }\n  .emoji-picker .diversity-picker.shown {\n    transform: translateY(0);\n    opacity: 1;\n    border-bottom: 1px solid #eeeeee; }\n  .emoji-picker .diversity-picker .emoji {\n    display: inline-block; }\n",""])},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var t=o(15),c=f(t),r=o(20),a=f(r),i=o(21),u=f(i),s=o(22),l=f(s),d=o(23),p=f(d),g=o(24),h=f(g),m=o(4),b=f(m),_=o(5),v=f(_),y=o(1),k=o(127),w=f(k);o(133);var x=function(e){function n(){return(0,u.default)(this,n),(0,p.default)(this,(n.__proto__||(0,a.default)(n)).apply(this,arguments))}return(0,h.default)(n,e),(0,l.default)(n,[{key:"shouldComponentUpdate",value:function(e,n,o){var f=o.activeModifier;return!e.modifiersSpread&&(!!(e.filter||!e.filter&&this.props.filter)||(this.props._emojiName!==e._emojiName||(f!==this.context.activeModifier||(0,c.default)(e.seenCategories).length!==(0,c.default)(this.props.seenCategories).length)))}},{key:"render",value:function(){var e=this,n=this.props,o=n.filter,f=n.onScroll,t=n.seenCategories,c=n.preload,r=n.customCategoryNames,a=n._emojiName,i=o?" filter":"";return b.default.createElement("div",{className:"emoji-list"+i,ref:function(n){return e._list=n},onScroll:f},y.categories.map(function(e,n){var f=c||t[n];return b.default.createElement(w.default,{category:e,index:n,key:n,filter:o,customCategoryNames:r,_emojiName:a,categorySeen:f})}))}}]),n}(m.Component);x.propTypes={filter:v.default.object,onScroll:v.default.func.isRequired,seenCategories:v.default.object.isRequired,preload:v.default.bool,_emojiName:v.default.object,customCategoryNames:v.default.object},x.contextTypes={activeModifier:v.default.string},n.default=x},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}function t(e,n){var o=e.index,f=e.category,t=e.filter,c=e.categorySeen,a=e._emojiName,i=n.customCategoryNames,s=t&&!t.hasOwnProperty(f.name)?" hidden":"",d=i&&i[f.name]?i[f.name]:"#"+f.name;return r.default.createElement("div",{className:"emoji-category "+f.name+s,key:o},r.default.createElement("div",{className:"category-name"},d),c&&f.members.map(function(e,n){var o=u.emojis[e],i=t&&!(t.hasOwnProperty(f.name)&&t[f.name].hasOwnProperty(e));return o?r.default.createElement(p.default,{member:e,emoji:(0,l.default)(o),key:n,hidden:i,_emojiName:a,categorySeen:c}):null}))}Object.defineProperty(n,"__esModule",{value:!0});var c=o(4),r=f(c),a=o(5),i=f(a),u=o(1),s=o(43),l=f(s),d=o(128),p=f(d);o(131),t.propTypes={index:i.default.number.isRequired,category:i.default.object.isRequired,filter:i.default.object,categorySeen:i.default.bool,_emojiName:i.default.object},t.contextTypes={customCategoryNames:i.default.object},n.default=t},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var t=o(20),c=f(t),r=o(21),a=f(r),i=o(22),u=f(i),s=o(23),l=f(s),d=o(24),p=f(d),g=o(4),h=f(g),m=o(5),b=f(m),_=o(59),v=o(17);o(129);var y=function(e){function n(e){(0,a.default)(this,n);var o=(0,l.default)(this,(n.__proto__||(0,c.default)(n)).call(this,e));return o.emoji=e.emoji,o.hasDiversities=o.emoji.hasOwnProperty("diversities"),o.onClick=o.onClick.bind(o),o.emojiChosen=o.emojiChosen.bind(o),o.onMouseEnter=o.onMouseEnter.bind(o),o.onMouseLeave=o.onMouseLeave.bind(o),o.onMouseDown=o.onMouseDown.bind(o),o.onMouseUp=o.onMouseUp.bind(o),o}return(0,p.default)(n,e),(0,u.default)(n,[{key:"shouldComponentUpdate",value:function(e,n,o){var f=e.hidden!==this.props.hidden,t=e.categorySeen!==this.props.categorySeen,c=this.hasDiversities,r=c&&o.activeModifier!==this.context.activeModifier;return f||t||r}},{key:"onClick",value:function(e){e.preventDefault()}},{key:"emojiChosen",value:function(e){var n=this.props.emoji,o=this.context.onEmojiClick;o&&o(n.unified,n,e),e.defaultPrevented||e.preventDefault()}},{key:"onMouseEnter",value:function(){var e=this;this.props._emojiName&&(this.props._emojiName.textContent=this.emoji.name),this.hasDiversities&&!this.props.disableDiversityPicker&&(this.onMouseEnterTimeout=setTimeout(function(){e.context.openDiversitiesMenu(e.props.member)},v.OPEN_DIVERSITIES_TIMEOUT))}},{key:"onMouseLeave",value:function(e){clearTimeout(this.onMouseEnterTimeout),e.relatedTarget&&e.relatedTarget.classList&&e.relatedTarget.classList.contains("emoji")||this.props._emojiName&&(this.props._emojiName.textContent="")}},{key:"onMouseDown",value:function(){var e=this;clearTimeout(this.onMouseEnterTimeout),this.hasDiversities&&!this.props.disableDiversityPicker&&(this.timeCounter=Date.now(),this.diversitiesTimeout=setTimeout(function(){delete e.diversitiesTimeout,e.context.openDiversitiesMenu(e.props.member)},v.OPEN_DIVERSITIES_TIMEOUT))}},{key:"onMouseUp",value:function(e){var n=this.timeCounter;if(clearTimeout(this.diversitiesTimeout),delete this.timeCounter,!(n&&Date.now()-n>=v.OPEN_DIVERSITIES_TIMEOUT))return this.emojiChosen(e)}},{key:"render",value:function(){var e=this.props,n=e.emoji,o=e.hidden,f=e.categorySeen,t=this.context,c=t.activeModifier,r=t.assetPath,a=t.emojiResolution,i=n.unified,u=f&&!o?" shown":"";i=(0,_.unifiedWithModifier)(n,c);var s="emoji"+(this.hasDiversities?" has-diversities":"")+u,l=(0,_.bgImage)({unified:i,assetPath:r,emojiResolution:a});return l.order=n.order,h.default.createElement("a",{className:s,onClick:this.onClick,onMouseEnter:this.onMouseEnter,onMouseLeave:this.onMouseLeave,onMouseDown:this.onMouseDown,onMouseUp:this.onMouseUp,tabIndex:n.order,style:l})}}]),n}(g.Component);y.propTypes={emoji:b.default.object.isRequired,hidden:b.default.bool,categorySeen:b.default.bool,member:b.default.number.isRequired,disableDiversityPicker:b.default.bool,_emojiName:b.default.object},y.contextTypes={onEmojiClick:b.default.func,parent:b.default.any,assetPath:b.default.string,activeModifier:b.default.string,emojiResolution:b.default.number,openDiversitiesMenu:b.default.func,disableDiversityPicker:b.default.bool},n.default=y},function(e,n,o){var f=o(130);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .emoji {\n  border-radius: 5px;\n  height: 20px;\n  width: 20px;\n  padding: 5px;\n  background-size: 20px;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n  overflow: hidden;\n  transition: background-color .2s;\n  display: none; }\n  .emoji-picker .emoji.shown {\n    display: inline-block; }\n  .emoji-picker .emoji:hover {\n    background-color: #bbdefb; }\n    .emoji-picker .emoji:hover.has-diversities:before {\n      opacity: 1; }\n  .emoji-picker .emoji.has-diversities:before {\n    content: '';\n    background-color: #f5f5f5;\n    display: block;\n    height: 8px;\n    width: 8px;\n    float: right;\n    opacity: 0;\n    transform: translateY(-6px) translateX(6px);\n    transition: opacity .2s; }\n",""])},function(e,n,o){var f=o(132);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .emoji-category {\n  position: relative;\n  padding: 30px 5px 0 5px;\n  margin: 0;\n  text-align: left;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: flex-start; }\n  .emoji-picker .emoji-category .category-name {\n    background-color: rgba(255, 255, 255, 0.9);\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 0;\n    display: block;\n    padding: 0 10px;\n    font-size: 12px;\n    font-weight: 700;\n    letter-spacing: .1em;\n    text-transform: uppercase;\n    color: #bdbdbd;\n    height: 30px;\n    line-height: 30px;\n    box-sizing: border-box;\n    transition: color .2s; }\n\n.emoji-picker.people .people.emoji-category {\n  position: initial; }\n  .emoji-picker.people .people.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.foods .foods.emoji-category {\n  position: initial; }\n  .emoji-picker.foods .foods.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.nature .nature.emoji-category {\n  position: initial; }\n  .emoji-picker.nature .nature.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.activity .activity.emoji-category {\n  position: initial; }\n  .emoji-picker.activity .activity.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.objects .objects.emoji-category {\n  position: initial; }\n  .emoji-picker.objects .objects.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.places .places.emoji-category {\n  position: initial; }\n  .emoji-picker.places .places.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.flags .flags.emoji-category {\n  position: initial; }\n  .emoji-picker.flags .flags.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.regional .regional.emoji-category {\n  position: initial; }\n  .emoji-picker.regional .regional.emoji-category .category-name {\n    color: #9e9e9e; }\n\n.emoji-picker.symbols .symbols.emoji-category {\n  position: initial; }\n  .emoji-picker.symbols .symbols.emoji-category .category-name {\n    color: #9e9e9e; }\n",""])},function(e,n,o){var f=o(134);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .emoji-list {\n  width: 100%;\n  height: 240px;\n  padding: 0;\n  overflow-x: hidden;\n  box-sizing: border-box;\n  -ms-overflow-style: none; }\n  .emoji-picker .emoji-list::-webkit-scrollbar {\n    height: 0;\n    width: 0; }\n  .emoji-picker .emoji-list::scrollbar {\n    height: 0;\n    width: 0; }\n  .emoji-picker .emoji-list.filter:before {\n    content: '';\n    background: #ffffff;\n    position: absolute;\n    left: 0;\n    right: 0;\n    top: 0;\n    height: 30px;\n    z-index: 1;\n    opacity: 0.9; }\n  .emoji-picker .emoji-list.filter .category-name {\n    background: none;\n    z-index: 1; }\n  .emoji-picker .emoji-list:not(.filter) .emoji-category {\n    min-height: 100%; }\n",""])},function(e,n,o){var f=o(136);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .wrapper {\n  position: relative;\n  overflow: hidden; }\n  .emoji-picker .wrapper.no-results:before {\n    content: '';\n    background-repeat: no-repeat;\n    background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\");\n    background-position: 50% 50%;\n    background-size: 100px 100px;\n    display: block;\n    width: 100px;\n    height: 100px;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    opacity: .07;\n    transform: translateX(-50%) translateY(-50%); }\n  .emoji-picker .wrapper.no-results .emoji-name {\n    display: none; }\n  .emoji-picker .wrapper:after {\n    content: '';\n    background-color: #ffffff;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    height: 5px; }\n  .emoji-picker .wrapper .scroller {\n    display: block;\n    position: absolute;\n    width: 5px;\n    padding-top: 5px;\n    z-index: 2;\n    right: 3px;\n    box-sizing: border-box;\n    opacity: 0;\n    transition: opacity .2s; }\n    .emoji-picker .wrapper .scroller.shown {\n      opacity: 1; }\n    .emoji-picker .wrapper .scroller div {\n      background-color: #bdbdbd;\n      width: 100%;\n      min-height: 12px; }\n  .emoji-picker .wrapper .emoji-name {\n    position: absolute;\n    right: 10px;\n    top: 8px;\n    font-size: 10px;\n    font-weight: 100;\n    z-index: 2;\n    color: #9e9e9e;\n    max-width: 130px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis; }\n",""])},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0}),n.isFirefoxOnMac=n.headerTransform=n.hitAnotherCategory=n.getScrollbarWidth=n.getProximity=n.getOffsets=n.clearTransform=n.adjustScrollbar=void 0;var t=o(138),c=f(t),r=o(139),a=f(r),i=o(140),u=f(i),s=o(141),l=f(s),d=o(142),p=f(d),g=o(143),h=f(g),m=o(148),b=f(m),_=o(149),v=f(_);n.adjustScrollbar=c.default,n.clearTransform=a.default,n.getOffsets=u.default,n.getProximity=l.default,n.getScrollbarWidth=p.default,n.hitAnotherCategory=h.default,n.headerTransform=b.default,n.isFirefoxOnMac=v.default},function(e,n,o){"use strict";function f(e,n,o,f){var c=Math.floor(o/(e/o)*.8),r=e-o,a=o-(c<t.MIN_SCROLLBAR_HEIGHT_PADDED?t.MIN_SCROLLBAR_HEIGHT_PADDED:c)-5,i=n*a/r;f.setAttribute("style","transform: translateY("+i+"px)"),f.children[0].setAttribute("style","height: "+c+"px")}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f;var t=o(17)},function(e,n,o){"use strict";function f(e,n){if(!Array.isArray(e)||0===e.length)return[];var o=[];return e.forEach(function(e){if(e.index===n)return void o.push(e);e.element.removeAttribute("style")}),o}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(e){var n=e.scrollHeight,o=e.offsetHeight,f=[];return Array.prototype.forEach.call(e.children,function(e){f.push(e.offsetTop)}),{scrollHeight:n,listHeight:o,offsets:f}}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(e){var n=e.offset,o=e.offsets,f=e.scrollTop,t=e.next;return n<=f&&(o[t]>=f||void 0===o[t])}function t(e){var n=e.scrollTop,o=e.listHeight,f=e.offsets,t=e.index;return f[t]<=o+n&&f[t]>=n}function c(e){var n=e.scrollTop,o=e.offset,f=e.headerHeight,t=n+f>=o;return n-f<=o&&t}function r(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:0,r=arguments.length>3&&void 0!==arguments[3]?arguments[3]:30;e=e||[0];for(var a=null,i=void 0,u={},s=0;s<e.length;s++){var l=e[s],d=s+1,p=c({scrollTop:n,offset:l,headerHeight:r}),g=f({offset:l,offsets:e,scrollTop:n,next:d});t({scrollTop:n,listHeight:o,offsets:e,index:s})&&(u[s]=!0),g&&(i=s),p&&(a=s)}return{proximityIndex:a,activeCategory:i,inViewPort:u}}Object.defineProperty(n,"__esModule",{value:!0}),n.default=r},function(e,n,o){"use strict";function f(){var e=document.createElement("div"),n=document.createElement("div");e.setAttribute("style","width: 50px;height:50px;overflow-y:scroll;border:none;"),n.setAttribute("style","height:100px;width:100%;border:none;"),e.appendChild(n),document.body.appendChild(e);var o=e.offsetWidth,f=n.clientWidth;return document.body.removeChild(e),o-f}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(e){var n=e.distance,o=e.currentIsActive,f=e.currentIsFirst;return(0,c.default)(n,0)||n<0&&!o?"next":!f&&n>=0&&o?"prev":void 0}Object.defineProperty(n,"__esModule",{value:!0});var t=o(144),c=function(e){return e&&e.__esModule?e:{default:e}}(t);n.default=f},function(e,n,o){e.exports={default:o(145),__esModule:!0}},function(e,n,o){o(146),e.exports=o(0).Object.is},function(e,n,o){var f=o(6);f(f.S,"Object",{is:o(147)})},function(e,n){e.exports=Object.is||function(e,n){return e===n?0!==e||1/e==1/n:e!=e&&n!=n}},function(e,n,o){"use strict";function f(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:30;return"transform: translateY("+((e=parseInt(e,10)||0)-n)+"px);"}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(){if("undefined"!=typeof navigator){var e=navigator.userAgent.toLowerCase().indexOf("firefox")>-1,n=navigator.platform.indexOf("Mac")>-1;return e&&n}}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0});var t=o(15),c=f(t),r=o(20),a=f(r),i=o(21),u=f(i),s=o(22),l=f(s),d=o(23),p=f(d),g=o(24),h=f(g),m=o(4),b=f(m),_=o(58),v=o(5),y=f(v),k=o(151),w=o(17);o(156);var x=function(e){function n(e){(0,u.default)(this,n);var o=(0,p.default)(this,(n.__proto__||(0,a.default)(n)).call(this,e));return o.onChange=(0,_.debounce)(w.FILTER_UPDATE_DEBOUNCE,e.onChange),o.filterStack=[],o.filterKeywords=(0,_.debounce)(50,o.filterKeywords.bind(o)),o}return(0,h.default)(n,e),(0,l.default)(n,[{key:"addToStack",value:function(e){var n=this.filterStack,o=n.length;o&&n[o-1].text===e.text||this.filterStack.push(e)}},{key:"filterKeywords",value:function(){var e=this._input.value.trim().toLowerCase();if(!e)return this.filterStack=[],this.onChange(null);this.filterStack=this.filterStack||[];var n=e.length;this.filterStack.length>n&&(this.filterStack=this.filterStack.slice(0,n));var o=(0,k.textIndexInStack)(e,this.filterStack),f=void 0;if(o>-1){this.filterStack.length=o+1;var t=!1;if(e.length<this.filterStack[o].text.length&&(t=!0,this.filterStack.forEach(function(n){n.text===e&&(t=!1)})),!t&&(f=(0,k.stackFilter)(o,e,this.filterStack),(0,c.default)(f).length))return this.addToStack({text:e,matches:f}),this.onChange(f)}if(f=(0,k.findMatches)(e),this.filterStack=[],!f.length)return this.onChange({});f=(0,k.reduceEmojis)(f),this.filterStack.push({text:e,matches:f}),this.onChange(f)}},{key:"render",value:function(){var e=this;return b.default.createElement("div",{className:"search-bar"},b.default.createElement("input",{type:"text",placeholder:"Emoji Search",onChange:this.filterKeywords,ref:function(n){return e._input=n}}),b.default.createElement("i",{className:"icn-magnifier"}))}}]),n}(m.Component);x.propTypes={onChange:y.default.func.isRequired},n.default=x},function(e,n,o){"use strict";function f(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(n,"__esModule",{value:!0}),n.textIndexInStack=n.findMatches=n.stackFilter=n.reduceEmojis=void 0;var t=o(152),c=f(t),r=o(153),a=f(r),i=o(154),u=f(i),s=o(155),l=f(s);n.reduceEmojis=c.default,n.stackFilter=a.default,n.findMatches=l.default,n.textIndexInStack=u.default},function(e,n,o){"use strict";function f(e){return e.reduce(function(e,n){return t.keywords[n].forEach(function(o){var f=(0,r.default)(t.emojis[o]);if(f){var c=f.category;e[c]=e[c]||{},e[c][o]=n}}),e},{})}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f;var t=o(1),c=o(43),r=function(e){return e&&e.__esModule?e:{default:e}}(c)},function(e,n,o){"use strict";function f(e,n,o){var f={},t=o[e],r=t.matches;if(t.text===n)return r;for(var a in r){f[a]={};for(var i in r[a])r[a][i].indexOf(n)>-1&&(f[a][i]=r[a][i]);(0,c.default)(f[a]).length||delete f[a]}return f}Object.defineProperty(n,"__esModule",{value:!0});var t=o(15),c=function(e){return e&&e.__esModule?e:{default:e}}(t);n.default=f},function(e,n,o){"use strict";function f(e,n){var o=e.length,f=n.length,t=f-1,c=-1;if(!f)return c;if(f>=o&&n[o-1].text===e)return o-1;if(-1!==e.indexOf(n[t].text))return t;for(var r=t;r>=0;r--){var a=n[r];if(a.text===e)return r;if(a.text.indexOf(e.substr(0,a.text.length))>-1)return c=r}return c}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f},function(e,n,o){"use strict";function f(e){return t.KEYWORDS_SINGLE.hasOwnProperty(e)?t.KEYWORDS_SINGLE[e]:t.ALL_KEYWORDS.filter(function(n){return n.indexOf(e)>-1})}Object.defineProperty(n,"__esModule",{value:!0}),n.default=f;var t=o(17)},function(e,n,o){var f=o(157);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker .search-bar {\n  height: 45px;\n  margin-top: 0;\n  padding: 10px;\n  position: relative;\n  z-index: 2;\n  left: 0;\n  box-sizing: border-box; }\n  .emoji-picker .search-bar input {\n    padding: 5px 5px 5px 35px;\n    margin: 0;\n    box-sizing: border-box;\n    color: #9e9e9e;\n    width: 100%;\n    outline: none;\n    border: 1px solid #eeeeee;\n    border-radius: 5px;\n    transition: border .2s; }\n    .emoji-picker .search-bar input::placeholder {\n      color: #e0e0e0; }\n    .emoji-picker .search-bar input:focus {\n      border: 1px solid #e0e0e0; }\n      .emoji-picker .search-bar input:focus + i:before {\n        opacity: 1; }\n  .emoji-picker .search-bar i:before {\n    content: '';\n    background-repeat: no-repeat;\n    background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\");\n    background-position: 50% 50%;\n    background-size: 15px 15px;\n    height: 15px;\n    width: 15px;\n    position: absolute;\n    left: 20px;\n    top: 15px;\n    display: block;\n    opacity: .3;\n    transition: opacity .2s; }\n",""])},function(e,n,o){var f=o(159);"string"==typeof f&&(f=[[e.i,f,""]]);var t={hmr:!0};t.transform=void 0;o(3)(f,t);f.locals&&(e.exports=f.locals)},function(e,n,o){n=e.exports=o(2)(!1),n.push([e.i,".emoji-picker .icn-magnifier:before {\n  background-image: url(\"data:image/svg+xml,%3Csvg id='Capa_1' xmlns='http://www.w3.org/2000/svg' width='310.4' height='310.4'%3E%3Cstyle%3E.st0%7Bfill:%239e9e9e%7D%3C/style%3E%3Cpath class='st0' d='M273.6 215c49.1-49.1 49.1-129 0-178.1-49.1-49.1-129-49.1-178.1 0-41.7 41.7-48 103.6-18.9 152 0 0 2.1 3.5-.7 6.3l-64.3 64.3c-12.8 12.8-15.8 30.7-4.5 42l2 2c11.3 11.3 29.2 8.3 42-4.5l64.1-64.1c3-3 6.4-.9 6.4-.9 48.4 28.9 110.3 22.6 152-19zm-154.9-23.3c-36.3-36.3-36.3-95.3 0-131.6s95.3-36.3 131.6 0 36.3 95.3 0 131.6-95.3 36.3-131.6 0z'/%3E%3Cpath class='st0' d='M126.8 118.4c-1.7 0-3.4-.3-5.1-1-6.6-2.8-9.7-10.4-6.9-17 17.6-41.6 65.7-61.1 107.3-43.5 6.6 2.8 9.7 10.4 6.9 17-2.8 6.6-10.4 9.7-17 6.9-28.4-12-61.2 1.3-73.2 29.7-2.2 4.9-7 7.9-12 7.9z'/%3E%3C/svg%3E\"); }\n\n.emoji-picker {\n  background-color: #ffffff;\n  width: 285px;\n  display: block;\n  position: relative;\n  padding: 0;\n  border: 1px solid #eeeeee;\n  border-radius: 3px;\n  overflow: hidden;\n  font-family: sans-serif; }\n  .emoji-picker .hidden {\n    display: none !important;\n    visibility: hidden !important;\n    padding: 0 !important;\n    margin: 0 !important; }\n  .emoji-picker a {\n    outline: none;\n    cursor: pointer; }\n  .emoji-picker ul {\n    list-style-type: none;\n    margin: 0;\n    padding: 0; }\n    .emoji-picker ul li {\n      display: inline-block; }\n  .emoji-picker .bar-wrapper {\n    position: relative; }\n",""])}])});
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -39749,6 +42430,158 @@ function symbolObservablePonyfill(root) {
 	}
 
 	return result;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/throttle-debounce/debounce.js":
+/*!****************************************************!*\
+  !*** ./node_modules/throttle-debounce/debounce.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* eslint-disable no-undefined */
+
+var throttle = __webpack_require__(/*! ./throttle */ "./node_modules/throttle-debounce/throttle.js");
+
+/**
+ * Debounce execution of a function. Debouncing, unlike throttling,
+ * guarantees that a function is only executed a single time, either at the
+ * very beginning of a series of calls, or at the very end.
+ *
+ * @param  {Number}   delay         A zero-or-greater delay in milliseconds. For event callbacks, values around 100 or 250 (or even higher) are most useful.
+ * @param  {Boolean}  [atBegin]     Optional, defaults to false. If atBegin is false or unspecified, callback will only be executed `delay` milliseconds
+ *                                  after the last debounced-function call. If atBegin is true, callback will be executed only at the first debounced-function call.
+ *                                  (After the throttled-function has not been called for `delay` milliseconds, the internal counter is reset).
+ * @param  {Function} callback      A function to be executed after delay milliseconds. The `this` context and all arguments are passed through, as-is,
+ *                                  to `callback` when the debounced-function is executed.
+ *
+ * @return {Function} A new, debounced function.
+ */
+module.exports = function ( delay, atBegin, callback ) {
+	return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/throttle-debounce/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/throttle-debounce/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var throttle = __webpack_require__(/*! ./throttle */ "./node_modules/throttle-debounce/throttle.js");
+var debounce = __webpack_require__(/*! ./debounce */ "./node_modules/throttle-debounce/debounce.js");
+
+module.exports = {
+	throttle: throttle,
+	debounce: debounce
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/throttle-debounce/throttle.js":
+/*!****************************************************!*\
+  !*** ./node_modules/throttle-debounce/throttle.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* eslint-disable no-undefined,no-param-reassign,no-shadow */
+
+/**
+ * Throttle execution of a function. Especially useful for rate limiting
+ * execution of handlers on events like resize and scroll.
+ *
+ * @param  {Number}    delay          A zero-or-greater delay in milliseconds. For event callbacks, values around 100 or 250 (or even higher) are most useful.
+ * @param  {Boolean}   [noTrailing]   Optional, defaults to false. If noTrailing is true, callback will only execute every `delay` milliseconds while the
+ *                                    throttled-function is being called. If noTrailing is false or unspecified, callback will be executed one final time
+ *                                    after the last throttled-function call. (After the throttled-function has not been called for `delay` milliseconds,
+ *                                    the internal counter is reset)
+ * @param  {Function}  callback       A function to be executed after delay milliseconds. The `this` context and all arguments are passed through, as-is,
+ *                                    to `callback` when the throttled-function is executed.
+ * @param  {Boolean}   [debounceMode] If `debounceMode` is true (at begin), schedule `clear` to execute after `delay` ms. If `debounceMode` is false (at end),
+ *                                    schedule `callback` to execute after `delay` ms.
+ *
+ * @return {Function}  A new, throttled, function.
+ */
+module.exports = function ( delay, noTrailing, callback, debounceMode ) {
+
+	// After wrapper has stopped being called, this timeout ensures that
+	// `callback` is executed at the proper times in `throttle` and `end`
+	// debounce modes.
+	var timeoutID;
+
+	// Keep track of the last time `callback` was executed.
+	var lastExec = 0;
+
+	// `noTrailing` defaults to falsy.
+	if ( typeof noTrailing !== 'boolean' ) {
+		debounceMode = callback;
+		callback = noTrailing;
+		noTrailing = undefined;
+	}
+
+	// The `wrapper` function encapsulates all of the throttling / debouncing
+	// functionality and when executed will limit the rate at which `callback`
+	// is executed.
+	function wrapper () {
+
+		var self = this;
+		var elapsed = Number(new Date()) - lastExec;
+		var args = arguments;
+
+		// Execute `callback` and update the `lastExec` timestamp.
+		function exec () {
+			lastExec = Number(new Date());
+			callback.apply(self, args);
+		}
+
+		// If `debounceMode` is true (at begin) this is used to clear the flag
+		// to allow future `callback` executions.
+		function clear () {
+			timeoutID = undefined;
+		}
+
+		if ( debounceMode && !timeoutID ) {
+			// Since `wrapper` is being called for the first time and
+			// `debounceMode` is true (at begin), execute `callback`.
+			exec();
+		}
+
+		// Clear any existing timeout.
+		if ( timeoutID ) {
+			clearTimeout(timeoutID);
+		}
+
+		if ( debounceMode === undefined && elapsed > delay ) {
+			// In throttle mode, if `delay` time has been exceeded, execute
+			// `callback`.
+			exec();
+
+		} else if ( noTrailing !== true ) {
+			// In trailing throttle mode, since `delay` time has not been
+			// exceeded, schedule `callback` to execute `delay` ms after most
+			// recent execution.
+			//
+			// If `debounceMode` is true (at begin), schedule `clear` to execute
+			// after `delay` ms.
+			//
+			// If `debounceMode` is false (at end), schedule `callback` to
+			// execute after `delay` ms.
+			timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === undefined ? delay - elapsed : delay);
+		}
+
+	}
+
+	// Return the wrapper function.
+	return wrapper;
+
 };
 
 

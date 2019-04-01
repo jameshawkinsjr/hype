@@ -1,7 +1,6 @@
 development: &development
   adapter: async
 
-
 test:
   adapter: async
 

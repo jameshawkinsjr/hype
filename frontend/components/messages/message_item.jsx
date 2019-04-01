@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import JSEMOJI from 'emoji-js';
 
 const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, chatroomId, currentChatroom }) => {
   let name;
@@ -30,13 +31,21 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
         )
     }
 
-
     let photoUrl = "";
 
     if (users[message.author_id]) {
       photoUrl = users[message.author_id].photoUrl;
     }
+    // debugger
 
+    let jsemoji = new JSEMOJI();
+    let messageBody = message.body
+    jsemoji.img_set = 'emojione';
+    jsemoji.img_sets.emojione.path = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/32/';
+    jsemoji.supports_css = false;
+    jsemoji.allow_native = false;
+    jsemoji.replace_mode = 'unified';
+    messageBody = jsemoji.replace_colons(messageBody);
     
   return (
     <li key={`message-${message.id}`} className="message-item-container">
@@ -51,7 +60,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
                         <span className="message-body-full-timestamp">{ message.full_timestamp }</span>
                       </span>
                     </div>
-                <div className='message-body-body'>{ message.body }</div>
+                <div className='message-body-body' dangerouslySetInnerHTML={{__html: messageBody}}></div>
             </div>
           { editButtons }
           </div>

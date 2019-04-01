@@ -1,5 +1,6 @@
 import React from 'react';
 import MessageItemContainer from './message_item_container';
+import EmojiPicker from 'emoji-picker-react';
 
 
 class MessageWindow extends React.Component {
@@ -14,6 +15,7 @@ class MessageWindow extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.submitDemo = this.submitDemo.bind(this);
         this.handleEnterKey = this.handleEnterKey.bind(this);
+        this.handleEmoji = this.handleEmoji.bind(this);
     }
 
     componentDidMount() {
@@ -75,6 +77,12 @@ class MessageWindow extends React.Component {
         }
     }
 
+    handleEmoji(data) {
+        let newBody = this.state.body;
+        newBody += ` :${data.name}: `;
+        this.setState( { body: newBody });
+    }
+
     render() {
         let chatroomTitle = "";
         let welcomeMessage = "";
@@ -101,7 +109,9 @@ class MessageWindow extends React.Component {
                     ) : ""
                     }
                 </ul>
+
             </div>
+            <EmojiPicker onEmojiClick={ (code, data) => this.handleEmoji(data) }/>
             <div className="message-form-input flex">
             <div className="message-form-left-box flex">
                 <p>+</p>

@@ -244,6 +244,9 @@
     line-height: 1.5;
     word-wrap: break-word;
     margin-top: 3px;
+    img {
+        max-height: 25px;
+    }
 }
 
 .message-body-timestamp .message-body-full-timestamp {
