@@ -36,7 +36,6 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
     if (users[message.author_id]) {
       photoUrl = users[message.author_id].photoUrl;
     }
-    // debugger
 
     let jsemoji = new JSEMOJI();
     let messageBody = message.body
@@ -61,6 +60,7 @@ const MessageItem = ({ message, destroyMessage, openModal, currentUser, users, c
                       </span>
                     </div>
                 <div className='message-body-body' dangerouslySetInnerHTML={{__html: messageBody}}></div>
+                {/* <div className='message-body-body' >{message.body}</div> */}
             </div>
           { editButtons }
           </div>

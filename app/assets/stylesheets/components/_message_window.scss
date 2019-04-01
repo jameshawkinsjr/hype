@@ -33,7 +33,6 @@
     height: 200px;
 }
 
-
 .message-form-left-box {
     cursor: pointer;
     justify-content: center;
@@ -91,6 +90,13 @@
     }
 }
 
+.emoji-picker-container{
+    // display: none;
+    position: absolute;
+    top: -340px;
+    left: -120px;
+}
+
 .message-form:focus {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
@@ -99,6 +105,7 @@
 }
 
 .message-form, .message-form-left-box, .message-form-right-box  {
+    position: relative;
     box-sizing: border-box;
     height: 45px;
     align-self: center;
@@ -244,7 +251,7 @@
     line-height: 1.5;
     word-wrap: break-word;
     margin-top: 3px;
-    img {
+    .emoji {
         max-height: 25px;
     }
 }

@@ -2057,8 +2057,7 @@ var MessageItem = function MessageItem(_ref) {
 
   if (users[message.author_id]) {
     photoUrl = users[message.author_id].photoUrl;
-  } // debugger
-
+  }
 
   var jsemoji = new emoji_js__WEBPACK_IMPORTED_MODULE_2___default.a();
   var messageBody = message.body;
@@ -2419,7 +2418,8 @@ function (_React$Component) {
       body: "",
       author_id: _this.props.currentUser.id,
       chatroom_id: _this.props.match.params.chatroomId,
-      parent_id: null
+      parent_id: null,
+      displayEmoji: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.submitDemo = _this.submitDemo.bind(_assertThisInitialized(_this));
@@ -2455,6 +2455,7 @@ function (_React$Component) {
         this.setState({
           chatroom_id: this.props.match.params.chatroomId
         });
+        this.hideEmoji();
       }
 
       if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId))) {
@@ -2506,9 +2507,17 @@ function (_React$Component) {
       this.setState({
         body: ""
       });
+      this.hideEmoji();
       setTimeout(function () {
         return $('#message-window').scrollTop($('#message-window')[0].scrollHeight);
       }, 300);
+    }
+  }, {
+    key: "hideEmoji",
+    value: function hideEmoji() {
+      this.setState({
+        displayEmoji: false
+      });
     }
   }, {
     key: "handleEnterKey",
@@ -2519,9 +2528,13 @@ function (_React$Component) {
     }
   }, {
     key: "handleEmoji",
-    value: function handleEmoji(data) {
+    value: function handleEmoji(code, data) {
+      console.log(code);
+      console.log(data);
       var newBody = this.state.body;
-      newBody += " :".concat(data.name, ": ");
+      newBody += " :".concat(data.name, ": "); // let emojiCode = `0X${code}`
+      // newBody += ` ${String.fromCodePoint(0X1f62b)} `;
+
       this.setState({
         body: newBody
       });
@@ -2557,11 +2570,7 @@ function (_React$Component) {
           message: message,
           users: _this4.props.users
         });
-      }) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        onEmojiClick: function onEmojiClick(code, data) {
-          return _this4.handleEmoji(data);
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-input flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-left-box flex"
@@ -2578,8 +2587,19 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-form-right-box flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "@"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-smile"
-      }), this.props.currentUser.full_name === "Pam Beesly" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "far fa-smile",
+        onClick: function onClick() {
+          _this4.setState({
+            displayEmoji: !_this4.state.displayEmoji
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "emoji-picker-container"
+      }, this.state.displayEmoji ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        onEmojiClick: function onEmojiClick(code, data) {
+          return _this4.handleEmoji(code, data);
+        }
+      }) : ""), this.props.currentUser.full_name === "Pam Beesly" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "nav-bar-button purple",
         onClick: this.submitDemo
       }, " Demo ") : "")));

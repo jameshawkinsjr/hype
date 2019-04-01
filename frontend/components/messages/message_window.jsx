@@ -11,6 +11,7 @@ class MessageWindow extends React.Component {
             author_id: this.props.currentUser.id,
             chatroom_id: this.props.match.params.chatroomId,
             parent_id: null,
+            displayEmoji: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.submitDemo = this.submitDemo.bind(this);
@@ -32,6 +33,7 @@ class MessageWindow extends React.Component {
             this.props.fetchMessages(this.props.match.params.chatroomId)
             .then( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 500);
             this.setState({ chatroom_id: this.props.match.params.chatroomId});
+            this.hideEmoji();
         }
         if (!this.props.currentUser.chatroom_ids.includes(parseInt(this.props.match.params.chatroomId)) ) {
             this.redirectToHome();
@@ -67,8 +69,13 @@ class MessageWindow extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.createMessage( this.state );
-        this.setState({ body: "" });
+        this.setState({ body: ""});
+        this.hideEmoji();
         setTimeout( () => $('#message-window').scrollTop($('#message-window')[0].scrollHeight), 300);
+    }
+
+    hideEmoji() {
+        this.setState({ displayEmoji: false });
     }
     
     handleEnterKey(e) {
@@ -77,9 +84,13 @@ class MessageWindow extends React.Component {
         }
     }
 
-    handleEmoji(data) {
+    handleEmoji(code, data) {
+        console.log(code)
+        console.log(data)
         let newBody = this.state.body;
         newBody += ` :${data.name}: `;
+        // let emojiCode = `0X${code}`
+        // newBody += ` ${String.fromCodePoint(0X1f62b)} `;
         this.setState( { body: newBody });
     }
 
@@ -111,7 +122,6 @@ class MessageWindow extends React.Component {
                 </ul>
 
             </div>
-            <EmojiPicker onEmojiClick={ (code, data) => this.handleEmoji(data) }/>
             <div className="message-form-input flex">
             <div className="message-form-left-box flex">
                 <p>+</p>
@@ -126,7 +136,10 @@ class MessageWindow extends React.Component {
             />
             <div className="message-form-right-box flex">
                 <p>@</p>
-                <i className="far fa-smile"></i>
+                <i className="far fa-smile" onClick= { () => {this.setState( { displayEmoji: !this.state.displayEmoji })}}></i>
+                <div className="emoji-picker-container">
+                    { this.state.displayEmoji ? <EmojiPicker  onEmojiClick={ (code, data) => this.handleEmoji(code, data) }/> : "" }
+                </div>
                 { this.props.currentUser.full_name === "Pam Beesly" ? (<button className="nav-bar-button purple" onClick= { this.submitDemo }> Demo </button>) : "" }
             </div>
             </div>
