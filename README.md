@@ -15,6 +15,13 @@
 
 hype is a real-time messaging app built to clone the app [Slack](https://slack.com) over a 2-week sprint. hype allows users to send and receive messages with other users in real time via direct messages, group chats, and channels.
 
+## Technologies
+
+* Backend: Rails/ActiveRecord/PostgreSQL
+* Frontend: React.js, Redux
+* Messaging: ActionCable / Websockets
+* Image Hosting: AWS S3
+
 
 ## Features
 
@@ -99,15 +106,6 @@ When adding users to a direct message thread or a chatroom, you can start tying 
 
 ##### User search for channel and direct message creation
 </div>
-
-
-
-## Technologies
-
-* Backend: Rails/ActiveRecord/PostgreSQL
-* Frontend: React.js, Redux
-* Messaging: ActionCable / Websockets
-* Image Hosting: AWS S3
 
 ## Additional Resources
 
