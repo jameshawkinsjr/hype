@@ -11,6 +11,7 @@
 
     .flex-column {
         padding-left: 20px;
+        width: 100px;
     }
     &:hover{
         background: #311134;
@@ -18,6 +19,9 @@
     img {
         height: 30px;
         width: auto;
+    }
+    button {
+        word-wrap: none;
     }
     button:hover {
         background: rgb(13, 74, 136); 

@@ -2932,7 +2932,7 @@ function (_React$Component) {
       }, "Hype"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "nav-bar-button",
         onClick: this.props.logout
-      }, " Sign Out ")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " Logout ")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "top-nav flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"

@@ -24,7 +24,7 @@ class NavBar extends React.Component {
                     {/* <img className="landing-page-logo" src={ window.images.hype_small_white}/> */}
                     <p> { name }</p>
                     </div>
-                <button className="nav-bar-button" onClick= { this.props.logout }> Sign Out </button>
+                <button className="nav-bar-button" onClick= { this.props.logout }> Logout </button>
             </div>
         ) : (
             <div className="top-nav flex">
