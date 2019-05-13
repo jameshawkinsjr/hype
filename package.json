@@ -19,7 +19,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "tar": ">=4.4.2"
   },
   "description": "hype is a real-time messaging app built to clone the app [Slack](https://slack.com). hype allows users to chat with other users in real time via direct messages, group chats, and channels.",
   "version": "1.0.0",
