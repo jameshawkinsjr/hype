@@ -4,7 +4,7 @@
   </a>
 </p>
 
-[Live Demo](http://www.hype-chat.com/#/)
+[Live Demo](https://get-hype-chat.herokuapp.com/#/)
 
 # hype
 
